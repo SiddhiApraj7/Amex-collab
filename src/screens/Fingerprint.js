@@ -35,7 +35,7 @@ import {
         <Image
         className="h-36 w-96 "
         
-        source = {require('../assets/e-rupi.png')}></Image>
+        source = {require('../../assets/e-rupi.png')}></Image>
         
         <Text className="font-bold text-xl p-3 mb-5">Login</Text>
 

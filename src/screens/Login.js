@@ -1,6 +1,5 @@
 import { View, Text , TextInput, Image, SafeAreaView, Button} from 'react-native'
 import React from 'react'
-import {logo} from "../assets/e-rupi.png";
 
 const Login = () => {
   return (
@@ -11,7 +10,7 @@ const Login = () => {
             <Image
             className="h-36 w-96 "
             
-            source = {require('../assets/e-rupi.png')}></Image>
+            source = {require('../../assets/e-rupi.png')}></Image>
             
             <Text className="font-bold text-xl p-3 mb-5">Login</Text>
 

@@ -12,13 +12,13 @@
           "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 6
         },
-        "signupAttributes": [
+        "signupAttributes": [],
+        "socialProviders": [],
+        "usernameAttributes": [
           "PHONE_NUMBER"
         ],
-        "socialProviders": [],
-        "usernameAttributes": [],
         "verificationMechanisms": [
-          "EMAIL"
+          "PHONE_NUMBER"
         ]
       },
       "providerPlugin": "awscloudformation",
