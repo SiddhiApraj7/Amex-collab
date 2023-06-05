@@ -12,7 +12,7 @@ const HomePage = () => {
 
             
             <Image
-            className="h-36 w-36 "
+            className="h-36 w-36 mt-5"
             
             source = {require('../../assets/e-rupi.png')}></Image>
             
