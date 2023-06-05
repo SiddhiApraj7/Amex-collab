@@ -3,14 +3,27 @@ import React from 'react';
 import {Ionicons} from "@expo/vector-icons";
 
 
-const Voucher = ({children}) => {
+const Voucher = ({name, company, value, purpose}) => {
   return (
     <View>
-            <View className="w-52 h-40 bg-blue-300 items-center mt-5">
-            <Ionicons name="wallet-outline" size={30} className="" ></Ionicons>
-            {children}
+      <View className="bg-blue-300 w-[350] mx-2 p-2 rounded-lg my-3">
+        <View className="flex-row justify-center gap-20">
+          <Ionicons name="qr-code-outline" size={50}></Ionicons>
+          <View className="text-white text-xs">
+            <Text>{company}</Text>
+            <View className="flex-row gap-2">
+            <Text>{name}</Text>
+            <Text>|</Text>
+            <Text>{purpose}</Text>
             </View>
-    </View>
+           
+            <Text>{value}e₹</Text>
+            
+          </View>
+          
+        </View>
+      </View>
+      </View>
     
     
   )

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button,ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button,ScrollView , StyleSheet,TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import Walletcard from '../components/Walletcard';
 
 
 const BeneficiaryHomePage = () => {
+  const navigation = useNavigation();
     const textrupi = (
     
         <Text className="text-xs"> E-RUPI</Text>
@@ -19,27 +20,32 @@ const BeneficiaryHomePage = () => {
         <View className="items-center bg-white">
 
         
-        <Image
-        className="h-36 w-52 mt-4"
-        
-        source = {require('../../assets/e-rupi.png')}></Image>
+            <Image
+            className="h-36 w-52 mt-4"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
     
         <View >
-            <View className="flex-row gap-5 my-2 ml-6">
+            <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="p-1 font-medium">Sahil Kumar</Text>
+                <Text className="p-1 font-medium text-lg">Sahil Kumar</Text>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
             <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View>
 
             <View className="flex-row gap-6 ml-1">
-            <View>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate("e_rupi_wallet");
+            }}>
             <Walletcard children={textrupi}/>
-            </View>
-            <View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=> {
+              navigation.navigate("e_rupee_wallet");
+            }}>
             <Walletcard children={textrupee} />
-            </View>
+            </TouchableOpacity>
 
             <View>
             <View className="">
@@ -95,12 +101,10 @@ const BeneficiaryHomePage = () => {
               {/*<Ionicons name="medkit-outline" className="mx-auto"size={56}></Ionicons>*/}
               
             </View>
-    
-               
+
             </View>
 
         </ScrollView>
-
             
                
            
@@ -108,8 +112,21 @@ const BeneficiaryHomePage = () => {
 
         
     </View>
+
+    <View className="bg-gray-300 h-36 mt-20 rounded-lg">
+        <View className="flex-row gap-10 mx-auto text-center p-1 ml-0" >
+          <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
+          <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
+          <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
+          <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
+        </View>
+        
+      </View>
     </SafeAreaView>
   )
-}
+          }
 
-export default BeneficiaryHomePage
+
+
+export default BeneficiaryHomePage;
+
