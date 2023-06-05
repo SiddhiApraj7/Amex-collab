@@ -44,11 +44,20 @@ const E_rupee_wallet = () => {
 
           <View><Text className="font-light text-center mt-10">HISTORY</Text></View>
 
+          <ScrollView>
+
           <View className="">
             <History name="BHOPAL CATERERS" date="22-05-23" cost="140" color="#F99D96"/>
             <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
             <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
+            <History name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA"/>
           </View>
+          </ScrollView>
 
       </View>
 
