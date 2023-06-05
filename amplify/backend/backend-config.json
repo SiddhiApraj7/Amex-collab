@@ -12,10 +12,12 @@
           "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 6
         },
-        "signupAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
         "socialProviders": [],
         "usernameAttributes": [
-          "PHONE_NUMBER"
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "PHONE_NUMBER"

@@ -53,6 +53,16 @@ import UserDetails from './src/screens/UserDetails';
 import Phone from './src/screens/Phone';
 import SelectRole from './src/screens/SelectRole';
 import BankDetails from './src/screens/BankDetails';
+
+
+import { Amplify } from 'aws-amplify';
+import awsExports from './src/aws-exports';
+Amplify.configure(awsExports);
+
+import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react-native';
+import ConfirmationCode from './src/screens/ConfirmationCode';
+
+
 export default function App() {
   // wherever the useState is located 
   
@@ -62,15 +72,19 @@ export default function App() {
   return (
     
     <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator 
+    screenOptions={{
+      headerShown: false
+    }}>
       <Stack.Screen name="home" component={HomePage}></Stack.Screen>
       <Stack.Screen name="login" component={Login}></Stack.Screen>
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
       <Stack.Screen name="otp" component={Phone}></Stack.Screen>
+       {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
       <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
-      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen>
+      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
 
     
   </Stack.Navigator>
