@@ -3,13 +3,16 @@ import React from 'react'
 import CustomInput from '../components/CustomInput';
 import { useState } from 'react';
 import NumberInput from '../components/NumberInput';
+import {useForm,Controller} from "react-hook-form";
 
 
 
 const Login = () => {
-  const [pin,setPin] = useState('');
+  // const [pin,setPin] = useState('');
+  const {control, handleSubmit} = useForm();
 
-  const onSignInPress = () => {
+  const onSignInPress = (data) => {
+    console.log(data);
     console.warn('sign in')
   }
   
@@ -28,14 +31,16 @@ const Login = () => {
             <View className = "h-full w-full bg-blue-300 rounded-t-3xl">
               <Text className="text-center mt-16 font-semibold text-lg"> Enter your wallet pin : </Text>
               <NumberInput
+                name = "pin"
                 placeholder="XXXX"
-                value = {pin}
-                setValue = {setPin}
+                control = {control}
                 secureTextEntry={true}
                 keyboardType='phone-pad'
               />
 
-            <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Submit" onPress={onSignInPress}/></View>
+            
+
+            <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Submit" onPress={handleSubmit(onSignInPress)}/></View>
 
             </View>
             

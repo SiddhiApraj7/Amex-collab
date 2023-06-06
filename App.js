@@ -76,15 +76,15 @@ export default function App() {
     screenOptions={{
       headerShown: false
     }}>
-      <Stack.Screen name="home" component={HomePage}></Stack.Screen>
+      {/* <Stack.Screen name="home" component={HomePage}></Stack.Screen> */}
       <Stack.Screen name="login" component={Login}></Stack.Screen>
-      <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
-      <Stack.Screen name="otp" component={Phone}></Stack.Screen>
+      {/* <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
+      <Stack.Screen name="otp" component={Phone}></Stack.Screen> */}
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
-      <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
+      {/* <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
-      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
+      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen>  */}
 
     
   </Stack.Navigator>

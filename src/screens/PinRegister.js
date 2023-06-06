@@ -1,8 +1,20 @@
 import { View, Text , TextInput, Image, SafeAreaView, Button} from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
+import NumberInput from '../components/NumberInput';
+import {useForm,Controller} from "react-hook-form";
+
+import { PrismaClient } from '../../prisma/prisma-client'
+const prisma = new PrismaClient()
+
 const PinRegister = () => {
   const navigation = useNavigation();
+  const {control, handleSubmit} = useForm();
+
+  const onPinpress = (data) => {
+    console.log(data);
+    navigation.navigate("selectRole");
+  }
   return (
     <SafeAreaView className="bg-white h-full">
             <View className="items-center  bg-white">
@@ -18,18 +30,24 @@ const PinRegister = () => {
             <View className = "h-full w-full bg-blue-300 rounded-t-3xl">
 
               <Text className="text-center mt-14  mb-1 font-semibold text-lg"> Enter 4 digit PIN: </Text>
-            <View className="bg-white flex-row gap-2 mx-16 mt-4 mb-2 pt-1.5 pb-4 align-middle items-center rounded-lg">
-              <TextInput required value={Number} maxLength={4} keyboardType="number-pad" className=" text-center pl-6 mt-1 text-sm font-semibold" placeholder="Enter your pin"/>
-            </View>
+              <NumberInput
+                name = "pin"
+                placeholder="XXXX"
+                control = {control}
+                secureTextEntry={true}
+                keyboardType='phone-pad'
+              />
 
             <Text className="text-center mt-10  mb-1 font-semibold text-lg"> Re-enter PIN: </Text>
-            <View className="bg-white flex-row gap-2 mx-16 mt-4 mb-2 pt-1.5 pb-4 align-middle items-center rounded-lg">
-              <TextInput required value={Number} maxLength={4} keyboardType="number-pad" className=" text-center pl-6 mt-1 text-sm font-semibold" placeholder="Re-enter your pin"/>
-            </View>
+            <NumberInput
+                name = "re-pin"
+                placeholder="XXXX"
+                control = {control}
+                secureTextEntry={true}
+                keyboardType='phone-pad'
+              />
 
-            <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl"><Button onPress={() => {
-              navigation.navigate("selectRole");
-            }} className="text-black text-center" color = "#82E0AA" title="Submit"></Button></View>
+            <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl"><Button onPress={handleSubmit(onPinpress)} className="text-black text-center" color = "#82E0AA" title="Submit"></Button></View>
 
 
             

@@ -2,6 +2,8 @@ import { View, Text , TextInput, Image, SafeAreaView, Button} from 'react-native
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import {Ionicons} from "@expo/vector-icons";
+import NumberInput from '../components/NumberInput';
+import {useForm,Controller} from "react-hook-form";
 
 const BankDetails = () => {
     const navigation = useNavigation();

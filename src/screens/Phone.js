@@ -35,6 +35,7 @@ const Phone = () => {
         .then(() => {
           setCode('');
             setPhoneNumber('');
+            console.warn('Verified');
           navigation.navigate("userDetails");
         })
         .catch((error) => {
