@@ -44,7 +44,7 @@ const E_rupi_wallet = () => {
 
 
                 </View>
-                <View className="bg-gray-300 p-2 rounded-lg ">
+                <View className="bg-gray-300 p-2 rounded-lg">
                     <View className="flex-row gap-10 mx-auto text-center p-1 ml-0" >
                           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
                           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>

@@ -49,7 +49,7 @@ const BeneficiaryHomePage = () => {
 
             <View>
             <View className="">
-            <View className="w-38 h-46 mx-0 mr-6 py-5 pl-5 pr-5 text-center rounded-2xl mt-5 bg-blue-300" >
+            <View className="w-38 h-46 mx-0 mr-6 py-5 pl-5 pr-5 text-center rounded-2xl mt-5 bg-blue-200" >
               <View className="my-auto ml-4">
               <Ionicons name="documents-outline" size={56} ></Ionicons>
               </View>

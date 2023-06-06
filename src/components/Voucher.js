@@ -6,7 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 const Voucher = ({name, company, value, purpose}) => {
   return (
     <View>
-      <View className="bg-blue-300 w-[350] mx-2 p-2 rounded-lg my-3">
+      <View className="bg-blue-200 w-[350] mx-2 p-2 rounded-lg my-3">
         <View className="flex-row justify-center gap-20">
           <Ionicons name="qr-code-outline" size={50}></Ionicons>
           <View className="text-white text-xs">
