@@ -12,7 +12,7 @@ const HomePage = () => {
 
             
             <Image
-            className="h-36 w-36 "
+            className="h-36 w-36 mt-5"
             
             source = {require('../../assets/e-rupi.png')}></Image>
             
@@ -22,7 +22,7 @@ const HomePage = () => {
                     navigation.navigate("login");
                 }}className="text-black" title = "Login" color = "#82E0AA"></Button></View>
                 <View><Button onPress={() => {
-                    navigation.navigate("fingerprint");
+                    navigation.navigate("selectRole");
                 }}className="text-black" color = "#82E0AA" title="Register"></Button></View>
             
             </View>

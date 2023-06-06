@@ -33,7 +33,7 @@ import {
 
         
         <Image
-        className="h-36 w-96 "
+        className="h-36 w-96 mt-5"
         
         source = {require('../../assets/e-rupi.png')}></Image>
         
@@ -46,8 +46,8 @@ import {
           </View>
 
          
-         <View className="text-center p-2 mt-5 items-center">
-          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp")}}></Button> : <Text>Press the fingerprint to initiate biometric authentication</Text>}
+         <View className="text-center p-2 mt-10 items-center">
+          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp")}}></Button> : <Text className="font-medium text-center mt-5 text-white">Press the fingerprint to initiate biometric authentication</Text>}
           </View> 
           
 

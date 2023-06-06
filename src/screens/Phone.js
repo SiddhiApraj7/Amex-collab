@@ -67,7 +67,7 @@ const Phone = () => {
         secureTextEntry={false}
         keyboardType="phone-pad"
        />
-       <View className="mx-28 p-4 mb-5  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Submit" onPress={sendVerification}/></View>
+       <View className="mx-28 p-4 mb-5  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Verify Phone Number" onPress={sendVerification}/></View>
 
     <View  className = "h-screen w-screen  bg-blue-300 rounded-t-3xl">
       <Text className="text-center mt-2  mb-1 font-semibold text-lg"> Enter your OTP: </Text>
@@ -79,7 +79,7 @@ const Phone = () => {
         keyboardType="phone-pad"
        />
 
-<View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Submit" onPress={confirmCode}/></View>
+<View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Check OTP" onPress={confirmCode}/></View>
     </View>
   </View>  
 </View>

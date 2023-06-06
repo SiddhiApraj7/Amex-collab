@@ -21,7 +21,7 @@ const PinRegister = () => {
 
             
             <Image
-            className="h-36 w-96 "
+            className="h-36 w-96 mt-5"
             
             source = {require('../../assets/e-rupi.png')}></Image>
             

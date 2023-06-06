@@ -53,15 +53,20 @@ import UserDetails from './src/screens/UserDetails';
 import Phone from './src/screens/Phone';
 import SelectRole from './src/screens/SelectRole';
 import BankDetails from './src/screens/BankDetails';
-
-
+import beneficiaryHomePage from "./src/screens/BeneficiaryHomePage"
+import E_rupi_wallet from './src/screens/E_rupi_wallet';
+import E_rupee_wallet from './src/screens/E_rupee_wallet';
 import { Amplify } from 'aws-amplify';
 import awsExports from './src/aws-exports';
+import GenerateVoucher from './src/screens/GenerateVoucher';
 Amplify.configure(awsExports);
 
 import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react-native';
 import ConfirmationCode from './src/screens/ConfirmationCode';
-
+import BeneficiaryHomePage from './src/screens/BeneficiaryHomePage';
+import PvtOrgHomePage from './src/screens/PvtOrgHomePage';
+import SelectServiceProvider from './src/screens/SelectServiceProvider';
+import ServiceProviderHomePage from './src/screens/ServiceProviderHomePage';
 
 export default function App() {
   // wherever the useState is located 
@@ -87,6 +92,14 @@ export default function App() {
       <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen>  */}
 
     
+      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
+      <Stack.Screen name="beneficiaryHomePage" component={BeneficiaryHomePage}></Stack.Screen>
+      <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
+      <Stack.Screen name="e_rupee_wallet" component={E_rupee_wallet}></Stack.Screen>
+      <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen>
+      <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
+      <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
+      <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
   </Stack.Navigator>
 </NavigationContainer>
   );
