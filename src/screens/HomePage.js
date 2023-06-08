@@ -22,7 +22,7 @@ const HomePage = () => {
                     navigation.navigate("login");
                 }}className="text-black" title = "Login" color = "#82E0AA"></Button></View>
                 <View><Button onPress={() => {
-                    navigation.navigate("selectRole");
+                    navigation.navigate("fingerprint");
                 }}className="text-black" color = "#82E0AA" title="Register"></Button></View>
             
             </View>

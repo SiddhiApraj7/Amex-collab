@@ -51,9 +51,7 @@ app.post('/create-user', async function (req, res) {
        pvtOrgInfo,
        serviceProviderInfo,
        recoveryEmail,
-       beneficiaryInfo: {
-        create: beneficiaryInfo // Create the associated beneficiary record
-      } 
+      
     },
        include: {
           beneficiaryInfo: true, // Include the created beneficiary record in the response
@@ -89,8 +87,146 @@ app.patch('/create-user', async (req, res) => {
 });
 
 
-// app.get('/create-user', async function (req, res) {
+app.post('/create-beneficiary', async function(req, res) {
+  const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
 
+  try {
+    // Find the user based on the phone number
+    const user = await prisma.users.findUnique({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const beneficiary = await prisma.beneficiary.create({
+      data: {
+        Users: {
+          connect: {
+            id: user.id
+          }
+        }
+      }
+    });
+
+    // Update the beneficiaryInfo field in the Users model
+    const updatedUser = await prisma.users.update({
+      where: {
+        id: user.id
+      },
+      data: {
+        beneficiaryInfo: {
+          connect: {
+            beneficiaryId: beneficiary.beneficiaryId
+          }
+        }
+      }
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create beneficiary' });
+  }
+});
+
+
+app.post('/create-pvtOrg', async function(req, res) {
+  const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+
+  try {
+    // Find the user based on the phone number
+    const user = await prisma.users.findUnique({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const pvtOrg = await prisma.pvtOrg.create({
+      data: {
+        Users: {
+          connect: {
+            id: user.id
+          }
+        }
+      }
+    });
+
+    // Update the pvtOrgInfo field in the Users model
+    const updatedUser = await prisma.users.update({
+      where: {
+        id: user.id
+      },
+      data: {
+        pvtOrgInfo: {
+          connect: {
+            privateOrgId: pvtOrg.privateOrgId
+          }
+        }
+      }
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create private organization' });
+  }
+});
+
+
+
+app.post('/create-serviceProvider', async function(req, res) {
+  const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+
+  try {
+    // Find the user based on the phone number
+    const user = await prisma.users.findUnique({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const serviceProvider = await prisma.serviceProvider.create({
+      data: {
+        Users: {
+          connect: {
+            id: user.id
+          }
+        }
+      }
+    });
+
+    // Update the serviceProviderInfo field in the Users model
+    const updatedUser = await prisma.users.update({
+      where: {
+        id: user.id
+      },
+      data: {
+        serviceProviderInfo: {
+          connect: {
+            serviceProviderId: serviceProvider.serviceProviderId
+          }
+        }
+      }
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create service provider' });
+  }
+});
 
 
 
