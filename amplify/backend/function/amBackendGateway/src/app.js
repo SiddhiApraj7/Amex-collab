@@ -55,7 +55,6 @@ app.post('/create-user', async function (req, res) {
     },
        include: {
           beneficiaryInfo: true, // Include the created beneficiary record in the response
-          AvailableVoucher: true
         }
     
   });
@@ -123,6 +122,9 @@ app.post('/create-beneficiary', async function(req, res) {
             beneficiaryId: beneficiary.beneficiaryId
           }
         }
+      },
+      include: {
+        beneficiaryInfo: true // Include the updated beneficiary record in the response
       }
     });
 
@@ -229,6 +231,141 @@ app.post('/create-serviceProvider', async function(req, res) {
 });
 
 
+app.post('/create-voucher', async function(req, res) {
+  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg } = req.body;
+
+  try {
+    const serviceProvider = await prisma.serviceProvider.findUnique({
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberSP
+        }
+      }
+    });
+
+    if (!serviceProvider) {
+      return res.status(404).json({ error: 'Service provider not found' });
+    }
+
+    const beneficiary = await prisma.beneficiary.findUnique({
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberB
+        }
+      }
+    });
+
+    if (!beneficiary) {
+      return res.status(404).json({ error: 'Beneficiary not found' });
+    }
+
+    const pvtOrg = await prisma.pvtOrg.findUnique({
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberPvtOrg
+        }
+      }
+    });
+
+    if (!pvtOrg) {
+      return res.status(404).json({ error: 'Private organization not found' });
+    }
+
+    const voucher = await prisma.voucher.create({
+      data: {
+        voucherAmount: voucherAmount,
+        voucherRedeemed,
+        voucherSPId,
+        voucherBeneficiaryId,
+        PvtOrgById,
+        ServiceProviderUser: {
+          connect: {
+            serviceProviderId: serviceProvider.serviceProviderId
+          }
+        },
+        BeneficiaryUser: {
+          connect: {
+            beneficiaryId: beneficiary.beneficiaryId
+          }
+        },
+        PvtOrgBy: {
+          connect: {
+            privateOrgId: pvtOrg.privateOrgId
+          }
+        }
+      },
+      include: {
+        BeneficiaryUser: true,
+        ServiceProviderUser: true,
+        PvtOrgBy: true
+      }
+    });
+    res.status(200).json(voucher);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create voucher' });
+  };
+
+    // Update the AvailableVoucher array in the beneficiary
+   try{ const updatedBeneficiary = await prisma.beneficiary.update({
+      where: {
+        beneficiaryId: voucherBeneficiaryId
+      },
+      data: {
+        AvailableVoucher: {
+          push: {
+            voucherId: voucher.voucherId
+          }
+        }
+      }
+    });
+    res.status(200).json(updatedBeneficiary);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update beneficiary' });
+  }
+
+  try {
+    // Update the VoucherRequested array in the service provider
+    const updatedServiceProvider = await prisma.serviceProvider.update({
+      where: {
+        serviceProviderId: serviceProviderId
+      },
+      data: {
+        VoucherRequested: {
+          push: {
+            voucherId: voucher.voucherId
+          }
+        }
+      }
+    });
+
+    res.status(200).json(updatedServiceProvider);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update service provider' });
+  }
+
+  try {
+    // Update the VouchersCreated field in the pvtOrg
+    const updatedPvtOrg = await prisma.pvtOrg.update({
+      where: {
+        privateOrgId: PvtOrgById
+      },
+      data: {
+        VouchersCreated: {
+          connect: {
+            voucherId: voucher.voucherId
+          }
+        }
+      }
+    });
+    res.status(200).json(updatedPvtOrg);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update PvtOrg' });
+  }
+});
 
 
 app.listen(3000, function () {

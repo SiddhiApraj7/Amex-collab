@@ -5136,14 +5136,14 @@ export namespace Prisma {
     S extends { include: any } & (serviceProviderArgs | serviceProviderFindManyArgs)
     ? serviceProvider  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'Users' ? UsersGetPayload<S['include'][P]> | null :
+        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends 'VouchersRequested' ? Array < VoucherGetPayload<S['include'][P]>>  :
         P extends '_count' ? ServiceProviderCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (serviceProviderArgs | serviceProviderFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'Users' ? UsersGetPayload<S['select'][P]> | null :
+        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends 'VouchersRequested' ? Array < VoucherGetPayload<S['select'][P]>>  :
         P extends '_count' ? ServiceProviderCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof serviceProvider ? serviceProvider[P] : never
   } 
@@ -6248,7 +6248,7 @@ export namespace Prisma {
     NOT?: Enumerable<serviceProviderWhereInput>
     serviceProviderId?: StringFilter | string
     BusinessTag?: EnumServiceProviderTagNullableFilter | ServiceProviderTag | null
-    Users?: XOR<UsersRelationFilter, UsersWhereInput> | null
+    Users?: XOR<UsersRelationFilter, UsersWhereInput>
     VouchersRequested?: VoucherListRelationFilter
   }
 
@@ -6583,7 +6583,7 @@ export namespace Prisma {
 
   export type serviceProviderUpdateInput = {
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
-    Users?: UsersUpdateOneWithoutServiceProviderInfoNestedInput
+    Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
     VouchersRequested?: VoucherUpdateManyWithoutServiceProviderUserNestedInput
   }
 
@@ -7341,12 +7341,10 @@ export namespace Prisma {
     set?: ServiceProviderTag | null
   }
 
-  export type UsersUpdateOneWithoutServiceProviderInfoNestedInput = {
+  export type UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput = {
     create?: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
     connectOrCreate?: UsersCreateOrConnectWithoutServiceProviderInfoInput
     upsert?: UsersUpsertWithoutServiceProviderInfoInput
-    disconnect?: boolean
-    delete?: boolean
     connect?: UsersWhereUniqueInput
     update?: XOR<UsersUpdateWithoutServiceProviderInfoInput, UsersUncheckedUpdateWithoutServiceProviderInfoInput>
   }
@@ -7915,7 +7913,7 @@ export namespace Prisma {
 
   export type serviceProviderUpdateWithoutVouchersRequestedInput = {
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
-    Users?: UsersUpdateOneWithoutServiceProviderInfoNestedInput
+    Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
   }
 
   export type serviceProviderUncheckedUpdateWithoutVouchersRequestedInput = {

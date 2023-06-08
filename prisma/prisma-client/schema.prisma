@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://anushthaprakash:Fingals1729@digirupi.cxuovwekb1mq.us-east-1.rds.amazonaws.com:5432/digiRupi_db"
 }
 
 model Users {
@@ -69,7 +69,7 @@ model pvtOrg {
 
 model serviceProvider {
   serviceProviderId String              @id @default(uuid())
-  Users             Users?              @relation(fields: [serviceProviderId], references: [id])
+  Users             Users              @relation(fields: [serviceProviderId], references: [id])
   VouchersRequested Voucher[]         
   BusinessTag       ServiceProviderTag? 
 }
