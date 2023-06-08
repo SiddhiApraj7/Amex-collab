@@ -5,6 +5,9 @@ import { useState } from 'react';
 import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 
+// post menthod 
+import axios from 'axios';
+
 
 
 const Login = () => {

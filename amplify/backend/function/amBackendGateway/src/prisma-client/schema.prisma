@@ -1,0 +1,17 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./prisma-client"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://anushthaprakash:Fingals1729@digirupi.cxuovwekb1mq.us-east-1.rds.amazonaws.com:5432/digiRupi_db"
+}
+
+model Users {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+  lastName String
+}

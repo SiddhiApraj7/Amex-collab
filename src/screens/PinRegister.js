@@ -4,8 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 
-import { PrismaClient } from '../../prisma/prisma-client'
-const prisma = new PrismaClient()
+// import { PrismaClient } from '../../prisma/prisma-client'
+// const prisma = new PrismaClient()
 
 const PinRegister = () => {
   const navigation = useNavigation();

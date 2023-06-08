@@ -1,38 +1,66 @@
 {
-  "auth": {
-    "digirupi": {
-      "customAuth": false,
-      "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 6
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "PHONE_NUMBER"
-        ]
-      },
+  "api": {
+    "amAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ],
       "providerPlugin": "awscloudformation",
-      "service": "Cognito"
+      "service": "API Gateway"
     }
   },
+  "auth": {},
   "function": {
+    "amBackendGateway": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "digiRupiF": {
       "build": true,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amBackendGateway_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ]
+    },
+    "AMPLIFY_function_amBackendGateway_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ]
+    },
+    "AMPLIFY_function_digiRupiF_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "digiRupiF"
+        }
+      ]
+    },
+    "AMPLIFY_function_digiRupiF_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "digiRupiF"
+        }
+      ]
     }
   }
 }
