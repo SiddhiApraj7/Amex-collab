@@ -30,18 +30,67 @@ app.use(function (req, res, next) {
 });
 
 //creat get method for items
-app.post('/items', async function (req, res) {
-  const { name, email, lastName } = req.body;
+app.post('/create-user', async function (req, res) {
+  const { phoneNumber,firstName ,recoveryEmail , lastName,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo} = req.body;
   const result = await prisma.users.create({
     data: {
-      name,
-      email,
-      lastName
-    }
+       phoneNumber,
+       firstName ,
+       lastName,
+       walletPin,
+       bankName,
+       bankAccountHolderName,
+       accountNumber,
+       isBeneficiary,
+       isPvtOrg,
+       isServiceProvider,
+       walletIdBeneficiary,
+       walletIdPvtOrg,
+       walletIdServiceProvider,
+       beneficiaryInfo,
+       pvtOrgInfo,
+       serviceProviderInfo,
+       recoveryEmail,
+       beneficiaryInfo: {
+        create: beneficiaryInfo // Create the associated beneficiary record
+      } 
+    },
+       include: {
+          beneficiaryInfo: true, // Include the created beneficiary record in the response
+          AvailableVoucher: true
+        }
+    
   });
 
   res.json({ success: 'post call succeed!', result })
 });
+
+app.patch('/create-user', async (req, res) => {
+  const { phoneNumber } = req.body;
+  const { firstName , lastName  ,recoveryEmail,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo  } = req.body;
+
+  try {
+    const updatedUser = await prisma.users.update({
+      where: { phoneNumber },
+      data: { firstName , lastName ,recoveryEmail,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo,
+      beneficiaryInfo},
+      include: {
+        beneficiaryInfo: true // Include the updated beneficiary record in the response
+      }
+
+    });
+    
+
+    res.json({ success: 'patch call succeed!', updatedUser })
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+});
+
+
+// app.get('/create-user', async function (req, res) {
+
 
 
 
