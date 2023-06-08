@@ -86,9 +86,22 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.BeneficiaryScalarFieldEnum = {
+  beneficiaryId: 'beneficiaryId'
+};
+
+exports.Prisma.PvtOrgScalarFieldEnum = {
+  privateOrgId: 'privateOrgId'
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.ServiceProviderScalarFieldEnum = {
+  serviceProviderId: 'serviceProviderId',
+  BusinessTag: 'BusinessTag'
 };
 
 exports.Prisma.SortOrder = {
@@ -105,14 +118,57 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  lastName: 'lastName'
+  phoneNumber: 'phoneNumber',
+  firstName: 'firstName',
+  recoveryEmail: 'recoveryEmail',
+  lastName: 'lastName',
+  walletPin: 'walletPin',
+  bankName: 'bankName',
+  bankAccountHolderName: 'bankAccountHolderName',
+  accountNumber: 'accountNumber',
+  isBeneficiary: 'isBeneficiary',
+  isPvtOrg: 'isPvtOrg',
+  isServiceProvider: 'isServiceProvider',
+  walletIdBeneficiary: 'walletIdBeneficiary',
+  walletIdPvtOrg: 'walletIdPvtOrg',
+  walletIdServiceProvider: 'walletIdServiceProvider',
+  createdAt: 'createdAt',
+  role: 'role'
 };
 
+exports.Prisma.VoucherScalarFieldEnum = {
+  voucherId: 'voucherId',
+  voucherAmount: 'voucherAmount',
+  voucherCreatedAt: 'voucherCreatedAt',
+  voucherRedeemed: 'voucherRedeemed',
+  voucherRedeemedDate: 'voucherRedeemedDate',
+  voucherSPId: 'voucherSPId',
+  voucherBeneficiaryId: 'voucherBeneficiaryId',
+  PvtOrgById: 'PvtOrgById'
+};
+exports.Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+  SUPERADMIN: 'SUPERADMIN'
+};
+
+exports.ServiceProviderTag = {
+  HOSPITALITY: 'HOSPITALITY',
+  HEALTHCARE: 'HEALTHCARE',
+  BUSINESS: 'BUSINESS',
+  PENSION: 'PENSION',
+  AGRICULTURE: 'AGRICULTURE',
+  HOUSEHOLD_UTILITIES: 'HOUSEHOLD_UTILITIES',
+  CHILDCARE: 'CHILDCARE',
+  OTHER: 'OTHER'
+};
 
 exports.Prisma.ModelName = {
-  Users: 'Users'
+  Users: 'Users',
+  beneficiary: 'beneficiary',
+  Voucher: 'Voucher',
+  pvtOrg: 'pvtOrg',
+  serviceProvider: 'serviceProvider'
 };
 
 /**

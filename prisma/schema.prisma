@@ -10,60 +10,77 @@ datasource db {
 }
 
 model Users {
-  id                  String  @id @default(uuid())
-  phoneNumber             String? @unique
+  id                      String           @id @default(uuid())
+  phoneNumber             String?          @unique
   firstName               String?
-  recoveryEmail           String? @unique
+  recoveryEmail           String?          @unique
   lastName                String?
   walletPin               Int?
   bankName                String?
   bankAccountHolderName   String?
-  accountNumber           Int?     @unique
-  isBeneficiary           Boolean @default(true)
-  isPvtOrg                Boolean? @default(false)
-  isServiceProvider       Boolean? @default(false)
+  accountNumber           Int?             @unique
+  isBeneficiary           Boolean          @default(true)
+  isPvtOrg                Boolean?         @default(false)
+  isServiceProvider       Boolean?         @default(false)
   walletIdBeneficiary     String?
   walletIdPvtOrg          String?
   walletIdServiceProvider String?
   beneficiaryInfo         beneficiary?
   pvtOrgInfo              pvtOrg?
   serviceProviderInfo     serviceProvider?
-  createdAt               DateTime @default(now())
-  UpdatedAt               DateTime @updatedAt
-  
+  createdAt               DateTime         @default(now())
+  role                    Role?            @default(USER)
 }
 
 enum Role {
+  USER
   ADMIN
   SUPERADMIN
 }
+// e-rupee wallet to be maid for each user
+
 
 model beneficiary {
-  beneficiaryId String @id @default(uuid())
-  Users         Users    @relation(fields: [beneficiaryId], references: [id])
-  // AvailableVouchers   Voucher[]
+  beneficiaryId    String    @id @default(uuid())
+  Users            Users     @relation(fields: [beneficiaryId], references: [id])
+  AvailableVoucher Voucher[]
 }
 
-model Voucher{
+model Voucher {
   // qrCode 
-  voucherId String @id @default(uuid())
-  voucherName String
-  voucherAmount Int
-  voucherDescription String
-  voucherImage String
-  voucherCode String
-  voucherExpiryDate DateTime
-  voucherRedeemed Boolean @default(false)
-  voucherRedeemedDate DateTime?
-  voucherRedeemedBy String?
-  // voucherRedeemedByUser Users? @relation(fields: [voucherRedeemedBy], references: [id])
+  voucherId            String           @id @default(uuid())
+  voucherAmount        Int              
+  voucherCreatedAt     DateTime         @default(now())
+  voucherRedeemed      Boolean          @default(false)
+  voucherRedeemedDate  DateTime?
+  voucherSPId          String           @default(uuid())
+  ServiceProviderUser  serviceProvider? @relation(fields: [voucherSPId], references: [serviceProviderId])
+  voucherBeneficiaryId String           @default(uuid())
+  BeneficiaryUser      beneficiary?     @relation(fields: [voucherBeneficiaryId], references: [beneficiaryId])
+  PvtOrgById           String           @default(uuid())
+  PvtOrgBy             pvtOrg?          @relation(fields: [PvtOrgById], references: [privateOrgId])
 }
+
 model pvtOrg {
-  privateOrgId String @id @default(uuid())
-  Users         Users    @relation(fields: [privateOrgId], references: [id])
+  privateOrgId    String    @id @default(uuid())
+  Users           Users     @relation(fields: [privateOrgId], references: [id])
+  VouchersCreated Voucher[]
 }
 
 model serviceProvider {
-  serviceProviderId String @id @default(uuid())
-  Users         Users    @relation(fields: [serviceProviderId], references: [id])
+  serviceProviderId String              @id @default(uuid())
+  Users             Users?              @relation(fields: [serviceProviderId], references: [id])
+  VouchersRequested Voucher[]         
+  BusinessTag       ServiceProviderTag? 
+}
+
+enum ServiceProviderTag {
+  HOSPITALITY
+  HEALTHCARE
+  BUSINESS
+  PENSION
+  AGRICULTURE
+  HOUSEHOLD_UTILITIES
+  CHILDCARE
+  OTHER
 }
