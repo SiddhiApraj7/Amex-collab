@@ -232,10 +232,10 @@ app.post('/create-serviceProvider', async function(req, res) {
 
 
 app.post('/create-voucher', async function(req, res) {
-  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg } = req.body;
-
+  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById} = req.body;
+  
   try {
-    const serviceProvider = await prisma.serviceProvider.findUnique({
+    const serviceProvider = await prisma.serviceProvider.findFirst({
       where: {
         Users : {
           phoneNumber: PhoneNumberSP
@@ -247,7 +247,7 @@ app.post('/create-voucher', async function(req, res) {
       return res.status(404).json({ error: 'Service provider not found' });
     }
 
-    const beneficiary = await prisma.beneficiary.findUnique({
+    const beneficiary = await prisma.beneficiary.findFirst({
       where: {
         Users : {
           phoneNumber: PhoneNumberB
@@ -259,7 +259,7 @@ app.post('/create-voucher', async function(req, res) {
       return res.status(404).json({ error: 'Beneficiary not found' });
     }
 
-    const pvtOrg = await prisma.pvtOrg.findUnique({
+    const pvtOrg = await prisma.pvtOrg.findFirst({
       where: {
         Users : {
           phoneNumber: PhoneNumberPvtOrg
