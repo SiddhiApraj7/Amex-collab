@@ -91,7 +91,9 @@ exports.Prisma.BeneficiaryScalarFieldEnum = {
 };
 
 exports.Prisma.PvtOrgScalarFieldEnum = {
-  privateOrgId: 'privateOrgId'
+  privateOrgId: 'privateOrgId',
+  CompanyName: 'CompanyName',
+  positionInCompany: 'positionInCompany'
 };
 
 exports.Prisma.QueryMode = {
@@ -101,6 +103,8 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ServiceProviderScalarFieldEnum = {
   serviceProviderId: 'serviceProviderId',
+  BusinessName: 'BusinessName',
+  PositionInBusiness: 'PositionInBusiness',
   BusinessTag: 'BusinessTag'
 };
 

@@ -55,11 +55,15 @@ model Voucher {
 model pvtOrg {
   privateOrgId    String    @id @default(uuid())
   VouchersCreated Voucher[]
+  CompanyName     String?
+  positionInCompany String?
   Users           Users     @relation(fields: [privateOrgId], references: [id])
 }
 
 model serviceProvider {
   serviceProviderId String              @id @default(uuid())
+  BusinessName       String?
+  PositionInBusiness String?
   BusinessTag       ServiceProviderTag?
   VouchersRequested Voucher[]
   Users             Users               @relation(fields: [serviceProviderId], references: [id])

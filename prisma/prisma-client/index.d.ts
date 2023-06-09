@@ -65,6 +65,8 @@ export type Voucher = {
  */
 export type pvtOrg = {
   privateOrgId: string
+  CompanyName: string | null
+  positionInCompany: string | null
 }
 
 /**
@@ -73,6 +75,8 @@ export type pvtOrg = {
  */
 export type serviceProvider = {
   serviceProviderId: string
+  BusinessName: string | null
+  PositionInBusiness: string | null
   BusinessTag: ServiceProviderTag | null
 }
 
@@ -4058,28 +4062,40 @@ export namespace Prisma {
 
   export type PvtOrgMinAggregateOutputType = {
     privateOrgId: string | null
+    CompanyName: string | null
+    positionInCompany: string | null
   }
 
   export type PvtOrgMaxAggregateOutputType = {
     privateOrgId: string | null
+    CompanyName: string | null
+    positionInCompany: string | null
   }
 
   export type PvtOrgCountAggregateOutputType = {
     privateOrgId: number
+    CompanyName: number
+    positionInCompany: number
     _all: number
   }
 
 
   export type PvtOrgMinAggregateInputType = {
     privateOrgId?: true
+    CompanyName?: true
+    positionInCompany?: true
   }
 
   export type PvtOrgMaxAggregateInputType = {
     privateOrgId?: true
+    CompanyName?: true
+    positionInCompany?: true
   }
 
   export type PvtOrgCountAggregateInputType = {
     privateOrgId?: true
+    CompanyName?: true
+    positionInCompany?: true
     _all?: true
   }
 
@@ -4158,6 +4174,8 @@ export namespace Prisma {
 
   export type PvtOrgGroupByOutputType = {
     privateOrgId: string
+    CompanyName: string | null
+    positionInCompany: string | null
     _count: PvtOrgCountAggregateOutputType | null
     _min: PvtOrgMinAggregateOutputType | null
     _max: PvtOrgMaxAggregateOutputType | null
@@ -4179,6 +4197,8 @@ export namespace Prisma {
 
   export type pvtOrgSelect = {
     privateOrgId?: boolean
+    CompanyName?: boolean
+    positionInCompany?: boolean
     VouchersCreated?: boolean | pvtOrg$VouchersCreatedArgs
     Users?: boolean | UsersArgs
     _count?: boolean | PvtOrgCountOutputTypeArgs
@@ -4988,16 +5008,22 @@ export namespace Prisma {
 
   export type ServiceProviderMinAggregateOutputType = {
     serviceProviderId: string | null
+    BusinessName: string | null
+    PositionInBusiness: string | null
     BusinessTag: ServiceProviderTag | null
   }
 
   export type ServiceProviderMaxAggregateOutputType = {
     serviceProviderId: string | null
+    BusinessName: string | null
+    PositionInBusiness: string | null
     BusinessTag: ServiceProviderTag | null
   }
 
   export type ServiceProviderCountAggregateOutputType = {
     serviceProviderId: number
+    BusinessName: number
+    PositionInBusiness: number
     BusinessTag: number
     _all: number
   }
@@ -5005,16 +5031,22 @@ export namespace Prisma {
 
   export type ServiceProviderMinAggregateInputType = {
     serviceProviderId?: true
+    BusinessName?: true
+    PositionInBusiness?: true
     BusinessTag?: true
   }
 
   export type ServiceProviderMaxAggregateInputType = {
     serviceProviderId?: true
+    BusinessName?: true
+    PositionInBusiness?: true
     BusinessTag?: true
   }
 
   export type ServiceProviderCountAggregateInputType = {
     serviceProviderId?: true
+    BusinessName?: true
+    PositionInBusiness?: true
     BusinessTag?: true
     _all?: true
   }
@@ -5094,6 +5126,8 @@ export namespace Prisma {
 
   export type ServiceProviderGroupByOutputType = {
     serviceProviderId: string
+    BusinessName: string | null
+    PositionInBusiness: string | null
     BusinessTag: ServiceProviderTag | null
     _count: ServiceProviderCountAggregateOutputType | null
     _min: ServiceProviderMinAggregateOutputType | null
@@ -5116,6 +5150,8 @@ export namespace Prisma {
 
   export type serviceProviderSelect = {
     serviceProviderId?: boolean
+    BusinessName?: boolean
+    PositionInBusiness?: boolean
     BusinessTag?: boolean
     VouchersRequested?: boolean | serviceProvider$VouchersRequestedArgs
     Users?: boolean | UsersArgs
@@ -5925,7 +5961,9 @@ export namespace Prisma {
 
 
   export const PvtOrgScalarFieldEnum: {
-    privateOrgId: 'privateOrgId'
+    privateOrgId: 'privateOrgId',
+    CompanyName: 'CompanyName',
+    positionInCompany: 'positionInCompany'
   };
 
   export type PvtOrgScalarFieldEnum = (typeof PvtOrgScalarFieldEnum)[keyof typeof PvtOrgScalarFieldEnum]
@@ -5941,6 +5979,8 @@ export namespace Prisma {
 
   export const ServiceProviderScalarFieldEnum: {
     serviceProviderId: 'serviceProviderId',
+    BusinessName: 'BusinessName',
+    PositionInBusiness: 'PositionInBusiness',
     BusinessTag: 'BusinessTag'
   };
 
@@ -6214,12 +6254,16 @@ export namespace Prisma {
     OR?: Enumerable<pvtOrgWhereInput>
     NOT?: Enumerable<pvtOrgWhereInput>
     privateOrgId?: StringFilter | string
+    CompanyName?: StringNullableFilter | string | null
+    positionInCompany?: StringNullableFilter | string | null
     VouchersCreated?: VoucherListRelationFilter
     Users?: XOR<UsersRelationFilter, UsersWhereInput>
   }
 
   export type pvtOrgOrderByWithRelationInput = {
     privateOrgId?: SortOrder
+    CompanyName?: SortOrder
+    positionInCompany?: SortOrder
     VouchersCreated?: VoucherOrderByRelationAggregateInput
     Users?: UsersOrderByWithRelationInput
   }
@@ -6230,6 +6274,8 @@ export namespace Prisma {
 
   export type pvtOrgOrderByWithAggregationInput = {
     privateOrgId?: SortOrder
+    CompanyName?: SortOrder
+    positionInCompany?: SortOrder
     _count?: pvtOrgCountOrderByAggregateInput
     _max?: pvtOrgMaxOrderByAggregateInput
     _min?: pvtOrgMinOrderByAggregateInput
@@ -6240,6 +6286,8 @@ export namespace Prisma {
     OR?: Enumerable<pvtOrgScalarWhereWithAggregatesInput>
     NOT?: Enumerable<pvtOrgScalarWhereWithAggregatesInput>
     privateOrgId?: StringWithAggregatesFilter | string
+    CompanyName?: StringNullableWithAggregatesFilter | string | null
+    positionInCompany?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type serviceProviderWhereInput = {
@@ -6247,6 +6295,8 @@ export namespace Prisma {
     OR?: Enumerable<serviceProviderWhereInput>
     NOT?: Enumerable<serviceProviderWhereInput>
     serviceProviderId?: StringFilter | string
+    BusinessName?: StringNullableFilter | string | null
+    PositionInBusiness?: StringNullableFilter | string | null
     BusinessTag?: EnumServiceProviderTagNullableFilter | ServiceProviderTag | null
     VouchersRequested?: VoucherListRelationFilter
     Users?: XOR<UsersRelationFilter, UsersWhereInput>
@@ -6254,6 +6304,8 @@ export namespace Prisma {
 
   export type serviceProviderOrderByWithRelationInput = {
     serviceProviderId?: SortOrder
+    BusinessName?: SortOrder
+    PositionInBusiness?: SortOrder
     BusinessTag?: SortOrder
     VouchersRequested?: VoucherOrderByRelationAggregateInput
     Users?: UsersOrderByWithRelationInput
@@ -6265,6 +6317,8 @@ export namespace Prisma {
 
   export type serviceProviderOrderByWithAggregationInput = {
     serviceProviderId?: SortOrder
+    BusinessName?: SortOrder
+    PositionInBusiness?: SortOrder
     BusinessTag?: SortOrder
     _count?: serviceProviderCountOrderByAggregateInput
     _max?: serviceProviderMaxOrderByAggregateInput
@@ -6276,6 +6330,8 @@ export namespace Prisma {
     OR?: Enumerable<serviceProviderScalarWhereWithAggregatesInput>
     NOT?: Enumerable<serviceProviderScalarWhereWithAggregatesInput>
     serviceProviderId?: StringWithAggregatesFilter | string
+    BusinessName?: StringNullableWithAggregatesFilter | string | null
+    PositionInBusiness?: StringNullableWithAggregatesFilter | string | null
     BusinessTag?: EnumServiceProviderTagNullableWithAggregatesFilter | ServiceProviderTag | null
   }
 
@@ -6538,38 +6594,53 @@ export namespace Prisma {
   }
 
   export type pvtOrgCreateInput = {
+    CompanyName?: string | null
+    positionInCompany?: string | null
     VouchersCreated?: VoucherCreateNestedManyWithoutPvtOrgByInput
     Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
   }
 
   export type pvtOrgUncheckedCreateInput = {
     privateOrgId?: string
+    CompanyName?: string | null
+    positionInCompany?: string | null
     VouchersCreated?: VoucherUncheckedCreateNestedManyWithoutPvtOrgByInput
   }
 
   export type pvtOrgUpdateInput = {
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
     VouchersCreated?: VoucherUpdateManyWithoutPvtOrgByNestedInput
     Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
   }
 
   export type pvtOrgUncheckedUpdateInput = {
     privateOrgId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
     VouchersCreated?: VoucherUncheckedUpdateManyWithoutPvtOrgByNestedInput
   }
 
   export type pvtOrgCreateManyInput = {
     privateOrgId?: string
+    CompanyName?: string | null
+    positionInCompany?: string | null
   }
 
   export type pvtOrgUpdateManyMutationInput = {
-
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type pvtOrgUncheckedUpdateManyInput = {
     privateOrgId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type serviceProviderCreateInput = {
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
     VouchersRequested?: VoucherCreateNestedManyWithoutServiceProviderUserInput
     Users?: UsersCreateNestedOneWithoutServiceProviderInfoInput
@@ -6577,11 +6648,15 @@ export namespace Prisma {
 
   export type serviceProviderUncheckedCreateInput = {
     serviceProviderId?: string
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
     VouchersRequested?: VoucherUncheckedCreateNestedManyWithoutServiceProviderUserInput
   }
 
   export type serviceProviderUpdateInput = {
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
     VouchersRequested?: VoucherUpdateManyWithoutServiceProviderUserNestedInput
     Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
@@ -6589,21 +6664,29 @@ export namespace Prisma {
 
   export type serviceProviderUncheckedUpdateInput = {
     serviceProviderId?: StringFieldUpdateOperationsInput | string
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
     VouchersRequested?: VoucherUncheckedUpdateManyWithoutServiceProviderUserNestedInput
   }
 
   export type serviceProviderCreateManyInput = {
     serviceProviderId?: string
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
   }
 
   export type serviceProviderUpdateManyMutationInput = {
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
   }
 
   export type serviceProviderUncheckedUpdateManyInput = {
     serviceProviderId?: StringFieldUpdateOperationsInput | string
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
   }
 
@@ -6975,14 +7058,20 @@ export namespace Prisma {
 
   export type pvtOrgCountOrderByAggregateInput = {
     privateOrgId?: SortOrder
+    CompanyName?: SortOrder
+    positionInCompany?: SortOrder
   }
 
   export type pvtOrgMaxOrderByAggregateInput = {
     privateOrgId?: SortOrder
+    CompanyName?: SortOrder
+    positionInCompany?: SortOrder
   }
 
   export type pvtOrgMinOrderByAggregateInput = {
     privateOrgId?: SortOrder
+    CompanyName?: SortOrder
+    positionInCompany?: SortOrder
   }
 
   export type EnumServiceProviderTagNullableFilter = {
@@ -6994,16 +7083,22 @@ export namespace Prisma {
 
   export type serviceProviderCountOrderByAggregateInput = {
     serviceProviderId?: SortOrder
+    BusinessName?: SortOrder
+    PositionInBusiness?: SortOrder
     BusinessTag?: SortOrder
   }
 
   export type serviceProviderMaxOrderByAggregateInput = {
     serviceProviderId?: SortOrder
+    BusinessName?: SortOrder
+    PositionInBusiness?: SortOrder
     BusinessTag?: SortOrder
   }
 
   export type serviceProviderMinOrderByAggregateInput = {
     serviceProviderId?: SortOrder
+    BusinessName?: SortOrder
+    PositionInBusiness?: SortOrder
     BusinessTag?: SortOrder
   }
 
@@ -7633,10 +7728,14 @@ export namespace Prisma {
   }
 
   export type pvtOrgCreateWithoutUsersInput = {
+    CompanyName?: string | null
+    positionInCompany?: string | null
     VouchersCreated?: VoucherCreateNestedManyWithoutPvtOrgByInput
   }
 
   export type pvtOrgUncheckedCreateWithoutUsersInput = {
+    CompanyName?: string | null
+    positionInCompany?: string | null
     VouchersCreated?: VoucherUncheckedCreateNestedManyWithoutPvtOrgByInput
   }
 
@@ -7646,11 +7745,15 @@ export namespace Prisma {
   }
 
   export type serviceProviderCreateWithoutUsersInput = {
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
     VouchersRequested?: VoucherCreateNestedManyWithoutServiceProviderUserInput
   }
 
   export type serviceProviderUncheckedCreateWithoutUsersInput = {
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
     VouchersRequested?: VoucherUncheckedCreateNestedManyWithoutServiceProviderUserInput
   }
@@ -7679,10 +7782,14 @@ export namespace Prisma {
   }
 
   export type pvtOrgUpdateWithoutUsersInput = {
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
     VouchersCreated?: VoucherUpdateManyWithoutPvtOrgByNestedInput
   }
 
   export type pvtOrgUncheckedUpdateWithoutUsersInput = {
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
     VouchersCreated?: VoucherUncheckedUpdateManyWithoutPvtOrgByNestedInput
   }
 
@@ -7692,11 +7799,15 @@ export namespace Prisma {
   }
 
   export type serviceProviderUpdateWithoutUsersInput = {
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
     VouchersRequested?: VoucherUpdateManyWithoutServiceProviderUserNestedInput
   }
 
   export type serviceProviderUncheckedUpdateWithoutUsersInput = {
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
     VouchersRequested?: VoucherUncheckedUpdateManyWithoutServiceProviderUserNestedInput
   }
@@ -7860,11 +7971,15 @@ export namespace Prisma {
   }
 
   export type pvtOrgCreateWithoutVouchersCreatedInput = {
+    CompanyName?: string | null
+    positionInCompany?: string | null
     Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
   }
 
   export type pvtOrgUncheckedCreateWithoutVouchersCreatedInput = {
     privateOrgId?: string
+    CompanyName?: string | null
+    positionInCompany?: string | null
   }
 
   export type pvtOrgCreateOrConnectWithoutVouchersCreatedInput = {
@@ -7886,12 +8001,16 @@ export namespace Prisma {
   }
 
   export type serviceProviderCreateWithoutVouchersRequestedInput = {
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
     Users?: UsersCreateNestedOneWithoutServiceProviderInfoInput
   }
 
   export type serviceProviderUncheckedCreateWithoutVouchersRequestedInput = {
     serviceProviderId?: string
+    BusinessName?: string | null
+    PositionInBusiness?: string | null
     BusinessTag?: ServiceProviderTag | null
   }
 
@@ -7906,11 +8025,15 @@ export namespace Prisma {
   }
 
   export type pvtOrgUpdateWithoutVouchersCreatedInput = {
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
     Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
   }
 
   export type pvtOrgUncheckedUpdateWithoutVouchersCreatedInput = {
     privateOrgId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: NullableStringFieldUpdateOperationsInput | string | null
+    positionInCompany?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type beneficiaryUpsertWithoutAvailableVoucherInput = {
@@ -7932,12 +8055,16 @@ export namespace Prisma {
   }
 
   export type serviceProviderUpdateWithoutVouchersRequestedInput = {
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
     Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
   }
 
   export type serviceProviderUncheckedUpdateWithoutVouchersRequestedInput = {
     serviceProviderId?: StringFieldUpdateOperationsInput | string
+    BusinessName?: NullableStringFieldUpdateOperationsInput | string | null
+    PositionInBusiness?: NullableStringFieldUpdateOperationsInput | string | null
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
   }
 

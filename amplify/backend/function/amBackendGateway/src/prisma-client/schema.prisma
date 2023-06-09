@@ -25,53 +25,54 @@ model Users {
   walletIdBeneficiary     String?
   walletIdPvtOrg          String?
   walletIdServiceProvider String?
+  createdAt               DateTime         @default(now())
+  role                    Role?            @default(USER)
   beneficiaryInfo         beneficiary?
   pvtOrgInfo              pvtOrg?
   serviceProviderInfo     serviceProvider?
-  createdAt               DateTime         @default(now())
-  role                    Role?            @default(USER)
+}
+
+model beneficiary {
+  beneficiaryId    String    @id @default(uuid())
+  AvailableVoucher Voucher[]
+  Users            Users     @relation(fields: [beneficiaryId], references: [id])
+}
+
+model Voucher {
+  voucherId            String          @id @default(uuid())
+  voucherAmount        Int
+  voucherCreatedAt     DateTime        @default(now())
+  voucherRedeemed      Boolean         @default(false)
+  voucherRedeemedDate  DateTime?
+  voucherSPId          String          @default(uuid())
+  voucherBeneficiaryId String          @default(uuid())
+  PvtOrgById           String          @default(uuid())
+  PvtOrgBy             pvtOrg          @relation(fields: [PvtOrgById], references: [privateOrgId])
+  BeneficiaryUser      beneficiary     @relation(fields: [voucherBeneficiaryId], references: [beneficiaryId])
+  ServiceProviderUser  serviceProvider @relation(fields: [voucherSPId], references: [serviceProviderId])
+}
+
+model pvtOrg {
+  privateOrgId    String    @id @default(uuid())
+  VouchersCreated Voucher[]
+  CompanyName     String?
+  positionInCompany String?
+  Users           Users     @relation(fields: [privateOrgId], references: [id])
+}
+
+model serviceProvider {
+  serviceProviderId String              @id @default(uuid())
+  BusinessName       String?
+  PositionInBusiness String?
+  BusinessTag       ServiceProviderTag?
+  VouchersRequested Voucher[]
+  Users             Users               @relation(fields: [serviceProviderId], references: [id])
 }
 
 enum Role {
   USER
   ADMIN
   SUPERADMIN
-}
-// e-rupee wallet to be maid for each user
-
-
-model beneficiary {
-  beneficiaryId    String    @id @default(uuid())
-  Users            Users     @relation(fields: [beneficiaryId], references: [id])
-  AvailableVoucher Voucher[]
-}
-
-model Voucher {
-  // qrCode 
-  voucherId            String           @id @default(uuid())
-  voucherAmount        Int              
-  voucherCreatedAt     DateTime         @default(now())
-  voucherRedeemed      Boolean          @default(false)
-  voucherRedeemedDate  DateTime?
-  voucherSPId          String           @default(uuid())
-  ServiceProviderUser  serviceProvider? @relation(fields: [voucherSPId], references: [serviceProviderId])
-  voucherBeneficiaryId String           @default(uuid())
-  BeneficiaryUser      beneficiary?     @relation(fields: [voucherBeneficiaryId], references: [beneficiaryId])
-  PvtOrgById           String           @default(uuid())
-  PvtOrgBy             pvtOrg?          @relation(fields: [PvtOrgById], references: [privateOrgId])
-}
-
-model pvtOrg {
-  privateOrgId    String    @id @default(uuid())
-  Users           Users     @relation(fields: [privateOrgId], references: [id])
-  VouchersCreated Voucher[]
-}
-
-model serviceProvider {
-  serviceProviderId String              @id @default(uuid())
-  Users             Users              @relation(fields: [serviceProviderId], references: [id])
-  VouchersRequested Voucher[]         
-  BusinessTag       ServiceProviderTag? 
 }
 
 enum ServiceProviderTag {
