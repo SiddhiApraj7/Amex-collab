@@ -1,57 +1,119 @@
-import { View, Text, TextInput, SafeAreaView, Button, Image, ScrollView } from 'react-native';
-import React from 'react';
-import {Ionicons} from "@expo/vector-icons";
+import {
+  View,
+  Text,
+  TextInput,
+  SafeAreaView,
+  Button,
+  Image,
+  ScrollView,
+} from "react-native";
+import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import {Number_input_ud} from "../components/Number_input_ud"
+import {useForm,Controller} from "react-hook-form";
 
 
 const UserDetails = () => {
-    const navigation = useNavigation();
-        return (
+  const navigation = useNavigation();
+  [firstName, setfirstName] = useState("");
+  [lastName, setlastName] = useState("");
+  [recoveryEmailName, setrecoveryEmailName] = useState("");
+  const updateUser = async (
+    phoneNumber,
+    firstName,
+    lastName,
+    recoveryEmail
+  ) => {
+    // create User schema using post method using axioms and async , await
+    try {
+      const response = await axios.patch("http://localhost:3000/create-user", {
+        phoneNumber: phoneNumber,
+        firstName: firstName,
+        lastName: lastName,
+        recoveryEmail: recoveryEmail,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-          <SafeAreaView className="bg-white h-full">
-            <View className="items-center  bg-white">
+  return (
+    <SafeAreaView className="bg-white h-full">
+      <View className="items-center  bg-white">
+        <Image
+          className="h-36 w-96 mt-5"
+          source={require("../../assets/e-rupi.png")}
+        ></Image>
 
-            
-            <Image
-            className="h-36 w-96 mt-5"
-            
-            source = {require('../../assets/e-rupi.png')}></Image>
-            
-            <Text className="font-bold text-xl p-3 mb-5">User Details</Text>
+        <Text className="font-bold text-xl p-3 mb-5">User Details</Text>
 
-            <View className = "h-full w-full bg-blue-300 rounded-t-3xl"> 
-
-            <Text className="text-center mt-12  mb-1 font-semibold text-lg"> Enter your details: </Text>
-            <View className="flex-col pl-12 gap-5">
+        <View className="h-full w-full bg-blue-300 rounded-t-3xl">
+          <Text className="text-center mt-12  mb-1 font-semibold text-lg">
+            {" "}
+            Enter your details:{" "}
+          </Text>
+          <View className="flex-col pl-12 gap-5">
             <View className="flex-row gap-4">
-                <Ionicons name="person-circle-outline" color="white" className="top-6" size={40}></Ionicons>
-              <TextInput className="bg-white mt-16 p-2 h-11 w-56 mx-14 font-light rounded-md" placeholder="Enter your First Name"/>
+              <Ionicons
+                name="person-circle-outline"
+                color="white"
+                className="top-6"
+                size={40}
+              ></Ionicons>
+              <Number_input_ud
+               value={firstName}
+               onChangeText={setfirstName}
+               placeholder="Enter your first name"
+               keyboardType="default"
+               />
             </View>
             <View className="flex-row gap-4">
-            <Ionicons name="person-circle-outline" color="white" className="top-6" size={40}></Ionicons>
-              <TextInput className="bg-white mt-4 h-11 mx-14 p-2 w-56 font-light rounded-md" placeholder="Enter your Last Name"/>
+              <Ionicons
+                name="person-circle-outline"
+                color="white"
+                className="top-6"
+                size={40}
+              ></Ionicons>
+              <Number_input_ud
+               value= {lastName}
+               onChangeText={setlastName}
+               placeholder="Enter your last name"
+               keyboardType="default"
+               />
             </View>
 
             <View className="flex-row gap-4">
-            <Ionicons name="mail-outline" color="white" className="top-6" size={40}></Ionicons>
-              <TextInput className="bg-white mt-4 h-11 mx-14 p-2 w-56 font-light rounded-md" placeholder="Enter Recovery E-mail"/>
+              <Ionicons
+                name="mail-outline"
+                color="white"
+                className="top-6"
+                size={40}
+              ></Ionicons>
+              <Number_input_ud
+               value={recoveryEmail}
+               onChangeText={setrecoveryEmailName}
+               placeholder="Enter recovery Email"
+               keyboardType="default"
+               />
             </View>
+          </View>
 
-            </View>
-            
-            <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl">
-                  <Button color = "#82E0AA" onPress={() => {
-                    navigation.navigate("bankDetails");
-                  }}title="Next"></Button>
-                  </View>
-            </View>
-
-            </View>
-        </SafeAreaView>
-    
-        
-    
-    )
-                }
+          <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl">
+            <Button
+              color="#82E0AA"
+              onPress={updateUser(phoneNumber, firstName, lastName).then(() => {
+                navigation.navigate("bankDetails");
+              })}
+              title="Next"
+            ></Button>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default UserDetails;

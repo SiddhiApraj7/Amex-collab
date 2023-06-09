@@ -67,6 +67,7 @@ import BeneficiaryHomePage from './src/screens/BeneficiaryHomePage';
 import PvtOrgHomePage from './src/screens/PvtOrgHomePage';
 import SelectServiceProvider from './src/screens/SelectServiceProvider';
 import ServiceProviderHomePage from './src/screens/ServiceProviderHomePage';
+import { AppProvider } from './AppContext';
 
 export default function App() {
   // wherever the useState is located 
@@ -75,21 +76,20 @@ export default function App() {
 
 
   return (
-    
+    <AppProvider>
     <NavigationContainer>
     <Stack.Navigator 
     screenOptions={{
       headerShown: false
     }}>
-      {/* <Stack.Screen name="home" component={HomePage}></Stack.Screen> */}
+      <Stack.Screen name="home" component={HomePage}></Stack.Screen>
       <Stack.Screen name="login" component={Login}></Stack.Screen>
-      {/* <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
-      <Stack.Screen name="otp" component={Phone}></Stack.Screen> */}
+      <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
+      <Stack.Screen name="otp" component={Phone}></Stack.Screen> 
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
-      {/* <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
+       <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
-      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen>  */}
 
     
       <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
@@ -102,6 +102,7 @@ export default function App() {
       <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
   </Stack.Navigator>
 </NavigationContainer>
+</AppProvider>
   );
 }
 
