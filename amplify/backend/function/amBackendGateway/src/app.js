@@ -230,6 +230,74 @@ app.post('/create-serviceProvider', async function(req, res) {
   }
 });
 
+app.patch('/create-serviceProvider', async (req, res) => {
+  try {
+    const { phoneNumber, BusinessName, PositionInBusiness, BusinessTag } = req.body;
+
+    const serviceProvider = await prisma.serviceProvider.findFirst({
+      where: {
+        Users: {
+          phoneNumber,
+        },
+      },
+    });
+
+    if (!serviceProvider) {
+      return res.status(404).json({ error: 'Service provider not found' });
+    }
+
+    const updatedServiceProvider = await prisma.serviceProvider.update({
+      where: {
+        serviceProviderId: serviceProvider.serviceProviderId,
+      },
+      data: {
+        BusinessName,
+        PositionInBusiness,
+        BusinessTag,
+      },
+    });
+
+    res.status(200).json({ success: 'Patch call succeeded!', updatedServiceProvider });
+  } catch (error) {
+    console.error('Error updating service provider:', error);
+    res.status(500).json({ error: 'Failed to update service provider' });
+  }
+});
+
+
+app.patch('/create-pvtOrg', async (req, res) => {
+  try {
+    const { phoneNumber, CompanyName, positionInCompany } = req.body;
+
+    const pvtOrg = await prisma.pvtOrg.findFirst({
+      where: {
+        Users: {
+          phoneNumber,
+        },
+      },
+    });
+
+    if (!pvtOrg) {
+      return res.status(404).json({ error: 'Private Organisation not found' });
+    }
+
+    const updatedPvtOrg = await prisma.pvtOrg.update({
+      where: {
+        privateOrgId: pvtOrg.privateOrgId,
+      },
+      data: {
+        CompanyName,
+        positionInCompany
+      },
+    });
+
+    res.status(200).json({ success: 'Patch call succeeded!', updatedPvtOrg});
+  } catch (error) {
+    console.error('Error updating pvtOrg:', error);
+    res.status(500).json({ error: 'Failed to update pvtOrg' });
+  }
+});
+
 
 app.post('/create-voucher', async function(req, res) {
   const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById} = req.body;
@@ -370,6 +438,27 @@ app.post('/create-voucher', async function(req, res) {
   }
 });
 
+app.patch('/create-voucher', async (req, res) => {
+  try {
+    const { voucherId } = req.body;
+    // Create the voucher using the provided voucherId
+    const updatedvoucher = await prisma.Voucher.update({
+      where : {
+        voucherId
+      },
+      data: {
+        voucherRedeemedDate: new Date(),
+        voucherRedeemed: true,
+     
+      },
+    });
+
+    res.status(200).json(updatedvoucher);
+  } catch (error) {
+    console.error('Error updating voucher:', error);
+    res.status(500).json({ error: 'Failed to update voucher' });
+  }
+});
 
 app.listen(3000, function () {
   console.log("App started")
