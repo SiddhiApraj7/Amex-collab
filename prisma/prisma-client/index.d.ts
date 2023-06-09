@@ -2248,15 +2248,15 @@ export namespace Prisma {
 
   export type beneficiarySelect = {
     beneficiaryId?: boolean
-    Users?: boolean | UsersArgs
     AvailableVoucher?: boolean | beneficiary$AvailableVoucherArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | BeneficiaryCountOutputTypeArgs
   }
 
 
   export type beneficiaryInclude = {
-    Users?: boolean | UsersArgs
     AvailableVoucher?: boolean | beneficiary$AvailableVoucherArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | BeneficiaryCountOutputTypeArgs
   }
 
@@ -2267,15 +2267,15 @@ export namespace Prisma {
     S extends { include: any } & (beneficiaryArgs | beneficiaryFindManyArgs)
     ? beneficiary  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends 'AvailableVoucher' ? Array < VoucherGetPayload<S['include'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends '_count' ? BeneficiaryCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (beneficiaryArgs | beneficiaryFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends 'AvailableVoucher' ? Array < VoucherGetPayload<S['select'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends '_count' ? BeneficiaryCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof beneficiary ? beneficiary[P] : never
   } 
       : beneficiary
@@ -2648,9 +2648,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
-
     AvailableVoucher<T extends beneficiary$AvailableVoucherArgs= {}>(args?: Subset<T, beneficiary$AvailableVoucherArgs>): Prisma.PrismaPromise<Array<VoucherGetPayload<T>>| Null>;
+
+    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -3268,16 +3268,16 @@ export namespace Prisma {
     voucherSPId?: boolean
     voucherBeneficiaryId?: boolean
     PvtOrgById?: boolean
-    ServiceProviderUser?: boolean | serviceProviderArgs
-    BeneficiaryUser?: boolean | beneficiaryArgs
     PvtOrgBy?: boolean | pvtOrgArgs
+    BeneficiaryUser?: boolean | beneficiaryArgs
+    ServiceProviderUser?: boolean | serviceProviderArgs
   }
 
 
   export type VoucherInclude = {
-    ServiceProviderUser?: boolean | serviceProviderArgs
-    BeneficiaryUser?: boolean | beneficiaryArgs
     PvtOrgBy?: boolean | pvtOrgArgs
+    BeneficiaryUser?: boolean | beneficiaryArgs
+    ServiceProviderUser?: boolean | serviceProviderArgs
   }
 
   export type VoucherGetPayload<S extends boolean | null | undefined | VoucherArgs> =
@@ -3287,16 +3287,16 @@ export namespace Prisma {
     S extends { include: any } & (VoucherArgs | VoucherFindManyArgs)
     ? Voucher  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'ServiceProviderUser' ? serviceProviderGetPayload<S['include'][P]> | null :
-        P extends 'BeneficiaryUser' ? beneficiaryGetPayload<S['include'][P]> | null :
-        P extends 'PvtOrgBy' ? pvtOrgGetPayload<S['include'][P]> | null :  never
+        P extends 'PvtOrgBy' ? pvtOrgGetPayload<S['include'][P]> :
+        P extends 'BeneficiaryUser' ? beneficiaryGetPayload<S['include'][P]> :
+        P extends 'ServiceProviderUser' ? serviceProviderGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (VoucherArgs | VoucherFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'ServiceProviderUser' ? serviceProviderGetPayload<S['select'][P]> | null :
-        P extends 'BeneficiaryUser' ? beneficiaryGetPayload<S['select'][P]> | null :
-        P extends 'PvtOrgBy' ? pvtOrgGetPayload<S['select'][P]> | null :  P extends keyof Voucher ? Voucher[P] : never
+        P extends 'PvtOrgBy' ? pvtOrgGetPayload<S['select'][P]> :
+        P extends 'BeneficiaryUser' ? beneficiaryGetPayload<S['select'][P]> :
+        P extends 'ServiceProviderUser' ? serviceProviderGetPayload<S['select'][P]> :  P extends keyof Voucher ? Voucher[P] : never
   } 
       : Voucher
 
@@ -3668,11 +3668,11 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    ServiceProviderUser<T extends serviceProviderArgs= {}>(args?: Subset<T, serviceProviderArgs>): Prisma__serviceProviderClient<serviceProviderGetPayload<T> | Null>;
+    PvtOrgBy<T extends pvtOrgArgs= {}>(args?: Subset<T, pvtOrgArgs>): Prisma__pvtOrgClient<pvtOrgGetPayload<T> | Null>;
 
     BeneficiaryUser<T extends beneficiaryArgs= {}>(args?: Subset<T, beneficiaryArgs>): Prisma__beneficiaryClient<beneficiaryGetPayload<T> | Null>;
 
-    PvtOrgBy<T extends pvtOrgArgs= {}>(args?: Subset<T, pvtOrgArgs>): Prisma__pvtOrgClient<pvtOrgGetPayload<T> | Null>;
+    ServiceProviderUser<T extends serviceProviderArgs= {}>(args?: Subset<T, serviceProviderArgs>): Prisma__serviceProviderClient<serviceProviderGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -4179,15 +4179,15 @@ export namespace Prisma {
 
   export type pvtOrgSelect = {
     privateOrgId?: boolean
-    Users?: boolean | UsersArgs
     VouchersCreated?: boolean | pvtOrg$VouchersCreatedArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | PvtOrgCountOutputTypeArgs
   }
 
 
   export type pvtOrgInclude = {
-    Users?: boolean | UsersArgs
     VouchersCreated?: boolean | pvtOrg$VouchersCreatedArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | PvtOrgCountOutputTypeArgs
   }
 
@@ -4198,15 +4198,15 @@ export namespace Prisma {
     S extends { include: any } & (pvtOrgArgs | pvtOrgFindManyArgs)
     ? pvtOrg  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends 'VouchersCreated' ? Array < VoucherGetPayload<S['include'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends '_count' ? PvtOrgCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (pvtOrgArgs | pvtOrgFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends 'VouchersCreated' ? Array < VoucherGetPayload<S['select'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends '_count' ? PvtOrgCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof pvtOrg ? pvtOrg[P] : never
   } 
       : pvtOrg
@@ -4579,9 +4579,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
-
     VouchersCreated<T extends pvtOrg$VouchersCreatedArgs= {}>(args?: Subset<T, pvtOrg$VouchersCreatedArgs>): Prisma.PrismaPromise<Array<VoucherGetPayload<T>>| Null>;
+
+    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -5117,15 +5117,15 @@ export namespace Prisma {
   export type serviceProviderSelect = {
     serviceProviderId?: boolean
     BusinessTag?: boolean
-    Users?: boolean | UsersArgs
     VouchersRequested?: boolean | serviceProvider$VouchersRequestedArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | ServiceProviderCountOutputTypeArgs
   }
 
 
   export type serviceProviderInclude = {
-    Users?: boolean | UsersArgs
     VouchersRequested?: boolean | serviceProvider$VouchersRequestedArgs
+    Users?: boolean | UsersArgs
     _count?: boolean | ServiceProviderCountOutputTypeArgs
   }
 
@@ -5136,15 +5136,15 @@ export namespace Prisma {
     S extends { include: any } & (serviceProviderArgs | serviceProviderFindManyArgs)
     ? serviceProvider  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends 'VouchersRequested' ? Array < VoucherGetPayload<S['include'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['include'][P]> :
         P extends '_count' ? ServiceProviderCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (serviceProviderArgs | serviceProviderFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends 'VouchersRequested' ? Array < VoucherGetPayload<S['select'][P]>>  :
+        P extends 'Users' ? UsersGetPayload<S['select'][P]> :
         P extends '_count' ? ServiceProviderCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof serviceProvider ? serviceProvider[P] : never
   } 
       : serviceProvider
@@ -5517,9 +5517,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
-
     VouchersRequested<T extends serviceProvider$VouchersRequestedArgs= {}>(args?: Subset<T, serviceProvider$VouchersRequestedArgs>): Prisma.PrismaPromise<Array<VoucherGetPayload<T>>| Null>;
+
+    Users<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -6116,14 +6116,14 @@ export namespace Prisma {
     OR?: Enumerable<beneficiaryWhereInput>
     NOT?: Enumerable<beneficiaryWhereInput>
     beneficiaryId?: StringFilter | string
-    Users?: XOR<UsersRelationFilter, UsersWhereInput>
     AvailableVoucher?: VoucherListRelationFilter
+    Users?: XOR<UsersRelationFilter, UsersWhereInput>
   }
 
   export type beneficiaryOrderByWithRelationInput = {
     beneficiaryId?: SortOrder
-    Users?: UsersOrderByWithRelationInput
     AvailableVoucher?: VoucherOrderByRelationAggregateInput
+    Users?: UsersOrderByWithRelationInput
   }
 
   export type beneficiaryWhereUniqueInput = {
@@ -6156,9 +6156,9 @@ export namespace Prisma {
     voucherSPId?: StringFilter | string
     voucherBeneficiaryId?: StringFilter | string
     PvtOrgById?: StringFilter | string
-    ServiceProviderUser?: XOR<ServiceProviderRelationFilter, serviceProviderWhereInput> | null
-    BeneficiaryUser?: XOR<BeneficiaryRelationFilter, beneficiaryWhereInput> | null
-    PvtOrgBy?: XOR<PvtOrgRelationFilter, pvtOrgWhereInput> | null
+    PvtOrgBy?: XOR<PvtOrgRelationFilter, pvtOrgWhereInput>
+    BeneficiaryUser?: XOR<BeneficiaryRelationFilter, beneficiaryWhereInput>
+    ServiceProviderUser?: XOR<ServiceProviderRelationFilter, serviceProviderWhereInput>
   }
 
   export type VoucherOrderByWithRelationInput = {
@@ -6170,9 +6170,9 @@ export namespace Prisma {
     voucherSPId?: SortOrder
     voucherBeneficiaryId?: SortOrder
     PvtOrgById?: SortOrder
-    ServiceProviderUser?: serviceProviderOrderByWithRelationInput
-    BeneficiaryUser?: beneficiaryOrderByWithRelationInput
     PvtOrgBy?: pvtOrgOrderByWithRelationInput
+    BeneficiaryUser?: beneficiaryOrderByWithRelationInput
+    ServiceProviderUser?: serviceProviderOrderByWithRelationInput
   }
 
   export type VoucherWhereUniqueInput = {
@@ -6214,14 +6214,14 @@ export namespace Prisma {
     OR?: Enumerable<pvtOrgWhereInput>
     NOT?: Enumerable<pvtOrgWhereInput>
     privateOrgId?: StringFilter | string
-    Users?: XOR<UsersRelationFilter, UsersWhereInput>
     VouchersCreated?: VoucherListRelationFilter
+    Users?: XOR<UsersRelationFilter, UsersWhereInput>
   }
 
   export type pvtOrgOrderByWithRelationInput = {
     privateOrgId?: SortOrder
-    Users?: UsersOrderByWithRelationInput
     VouchersCreated?: VoucherOrderByRelationAggregateInput
+    Users?: UsersOrderByWithRelationInput
   }
 
   export type pvtOrgWhereUniqueInput = {
@@ -6248,15 +6248,15 @@ export namespace Prisma {
     NOT?: Enumerable<serviceProviderWhereInput>
     serviceProviderId?: StringFilter | string
     BusinessTag?: EnumServiceProviderTagNullableFilter | ServiceProviderTag | null
-    Users?: XOR<UsersRelationFilter, UsersWhereInput>
     VouchersRequested?: VoucherListRelationFilter
+    Users?: XOR<UsersRelationFilter, UsersWhereInput>
   }
 
   export type serviceProviderOrderByWithRelationInput = {
     serviceProviderId?: SortOrder
     BusinessTag?: SortOrder
-    Users?: UsersOrderByWithRelationInput
     VouchersRequested?: VoucherOrderByRelationAggregateInput
+    Users?: UsersOrderByWithRelationInput
   }
 
   export type serviceProviderWhereUniqueInput = {
@@ -6432,8 +6432,8 @@ export namespace Prisma {
   }
 
   export type beneficiaryCreateInput = {
-    Users?: UsersCreateNestedOneWithoutBeneficiaryInfoInput
     AvailableVoucher?: VoucherCreateNestedManyWithoutBeneficiaryUserInput
+    Users?: UsersCreateNestedOneWithoutBeneficiaryInfoInput
   }
 
   export type beneficiaryUncheckedCreateInput = {
@@ -6442,8 +6442,8 @@ export namespace Prisma {
   }
 
   export type beneficiaryUpdateInput = {
-    Users?: UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput
     AvailableVoucher?: VoucherUpdateManyWithoutBeneficiaryUserNestedInput
+    Users?: UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput
   }
 
   export type beneficiaryUncheckedUpdateInput = {
@@ -6469,9 +6469,9 @@ export namespace Prisma {
     voucherCreatedAt?: Date | string
     voucherRedeemed?: boolean
     voucherRedeemedDate?: Date | string | null
-    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
-    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
     PvtOrgBy?: pvtOrgCreateNestedOneWithoutVouchersCreatedInput
+    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
+    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
   }
 
   export type VoucherUncheckedCreateInput = {
@@ -6491,9 +6491,9 @@ export namespace Prisma {
     voucherCreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherRedeemed?: BoolFieldUpdateOperationsInput | boolean
     voucherRedeemedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ServiceProviderUser?: serviceProviderUpdateOneWithoutVouchersRequestedNestedInput
-    BeneficiaryUser?: beneficiaryUpdateOneWithoutAvailableVoucherNestedInput
-    PvtOrgBy?: pvtOrgUpdateOneWithoutVouchersCreatedNestedInput
+    PvtOrgBy?: pvtOrgUpdateOneRequiredWithoutVouchersCreatedNestedInput
+    BeneficiaryUser?: beneficiaryUpdateOneRequiredWithoutAvailableVoucherNestedInput
+    ServiceProviderUser?: serviceProviderUpdateOneRequiredWithoutVouchersRequestedNestedInput
   }
 
   export type VoucherUncheckedUpdateInput = {
@@ -6538,8 +6538,8 @@ export namespace Prisma {
   }
 
   export type pvtOrgCreateInput = {
-    Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
     VouchersCreated?: VoucherCreateNestedManyWithoutPvtOrgByInput
+    Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
   }
 
   export type pvtOrgUncheckedCreateInput = {
@@ -6548,8 +6548,8 @@ export namespace Prisma {
   }
 
   export type pvtOrgUpdateInput = {
-    Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
     VouchersCreated?: VoucherUpdateManyWithoutPvtOrgByNestedInput
+    Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
   }
 
   export type pvtOrgUncheckedUpdateInput = {
@@ -6571,8 +6571,8 @@ export namespace Prisma {
 
   export type serviceProviderCreateInput = {
     BusinessTag?: ServiceProviderTag | null
-    Users?: UsersCreateNestedOneWithoutServiceProviderInfoInput
     VouchersRequested?: VoucherCreateNestedManyWithoutServiceProviderUserInput
+    Users?: UsersCreateNestedOneWithoutServiceProviderInfoInput
   }
 
   export type serviceProviderUncheckedCreateInput = {
@@ -6583,8 +6583,8 @@ export namespace Prisma {
 
   export type serviceProviderUpdateInput = {
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
-    Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
     VouchersRequested?: VoucherUpdateManyWithoutServiceProviderUserNestedInput
+    Users?: UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput
   }
 
   export type serviceProviderUncheckedUpdateInput = {
@@ -6853,15 +6853,15 @@ export namespace Prisma {
     _max?: NestedEnumRoleNullableFilter
   }
 
-  export type UsersRelationFilter = {
-    is?: UsersWhereInput
-    isNot?: UsersWhereInput
-  }
-
   export type VoucherListRelationFilter = {
     every?: VoucherWhereInput
     some?: VoucherWhereInput
     none?: VoucherWhereInput
+  }
+
+  export type UsersRelationFilter = {
+    is?: UsersWhereInput
+    isNot?: UsersWhereInput
   }
 
   export type VoucherOrderByRelationAggregateInput = {
@@ -7145,12 +7145,6 @@ export namespace Prisma {
     update?: XOR<serviceProviderUpdateWithoutUsersInput, serviceProviderUncheckedUpdateWithoutUsersInput>
   }
 
-  export type UsersCreateNestedOneWithoutBeneficiaryInfoInput = {
-    create?: XOR<UsersCreateWithoutBeneficiaryInfoInput, UsersUncheckedCreateWithoutBeneficiaryInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutBeneficiaryInfoInput
-    connect?: UsersWhereUniqueInput
-  }
-
   export type VoucherCreateNestedManyWithoutBeneficiaryUserInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutBeneficiaryUserInput>, Enumerable<VoucherUncheckedCreateWithoutBeneficiaryUserInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutBeneficiaryUserInput>
@@ -7158,19 +7152,17 @@ export namespace Prisma {
     connect?: Enumerable<VoucherWhereUniqueInput>
   }
 
+  export type UsersCreateNestedOneWithoutBeneficiaryInfoInput = {
+    create?: XOR<UsersCreateWithoutBeneficiaryInfoInput, UsersUncheckedCreateWithoutBeneficiaryInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutBeneficiaryInfoInput
+    connect?: UsersWhereUniqueInput
+  }
+
   export type VoucherUncheckedCreateNestedManyWithoutBeneficiaryUserInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutBeneficiaryUserInput>, Enumerable<VoucherUncheckedCreateWithoutBeneficiaryUserInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutBeneficiaryUserInput>
     createMany?: VoucherCreateManyBeneficiaryUserInputEnvelope
     connect?: Enumerable<VoucherWhereUniqueInput>
-  }
-
-  export type UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput = {
-    create?: XOR<UsersCreateWithoutBeneficiaryInfoInput, UsersUncheckedCreateWithoutBeneficiaryInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutBeneficiaryInfoInput
-    upsert?: UsersUpsertWithoutBeneficiaryInfoInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<UsersUpdateWithoutBeneficiaryInfoInput, UsersUncheckedUpdateWithoutBeneficiaryInfoInput>
   }
 
   export type VoucherUpdateManyWithoutBeneficiaryUserNestedInput = {
@@ -7187,6 +7179,14 @@ export namespace Prisma {
     deleteMany?: Enumerable<VoucherScalarWhereInput>
   }
 
+  export type UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput = {
+    create?: XOR<UsersCreateWithoutBeneficiaryInfoInput, UsersUncheckedCreateWithoutBeneficiaryInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutBeneficiaryInfoInput
+    upsert?: UsersUpsertWithoutBeneficiaryInfoInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<UsersUpdateWithoutBeneficiaryInfoInput, UsersUncheckedUpdateWithoutBeneficiaryInfoInput>
+  }
+
   export type VoucherUncheckedUpdateManyWithoutBeneficiaryUserNestedInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutBeneficiaryUserInput>, Enumerable<VoucherUncheckedCreateWithoutBeneficiaryUserInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutBeneficiaryUserInput>
@@ -7201,10 +7201,10 @@ export namespace Prisma {
     deleteMany?: Enumerable<VoucherScalarWhereInput>
   }
 
-  export type serviceProviderCreateNestedOneWithoutVouchersRequestedInput = {
-    create?: XOR<serviceProviderCreateWithoutVouchersRequestedInput, serviceProviderUncheckedCreateWithoutVouchersRequestedInput>
-    connectOrCreate?: serviceProviderCreateOrConnectWithoutVouchersRequestedInput
-    connect?: serviceProviderWhereUniqueInput
+  export type pvtOrgCreateNestedOneWithoutVouchersCreatedInput = {
+    create?: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
+    connectOrCreate?: pvtOrgCreateOrConnectWithoutVouchersCreatedInput
+    connect?: pvtOrgWhereUniqueInput
   }
 
   export type beneficiaryCreateNestedOneWithoutAvailableVoucherInput = {
@@ -7213,10 +7213,10 @@ export namespace Prisma {
     connect?: beneficiaryWhereUniqueInput
   }
 
-  export type pvtOrgCreateNestedOneWithoutVouchersCreatedInput = {
-    create?: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
-    connectOrCreate?: pvtOrgCreateOrConnectWithoutVouchersCreatedInput
-    connect?: pvtOrgWhereUniqueInput
+  export type serviceProviderCreateNestedOneWithoutVouchersRequestedInput = {
+    create?: XOR<serviceProviderCreateWithoutVouchersRequestedInput, serviceProviderUncheckedCreateWithoutVouchersRequestedInput>
+    connectOrCreate?: serviceProviderCreateOrConnectWithoutVouchersRequestedInput
+    connect?: serviceProviderWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -7231,40 +7231,28 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type serviceProviderUpdateOneWithoutVouchersRequestedNestedInput = {
-    create?: XOR<serviceProviderCreateWithoutVouchersRequestedInput, serviceProviderUncheckedCreateWithoutVouchersRequestedInput>
-    connectOrCreate?: serviceProviderCreateOrConnectWithoutVouchersRequestedInput
-    upsert?: serviceProviderUpsertWithoutVouchersRequestedInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: serviceProviderWhereUniqueInput
-    update?: XOR<serviceProviderUpdateWithoutVouchersRequestedInput, serviceProviderUncheckedUpdateWithoutVouchersRequestedInput>
-  }
-
-  export type beneficiaryUpdateOneWithoutAvailableVoucherNestedInput = {
-    create?: XOR<beneficiaryCreateWithoutAvailableVoucherInput, beneficiaryUncheckedCreateWithoutAvailableVoucherInput>
-    connectOrCreate?: beneficiaryCreateOrConnectWithoutAvailableVoucherInput
-    upsert?: beneficiaryUpsertWithoutAvailableVoucherInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: beneficiaryWhereUniqueInput
-    update?: XOR<beneficiaryUpdateWithoutAvailableVoucherInput, beneficiaryUncheckedUpdateWithoutAvailableVoucherInput>
-  }
-
-  export type pvtOrgUpdateOneWithoutVouchersCreatedNestedInput = {
+  export type pvtOrgUpdateOneRequiredWithoutVouchersCreatedNestedInput = {
     create?: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
     connectOrCreate?: pvtOrgCreateOrConnectWithoutVouchersCreatedInput
     upsert?: pvtOrgUpsertWithoutVouchersCreatedInput
-    disconnect?: boolean
-    delete?: boolean
     connect?: pvtOrgWhereUniqueInput
     update?: XOR<pvtOrgUpdateWithoutVouchersCreatedInput, pvtOrgUncheckedUpdateWithoutVouchersCreatedInput>
   }
 
-  export type UsersCreateNestedOneWithoutPvtOrgInfoInput = {
-    create?: XOR<UsersCreateWithoutPvtOrgInfoInput, UsersUncheckedCreateWithoutPvtOrgInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutPvtOrgInfoInput
-    connect?: UsersWhereUniqueInput
+  export type beneficiaryUpdateOneRequiredWithoutAvailableVoucherNestedInput = {
+    create?: XOR<beneficiaryCreateWithoutAvailableVoucherInput, beneficiaryUncheckedCreateWithoutAvailableVoucherInput>
+    connectOrCreate?: beneficiaryCreateOrConnectWithoutAvailableVoucherInput
+    upsert?: beneficiaryUpsertWithoutAvailableVoucherInput
+    connect?: beneficiaryWhereUniqueInput
+    update?: XOR<beneficiaryUpdateWithoutAvailableVoucherInput, beneficiaryUncheckedUpdateWithoutAvailableVoucherInput>
+  }
+
+  export type serviceProviderUpdateOneRequiredWithoutVouchersRequestedNestedInput = {
+    create?: XOR<serviceProviderCreateWithoutVouchersRequestedInput, serviceProviderUncheckedCreateWithoutVouchersRequestedInput>
+    connectOrCreate?: serviceProviderCreateOrConnectWithoutVouchersRequestedInput
+    upsert?: serviceProviderUpsertWithoutVouchersRequestedInput
+    connect?: serviceProviderWhereUniqueInput
+    update?: XOR<serviceProviderUpdateWithoutVouchersRequestedInput, serviceProviderUncheckedUpdateWithoutVouchersRequestedInput>
   }
 
   export type VoucherCreateNestedManyWithoutPvtOrgByInput = {
@@ -7274,19 +7262,17 @@ export namespace Prisma {
     connect?: Enumerable<VoucherWhereUniqueInput>
   }
 
+  export type UsersCreateNestedOneWithoutPvtOrgInfoInput = {
+    create?: XOR<UsersCreateWithoutPvtOrgInfoInput, UsersUncheckedCreateWithoutPvtOrgInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutPvtOrgInfoInput
+    connect?: UsersWhereUniqueInput
+  }
+
   export type VoucherUncheckedCreateNestedManyWithoutPvtOrgByInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutPvtOrgByInput>, Enumerable<VoucherUncheckedCreateWithoutPvtOrgByInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutPvtOrgByInput>
     createMany?: VoucherCreateManyPvtOrgByInputEnvelope
     connect?: Enumerable<VoucherWhereUniqueInput>
-  }
-
-  export type UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput = {
-    create?: XOR<UsersCreateWithoutPvtOrgInfoInput, UsersUncheckedCreateWithoutPvtOrgInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutPvtOrgInfoInput
-    upsert?: UsersUpsertWithoutPvtOrgInfoInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<UsersUpdateWithoutPvtOrgInfoInput, UsersUncheckedUpdateWithoutPvtOrgInfoInput>
   }
 
   export type VoucherUpdateManyWithoutPvtOrgByNestedInput = {
@@ -7303,6 +7289,14 @@ export namespace Prisma {
     deleteMany?: Enumerable<VoucherScalarWhereInput>
   }
 
+  export type UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput = {
+    create?: XOR<UsersCreateWithoutPvtOrgInfoInput, UsersUncheckedCreateWithoutPvtOrgInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutPvtOrgInfoInput
+    upsert?: UsersUpsertWithoutPvtOrgInfoInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<UsersUpdateWithoutPvtOrgInfoInput, UsersUncheckedUpdateWithoutPvtOrgInfoInput>
+  }
+
   export type VoucherUncheckedUpdateManyWithoutPvtOrgByNestedInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutPvtOrgByInput>, Enumerable<VoucherUncheckedCreateWithoutPvtOrgByInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutPvtOrgByInput>
@@ -7317,17 +7311,17 @@ export namespace Prisma {
     deleteMany?: Enumerable<VoucherScalarWhereInput>
   }
 
-  export type UsersCreateNestedOneWithoutServiceProviderInfoInput = {
-    create?: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutServiceProviderInfoInput
-    connect?: UsersWhereUniqueInput
-  }
-
   export type VoucherCreateNestedManyWithoutServiceProviderUserInput = {
     create?: XOR<Enumerable<VoucherCreateWithoutServiceProviderUserInput>, Enumerable<VoucherUncheckedCreateWithoutServiceProviderUserInput>>
     connectOrCreate?: Enumerable<VoucherCreateOrConnectWithoutServiceProviderUserInput>
     createMany?: VoucherCreateManyServiceProviderUserInputEnvelope
     connect?: Enumerable<VoucherWhereUniqueInput>
+  }
+
+  export type UsersCreateNestedOneWithoutServiceProviderInfoInput = {
+    create?: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutServiceProviderInfoInput
+    connect?: UsersWhereUniqueInput
   }
 
   export type VoucherUncheckedCreateNestedManyWithoutServiceProviderUserInput = {
@@ -7339,14 +7333,6 @@ export namespace Prisma {
 
   export type NullableEnumServiceProviderTagFieldUpdateOperationsInput = {
     set?: ServiceProviderTag | null
-  }
-
-  export type UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput = {
-    create?: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutServiceProviderInfoInput
-    upsert?: UsersUpsertWithoutServiceProviderInfoInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<UsersUpdateWithoutServiceProviderInfoInput, UsersUncheckedUpdateWithoutServiceProviderInfoInput>
   }
 
   export type VoucherUpdateManyWithoutServiceProviderUserNestedInput = {
@@ -7361,6 +7347,14 @@ export namespace Prisma {
     update?: Enumerable<VoucherUpdateWithWhereUniqueWithoutServiceProviderUserInput>
     updateMany?: Enumerable<VoucherUpdateManyWithWhereWithoutServiceProviderUserInput>
     deleteMany?: Enumerable<VoucherScalarWhereInput>
+  }
+
+  export type UsersUpdateOneRequiredWithoutServiceProviderInfoNestedInput = {
+    create?: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutServiceProviderInfoInput
+    upsert?: UsersUpsertWithoutServiceProviderInfoInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<UsersUpdateWithoutServiceProviderInfoInput, UsersUncheckedUpdateWithoutServiceProviderInfoInput>
   }
 
   export type VoucherUncheckedUpdateManyWithoutServiceProviderUserNestedInput = {
@@ -7707,6 +7701,36 @@ export namespace Prisma {
     VouchersRequested?: VoucherUncheckedUpdateManyWithoutServiceProviderUserNestedInput
   }
 
+  export type VoucherCreateWithoutBeneficiaryUserInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    PvtOrgBy?: pvtOrgCreateNestedOneWithoutVouchersCreatedInput
+    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
+  }
+
+  export type VoucherUncheckedCreateWithoutBeneficiaryUserInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    voucherSPId?: string
+    PvtOrgById?: string
+  }
+
+  export type VoucherCreateOrConnectWithoutBeneficiaryUserInput = {
+    where: VoucherWhereUniqueInput
+    create: XOR<VoucherCreateWithoutBeneficiaryUserInput, VoucherUncheckedCreateWithoutBeneficiaryUserInput>
+  }
+
+  export type VoucherCreateManyBeneficiaryUserInputEnvelope = {
+    data: Enumerable<VoucherCreateManyBeneficiaryUserInput>
+    skipDuplicates?: boolean
+  }
+
   export type UsersCreateWithoutBeneficiaryInfoInput = {
     id?: string
     phoneNumber?: string | null
@@ -7756,34 +7780,34 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutBeneficiaryInfoInput, UsersUncheckedCreateWithoutBeneficiaryInfoInput>
   }
 
-  export type VoucherCreateWithoutBeneficiaryUserInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
-    PvtOrgBy?: pvtOrgCreateNestedOneWithoutVouchersCreatedInput
-  }
-
-  export type VoucherUncheckedCreateWithoutBeneficiaryUserInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    voucherSPId?: string
-    PvtOrgById?: string
-  }
-
-  export type VoucherCreateOrConnectWithoutBeneficiaryUserInput = {
+  export type VoucherUpsertWithWhereUniqueWithoutBeneficiaryUserInput = {
     where: VoucherWhereUniqueInput
+    update: XOR<VoucherUpdateWithoutBeneficiaryUserInput, VoucherUncheckedUpdateWithoutBeneficiaryUserInput>
     create: XOR<VoucherCreateWithoutBeneficiaryUserInput, VoucherUncheckedCreateWithoutBeneficiaryUserInput>
   }
 
-  export type VoucherCreateManyBeneficiaryUserInputEnvelope = {
-    data: Enumerable<VoucherCreateManyBeneficiaryUserInput>
-    skipDuplicates?: boolean
+  export type VoucherUpdateWithWhereUniqueWithoutBeneficiaryUserInput = {
+    where: VoucherWhereUniqueInput
+    data: XOR<VoucherUpdateWithoutBeneficiaryUserInput, VoucherUncheckedUpdateWithoutBeneficiaryUserInput>
+  }
+
+  export type VoucherUpdateManyWithWhereWithoutBeneficiaryUserInput = {
+    where: VoucherScalarWhereInput
+    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutAvailableVoucherInput>
+  }
+
+  export type VoucherScalarWhereInput = {
+    AND?: Enumerable<VoucherScalarWhereInput>
+    OR?: Enumerable<VoucherScalarWhereInput>
+    NOT?: Enumerable<VoucherScalarWhereInput>
+    voucherId?: StringFilter | string
+    voucherAmount?: IntFilter | number
+    voucherCreatedAt?: DateTimeFilter | Date | string
+    voucherRedeemed?: BoolFilter | boolean
+    voucherRedeemedDate?: DateTimeNullableFilter | Date | string | null
+    voucherSPId?: StringFilter | string
+    voucherBeneficiaryId?: StringFilter | string
+    PvtOrgById?: StringFilter | string
   }
 
   export type UsersUpsertWithoutBeneficiaryInfoInput = {
@@ -7835,34 +7859,30 @@ export namespace Prisma {
     serviceProviderInfo?: serviceProviderUncheckedUpdateOneWithoutUsersNestedInput
   }
 
-  export type VoucherUpsertWithWhereUniqueWithoutBeneficiaryUserInput = {
-    where: VoucherWhereUniqueInput
-    update: XOR<VoucherUpdateWithoutBeneficiaryUserInput, VoucherUncheckedUpdateWithoutBeneficiaryUserInput>
-    create: XOR<VoucherCreateWithoutBeneficiaryUserInput, VoucherUncheckedCreateWithoutBeneficiaryUserInput>
+  export type pvtOrgCreateWithoutVouchersCreatedInput = {
+    Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
   }
 
-  export type VoucherUpdateWithWhereUniqueWithoutBeneficiaryUserInput = {
-    where: VoucherWhereUniqueInput
-    data: XOR<VoucherUpdateWithoutBeneficiaryUserInput, VoucherUncheckedUpdateWithoutBeneficiaryUserInput>
+  export type pvtOrgUncheckedCreateWithoutVouchersCreatedInput = {
+    privateOrgId?: string
   }
 
-  export type VoucherUpdateManyWithWhereWithoutBeneficiaryUserInput = {
-    where: VoucherScalarWhereInput
-    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutAvailableVoucherInput>
+  export type pvtOrgCreateOrConnectWithoutVouchersCreatedInput = {
+    where: pvtOrgWhereUniqueInput
+    create: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
   }
 
-  export type VoucherScalarWhereInput = {
-    AND?: Enumerable<VoucherScalarWhereInput>
-    OR?: Enumerable<VoucherScalarWhereInput>
-    NOT?: Enumerable<VoucherScalarWhereInput>
-    voucherId?: StringFilter | string
-    voucherAmount?: IntFilter | number
-    voucherCreatedAt?: DateTimeFilter | Date | string
-    voucherRedeemed?: BoolFilter | boolean
-    voucherRedeemedDate?: DateTimeNullableFilter | Date | string | null
-    voucherSPId?: StringFilter | string
-    voucherBeneficiaryId?: StringFilter | string
-    PvtOrgById?: StringFilter | string
+  export type beneficiaryCreateWithoutAvailableVoucherInput = {
+    Users?: UsersCreateNestedOneWithoutBeneficiaryInfoInput
+  }
+
+  export type beneficiaryUncheckedCreateWithoutAvailableVoucherInput = {
+    beneficiaryId?: string
+  }
+
+  export type beneficiaryCreateOrConnectWithoutAvailableVoucherInput = {
+    where: beneficiaryWhereUniqueInput
+    create: XOR<beneficiaryCreateWithoutAvailableVoucherInput, beneficiaryUncheckedCreateWithoutAvailableVoucherInput>
   }
 
   export type serviceProviderCreateWithoutVouchersRequestedInput = {
@@ -7880,30 +7900,30 @@ export namespace Prisma {
     create: XOR<serviceProviderCreateWithoutVouchersRequestedInput, serviceProviderUncheckedCreateWithoutVouchersRequestedInput>
   }
 
-  export type beneficiaryCreateWithoutAvailableVoucherInput = {
-    Users?: UsersCreateNestedOneWithoutBeneficiaryInfoInput
+  export type pvtOrgUpsertWithoutVouchersCreatedInput = {
+    update: XOR<pvtOrgUpdateWithoutVouchersCreatedInput, pvtOrgUncheckedUpdateWithoutVouchersCreatedInput>
+    create: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
   }
 
-  export type beneficiaryUncheckedCreateWithoutAvailableVoucherInput = {
-    beneficiaryId?: string
+  export type pvtOrgUpdateWithoutVouchersCreatedInput = {
+    Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
   }
 
-  export type beneficiaryCreateOrConnectWithoutAvailableVoucherInput = {
-    where: beneficiaryWhereUniqueInput
+  export type pvtOrgUncheckedUpdateWithoutVouchersCreatedInput = {
+    privateOrgId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type beneficiaryUpsertWithoutAvailableVoucherInput = {
+    update: XOR<beneficiaryUpdateWithoutAvailableVoucherInput, beneficiaryUncheckedUpdateWithoutAvailableVoucherInput>
     create: XOR<beneficiaryCreateWithoutAvailableVoucherInput, beneficiaryUncheckedCreateWithoutAvailableVoucherInput>
   }
 
-  export type pvtOrgCreateWithoutVouchersCreatedInput = {
-    Users?: UsersCreateNestedOneWithoutPvtOrgInfoInput
+  export type beneficiaryUpdateWithoutAvailableVoucherInput = {
+    Users?: UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput
   }
 
-  export type pvtOrgUncheckedCreateWithoutVouchersCreatedInput = {
-    privateOrgId?: string
-  }
-
-  export type pvtOrgCreateOrConnectWithoutVouchersCreatedInput = {
-    where: pvtOrgWhereUniqueInput
-    create: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
+  export type beneficiaryUncheckedUpdateWithoutAvailableVoucherInput = {
+    beneficiaryId?: StringFieldUpdateOperationsInput | string
   }
 
   export type serviceProviderUpsertWithoutVouchersRequestedInput = {
@@ -7921,30 +7941,34 @@ export namespace Prisma {
     BusinessTag?: NullableEnumServiceProviderTagFieldUpdateOperationsInput | ServiceProviderTag | null
   }
 
-  export type beneficiaryUpsertWithoutAvailableVoucherInput = {
-    update: XOR<beneficiaryUpdateWithoutAvailableVoucherInput, beneficiaryUncheckedUpdateWithoutAvailableVoucherInput>
-    create: XOR<beneficiaryCreateWithoutAvailableVoucherInput, beneficiaryUncheckedCreateWithoutAvailableVoucherInput>
+  export type VoucherCreateWithoutPvtOrgByInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
+    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
   }
 
-  export type beneficiaryUpdateWithoutAvailableVoucherInput = {
-    Users?: UsersUpdateOneRequiredWithoutBeneficiaryInfoNestedInput
+  export type VoucherUncheckedCreateWithoutPvtOrgByInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    voucherSPId?: string
+    voucherBeneficiaryId?: string
   }
 
-  export type beneficiaryUncheckedUpdateWithoutAvailableVoucherInput = {
-    beneficiaryId?: StringFieldUpdateOperationsInput | string
+  export type VoucherCreateOrConnectWithoutPvtOrgByInput = {
+    where: VoucherWhereUniqueInput
+    create: XOR<VoucherCreateWithoutPvtOrgByInput, VoucherUncheckedCreateWithoutPvtOrgByInput>
   }
 
-  export type pvtOrgUpsertWithoutVouchersCreatedInput = {
-    update: XOR<pvtOrgUpdateWithoutVouchersCreatedInput, pvtOrgUncheckedUpdateWithoutVouchersCreatedInput>
-    create: XOR<pvtOrgCreateWithoutVouchersCreatedInput, pvtOrgUncheckedCreateWithoutVouchersCreatedInput>
-  }
-
-  export type pvtOrgUpdateWithoutVouchersCreatedInput = {
-    Users?: UsersUpdateOneRequiredWithoutPvtOrgInfoNestedInput
-  }
-
-  export type pvtOrgUncheckedUpdateWithoutVouchersCreatedInput = {
-    privateOrgId?: StringFieldUpdateOperationsInput | string
+  export type VoucherCreateManyPvtOrgByInputEnvelope = {
+    data: Enumerable<VoucherCreateManyPvtOrgByInput>
+    skipDuplicates?: boolean
   }
 
   export type UsersCreateWithoutPvtOrgInfoInput = {
@@ -7996,34 +8020,20 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutPvtOrgInfoInput, UsersUncheckedCreateWithoutPvtOrgInfoInput>
   }
 
-  export type VoucherCreateWithoutPvtOrgByInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    ServiceProviderUser?: serviceProviderCreateNestedOneWithoutVouchersRequestedInput
-    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
-  }
-
-  export type VoucherUncheckedCreateWithoutPvtOrgByInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    voucherSPId?: string
-    voucherBeneficiaryId?: string
-  }
-
-  export type VoucherCreateOrConnectWithoutPvtOrgByInput = {
+  export type VoucherUpsertWithWhereUniqueWithoutPvtOrgByInput = {
     where: VoucherWhereUniqueInput
+    update: XOR<VoucherUpdateWithoutPvtOrgByInput, VoucherUncheckedUpdateWithoutPvtOrgByInput>
     create: XOR<VoucherCreateWithoutPvtOrgByInput, VoucherUncheckedCreateWithoutPvtOrgByInput>
   }
 
-  export type VoucherCreateManyPvtOrgByInputEnvelope = {
-    data: Enumerable<VoucherCreateManyPvtOrgByInput>
-    skipDuplicates?: boolean
+  export type VoucherUpdateWithWhereUniqueWithoutPvtOrgByInput = {
+    where: VoucherWhereUniqueInput
+    data: XOR<VoucherUpdateWithoutPvtOrgByInput, VoucherUncheckedUpdateWithoutPvtOrgByInput>
+  }
+
+  export type VoucherUpdateManyWithWhereWithoutPvtOrgByInput = {
+    where: VoucherScalarWhereInput
+    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutVouchersCreatedInput>
   }
 
   export type UsersUpsertWithoutPvtOrgInfoInput = {
@@ -8075,20 +8085,34 @@ export namespace Prisma {
     serviceProviderInfo?: serviceProviderUncheckedUpdateOneWithoutUsersNestedInput
   }
 
-  export type VoucherUpsertWithWhereUniqueWithoutPvtOrgByInput = {
-    where: VoucherWhereUniqueInput
-    update: XOR<VoucherUpdateWithoutPvtOrgByInput, VoucherUncheckedUpdateWithoutPvtOrgByInput>
-    create: XOR<VoucherCreateWithoutPvtOrgByInput, VoucherUncheckedCreateWithoutPvtOrgByInput>
+  export type VoucherCreateWithoutServiceProviderUserInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    PvtOrgBy?: pvtOrgCreateNestedOneWithoutVouchersCreatedInput
+    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
   }
 
-  export type VoucherUpdateWithWhereUniqueWithoutPvtOrgByInput = {
-    where: VoucherWhereUniqueInput
-    data: XOR<VoucherUpdateWithoutPvtOrgByInput, VoucherUncheckedUpdateWithoutPvtOrgByInput>
+  export type VoucherUncheckedCreateWithoutServiceProviderUserInput = {
+    voucherId?: string
+    voucherAmount: number
+    voucherCreatedAt?: Date | string
+    voucherRedeemed?: boolean
+    voucherRedeemedDate?: Date | string | null
+    voucherBeneficiaryId?: string
+    PvtOrgById?: string
   }
 
-  export type VoucherUpdateManyWithWhereWithoutPvtOrgByInput = {
-    where: VoucherScalarWhereInput
-    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutVouchersCreatedInput>
+  export type VoucherCreateOrConnectWithoutServiceProviderUserInput = {
+    where: VoucherWhereUniqueInput
+    create: XOR<VoucherCreateWithoutServiceProviderUserInput, VoucherUncheckedCreateWithoutServiceProviderUserInput>
+  }
+
+  export type VoucherCreateManyServiceProviderUserInputEnvelope = {
+    data: Enumerable<VoucherCreateManyServiceProviderUserInput>
+    skipDuplicates?: boolean
   }
 
   export type UsersCreateWithoutServiceProviderInfoInput = {
@@ -8140,34 +8164,20 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutServiceProviderInfoInput, UsersUncheckedCreateWithoutServiceProviderInfoInput>
   }
 
-  export type VoucherCreateWithoutServiceProviderUserInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    BeneficiaryUser?: beneficiaryCreateNestedOneWithoutAvailableVoucherInput
-    PvtOrgBy?: pvtOrgCreateNestedOneWithoutVouchersCreatedInput
-  }
-
-  export type VoucherUncheckedCreateWithoutServiceProviderUserInput = {
-    voucherId?: string
-    voucherAmount: number
-    voucherCreatedAt?: Date | string
-    voucherRedeemed?: boolean
-    voucherRedeemedDate?: Date | string | null
-    voucherBeneficiaryId?: string
-    PvtOrgById?: string
-  }
-
-  export type VoucherCreateOrConnectWithoutServiceProviderUserInput = {
+  export type VoucherUpsertWithWhereUniqueWithoutServiceProviderUserInput = {
     where: VoucherWhereUniqueInput
+    update: XOR<VoucherUpdateWithoutServiceProviderUserInput, VoucherUncheckedUpdateWithoutServiceProviderUserInput>
     create: XOR<VoucherCreateWithoutServiceProviderUserInput, VoucherUncheckedCreateWithoutServiceProviderUserInput>
   }
 
-  export type VoucherCreateManyServiceProviderUserInputEnvelope = {
-    data: Enumerable<VoucherCreateManyServiceProviderUserInput>
-    skipDuplicates?: boolean
+  export type VoucherUpdateWithWhereUniqueWithoutServiceProviderUserInput = {
+    where: VoucherWhereUniqueInput
+    data: XOR<VoucherUpdateWithoutServiceProviderUserInput, VoucherUncheckedUpdateWithoutServiceProviderUserInput>
+  }
+
+  export type VoucherUpdateManyWithWhereWithoutServiceProviderUserInput = {
+    where: VoucherScalarWhereInput
+    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutVouchersRequestedInput>
   }
 
   export type UsersUpsertWithoutServiceProviderInfoInput = {
@@ -8219,22 +8229,6 @@ export namespace Prisma {
     pvtOrgInfo?: pvtOrgUncheckedUpdateOneWithoutUsersNestedInput
   }
 
-  export type VoucherUpsertWithWhereUniqueWithoutServiceProviderUserInput = {
-    where: VoucherWhereUniqueInput
-    update: XOR<VoucherUpdateWithoutServiceProviderUserInput, VoucherUncheckedUpdateWithoutServiceProviderUserInput>
-    create: XOR<VoucherCreateWithoutServiceProviderUserInput, VoucherUncheckedCreateWithoutServiceProviderUserInput>
-  }
-
-  export type VoucherUpdateWithWhereUniqueWithoutServiceProviderUserInput = {
-    where: VoucherWhereUniqueInput
-    data: XOR<VoucherUpdateWithoutServiceProviderUserInput, VoucherUncheckedUpdateWithoutServiceProviderUserInput>
-  }
-
-  export type VoucherUpdateManyWithWhereWithoutServiceProviderUserInput = {
-    where: VoucherScalarWhereInput
-    data: XOR<VoucherUpdateManyMutationInput, VoucherUncheckedUpdateManyWithoutVouchersRequestedInput>
-  }
-
   export type VoucherCreateManyBeneficiaryUserInput = {
     voucherId?: string
     voucherAmount: number
@@ -8251,8 +8245,8 @@ export namespace Prisma {
     voucherCreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherRedeemed?: BoolFieldUpdateOperationsInput | boolean
     voucherRedeemedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ServiceProviderUser?: serviceProviderUpdateOneWithoutVouchersRequestedNestedInput
-    PvtOrgBy?: pvtOrgUpdateOneWithoutVouchersCreatedNestedInput
+    PvtOrgBy?: pvtOrgUpdateOneRequiredWithoutVouchersCreatedNestedInput
+    ServiceProviderUser?: serviceProviderUpdateOneRequiredWithoutVouchersRequestedNestedInput
   }
 
   export type VoucherUncheckedUpdateWithoutBeneficiaryUserInput = {
@@ -8291,8 +8285,8 @@ export namespace Prisma {
     voucherCreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherRedeemed?: BoolFieldUpdateOperationsInput | boolean
     voucherRedeemedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ServiceProviderUser?: serviceProviderUpdateOneWithoutVouchersRequestedNestedInput
-    BeneficiaryUser?: beneficiaryUpdateOneWithoutAvailableVoucherNestedInput
+    BeneficiaryUser?: beneficiaryUpdateOneRequiredWithoutAvailableVoucherNestedInput
+    ServiceProviderUser?: serviceProviderUpdateOneRequiredWithoutVouchersRequestedNestedInput
   }
 
   export type VoucherUncheckedUpdateWithoutPvtOrgByInput = {
@@ -8331,8 +8325,8 @@ export namespace Prisma {
     voucherCreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherRedeemed?: BoolFieldUpdateOperationsInput | boolean
     voucherRedeemedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    BeneficiaryUser?: beneficiaryUpdateOneWithoutAvailableVoucherNestedInput
-    PvtOrgBy?: pvtOrgUpdateOneWithoutVouchersCreatedNestedInput
+    PvtOrgBy?: pvtOrgUpdateOneRequiredWithoutVouchersCreatedNestedInput
+    BeneficiaryUser?: beneficiaryUpdateOneRequiredWithoutAvailableVoucherNestedInput
   }
 
   export type VoucherUncheckedUpdateWithoutServiceProviderUserInput = {
