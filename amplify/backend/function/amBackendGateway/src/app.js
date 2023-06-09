@@ -235,13 +235,10 @@ app.post('/create-voucher', async function(req, res) {
   const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById} = req.body;
   
   try {
-    const serviceProvider = await prisma.serviceProvider.findUnique({
-      select: {
-        where : {
-          Users : {
-            phoneNumber: PhoneNumberSP
-          }
-
+    const serviceProvider = await prisma.serviceProvider.findFirst({
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberSP
         }
         
       }
@@ -252,12 +249,9 @@ app.post('/create-voucher', async function(req, res) {
     }
 
     const beneficiary = await prisma.beneficiary.findFirst({
-      select: {
-        where : {
-          Users : {
-            phoneNumber: PhoneNumberB
-          }
-
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberB
         }
         
       }
@@ -268,12 +262,9 @@ app.post('/create-voucher', async function(req, res) {
     }
 
     const pvtOrg = await prisma.pvtOrg.findFirst({
-      select: {
-        where : {
-          Users : {
-            phoneNumber: PhoneNumberPvtOrg
-          }
-
+      where: {
+        Users : {
+          phoneNumber: PhoneNumberPvtOrg
         }
         
       }
