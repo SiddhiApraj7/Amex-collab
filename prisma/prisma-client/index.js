@@ -174,7 +174,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/siddhiapraj/Amex-collab/prisma/prisma-client",
+      "value": "C:\\Users\\anush\\Desktop\\digirupi\\prisma\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -183,7 +183,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       },
       {
@@ -206,7 +206,7 @@ const config = {
   ],
   "activeProvider": "postgresql",
   "dataProxy": false,
-  "postinstall": true
+  "postinstall": false
 }
 
 const fs = require('fs')
@@ -236,8 +236,8 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "prisma/prisma-client/libquery_engine-darwin-arm64.dylib.node")
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "prisma/prisma-client/query_engine-windows.dll.node")
 
 path.join(__dirname, "libquery_engine-rhel-openssl-1.0.x.so.node");
 path.join(process.cwd(), "prisma/prisma-client/libquery_engine-rhel-openssl-1.0.x.so.node")
