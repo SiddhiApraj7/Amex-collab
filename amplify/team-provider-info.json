@@ -13,17 +13,14 @@
     },
     "categories": {
       "function": {
-        "digiRupiF": {
-          "deploymentBucketName": "amplify-digirupi-dev-132457-deployment",
-          "s3Key": "amplify-builds/digiRupiF-657951595947584e6c46-build.zip"
-        },
         "amBackendGateway": {
           "deploymentBucketName": "amplify-digirupi-dev-132457-deployment",
-          "s3Key": "amplify-builds/amBackendGateway-6a6c426d713670395455-build.zip"
+          "s3Key": "amplify-builds/amBackendGateway-754f2b584833356f434a-build.zip"
+        },
+        "digiRupiF": {
+          "deploymentBucketName": "amplify-digirupi-dev-132457-deployment",
+          "s3Key": "amplify-builds/digiRupiF-2b5341556158686d4651-build.zip"
         }
-      },
-      "api": {
-        "amAPI": {}
       }
     }
   }

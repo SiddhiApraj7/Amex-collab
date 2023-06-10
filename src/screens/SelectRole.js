@@ -22,7 +22,7 @@ const SelectRole = () => {
         navigation.navigate("beneficiaryHomePage");
       }}></Button></View>
       <View className="mx-10 p-4 mt-9 mb-5 rounded-2xl"><Button color="#236DE7" className="p-4" title="Service Provider" onPress={() => {
-        navigation.navigate("serviceProviderHomePage");
+        navigation.navigate("serviceProviderInfo");
       }}></Button></View>
       <View className="mx-10 p-4 mt-9 mb-10 rounded-2xl"><Button color="#236DE7" className="p-4" title="Private Organization" onPress={() => {
         navigation.navigate("pvtOrgHomePage"); }}></Button></View> 

@@ -78,6 +78,7 @@ const BankDetails = () => {
                   value={value}
                   onChange={item => {
                       setValue(item.value);
+                      
                   }}
                   
                 />
