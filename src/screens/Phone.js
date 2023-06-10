@@ -25,6 +25,7 @@ const Phone = () => {
         phoneNumber: phoneNumber,
       });
       console.log(response);
+      console.warn('database created');
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +87,6 @@ const Phone = () => {
           <View className="h-screen w-screen  bg-blue-300 rounded-t-3xl">
             <Text className="text-center mt-2  mb-1 font-semibold text-lg"> Enter your OTP: </Text>
             <View className="bg-white flex-row ml-12 mr-12 mt-3 mb-3 p-2 rounded-lg">
-
               <TextInput
                 value={code}
                 onChangeText={setCode}

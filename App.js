@@ -1,45 +1,4 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-
-// import { Amplify } from 'aws-amplify';
-// import awsExports from './src/aws-exports';
-// Amplify.configure(awsExports);
-
-// import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react-native';
-
-// const App = () => {
-//   return (
-//     <View className ="bg-blue-300">
-//       <Text className= "text-red-700"> Open up App.js to start working afafai on your app!</Text>
-//       <StatusBar style="auto" />
-//       <SignOutButton />
-//     </View>
-//   );
-// }
-
-// export default withAuthenticator(App);
-
-// // retrieves only the current value of 'user' from 'useAuthenticator'
-// const userSelector = (context) => [context.user]
-
-// const SignOutButton = () => {
-//   const { user, signOut } = useAuthenticator(userSelector);
-//   return (
-//     <Pressable onPress={signOut} style={styles.buttonContainer}>
-//       <Text style={styles.buttonText}>Hello, {user.username}! Click here to sign out!</Text>
-//     </Pressable>
-//   )
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
@@ -82,12 +41,12 @@ export default function App() {
     screenOptions={{
       headerShown: false
     }}>
-      <Stack.Screen name="home" component={HomePage}></Stack.Screen>
-      <Stack.Screen name="login" component={Login}></Stack.Screen>
-      <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
+      {/* <Stack.Screen name="home" component={HomePage}></Stack.Screen> */}
+      {/* <Stack.Screen name="login" component={Login}></Stack.Screen>
+      <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen> */}
       <Stack.Screen name="otp" component={Phone}></Stack.Screen> 
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
-       <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
+       {/* <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
 
@@ -99,7 +58,7 @@ export default function App() {
       <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen>
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
       <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
-      <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
+      <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen> */}
   </Stack.Navigator>
 </NavigationContainer>
 </AppProvider>
