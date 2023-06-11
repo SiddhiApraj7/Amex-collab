@@ -31,6 +31,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
     "react-native": "0.71.8",
+    "react-native-dropdown-picker": "^5.4.6",
     "react-native-element-dropdown": "^2.9.0",
     "react-native-get-random-values": "^1.9.0",
     "react-native-ionicons": "^4.6.5",

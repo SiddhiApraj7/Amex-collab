@@ -12,7 +12,7 @@ const Phone_test = () => {
 
   async function createUser(phoneNumber) {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/create-user', {
+      const response = await axios.post('http://192.168.29.208:3000/create-user', {
         phoneNumber: phoneNumber,
       });
 
