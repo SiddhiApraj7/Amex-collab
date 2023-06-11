@@ -25,14 +25,15 @@ const UserDetails = () => {
     console.log(data);
     console.log(phoneNumber);
      try {
-      const response = await axios.patch("http://192.168.29.208:3000/create-user", {
+      const response = await axios.patch("http://192.168.1.45:3000/create-user", {
         phoneNumber: phoneNumber,
         firstName: data.firstName,
         lastName: data.lastName,
         recoveryEmail: data.recoveryEmail
+
       });
       console.log(response.data);
-      navigation.navigate('bankDetails');
+      navigation.navigate('pinRegister');
     } catch (error) {
       console.log(error);
     }
@@ -49,18 +50,23 @@ const UserDetails = () => {
         <Text className="font-bold text-xl p-3 mb-5">User Details</Text>
 
         <View className="h-full w-full bg-blue-300 rounded-t-3xl">
-          <Text className="text-center mt-12  mb-1 font-semibold text-lg">
+          <Text className="text-center mt-12  mb-5 font-semibold text-lg">
             {" "}
             Enter your details:{" "}
           </Text>
-          <View className="flex-col pl-12 gap-5">
+
+
+          <View className="flex-col mt-4 gap-5">
             <View className="flex-row gap-4">
+              <View className="pl-12">
               <Ionicons
                 name="person-circle-outline"
                 color="white"
                 className="top-6"
                 size={40}
               ></Ionicons>
+              </View>
+              <View className="ml-2">
               <Number_input_ud
                  control = {control}
                  name = "firstName"
@@ -69,13 +75,19 @@ const UserDetails = () => {
                 keyboardType="default"
               />
             </View>
+            </View>
+
+
             <View className="flex-row gap-4">
+            <View className="pl-12">
               <Ionicons
                 name="person-circle-outline"
                 color="white"
                 className="top-6"
                 size={40}
               ></Ionicons>
+              </View>
+              <View className="ml-2">
               <Number_input_ud
                 control = {control}
                 name = "lastName"
@@ -84,14 +96,18 @@ const UserDetails = () => {
                 keyboardType="default"
               />
             </View>
+            </View>
 
             <View className="flex-row gap-4">
+            <View className="pl-12">
               <Ionicons
                 name="mail-outline"
                 color="white"
                 className="top-6"
                 size={40}
               ></Ionicons>
+              </View>
+              <View className="ml-2">
               <Number_input_ud
                 control = {control}
                 secureTextEntry={false}
@@ -99,6 +115,7 @@ const UserDetails = () => {
                 placeholder="Enter recovery Email"
                 keyboardType="default"
               />
+            </View>
             </View>
           </View>
 
