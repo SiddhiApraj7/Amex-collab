@@ -2,11 +2,11 @@ import { View, Text, SafeAreaView, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
-
+import { AppContext } from '../../AppContext';
 
 const Phone_test = () => {
-
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+    //const [phoneNumber, setPhoneNumber] = useState('');
     const navigation = useNavigation();
     async function createUser(phoneNumber) {
         // create User schema using post method using axioms and async , await

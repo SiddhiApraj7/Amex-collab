@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 const Phone = () => {
 
-  // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  
   const navigation = useNavigation();
   const [ phoneNumber, setPhoneNumber ] = useState('');
   const [verificationId, setVerificationId] = useState(null);
@@ -72,7 +72,7 @@ const Phone = () => {
         alert(error);
         navigation.navigate("otp");
       })
-  }
+  };
 
   return (
     <SafeAreaView>
@@ -82,8 +82,6 @@ const Phone = () => {
               placeholder="+910000000000"
               keyboardType="phone-pad"
             />
-
-          </View>
           <View className="mx-28 p-4 mb-5  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" title="Verify Phone Number" onPress={sendVerification} /></View>
 
           <View className="h-screen w-screen  bg-blue-300 rounded-t-3xl">
@@ -99,8 +97,7 @@ const Phone = () => {
             </View>
 
             <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" title="Check OTP" onPress={confirmCode} /></View>
-          </View>
-        </View>
+        
       </View>
     </SafeAreaView>
 
