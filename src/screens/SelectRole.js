@@ -25,7 +25,7 @@ const SelectRole = () => {
         navigation.navigate("serviceProviderInfo");
       }}></Button></View>
       <View className="mx-10 p-4 mt-9 mb-10 rounded-2xl"><Button color="#236DE7" className="p-4" title="Private Organization" onPress={() => {
-        navigation.navigate("pvtOrgHomePage"); }}></Button></View> 
+        navigation.navigate("pvtOrgInfo"); }}></Button></View> 
 
      
     </View>
