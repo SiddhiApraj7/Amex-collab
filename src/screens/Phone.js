@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
+import { useNavigation } from "@react-navigation/native";
 
 
 const Phone = () => {
@@ -77,7 +78,7 @@ const Phone = () => {
   return (
     <SafeAreaView>
         <TextInput
-              value={phoneNumbr}
+              value={phoneNumber}
               onChangeText={setPhoneNumber}
               placeholder="+910000000000"
               keyboardType="phone-pad"

@@ -21,19 +21,19 @@ app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*') // Update this with specific allowed origins if needed
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  next()
-})
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*")
-//   res.header("Access-Control-Allow-Headers", "*")
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*') // Update this with specific allowed origins if needed
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   )
 //   next()
-// });
+// })
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "*")
+  next()
+});
 
 //creat get method for items
 app.post('/create-user', async function (req, res) {
@@ -138,6 +138,22 @@ app.post('/create-beneficiary', async function(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create beneficiary' });
+  }
+});
+
+
+
+app.delete('/delete-all-data', async (req, res) => {
+  try {
+    await prisma.voucher.deleteMany();
+    await prisma.beneficiary.deleteMany();
+    await prisma.pvtOrg.deleteMany();
+    await prisma.serviceProvider.deleteMany();
+    await prisma.users.deleteMany();
+    res.json({ success: 'All data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting data:', error);
+    res.status(500).json({ error: 'Failed to delete data' });
   }
 });
 
@@ -422,7 +438,6 @@ app.post('/create-voucher', async function(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Failed to update service provider' });
   }
-
   try {
     // Update the VouchersCreated field in the pvtOrg
     const updatedPvtOrg = await prisma.pvtOrg.update({
@@ -448,7 +463,7 @@ app.patch('/create-voucher', async (req, res) => {
   try {
     const { voucherId } = req.body;
     // Create the voucher using the provided voucherId
-    const updatedvoucher = await prisma.Voucher.update({
+    const updatedvoucher = await prisma.voucher.update({
       where : {
         voucherId
       },

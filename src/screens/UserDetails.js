@@ -11,30 +11,27 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import {Number_input_ud} from "../components/Number_input_ud"
-import {useForm,Controller} from "react-hook-form";
-
+import Number_input_ud from "../components/Number_input_ud";
+import { useForm, Controller } from "react-hook-form";
+import { AppContext } from "../../AppContext";
+import { useContext } from "react";
+import axios from "axios";
 
 const UserDetails = () => {
   const navigation = useNavigation();
-  [firstName, setfirstName] = useState("");
-  [lastName, setlastName] = useState("");
-  [recoveryEmailName, setrecoveryEmailName] = useState("");
-  const updateUser = async (
-    phoneNumber,
-    firstName,
-    lastName,
-    recoveryEmail
-  ) => {
-    // create User schema using post method using axioms and async , await
-    try {
-      const response = await axios.patch("http://localhost:3000/create-user", {
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const {control, handleSubmit} = useForm();
+  const updateUser = async (data) => {
+    console.log(data);
+    console.log(phoneNumber);
+     try {
+      const response = await axios.patch("http://192.168.29.164:3000/create-user", {
         phoneNumber: phoneNumber,
-        firstName: firstName,
-        lastName: lastName,
-        recoveryEmail: recoveryEmail,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        recoveryEmail: data.recoveryEmail
       });
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -64,11 +61,12 @@ const UserDetails = () => {
                 size={40}
               ></Ionicons>
               <Number_input_ud
-               value={firstName}
-               onChangeText={setfirstName}
-               placeholder="Enter your first name"
-               keyboardType="default"
-               />
+                 control = {control}
+                 name = "firstName"
+                placeholder="Enter your first name"
+                secureTextEntry={false}
+                keyboardType="default"
+              />
             </View>
             <View className="flex-row gap-4">
               <Ionicons
@@ -78,11 +76,12 @@ const UserDetails = () => {
                 size={40}
               ></Ionicons>
               <Number_input_ud
-               value= {lastName}
-               onChangeText={setlastName}
-               placeholder="Enter your last name"
-               keyboardType="default"
-               />
+                control = {control}
+                name = "lastName"
+                secureTextEntry={false}
+                placeholder="Enter your last name"
+                keyboardType="default"
+              />
             </View>
 
             <View className="flex-row gap-4">
@@ -93,20 +92,22 @@ const UserDetails = () => {
                 size={40}
               ></Ionicons>
               <Number_input_ud
-               value={recoveryEmail}
-               onChangeText={setrecoveryEmailName}
-               placeholder="Enter recovery Email"
-               keyboardType="default"
-               />
+                control = {control}
+                secureTextEntry={false}
+                name = "recoveryEmail"
+                placeholder="Enter recovery Email"
+                keyboardType="default"
+              />
             </View>
           </View>
 
           <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl">
             <Button
               color="#82E0AA"
-              onPress={updateUser(phoneNumber, firstName, lastName, recoveryEmail).then(() => {
-                navigation.navigate("bankDetails");
-              })}
+              // onPress={updateUser(phoneNumber, firstName, lastName, recoveryEmail).then(() => {
+              //   navigation.navigate("bankDetails");
+              // })}
+              onPress={handleSubmit(updateUser)}
               title="Next"
             ></Button>
           </View>

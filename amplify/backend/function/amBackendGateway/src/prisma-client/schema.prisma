@@ -61,7 +61,7 @@ model pvtOrg {
 }
 
 model serviceProvider {
-  serviceProviderId String              @id @default(uuid())
+  serviceProviderId  String              @id @default(uuid())
   BusinessName       String?
   PositionInBusiness String?
   BusinessTag       ServiceProviderTag?
