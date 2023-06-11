@@ -19,16 +19,6 @@ const app = express()
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
-// Enable CORS for all methods
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*') // Update this with specific allowed origins if needed
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   )
-//   next()
-// })
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "*")
@@ -91,8 +81,12 @@ app.patch('/create-user', async (req, res) => {
   }
 });
 
+// post request to see if a user is a beneficiary
+// app.post('/is-beneficiary', async function (req, res) {
+//   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+
 app.get('/get-role', async function(req, res) {
-  const{ phoneNumber} = req.body;
+  const { phoneNumber} = req.body;
 
   try {
     const user = await prisma.users.findFirst({
@@ -117,6 +111,7 @@ app.get('/get-role', async function(req, res) {
     res.status(500).json({ error: 'Failed to retrieve isBeneficiary field' });
   }
 });
+
 
 app.post('/create-beneficiary', async function(req, res) {
   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
@@ -149,6 +144,7 @@ app.post('/create-beneficiary', async function(req, res) {
         id: user.id
       },
       data: {
+        isBeneficiary: true,
         beneficiaryInfo: {
           connect: {
             beneficiaryId: beneficiary.beneficiaryId
