@@ -181,7 +181,7 @@ app.delete('/delete-all-data', async (req, res) => {
 
 
 app.post('/create-pvtOrg', async function(req, res) {
-  const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+  const {phoneNumber, CompanyName,positionInCompany} = req.body; // Extract phone number from the request body
 
   try {
     // Find the user based on the phone number
@@ -197,6 +197,8 @@ app.post('/create-pvtOrg', async function(req, res) {
 
     const pvtOrg = await prisma.pvtOrg.create({
       data: {
+        CompanyName,
+        positionInCompany,
         Users: {
           connect: {
             id: user.id
@@ -211,6 +213,7 @@ app.post('/create-pvtOrg', async function(req, res) {
         id: user.id
       },
       data: {
+        isPvtOrg: true,
         pvtOrgInfo: {
           connect: {
             privateOrgId: pvtOrg.privateOrgId
@@ -229,7 +232,7 @@ app.post('/create-pvtOrg', async function(req, res) {
 
 
 app.post('/create-serviceProvider', async function(req, res) {
-  const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+  const { phoneNumber ,  BusinessName , PositionInBusiness, BusinessTag  } = req.body; // Extract phone number from the request body
 
   try {
     // Find the user based on the phone number
@@ -245,6 +248,9 @@ app.post('/create-serviceProvider', async function(req, res) {
 
     const serviceProvider = await prisma.serviceProvider.create({
       data: {
+        BusinessName,
+        PositionInBusiness,
+        BusinessTag,
         Users: {
           connect: {
             id: user.id
@@ -259,6 +265,7 @@ app.post('/create-serviceProvider', async function(req, res) {
         id: user.id
       },
       data: {
+        isServiceProvider: true,
         serviceProviderInfo: {
           connect: {
             serviceProviderId: serviceProvider.serviceProviderId
