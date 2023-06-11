@@ -27,32 +27,32 @@ app.use(function (req, res, next) {
 
 //creat get method for items
 app.post('/create-user', async function (req, res) {
-  const { phoneNumber,firstName ,recoveryEmail , lastName,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo} = req.body;
+  const { phoneNumber, firstName, recoveryEmail, lastName, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
   const result = await prisma.users.create({
     data: {
-       phoneNumber,
-       firstName ,
-       lastName,
-       walletPin,
-       bankName,
-       bankAccountHolderName,
-       accountNumber,
-       isBeneficiary,
-       isPvtOrg,
-       isServiceProvider,
-       walletIdBeneficiary,
-       walletIdPvtOrg,
-       walletIdServiceProvider,
-       beneficiaryInfo,
-       pvtOrgInfo,
-       serviceProviderInfo,
-       recoveryEmail,
-      
+      phoneNumber,
+      firstName,
+      lastName,
+      walletPin,
+      bankName,
+      bankAccountHolderName,
+      accountNumber,
+      isBeneficiary,
+      isPvtOrg,
+      isServiceProvider,
+      walletIdBeneficiary,
+      walletIdPvtOrg,
+      walletIdServiceProvider,
+      beneficiaryInfo,
+      pvtOrgInfo,
+      serviceProviderInfo,
+      recoveryEmail,
+
     },
-       include: {
-          beneficiaryInfo: true, // Include the created beneficiary record in the response
-        }
-    
+    include: {
+      beneficiaryInfo: true, // Include the created beneficiary record in the response
+    }
+
   });
 
   res.json({ success: 'post call succeed!', result })
@@ -60,19 +60,21 @@ app.post('/create-user', async function (req, res) {
 
 app.patch('/create-user', async (req, res) => {
   const { phoneNumber } = req.body;
-  const { firstName , lastName  ,recoveryEmail,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo  } = req.body;
+  const { firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
 
   try {
     const updatedUser = await prisma.users.update({
       where: { phoneNumber },
-      data: { firstName , lastName ,recoveryEmail,walletPin,bankName,bankAccountHolderName,accountNumber,isBeneficiary,isPvtOrg,isServiceProvider,walletIdBeneficiary,walletIdPvtOrg,walletIdServiceProvider,beneficiaryInfo,pvtOrgInfo,serviceProviderInfo,
-      beneficiaryInfo},
+      data: {
+        firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo,
+        beneficiaryInfo
+      },
       include: {
         beneficiaryInfo: true // Include the updated beneficiary record in the response
       }
 
     });
-    
+
 
     res.json({ success: 'patch call succeed!', updatedUser })
   } catch (error) {
@@ -85,8 +87,8 @@ app.patch('/create-user', async (req, res) => {
 // app.post('/is-beneficiary', async function (req, res) {
 //   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
 
-app.get('/get-role', async function(req, res) {
-  const { phoneNumber} = req.body;
+app.get('/get-role', async function (req, res) {
+  const { phoneNumber } = req.body;
 
   try {
     const user = await prisma.users.findFirst({
@@ -95,8 +97,8 @@ app.get('/get-role', async function(req, res) {
       },
       select: {
         isBeneficiary: true,
-        isServiceProvider : true,
-        isPvtOrg : true,
+        isServiceProvider: true,
+        isPvtOrg: true,
 
       }
     });
@@ -105,7 +107,7 @@ app.get('/get-role', async function(req, res) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ isBeneficiary: user.isBeneficiary, isServiceProvider : user.isServiceProvider, isPvtOrg : user.isPvtOrg });
+    res.status(200).json({ isBeneficiary: user.isBeneficiary, isServiceProvider: user.isServiceProvider, isPvtOrg: user.isPvtOrg });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to retrieve isBeneficiary field' });
@@ -113,7 +115,7 @@ app.get('/get-role', async function(req, res) {
 });
 
 
-app.post('/create-beneficiary', async function(req, res) {
+app.post('/create-beneficiary', async function (req, res) {
   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
 
   try {
@@ -342,7 +344,7 @@ app.patch('/create-pvtOrg', async (req, res) => {
       },
     });
 
-    res.status(200).json({ success: 'Patch call succeeded!', updatedPvtOrg});
+    res.status(200).json({ success: 'Patch call succeeded!', updatedPvtOrg });
   } catch (error) {
     console.error('Error updating pvtOrg:', error);
     res.status(500).json({ error: 'Failed to update pvtOrg' });
@@ -350,16 +352,16 @@ app.patch('/create-pvtOrg', async (req, res) => {
 });
 
 
-app.post('/create-voucher', async function(req, res) {
-  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById} = req.body;
-  
+app.post('/create-voucher', async function (req, res) {
+  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById } = req.body;
+
   try {
     const serviceProvider = await prisma.serviceProvider.findFirst({
       where: {
-        Users : {
+        Users: {
           phoneNumber: PhoneNumberSP
         }
-        
+
       }
     });
 
@@ -369,10 +371,10 @@ app.post('/create-voucher', async function(req, res) {
 
     const beneficiary = await prisma.beneficiary.findFirst({
       where: {
-        Users : {
+        Users: {
           phoneNumber: PhoneNumberB
         }
-        
+
       }
     });
 
@@ -382,10 +384,10 @@ app.post('/create-voucher', async function(req, res) {
 
     const pvtOrg = await prisma.pvtOrg.findFirst({
       where: {
-        Users : {
+        Users: {
           phoneNumber: PhoneNumberPvtOrg
         }
-        
+
       }
     });
 
@@ -428,8 +430,9 @@ app.post('/create-voucher', async function(req, res) {
     res.status(500).json({ error: 'Failed to create voucher' });
   };
 
-    // Update the AvailableVoucher array in the beneficiary
-   try{ const updatedBeneficiary = await prisma.beneficiary.update({
+  // Update the AvailableVoucher array in the beneficiary
+  try {
+    const updatedBeneficiary = await prisma.beneficiary.update({
       where: {
         beneficiaryId: voucherBeneficiaryId
       },
@@ -493,13 +496,13 @@ app.patch('/create-voucher', async (req, res) => {
     const { voucherId } = req.body;
     // Create the voucher using the provided voucherId
     const updatedvoucher = await prisma.voucher.update({
-      where : {
+      where: {
         voucherId
       },
       data: {
         voucherRedeemedDate: new Date(),
         voucherRedeemed: true,
-     
+
       },
     });
 
