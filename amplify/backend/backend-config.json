@@ -1,0 +1,66 @@
+{
+  "api": {
+    "amAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {},
+  "function": {
+    "amBackendGateway": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "digiRupiF": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amBackendGateway_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ]
+    },
+    "AMPLIFY_function_amBackendGateway_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amBackendGateway"
+        }
+      ]
+    },
+    "AMPLIFY_function_digiRupiF_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "digiRupiF"
+        }
+      ]
+    },
+    "AMPLIFY_function_digiRupiF_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "digiRupiF"
+        }
+      ]
+    }
+  }
+}
