@@ -104,7 +104,7 @@ const UserDetails = () => {
           <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl">
             <Button
               color="#82E0AA"
-              onPress={updateUser(phoneNumber, firstName, lastName).then(() => {
+              onPress={updateUser(phoneNumber, firstName, lastName, recoveryEmail).then(() => {
                 navigation.navigate("bankDetails");
               })}
               title="Next"

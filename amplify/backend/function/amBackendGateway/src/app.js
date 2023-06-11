@@ -23,11 +23,20 @@ app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "*")
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*') // Update this with specific allowed origins if needed
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
   next()
-});
+})
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*")
+//   res.header("Access-Control-Allow-Headers", "*")
+//   next()
+// });
 
 //creat get method for items
 app.post('/create-user', async function (req, res) {
