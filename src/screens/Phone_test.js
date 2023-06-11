@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import { AppContext } from '../../AppContext';
+import { useContext } from 'react';
 
 const Phone_test = () => {
     const { phoneNumber, setPhoneNumber } = useContext(AppContext);

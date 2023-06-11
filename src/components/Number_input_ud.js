@@ -4,7 +4,7 @@ import {useForm,Controller} from "react-hook-form";
 
 const Number_input_ud = ({name,control,placeholder,secureTextEntry,keyboardType}) => {
   return (
-    <View className="bg-white mt-16 p-2 h-11 w-56 mx-14 font-light rounded-md">
+    <View className="bg-white p-2 h-11 w-56 font-light rounded-md">
       <Controller
                 control={control}
                 name = {name}
