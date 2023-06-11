@@ -91,6 +91,32 @@ app.patch('/create-user', async (req, res) => {
   }
 });
 
+app.get('/get-role', async function(req, res) {
+  const{ phoneNumber} = req.body;
+
+  try {
+    const user = await prisma.users.findFirst({
+      where: {
+        phoneNumber
+      },
+      select: {
+        isBeneficiary: true,
+        isServiceProvider : true,
+        isPvtOrg : true,
+
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ isBeneficiary: user.isBeneficiary, isServiceProvider : user.isServiceProvider, isPvtOrg : user.isPvtOrg });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to retrieve isBeneficiary field' });
+  }
+});
 
 app.post('/create-beneficiary', async function(req, res) {
   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body

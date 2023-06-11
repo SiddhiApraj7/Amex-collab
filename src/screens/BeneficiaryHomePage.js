@@ -1,12 +1,29 @@
 import { View, Text, SafeAreaView, TextInput, Image, Button,ScrollView , StyleSheet,TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Ionicons} from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Walletcard from '../components/Walletcard';
+import { BackHandler } from 'react-native';
 
 
 const BeneficiaryHomePage = () => {
   const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        // Prevent going back by returning true
+        return true;
+      };
+
+      // Add event listener for the back button press
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      // Remove event listener when the component is unfocused or unmounted
+      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
+
     const textrupi = (
     
         <Text className="text-xs"> E-RUPI</Text>

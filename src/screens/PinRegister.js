@@ -2,7 +2,10 @@ import { View, Text , TextInput, Image, SafeAreaView, Button} from 'react-native
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import NumberInput from '../components/NumberInput';
-import {useForm,Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { AppContext } from "../../AppContext";
+import { useContext, useState } from "react";
+import axios from 'axios';
 
 // import { PrismaClient } from '../../prisma/prisma-client'
 // const prisma = new PrismaClient()
@@ -10,11 +13,57 @@ import {useForm,Controller} from "react-hook-form";
 const PinRegister = () => {
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
+  //const [verificationError, setVerificationError] = useState('');
+  const [error, setError] = useState('');
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
-  const onPinpress = (data) => {
-    console.log(data);
-    navigation.navigate("selectRole");
+  async function updateUser(phoneNumber, pin) {
+    
+    try {
+      console.log(pin);
+      const response = await axios.patch('http://192.168.29.208:3000/create-user', {
+        phoneNumber: phoneNumber,
+        walletPin : parseInt(pin),
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      alert(error);
+      setError('User already exists, please login.');
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); // Redirect to login screen after 3 seconds
+    }
+  } 
+
+  const onPinPress = (data) => {
+    //console.log(data.pin);
+    //console.log(data.repin);
+  
+    try{
+      if (data.pin === data.repin) {
+        console.log('PINs matched');
+        updateUser(phoneNumber, data.pin);
+    }
+    else{
+      console.log('RePin does not match Pin');
+      alert('RePin does not match Pin. Please re-enter your repin.');
+      navigation.navigate("pinRegister");
+    }
   }
+    catch(error){
+      alert(error);
+      console.log(error);
+      
+      
+
+    }
+      //navigation.navigate('selectRole');
+  
+  }
+
+  
   return (
     <SafeAreaView className="bg-white h-full">
             <View className="items-center  bg-white">
@@ -36,18 +85,22 @@ const PinRegister = () => {
                 control = {control}
                 secureTextEntry={true}
                 keyboardType='phone-pad'
+                maxlength={4}
+            
               />
 
             <Text className="text-center mt-10  mb-1 font-semibold text-lg"> Re-enter PIN: </Text>
             <NumberInput
-                name = "re-pin"
+                name = "repin"
                 placeholder="XXXX"
                 control = {control}
                 secureTextEntry={true}
                 keyboardType='phone-pad'
+                maxlength = {4}
+                
               />
 
-            <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl"><Button onPress={handleSubmit(onPinpress)} className="text-black text-center" color = "#82E0AA" title="Submit"></Button></View>
+            <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl"><Button onPress={handleSubmit(onPinPress)} className="text-black text-center" color = "#82E0AA" title="Submit"></Button></View>
 
 
             
