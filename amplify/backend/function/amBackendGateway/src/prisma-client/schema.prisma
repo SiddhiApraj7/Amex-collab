@@ -19,7 +19,7 @@ model Users {
   bankName                String?
   bankAccountHolderName   String?
   accountNumber           Int?             @unique
-  isBeneficiary           Boolean          @default(true)
+  isBeneficiary           Boolean          @default(false)
   isPvtOrg                Boolean?         @default(false)
   isServiceProvider       Boolean?         @default(false)
   walletIdBeneficiary     String?
@@ -61,7 +61,7 @@ model pvtOrg {
 }
 
 model serviceProvider {
-  serviceProviderId  String              @id @default(uuid())
+  serviceProviderId String              @id @default(uuid())
   BusinessName       String?
   PositionInBusiness String?
   BusinessTag       ServiceProviderTag?

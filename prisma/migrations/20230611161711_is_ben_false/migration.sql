@@ -15,7 +15,7 @@ CREATE TABLE "Users" (
     "bankName" TEXT,
     "bankAccountHolderName" TEXT,
     "accountNumber" INTEGER,
-    "isBeneficiary" BOOLEAN NOT NULL DEFAULT true,
+    "isBeneficiary" BOOLEAN NOT NULL DEFAULT false,
     "isPvtOrg" BOOLEAN DEFAULT false,
     "isServiceProvider" BOOLEAN DEFAULT false,
     "walletIdBeneficiary" TEXT,
@@ -51,6 +51,8 @@ CREATE TABLE "Voucher" (
 -- CreateTable
 CREATE TABLE "pvtOrg" (
     "privateOrgId" TEXT NOT NULL,
+    "CompanyName" TEXT,
+    "positionInCompany" TEXT,
 
     CONSTRAINT "pvtOrg_pkey" PRIMARY KEY ("privateOrgId")
 );
@@ -58,6 +60,8 @@ CREATE TABLE "pvtOrg" (
 -- CreateTable
 CREATE TABLE "serviceProvider" (
     "serviceProviderId" TEXT NOT NULL,
+    "BusinessName" TEXT,
+    "PositionInBusiness" TEXT,
     "BusinessTag" "ServiceProviderTag",
 
     CONSTRAINT "serviceProvider_pkey" PRIMARY KEY ("serviceProviderId")
@@ -76,13 +80,13 @@ CREATE UNIQUE INDEX "Users_accountNumber_key" ON "Users"("accountNumber");
 ALTER TABLE "beneficiary" ADD CONSTRAINT "beneficiary_beneficiaryId_fkey" FOREIGN KEY ("beneficiaryId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Voucher" ADD CONSTRAINT "Voucher_voucherSPId_fkey" FOREIGN KEY ("voucherSPId") REFERENCES "serviceProvider"("serviceProviderId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Voucher" ADD CONSTRAINT "Voucher_PvtOrgById_fkey" FOREIGN KEY ("PvtOrgById") REFERENCES "pvtOrg"("privateOrgId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Voucher" ADD CONSTRAINT "Voucher_voucherBeneficiaryId_fkey" FOREIGN KEY ("voucherBeneficiaryId") REFERENCES "beneficiary"("beneficiaryId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Voucher" ADD CONSTRAINT "Voucher_PvtOrgById_fkey" FOREIGN KEY ("PvtOrgById") REFERENCES "pvtOrg"("privateOrgId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Voucher" ADD CONSTRAINT "Voucher_voucherSPId_fkey" FOREIGN KEY ("voucherSPId") REFERENCES "serviceProvider"("serviceProviderId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "pvtOrg" ADD CONSTRAINT "pvtOrg_privateOrgId_fkey" FOREIGN KEY ("privateOrgId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
