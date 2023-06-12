@@ -7,8 +7,7 @@ import {useForm,Controller} from "react-hook-form";
 
 // post menthod 
 import axios from 'axios';
-
-
+// add phone number input box
 
 const Login = () => {
   // const [pin,setPin] = useState('');
