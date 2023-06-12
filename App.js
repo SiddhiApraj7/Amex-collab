@@ -92,13 +92,13 @@ export default function App() {
 
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
       <Stack.Screen name="otp" component={Phone}></Stack.Screen>  */}
-      <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> 
-      <Stack.Screen name="login" component={Login}></Stack.Screen>
+      {/* <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> 
+      <Stack.Screen name="login" component={Login}></Stack.Screen> */}
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
-       <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
+       {/* <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
-      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
+      <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen>  */}
       <Stack.Screen name="beneficiaryHomePage" component={BeneficiaryHomePage}></Stack.Screen>
       <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
       <Stack.Screen name="e_rupee_wallet" component={E_rupee_wallet}></Stack.Screen>

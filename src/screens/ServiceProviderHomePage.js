@@ -5,10 +5,16 @@ import { useNavigation ,useFocusEffect } from '@react-navigation/native';
 import Walletcard from '../components/Walletcard';
 import VoucherHistory from '../components/VoucherHistory';
 import { BackHandler } from 'react-native';
+import { AppContext } from "../../AppContext";
+import { useContext, useState} from "react";
 
 
 const ServiceProviderHomePage = () => {
   const navigation = useNavigation();
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [bankName, setBankName] = useState('');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -24,6 +30,31 @@ const ServiceProviderHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+
+  async function fetchSPInfo(phoneNumber) {
+    
+    try {
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
+      console.log(response.data);
+      const sp = response.data;
+      setFirstName(sp.firstName);
+      setLastName(sp.lastName);
+      setBankName(sp.bankName);
+      
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      /* alert(error);
+      setError('User already exists, please login.');
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); */ // Redirect to login screen after 3 seconds
+    }
+  } 
+
+  fetchSPInfo();
+
 
     const textrupi = (
     
@@ -46,7 +77,7 @@ const ServiceProviderHomePage = () => {
         <View >
             <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="px-1 pt-1 pb-2 font-medium text-lg">Sahil Kumar</Text>
+                <Text className="px-1 pt-1 pb-2 font-medium text-lg">{firstName} {lastName}</Text>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>

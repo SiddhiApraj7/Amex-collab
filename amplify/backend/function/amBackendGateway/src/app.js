@@ -273,7 +273,7 @@ app.post('/create-serviceProvider', async function(req, res) {
             serviceProviderId: serviceProvider.serviceProviderId
           }
         },
-        isServiceProvider : true,
+        
       }
     });
 
@@ -514,8 +514,8 @@ app.patch('/create-voucher', async (req, res) => {
   }
 });
 
-app.get('/get-beneficiary-info/', async (req, res) => {
-  const {phoneNumber} = req.body;
+app.get('/get-beneficiary-info/:phoneNumber', async (req, res) => {
+  const {phoneNumber} = req.params;
 
   try {
     const beneficiary = await prisma.beneficiary.findFirst({
@@ -545,8 +545,8 @@ app.get('/get-beneficiary-info/', async (req, res) => {
   }
 });
 
-app.get('/get-serviceProvider-info/', async (req, res) => {
-  const {phoneNumber} = req.body;
+app.get('/get-serviceProvider-info/:phoneNumber', async (req, res) => {
+  const {phoneNumber} = req.params;
 
   try {
     const serviceProvider = await prisma.serviceProvider.findFirst({
@@ -556,9 +556,6 @@ app.get('/get-serviceProvider-info/', async (req, res) => {
         }
       },
       select: {
-        BusinessName : true,
-        PositionInBusiness : true,
-        BusinessTag : true,
         Users: {
           select: {
             firstName: true,
@@ -566,19 +563,17 @@ app.get('/get-serviceProvider-info/', async (req, res) => {
             bankName: true,
             
           }
-        }
+        },
+        BusinessName : true,
+        PositionInBusiness : true,
+        BusinessTag : true,
+        
       }
     });
 
     if (serviceProvider && serviceProvider.Users) {
-      res.status(200).json({
-        BusinessName,
-        PositionInBusiness,
-        BusinessTag,
-        firstName,
-        lastName,
-        bankName
-      });
+      res.status(200).json(serviceProvider);
+        
     } else {
       res.status(404).json({ message: 'Service Provider not found' });
     }
@@ -587,6 +582,65 @@ app.get('/get-serviceProvider-info/', async (req, res) => {
   }
 });
 
+app.get('/get-pvtOrg-info/:phoneNumber', async (req, res) => {
+  const {phoneNumber} = req.params;
+
+  try {
+    const pvtOrg = await prisma.pvtOrg.findFirst({
+      where: {
+        Users: {
+          phoneNumber: phoneNumber
+        }
+      },
+      select: {
+        Users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            bankName: true,
+            
+          }
+        },
+        CompanyName : true,
+        positionInCompany : true
+        
+      }
+    });
+
+    if (pvtOrg && pvtOrg.Users) {
+      res.status(200).json(pvtOrg);
+        
+    } else {
+      res.status(404).json({ message: 'Pvt Organisation not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/login/:phoneNumber', async (req, res) => {
+  const { walletPin } = req.body;
+  const { phoneNumber } = req.params;
+
+  try {
+    const user = await prisma.Users.findFirst({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isPinMatched = user.walletPin === walletPin;
+
+    res.status(200).json({ isPinMatched });
+  } catch (error) {
+    console.error('Error checking wallet PIN:', error);
+    res.status(500).json({ error: 'Failed to check wallet PIN' });
+  }
+});
 
 
 app.listen(3000, function () {

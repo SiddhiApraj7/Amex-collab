@@ -5,13 +5,18 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Walletcard from '../components/Walletcard';
 import { BackHandler } from 'react-native';
 import axios from 'axios';
+import { AppContext } from "../../AppContext";
+import { useContext , useState} from "react";
 
 
 const BeneficiaryHomePage = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [bankName, setBankName] = useState('');
 
+  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -27,21 +32,28 @@ const BeneficiaryHomePage = () => {
     }, [])
   );
 
-  useEffect(() => {
-    // Fetch beneficiary information from the API
-    const fetchBeneficiaryInfo = async () => {
-      try {
-        const response = await axios.get('http://192.168.29.208:3000/get-beneficiary-info/');
-        const beneficiary = response.data;
-        setFirstName(beneficiary.Users.firstName);
-        setLastName(beneficiary.Users.lastName);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  async function fetchBenificiaryInfo() {
+    const phoneNumber = "+91321";
+    try {
+      const response = await axios.get(`http://192.168.29.208:3000/get-beneficiary-info/${phoneNumber}`);
+      console.log(response.data);
+      const beneficiary = response.data;
+      setFirstName(beneficiary.firstName);
+      setLastName(beneficiary.lastName);
+      setBankName(beneficiary.bankName);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      /* alert(error);
+      setError('User already exists, please login.');
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); */ // Redirect to login screen after 3 seconds
+    }
+  } 
 
-    fetchBeneficiaryInfo();
-  }, []);
+  fetchBenificiaryInfo();
 
     const textrupi = (
     

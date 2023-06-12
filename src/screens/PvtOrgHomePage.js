@@ -5,10 +5,16 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Walletcard from '../components/Walletcard';
 import VoucherHistory from '../components/VoucherHistory';
 import { BackHandler } from 'react-native';
+import { AppContext } from "../../AppContext";
+import { useContext, useState} from "react";
 
 
 const PvtOrgHomePage = () => {
   const navigation = useNavigation();
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [bankName, setBankName] = useState('');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -24,6 +30,32 @@ const PvtOrgHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+
+  async function fetchPvtOrgInfo(phoneNumber) {
+    
+    try {
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
+      console.log(response.data);
+      const pvtorg = response.data;
+      setFirstName(pvtorg.firstName);
+      setLastName(pvtorg.lastName);
+      setBankName(pvtorg.bankName);
+      
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      /* alert(error);
+      setError('User already exists, please login.');
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); */ // Redirect to login screen after 3 seconds
+    }
+  } 
+
+  fetchPvtOrgInfo();
+
+
 
     const textrupi = (
     
