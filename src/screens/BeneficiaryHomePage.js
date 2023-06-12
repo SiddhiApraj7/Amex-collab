@@ -74,9 +74,17 @@ const BeneficiaryHomePage = () => {
             source = {require('../../assets/e-rupi.png')}></Image>
     
         <View >
-            <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
+        <View className="flex-row gap-2 ml-5 w-96 justify-between">
+              <View className="flex-row gap-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="p-1 font-medium text-lg">{firstName} {lastName}</Text>
+                <View className="pb-2">
+                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+                {/* <Text className="font-light text-sm mr-7">Infosys - HR Head</Text> */}
+                </View>
+                </View>
+                <View className="pt-1 mr-5">
+                <Text className="font-medium text-lg">(bankName)</Text>
+                </View>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>

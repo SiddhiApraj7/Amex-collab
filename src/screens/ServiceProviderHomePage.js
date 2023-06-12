@@ -15,6 +15,9 @@ const ServiceProviderHomePage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
+  const [BusinessName, setBusinessName] = useState('');
+  const [PositionInBusiness, setPositionInBusiness] = useState('');
+  const [BusinessTag, setBusinessTag] = useState('');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -36,10 +39,13 @@ const ServiceProviderHomePage = () => {
     try {
       const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
-      const sp = response.data;
-      setFirstName(sp.firstName);
-      setLastName(sp.lastName);
-      setBankName(sp.bankName);
+      const serviceProvider = response.data;
+      setFirstName(serviceProvider.Users.firstName);
+      setLastName(serviceProvider.Users.lastName);
+      setBankName(serviceProvider.bankName);
+      setBusinessName(serviceProvider.BusinessName);
+      setPositionInBusiness(serviceProvider.PositionInBusiness);
+      setBusinessTag(serviceProvider.BusinessTag);
       
     } catch (error) {
       console.error(error);
@@ -75,9 +81,18 @@ const ServiceProviderHomePage = () => {
             source = {require('../../assets/e-rupi.png')}></Image>
     
         <View >
-            <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
+            <View className="flex-row gap-2 ml-5 w-96 justify-between">
+              <View className="flex-row gap-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="px-1 pt-1 pb-2 font-medium text-lg">{firstName} {lastName}</Text>
+                <View className="pb-2">
+                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+                <Text className="font-light text-sm mr-7">{BusinessName} - {PositionInBusiness}</Text>
+                </View>
+                </View>
+                <View className="pt-1 mr-5">
+                <Text className="font-medium text-lg">{bankName}</Text>
+                <Text className="font-light text-sm mr-7">{BusinessTag}</Text>
+                </View>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>

@@ -15,7 +15,7 @@ const SelectServiceProvider = () => {
     source = {require('../../assets/e-rupi.png')}></Image>
     <View className="flex-row justify-evenly gap-20">
         <View>
-        <Ionicons name="people-circle-outline" size={50}></Ionicons>
+        <Ionicons name="people-circle-outline" size={40}></Ionicons>
         </View>
         <View className="text-center items-center">
         <Text className="font-bold text-lg">Infosys</Text>
@@ -34,6 +34,122 @@ const SelectServiceProvider = () => {
         <View className="p-1 ml-5"><Ionicons name="search-outline" size={28}></Ionicons></View>
         <TextInput placeholder="Search Service Provider"></TextInput>
     </View>
+    <ScrollView className="mt-2 w-full  ">
+        <View className="p-2 bg-white border-2  h-18 mx-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <View className="flex-row"> 
+                <Text className="text-xs font-medium p-1">Name :</Text><Text className="font-light text-xs p-1"> Govt. Pension Scheme</Text>
+                </View>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+
+    <View className="p-2 bg-white border-2  h-18 m-1">
+            <View className="flex-row my-auto gap-5">
+              <Image className="h-12 w-12"
+    
+    source = {require('../../assets/pension-vector-icon.jpg')}>
+
+              </Image>
+              <View className="bg-white h-18">
+                <Text className="text-xs font-medium p-1">Business Name : Govt. Pension Scheme</Text>
+                <Text className="text-xs font-medium p-1">BusinessTag : PENSION</Text>
+              </View>
+            </View>
+    </View>
+    </ScrollView>
+    
 
     
     

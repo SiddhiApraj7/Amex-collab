@@ -76,9 +76,14 @@ const PvtOrgHomePage = () => {
             source = {require('../../assets/e-rupi.png')}></Image>
     
         <View >
-            <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
+        <View className="flex-row gap-2 ml-10 bg-gray-200 rounded-lg p-2 w-80">
+              <View className="flex-row gap-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="px-1 pt-1 pb-2 font-medium text-lg">Sahil Kumar</Text>
+                <Text className="p-1 font-medium text-lg mr-7">{firstName} {lastName}</Text>
+                </View>
+                <View className="pt-2">
+                <Text className="p-1 font-medium text-lg">{bankName}</Text>
+                </View>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>

@@ -182,8 +182,8 @@ app.delete('/delete-all-data', async (req, res) => {
 });
 
 
-app.post('/create-pvtOrg', async function(req, res) {
-  const {phoneNumber, CompanyName,positionInCompany} = req.body; // Extract phone number from the request body
+app.post('/create-pvtOrg', async function (req, res) {
+  const { phoneNumber, CompanyName, positionInCompany } = req.body; // Extract phone number from the request body
 
   try {
     // Find the user based on the phone number
@@ -233,8 +233,8 @@ app.post('/create-pvtOrg', async function(req, res) {
 
 
 
-app.post('/create-serviceProvider', async function(req, res) {
-  const { phoneNumber ,  BusinessName , PositionInBusiness, BusinessTag  } = req.body; // Extract phone number from the request body
+app.post('/create-serviceProvider', async function (req, res) {
+  const { phoneNumber, BusinessName, PositionInBusiness, BusinessTag } = req.body; // Extract phone number from the request body
 
   try {
     // Find the user based on the phone number
@@ -273,7 +273,7 @@ app.post('/create-serviceProvider', async function(req, res) {
             serviceProviderId: serviceProvider.serviceProviderId
           }
         },
-        
+
       }
     });
 
@@ -515,7 +515,7 @@ app.patch('/create-voucher', async (req, res) => {
 });
 
 app.get('/get-beneficiary-info/:phoneNumber', async (req, res) => {
-  const {phoneNumber} = req.params;
+  const { phoneNumber } = req.params;
 
   try {
     const beneficiary = await prisma.beneficiary.findFirst({
@@ -546,7 +546,7 @@ app.get('/get-beneficiary-info/:phoneNumber', async (req, res) => {
 });
 
 app.get('/get-serviceProvider-info/:phoneNumber', async (req, res) => {
-  const {phoneNumber} = req.params;
+  const { phoneNumber } = req.params;
 
   try {
     const serviceProvider = await prisma.serviceProvider.findFirst({
@@ -561,19 +561,19 @@ app.get('/get-serviceProvider-info/:phoneNumber', async (req, res) => {
             firstName: true,
             lastName: true,
             bankName: true,
-            
+
           }
         },
-        BusinessName : true,
-        PositionInBusiness : true,
-        BusinessTag : true,
-        
+        BusinessName: true,
+        PositionInBusiness: true,
+        BusinessTag: true,
+
       }
     });
 
     if (serviceProvider && serviceProvider.Users) {
       res.status(200).json(serviceProvider);
-        
+
     } else {
       res.status(404).json({ message: 'Service Provider not found' });
     }
@@ -583,7 +583,7 @@ app.get('/get-serviceProvider-info/:phoneNumber', async (req, res) => {
 });
 
 app.get('/get-pvtOrg-info/:phoneNumber', async (req, res) => {
-  const {phoneNumber} = req.params;
+  const { phoneNumber } = req.params;
 
   try {
     const pvtOrg = await prisma.pvtOrg.findFirst({
@@ -598,18 +598,18 @@ app.get('/get-pvtOrg-info/:phoneNumber', async (req, res) => {
             firstName: true,
             lastName: true,
             bankName: true,
-            
+
           }
         },
-        CompanyName : true,
-        positionInCompany : true
-        
+        CompanyName: true,
+        positionInCompany: true
+
       }
     });
 
     if (pvtOrg && pvtOrg.Users) {
       res.status(200).json(pvtOrg);
-        
+
     } else {
       res.status(404).json({ message: 'Pvt Organisation not found' });
     }
@@ -641,6 +641,33 @@ app.post('/login/:phoneNumber', async (req, res) => {
     res.status(500).json({ error: 'Failed to check wallet PIN' });
   }
 });
+
+app.get('/all-service-providers', async (req, res) => {
+  try {
+    const serviceProviders = await prisma.serviceProvider.findMany({
+      select: {
+        
+        BusinessName: true,
+        BusinessTag: true,
+        PositionInBusiness: true,
+        serviceProviderId : true,
+        Users: {
+          select: {
+            phoneNumber: true,
+            firstName: true,
+            lastName: true,
+          }
+        }
+      }
+    });
+
+    res.status(200).json(serviceProviders);
+  } catch (error) {
+    console.error('Error retrieving service providers:', error);
+    res.status(500).json({ error: 'Failed to retrieve service providers' });
+  }
+});
+
 
 
 app.listen(3000, function () {
