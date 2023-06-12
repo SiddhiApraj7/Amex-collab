@@ -265,7 +265,8 @@ app.post('/create-serviceProvider', async function (req, res) {
           connect: {
             serviceProviderId: serviceProvider.serviceProviderId
           }
-        }
+        },
+        isServiceProvider : true,
       }
     });
 
@@ -505,6 +506,81 @@ app.patch('/create-voucher', async (req, res) => {
     res.status(500).json({ error: 'Failed to update voucher' });
   }
 });
+
+app.get('/get-beneficiary-info/', async (req, res) => {
+  const {phoneNumber} = req.body;
+
+  try {
+    const beneficiary = await prisma.beneficiary.findFirst({
+      where: {
+        Users: {
+          phoneNumber: phoneNumber
+        }
+      },
+      select: {
+        Users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            bankName: true
+          }
+        }
+      }
+    });
+
+    if (beneficiary && beneficiary.Users) {
+      res.status(200).json(beneficiary.Users);
+    } else {
+      res.status(404).json({ message: 'Beneficiary not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/get-serviceProvider-info/', async (req, res) => {
+  const {phoneNumber} = req.body;
+
+  try {
+    const serviceProvider = await prisma.serviceProvider.findFirst({
+      where: {
+        Users: {
+          phoneNumber: phoneNumber
+        }
+      },
+      select: {
+        BusinessName : true,
+        PositionInBusiness : true,
+        BusinessTag : true,
+        Users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            bankName: true,
+            
+          }
+        }
+      }
+    });
+
+    if (serviceProvider && serviceProvider.Users) {
+      res.status(200).json({
+        BusinessName,
+        PositionInBusiness,
+        BusinessTag,
+        firstName,
+        lastName,
+        bankName
+      });
+    } else {
+      res.status(404).json({ message: 'Service Provider not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 app.listen(3000, function () {
   console.log("App started")

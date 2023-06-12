@@ -4,10 +4,13 @@ import {Ionicons} from "@expo/vector-icons";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Walletcard from '../components/Walletcard';
 import { BackHandler } from 'react-native';
+import axios from 'axios';
 
 
 const BeneficiaryHomePage = () => {
   const navigation = useNavigation();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -23,6 +26,22 @@ const BeneficiaryHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+
+  useEffect(() => {
+    // Fetch beneficiary information from the API
+    const fetchBeneficiaryInfo = async () => {
+      try {
+        const response = await axios.get('http://192.168.29.208:3000/get-beneficiary-info/');
+        const beneficiary = response.data;
+        setFirstName(beneficiary.Users.firstName);
+        setLastName(beneficiary.Users.lastName);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBeneficiaryInfo();
+  }, []);
 
     const textrupi = (
     
@@ -45,7 +64,7 @@ const BeneficiaryHomePage = () => {
         <View >
             <View className="flex-row gap-2  mx-auto bg-gray-200 rounded-lg p-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="p-1 font-medium text-lg">Sahil Kumar</Text>
+                <Text className="p-1 font-medium text-lg">{firstName} {lastName}</Text>
             </View>
 
             <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
