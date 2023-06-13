@@ -4,17 +4,17 @@ import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 const GenerateVoucher = () => {
     const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
-  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+ // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
-  async function fetchUserInfo(phoneNumber) {
-    //const phoneNumber = "+91321";
+  async function fetchUserInfo() {
+    const phoneNumber = "+911234";
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
@@ -34,7 +34,9 @@ const GenerateVoucher = () => {
     }
   }
 
-  fetchUserInfo(phoneNumber);
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
   return (
     <SafeAreaView className="bg-white h-full">
@@ -42,13 +44,13 @@ const GenerateVoucher = () => {
 
     
     <Image
-    className="h-36 w-96 mt-5"
+    className="h-36 w-52 "
     
     source = {require('../../assets/e-rupi.png')}></Image>
     <View className="flex-row gap-2 ml-5 w-96 justify-between">
             <View className="flex-row gap-2">
               <Ionicons name="person-circle" size={36}></Ionicons>
-              <View className="pb-2">
+              <View className="pb-0">
                 <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
                 {/* <Text className="font-light text-sm mr-7">Infosys - HR Head</Text> */}
               </View>
@@ -58,22 +60,22 @@ const GenerateVoucher = () => {
             </View>
           </View>
     <View className="mt-5">
-    <Text className="font-bold text-xl p-1 mb-2">Generate Voucher</Text>
+    <Text className="font-bold text-lg p-1 mb-2">Generate Voucher</Text>
     </View>
 
     <View className="bg-blue-300 h-4/5 w-full rounded-lg">
         <View className="px-5 py-3 flex-col gap-1">
-            <Text className="font-bold text-md">Wallet Number</Text>
+            <Text className="font-bold text-sm">Wallet Number</Text>
             <View className="bg-gray-100 w-full h-10 rounded-lg"></View>
         </View>
 
         <View className="px-5 py-1 flex-col gap-1">
-            <Text className="font-bold text-md">Validity</Text>
+            <Text className="font-bold text-sm">Validity</Text>
             <View className="bg-gray-100 w-full h-10 rounded-lg"></View>
         </View>
 
         <View className="px-5 py-1 flex-col gap-2">
-            <Text className="font-bold text-md">Amount</Text>
+            <Text className="font-bold text-sm">Amount</Text>
             <View className="bg-gray-100 w-full h-10 rounded-lg"></View>
         </View>
 
