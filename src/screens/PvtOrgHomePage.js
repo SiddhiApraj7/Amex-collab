@@ -6,13 +6,13 @@ import Walletcard from '../components/Walletcard';
 import VoucherHistory from '../components/VoucherHistory';
 import { BackHandler } from 'react-native';
 import { AppContext } from "../../AppContext";
-import { useContext, useState} from "react";
+import { useContext, useState, useEffect} from "react";
 import axios from 'axios';
 
 
 const PvtOrgHomePage = () => {
   const navigation = useNavigation();
-  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
@@ -34,17 +34,17 @@ const PvtOrgHomePage = () => {
     }, [])
   );
 
-  async function fetchPvtOrgInfo(phoneNumber) {
-    
+  async function fetchPvtOrgInfo() {
+    const phoneNumber = "+911234";
     try {
       const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
-      const pvtorg = response.data;
-      setFirstName(pvtorg.firstName);
-      setLastName(pvtorg.lastName);
-      setBankName(pvtorg.bankName);
-      setCompanyName(serviceProvider.CompanyName);
-      setPositionInCompany(serviceProvider.positionInCompany);
+      const pvtOrg = response.data;
+      setFirstName(pvtOrg.Users.firstName);
+      setLastName(pvtOrg.Users.lastName);
+      setBankName(pvtOrg.Users.bankName);
+      setCompanyName(pvtOrg.CompanyName);
+      setPositionInCompany(pvtOrg.positionInCompany);
       
     } catch (error) {
       console.error(error);
@@ -57,8 +57,10 @@ const PvtOrgHomePage = () => {
       }, 3000); */ // Redirect to login screen after 3 seconds
     }
   } 
-
-  fetchPvtOrgInfo(phoneNumber);
+useEffect(() => {
+  fetchPvtOrgInfo();
+}, []);
+  
 
 
 
@@ -76,26 +78,28 @@ const PvtOrgHomePage = () => {
 
         
             <Image
-            className="h-36 w-52 mt-4"
+            className="h-36 w-52 "
             
             source = {require('../../assets/e-rupi.png')}></Image>
     
-        <View >
-            <View className="flex-row gap-2 ml-5 w-96 justify-between">
-              <View className="flex-row gap-2">
+        <View clasName="flex-col">
+            {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
+            <View className="flex-row gap-2 ml-7 w-96 justify-between">
                 <Ionicons name="person-circle" size={36}></Ionicons>
                 <View className="pb-2">
-                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-                <Text className="font-light text-sm mr-7">{BusinessName} - {PositionInBusiness}</Text>
+                <Text className="font-medium text-sm mr-7">{firstName} {lastName}</Text>
+                <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text>
                 </View>
-                <View className="pt-1 mr-5">
-                <Text className="font-medium text-lg">{bankName}</Text>
-                <Text className="font-light text-sm mr-7">{BusinessTag}</Text>
+                <View className=" mr-10">
+                <Text className="font-medium text-sm">{bankName}</Text>
+                <Text className="font-light text-center">BALANCE:1000e$</Text>
+                {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
                 </View>
             </View>
 
-            <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
-            <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View>
+            {/* <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
+            <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View> */}
+            {/* </View> */}
 
             <View className="items-center">
 
@@ -112,7 +116,7 @@ const PvtOrgHomePage = () => {
              <TouchableOpacity onPress={() => {
               navigation.navigate("generateVoucher");
             }}>
-             <View className="w-42 h-46 mx-0 py-5 pl-6 pr-5 text-center rounded-2xl mt-5 bg-blue-200">
+             <View className="w-38 h-46 mx-0 py-5 pl-5 pr-5 text-center rounded-2xl mt-5  bg-blue-200">
               <View className="my-auto align-center">
               <Ionicons name="create-outline" size={42} ></Ionicons>
               <Text className=" text-xs">Generate</Text>
@@ -127,12 +131,12 @@ const PvtOrgHomePage = () => {
 
 
         <View>
-            <Text className="font-light text-center mt-6">PAST TRANSACTIONS</Text>
+            <Text className="font-light text-center mt-4">PAST TRANSACTIONS</Text>
         </View>
 
-        <ScrollView>
+        <ScrollView clasName="h-20">
 
-         <View className="mb-40">
+     
             <VoucherHistory name="Anushtha Prakash" date="22-05-23" cost="140" color="#F99D96" purpose="Scholarship"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
@@ -141,7 +145,7 @@ const PvtOrgHomePage = () => {
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-            </View>
+
         </ScrollView>
         
             
@@ -149,10 +153,10 @@ const PvtOrgHomePage = () => {
            
         </View>
 
-        </View>
+        
     </View>
 
-    <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+    {/* <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -160,7 +164,7 @@ const PvtOrgHomePage = () => {
           <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
           </View>
         
-      </View>
+      </View> */}
     </SafeAreaView>
   )
           }

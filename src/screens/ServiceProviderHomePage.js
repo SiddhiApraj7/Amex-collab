@@ -43,7 +43,7 @@ const ServiceProviderHomePage = () => {
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
       setLastName(serviceProvider.Users.lastName);
-      setBankName(serviceProvider.bankName);
+      setBankName(serviceProvider.Users.bankName);
       setBusinessName(serviceProvider.BusinessName);
       setPositionInBusiness(serviceProvider.PositionInBusiness);
       setBusinessTag(serviceProvider.BusinessTag);
