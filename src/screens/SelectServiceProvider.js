@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import SelectServiceProvider_comp from '../components/serviceProvider_info';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
+import GenerateVoucher from './GenerateVoucher';
 
 const SelectServiceProvider = () => {
 
@@ -13,10 +14,13 @@ const SelectServiceProvider = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
-  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
+  //console.log("aa");
+  //console.log(serviceProviderChoice);
 
   async function fetchUserInfo() {
-    const phoneNumber = "+911234";
+    const phoneNumber = "+91321";
     try {
       const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
@@ -36,9 +40,7 @@ const SelectServiceProvider = () => {
     }
   }
 
-  useEffect(() => {
-    fetchUserInfo();
-  }, []);
+  fetchUserInfo();
 
   return (
     <SafeAreaView className="bg-white h-full">
@@ -72,10 +74,12 @@ const SelectServiceProvider = () => {
         <View className="p-1 ml-5"><Ionicons name="search-outline" size={28}></Ionicons></View>
         <TextInput placeholder="Search Service Provider"></TextInput>
     </View>
-    <ScrollView className="mt-2 w-full h-[45%]  ">
+    <ScrollView className="mt-2 w-full h-[51%]  ">
         <SelectServiceProvider_comp />
    
     </ScrollView>
+
+    <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Select" onPress={navigation.navigate("generateVoucher")}/></View>
 
     <View>
       
