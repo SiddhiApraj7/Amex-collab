@@ -59,7 +59,7 @@ const ServiceProviderHomePage = () => {
     }
   } 
 
-  fetchSPInfo();
+  fetchSPInfo(phoneNumber);
 
 
     const textrupi = (

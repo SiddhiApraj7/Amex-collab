@@ -160,7 +160,7 @@ const BeneficiaryHomePage = () => {
 
         </View>
       </View>
-      <View className="bg-gray-300 rounded-lg pt-1" style={{position: 'absolute', left:0, right:0, bottom:25, flex:1}}>
+      <View className="bg-gray-300 rounded-lg p-1 my-auto pt-1" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>

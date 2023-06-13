@@ -15,6 +15,8 @@ const PvtOrgHomePage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
+  const [CompanyName, setCompanyName] = useState('');
+  const [positionInCompany, setPositionInCompany] = useState('');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -40,6 +42,8 @@ const PvtOrgHomePage = () => {
       setFirstName(pvtorg.firstName);
       setLastName(pvtorg.lastName);
       setBankName(pvtorg.bankName);
+      setCompanyName(serviceProvider.CompanyName);
+      setPositionInCompany(serviceProvider.positionInCompany);
       
     } catch (error) {
       console.error(error);
@@ -53,7 +57,7 @@ const PvtOrgHomePage = () => {
     }
   } 
 
-  fetchPvtOrgInfo();
+  fetchPvtOrgInfo(phoneNumber);
 
 
 
@@ -76,13 +80,16 @@ const PvtOrgHomePage = () => {
             source = {require('../../assets/e-rupi.png')}></Image>
     
         <View >
-        <View className="flex-row gap-2 ml-10 bg-gray-200 rounded-lg p-2 w-80">
+            <View className="flex-row gap-2 ml-5 w-96 justify-between">
               <View className="flex-row gap-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
-                <Text className="p-1 font-medium text-lg mr-7">{firstName} {lastName}</Text>
+                <View className="pb-2">
+                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+                <Text className="font-light text-sm mr-7">{BusinessName} - {PositionInBusiness}</Text>
                 </View>
-                <View className="pt-2">
-                <Text className="p-1 font-medium text-lg">{bankName}</Text>
+                <View className="pt-1 mr-5">
+                <Text className="font-medium text-lg">{bankName}</Text>
+                <Text className="font-light text-sm mr-7">{BusinessTag}</Text>
                 </View>
             </View>
 
@@ -141,7 +148,7 @@ const PvtOrgHomePage = () => {
            
         </View>
 
-        
+        </View>
     </View>
 
     <View className="bg-gray-300 h-36 mt-20 rounded-lg">
