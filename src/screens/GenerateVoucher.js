@@ -12,6 +12,7 @@ const GenerateVoucher = () => {
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
  // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+ const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
 
   async function fetchUserInfo() {
     const phoneNumber = "+911234";
@@ -82,7 +83,7 @@ const GenerateVoucher = () => {
         <View className="mx-28 py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Search Service Provider" onPress={() => {
               navigation.navigate("selectServiceProvider");
             }}/></View>
-        <View className="p-5"><View className="p-2 bg-gray-100 rounded-lg w-full h-10"><Text className="font-semibold mx-auto ">Selected Service Provider</Text></View></View>
+        <View className="p-5"><View className="p-2 bg-gray-100 rounded-lg w-full h-10"><Text className="font-semibold mx-auto ">{serviceProviderChoice ? serviceProviderChoice : 'Select Service Provider'}</Text></View></View>
 
         <View className="text-center items-center">
         <Text className="pb-1">OR</Text>

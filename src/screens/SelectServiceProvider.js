@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import SelectServiceProvider_comp from '../components/serviceProvider_info';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import GenerateVoucher from './GenerateVoucher';
 
 const SelectServiceProvider = () => {
@@ -40,7 +40,10 @@ const SelectServiceProvider = () => {
     }
   }
 
-  fetchUserInfo();
+
+useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
   return (
     <SafeAreaView className="bg-white h-full">
@@ -79,7 +82,7 @@ const SelectServiceProvider = () => {
    
     </ScrollView>
 
-    <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Select" onPress={navigation.navigate("generateVoucher")}/></View>
+    <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Select" onPress={() => navigation.navigate("generateVoucher")}/></View>
 
     <View>
       
