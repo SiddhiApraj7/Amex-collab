@@ -7,6 +7,7 @@ import VoucherHistory from '../components/VoucherHistory';
 import { BackHandler } from 'react-native';
 import { AppContext } from "../../AppContext";
 import { useContext, useState} from "react";
+import axios from 'axios';
 
 
 const PvtOrgHomePage = () => {
@@ -131,7 +132,7 @@ const PvtOrgHomePage = () => {
 
         <ScrollView>
 
-         <View className="">
+         <View className="mb-40">
             <VoucherHistory name="Anushtha Prakash" date="22-05-23" cost="140" color="#F99D96" purpose="Scholarship"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
@@ -151,13 +152,13 @@ const PvtOrgHomePage = () => {
         </View>
     </View>
 
-    <View className="bg-gray-300 h-36 mt-20 rounded-lg">
-        <View className="flex-row gap-10 mx-auto text-center p-1 ml-0" >
+    <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+          <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
           <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
           <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
-        </View>
+          </View>
         
       </View>
     </SafeAreaView>
