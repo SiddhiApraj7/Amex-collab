@@ -480,17 +480,17 @@ app.get('/get-beneficiary-info/:phoneNumber', async (req, res) => {
         }
       },
       select: {
-        Users: {
+        Users:{
           select: {
             firstName: true,
             lastName: true,
             bankName: true
-          }
         }
+      }
       }
     });
 
-    if (beneficiary && beneficiary.Users) {
+    if (beneficiary) {
       res.status(200).json(beneficiary.Users);
     } else {
       res.status(404).json({ message: 'Beneficiary not found' });
@@ -579,7 +579,7 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
   try {
     const user = await prisma.Users.findFirst({
       where: {
-          phoneNumber: phoneNumber
+         phoneNumber: phoneNumber
       },
       select: {
             firstName: true,
