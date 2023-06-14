@@ -209,8 +209,8 @@ const config = {
   "postinstall": false
 }
 
-// const fs = require('fs')
-fs = require('react-native-fs')
+const fs = require('fs')
+
 
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {

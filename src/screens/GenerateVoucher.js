@@ -12,6 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 
 
 const GenerateVoucher = () => {
+
   const [BusinessTag, setBusinessTag] = useState('');
   const [BusinessName, setBusinessName] = useState('');
   const { control, handleSubmit } = useForm();
@@ -19,18 +20,19 @@ const GenerateVoucher = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
- // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+ 
+ //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
-
+ 
   async function fetchUserInfo() {
-    const phoneNumber = "+911234";
+    const phoneNumber = "+9196";
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
-      const user = response.data;
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setBankName(user.bankName);
+      const pvtOrg = response.data;
+      setFirstName(pvtOrg.Users.firstName);
+      setLastName(pvtOrg.Users.lastName);
+      setBankName(pvtOrg.Users.bankName);
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -78,6 +80,31 @@ const GenerateVoucher = () => {
       fetchSPInfo(serviceProviderChoice);
     }
   }, [serviceProviderChoice]); 
+
+
+  const createVoucher = async (data) => {
+    console.log(phoneNumber);
+    console.log(data.amount);
+    console.log(data.phoneNumberB);
+    console.log(serviceProviderChoice);
+    
+
+     try {
+      
+      const response = await axios.post("http://192.168.29.208:3000/create-voucher", {
+      voucherAmount : parseInt(data.amount), 
+      PhoneNumberSP : serviceProviderChoice, 
+      PhoneNumberB : data.phoneNumberB, 
+      PhoneNumberPvtOrg : phoneNumber, 
+      voucherRedeemed : false
+        
+      });
+      console.log(response.data);
+  
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView className="bg-white h-full">
     <View className="items-center  bg-white">
@@ -110,10 +137,10 @@ const GenerateVoucher = () => {
               
             </NumberInput> */}
             <Number_input_ud
-              placeholder="ex. 123456789123"
+              placeholder="ex. +917766"
               secureTextEntry={true}
               keyboardType="phone-pad"
-              name="accountNumber"
+              name="phoneNumberB"
               control={control}
             />
         </View>
@@ -124,7 +151,7 @@ const GenerateVoucher = () => {
               placeholder="ex. 23-10-23"
               secureTextEntry={true}
               keyboardType="phone-pad"
-              name="accountNumber"
+              name="validity"
               control={control}
             />
         </View>
@@ -135,7 +162,7 @@ const GenerateVoucher = () => {
               placeholder="ex. 100"
               secureTextEntry={true}
               keyboardType="phone-pad"
-              name="accountNumber"
+              name="amount"
               control={control}
             />
         </View>
@@ -165,7 +192,7 @@ const GenerateVoucher = () => {
             
         </View>
 
-        <View className="mx-28 py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Make Request"/></View>
+        <View className="mx-28 py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Make Request" onPress={handleSubmit(createVoucher)}/></View>
 
         
     </View>

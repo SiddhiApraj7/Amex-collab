@@ -19,15 +19,15 @@ const SelectServiceProvider = () => {
   //console.log("aa");
   //console.log(serviceProviderChoice);
 
-  async function fetchUserInfo() {
-    const phoneNumber = "+91321";
+  async function fetchUserInfo(phoneNumber) {
+    
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
-      const user = response.data;
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setBankName(user.bankName);
+      const pvtOrg = response.data;
+      setFirstName(pvtOrg.Users.firstName);
+      setLastName(pvtOrg.Users.lastName);
+      setBankName(pvtOrg.Users.bankName);
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -42,7 +42,7 @@ const SelectServiceProvider = () => {
 
 
 useEffect(() => {
-    fetchUserInfo();
+    fetchUserInfo("+9196");
   }, []);
 
   return (
