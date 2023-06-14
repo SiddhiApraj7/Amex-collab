@@ -21,7 +21,7 @@ const PinRegister = () => {
     
     try {
       console.log(pin);
-      const response = await axios.patch('http://192.168.29.208:3000/create-user', {
+      const response = await axios.patch('http://192.168.29.164:3000/create-user', {
         phoneNumber: phoneNumber,
         walletPin : parseInt(pin),
       });
@@ -45,6 +45,7 @@ const PinRegister = () => {
       if (data.pin === data.repin) {
         console.log('PINs matched');
         updateUser(phoneNumber, data.pin);
+        navigation.navigate('selectRole');
     }
     else{
       console.log('RePin does not match Pin');

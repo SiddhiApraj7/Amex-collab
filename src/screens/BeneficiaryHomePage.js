@@ -7,6 +7,8 @@ import { BackHandler } from 'react-native';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext , useState} from "react";
+import { useEffect } from 'react';
+
 
 
 const BeneficiaryHomePage = () => {
@@ -14,8 +16,7 @@ const BeneficiaryHomePage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
-
-  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   
   useFocusEffect(
     React.useCallback(() => {
@@ -31,12 +32,16 @@ const BeneficiaryHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+  useEffect(() => {
+    // Fetch user data and check role status
+    fetchBenificiaryInfo();
+  }, []);
 
   async function fetchBenificiaryInfo() {
-    const phoneNumber = "+91321";
+    // const phoneNumber = "+911234";
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-beneficiary-info/${phoneNumber}`);
-      console.log(response.data);
+      const response = await axios.get(`http://192.168.29.164:3000/get-beneficiary-info/${phoneNumber}`);
+      // console.log(response.data);
       const beneficiary = response.data;
       setFirstName(beneficiary.firstName);
       setLastName(beneficiary.lastName);
@@ -53,7 +58,7 @@ const BeneficiaryHomePage = () => {
     }
   } 
 
-  fetchBenificiaryInfo();
+  // fetchBenificiaryInfo();
 
     const textrupi = (
     

@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "amAPI": {
+    "amAPIEndpoint": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
@@ -8,13 +8,6 @@ export type AmplifyDependentResourcesAttributes = {
   },
   "function": {
     "amBackendGateway": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "digiRupiF": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

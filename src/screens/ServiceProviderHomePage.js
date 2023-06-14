@@ -7,6 +7,8 @@ import VoucherHistory from '../components/VoucherHistory';
 import { BackHandler } from 'react-native';
 import { AppContext } from "../../AppContext";
 import { useContext, useState} from "react";
+import axios from 'axios';
+import { useEffect } from 'react';
 
 
 const ServiceProviderHomePage = () => {
@@ -30,11 +32,15 @@ const ServiceProviderHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+  useEffect(() => {
+    // Fetch user data and check role status
+    fetchSPInfo();
+  }, []);
 
-  async function fetchSPInfo(phoneNumber) {
+  async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const sp = response.data;
       setFirstName(sp.firstName);
@@ -53,7 +59,7 @@ const ServiceProviderHomePage = () => {
     }
   } 
 
-  fetchSPInfo();
+  // fetchSPInfo();
 
 
     const textrupi = (
