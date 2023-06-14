@@ -13,6 +13,7 @@ import { useForm, Controller } from "react-hook-form";
 
 const GenerateVoucher = () => {
   const [BusinessTag, setBusinessTag] = useState('');
+  const [BusinessName, setBusinessName] = useState('');
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
@@ -58,6 +59,7 @@ const GenerateVoucher = () => {
       // setBusinessName(serviceProvider.BusinessName);
       // setPositionInBusiness(serviceProvider.PositionInBusiness);
       setBusinessTag(serviceProvider.BusinessTag);
+      setBusinessName(serviceProvider.BusinessName);
       
     } catch (error) {
       console.error(error);
@@ -142,10 +144,10 @@ const GenerateVoucher = () => {
               navigation.navigate("selectServiceProvider");
             }}/></View>
         <View className="p-3">
-        <Text className="font-bold mb-2 text-sm">Service Provider Phone Number</Text>
+        <Text className="font-bold mb-2 text-sm">Service Provider Name</Text>
           <View className="p-2 bg-gray-100 rounded-lg w-full h-10">
           
-          <Text className="font-semibold mx-auto ">{serviceProviderChoice ? serviceProviderChoice : 'Selected Service Provider'}</Text>
+          <Text className="font-semibold mx-auto ">{serviceProviderChoice ? BusinessName: 'Selected Service Provider'}</Text>
           
           </View></View>
 
