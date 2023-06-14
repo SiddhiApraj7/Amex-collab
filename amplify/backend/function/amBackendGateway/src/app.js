@@ -655,7 +655,13 @@ app.post('/available-vouchers', async (req, res) => {
         },
       },
       include: {
-        AvailableVoucher: true,
+        AvailableVoucher: {
+          include: {
+            PvtOrgBy: true,
+            BeneficiaryUser : true,
+            ServiceProviderUser: true,
+          },
+        },
       },
     });
 
