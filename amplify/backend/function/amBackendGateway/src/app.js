@@ -705,6 +705,73 @@ app.post('/available-vouchers', async (req, res) => {
 });
 
 
+app.post('/vouchers-created', async (req, res) => {
+  const { phoneNumber } = req.body;
+
+  try {
+    const pvtOrg = await prisma.pvtOrg.findFirst({
+      where: {
+        Users: {
+          phoneNumber,
+        },
+      },
+      include: {
+        VouchersCreated: {
+          include: {
+            PvtOrgBy: true,
+            BeneficiaryUser : true,
+            ServiceProviderUser: true,
+          },
+        },
+      },
+    });
+
+    if (!pvtOrg) {
+      return res.status(404).json({ message: 'pvtOrg not found' });
+    }
+
+    const vouchers = pvtOrg.VouchersCreated || [];
+    res.json({ vouchers });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/vouchers-requested', async (req, res) => {
+  const { phoneNumber } = req.body;
+
+  try {
+    const serviceProvider = await prisma.serviceProvider.findFirst({
+      where: {
+        Users: {
+          phoneNumber,
+        },
+      },
+      include: {
+        VouchersRequested: {
+          include: {
+            PvtOrgBy: true,
+            BeneficiaryUser : true,
+            ServiceProviderUser: true,
+          },
+        },
+      },
+    });
+
+    if (!serviceProvider) {
+      return res.status(404).json({ message: 'serviceProvider not found' });
+    }
+
+    const vouchers = serviceProvider.VouchersRequested || [];
+    res.json({ vouchers });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 
 app.listen(3000, function () {
