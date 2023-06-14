@@ -13,14 +13,14 @@ const SelectServiceProvider_comp = () => {
   const [serviceProviders, setServiceProviders] = useState([]);
   const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
 
-  const handleProviderClick = (index,providerName) => {
+  const handleProviderClick = (index,providerNumber) => {
     if (index === selectedProviderIndex) {
       // Clicked on the currently selected provider, deselect it
       setSelectedProviderIndex(-1);
     } else {
       // Clicked on a new provider, update the selected index
       setSelectedProviderIndex(index);
-      setserviceProviderChoice(providerName);
+      setserviceProviderChoice(providerNumber);
       console.log(serviceProviderChoice);
     }
   };
@@ -31,7 +31,7 @@ const SelectServiceProvider_comp = () => {
 
   async function getAllServiceProviders() {
     try {
-      const response = await axios.get('http://192.168.1.45:3000/all-service-providers');
+      const response = await axios.get('http://192.168.29.208:3000/all-service-providers');
       console.log(response.data);
       const serviceProvidersList = response.data;
       setServiceProviders(serviceProvidersList);
@@ -47,7 +47,7 @@ const SelectServiceProvider_comp = () => {
     
     <View>
       {serviceProviders.map((provider, index) => (
-        <TouchableOpacity /* className="p-2 bg-white border-2 mb-2 rounded-md h-18 mx-2" */ style={[styles.providerContainer, selectedProviderIndex === index && styles.selectedProviderContainer]} key={provider.serviceProviderId} onPress={() => handleProviderClick(index, provider.BusinessName)}>
+        <TouchableOpacity /* className="p-2 bg-white border-2 mb-2 rounded-md h-18 mx-2" */ style={[styles.providerContainer, selectedProviderIndex === index && styles.selectedProviderContainer]} key={provider.serviceProviderId} onPress={() => handleProviderClick(index, provider.Users.phoneNumber)}>
           <View className="flex-row my-auto gap-5">
             <Image className="h-12 w-12" source={require('../../assets/pension-vector-icon.jpg')} />
             <View className="bg-white h-18">
