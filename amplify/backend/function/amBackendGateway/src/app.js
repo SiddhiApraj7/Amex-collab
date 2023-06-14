@@ -573,6 +573,33 @@ app.get('/get-pvtOrg-info/:phoneNumber', async (req, res) => {
   }
 });
 
+app.get('/get-user-info/:phoneNumber', async (req, res) => {
+  const { phoneNumber } = req.params;
+
+  try {
+    const user = await prisma.Users.findFirst({
+      where: {
+        Users: {
+          phoneNumber: phoneNumber
+        }
+      },
+      select: {
+            firstName: true,
+            lastName: true,
+            bankName: true
+          }
+    });
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 app.post('/login', async (req, res) => {
   const { phoneNumber, walletPin } = req.body;
 
