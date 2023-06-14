@@ -644,6 +644,35 @@ app.get('/all-service-providers', async (req, res) => {
 });
 
 
+app.post('/available-vouchers', async (req, res) => {
+  const { phoneNumber } = req.body;
+
+  try {
+    const beneficiary = await prisma.beneficiary.findFirst({
+      where: {
+        Users: {
+          phoneNumber,
+        },
+      },
+      include: {
+        AvailableVoucher: true,
+      },
+    });
+
+    if (!beneficiary) {
+      return res.status(404).json({ message: 'Beneficiary not found' });
+    }
+
+    const vouchers = beneficiary.AvailableVoucher || [];
+    res.json({ vouchers });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
 
 app.listen(3000, function () {
   console.log("App started")
