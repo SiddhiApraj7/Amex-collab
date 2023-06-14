@@ -12,9 +12,29 @@ import { useFocusEffect } from '@react-navigation/native';
 const SelectRole = () => {
   const navigation = useNavigation();
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
-  const [isBeneficiary, setIsBeneficiary] = useState(false);
-  const [isServiceProvider, setIsServiceProvider] = useState(false);
-  const [isPvtOrg, setIsPvtOrg] = useState(false);
+  const [is_Beneficiary, setIsBeneficiary] = useState(false);
+  const [is_ServiceProvider, setIsServiceProvider] = useState(false);
+  const [is_PvtOrg, setIsPvtOrg] = useState(false);
+  const fetchUserRole = async () => {
+    try {
+      // Make API call to check user role
+      const response = await axios.post('http://192.168.29.164:3000/get-role', {
+        phoneNumber: phoneNumber
+      });
+      // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
+      const data = response.data;
+      console.log(data);
+
+
+      // Update the state based on user role
+      setIsBeneficiary(data.isBeneficiary);
+      setIsServiceProvider(data.isServiceProvider);
+      setIsPvtOrg(data.isPvtOrg);
+
+    } catch (error) {
+      console.log('Error fetching user role:', error);
+    }
+  };
 
   useEffect(() => {
     // Fetch user data and check role status
@@ -41,7 +61,7 @@ const SelectRole = () => {
       const response = await axios.post('http://192.168.29.164:3000/create-beneficiary', {
         phoneNumber: phoneNumber
       });
-  
+       
       if (response.status === 200) {
         console.log('Beneficiary created successfully');
         console.log(response.data);
@@ -55,7 +75,7 @@ const SelectRole = () => {
 
 
  const onBeneficiaryPress = async () => {
-    if (isBeneficiary) {
+    if (is_Beneficiary) {
       navigation.navigate('beneficiaryHomePage');
     } else {
      await createBeneficiary();
@@ -64,7 +84,7 @@ const SelectRole = () => {
   };
 
 const onServiceProviderPress = async () => {
-    if (isServiceProvider) {
+    if (is_ServiceProvider) {
       navigation.navigate('serviceProviderHomePage');
     } else {
       navigation.navigate('serviceProviderInfo');
@@ -72,30 +92,14 @@ const onServiceProviderPress = async () => {
   };
 
  const onPvtOrgPress = async () => {
-    if (isPvtOrg) {
+    if (is_PvtOrg) {
       navigation.navigate('pvtOrgHomePage');
     } else {
       navigation.navigate('pvtOrgInfo');
     }
   };
 
-  const fetchUserRole = async () => {
-    try {
-      // Make API call to check user role
-      const response = await axios.get('http://192.168.29.208:3000/get-role');
-      // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
-      const data = response.data;
 
-
-      // Update the state based on user role
-      setIsBeneficiary(data.isBeneficiary);
-      setIsServiceProvider(data.isServiceProvider);
-      setIsPvtOrg(data.isPvtOrg);
-
-    } catch (error) {
-      console.log('Error fetching user role:', error);
-    }
-  };
 
   return (
     <SafeAreaView className="bg-white h-full">

@@ -4,6 +4,7 @@ import CustomInput from '../components/CustomInput';
 import { useState } from 'react';
 import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
+import { useNavigation } from "@react-navigation/native";
 
 // post menthod 
 import axios from 'axios';
@@ -11,11 +12,43 @@ import axios from 'axios';
 
 const Login = () => {
   // const [pin,setPin] = useState('');
+  const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
+  const [error, setError] = useState('');
 
-  const onSignInPress = (data) => {
+  const VerifyUser = async(data) => {
+    try {
+      const response = await axios.post('http://192.168.29.164:3000/login', {
+        phoneNumber: data.phoneNumber,
+        walletPin : parseInt(data.pin),
+      });
+
+      console.log(response.data);
+      if(response.data.isPinMatched === true){
+        navigation.navigate('selectRole');
+      }
+      else{
+        alert('Incorrect Pin. Please try again.');
+        setError('Incorrect Pin. Please try again.');
+        setTimeout(() => {
+          setError('');
+        }, 4000); // Redirect to login screen after 3 seconds
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+      setError('Error during verification. Please try again.');
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); // Redirect to login screen after 3 seconds
+    }
+  }
+
+  const onSignInPress = async(data) => {
     console.log(data);
-    console.warn('sign in')
+    await VerifyUser(data);
+
   }
   
   return (
@@ -31,6 +64,14 @@ const Login = () => {
             <Text className="font-bold text-xl p-3 mb-5">Login</Text>
 
             <View className = "h-full w-full bg-blue-300 rounded-t-3xl">
+              <Text className="text-center mt-16 font-semibold text-lg"> Enter your registered phone number : </Text>
+              <NumberInput
+                name = "phoneNumber"
+                placeholder="+91XXXXXXXXXX"
+                control = {control}
+                secureTextEntry={false}
+                keyboardType='phone-pad'
+              />
               <Text className="text-center mt-16 font-semibold text-lg"> Enter your wallet pin : </Text>
               <NumberInput
                 name = "pin"
@@ -51,5 +92,12 @@ const Login = () => {
     
   )
 }
+const styles = {
+  warningText: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 10,
+  },
+};
 
 export default Login;

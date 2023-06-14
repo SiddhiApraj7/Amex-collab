@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/create-user": {
+      "name": "/create-user",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-role": {
+      "name": "/get-role",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

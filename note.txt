@@ -5,5 +5,7 @@ Secret access key
 mzeF9lMQmEfJ6TcfqGssgS7S/nvBafxQknaYLusA
 
 profile name : am_amplify
-endpoint : https://34zlk7jk95.execute-api.us-east-1.amazonaws.com/dev
+endpoint : https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev
 environment : dev
+
+https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev

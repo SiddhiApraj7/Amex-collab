@@ -17,7 +17,9 @@ const prisma = new PrismaClient()
 // declare a new express app
 const app = express()
 app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
 app.use(awsServerlessExpressMiddleware.eventContext())
+
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -87,7 +89,7 @@ app.patch('/create-user', async (req, res) => {
 // app.post('/is-beneficiary', async function (req, res) {
 //   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
 
-app.get('/get-role', async function (req, res) {
+app.post('/get-role', async function (req, res) {
   const { phoneNumber } = req.body;
 
   try {
@@ -141,24 +143,24 @@ app.post('/create-beneficiary', async function (req, res) {
     });
 
     // Update the beneficiaryInfo field in the Users model
-    const updatedUser = await prisma.users.update({
-      where: {
-        id: user.id
-      },
-      data: {
-        isBeneficiary: true,
-        beneficiaryInfo: {
-          connect: {
-            beneficiaryId: beneficiary.beneficiaryId
-          }
-        }
-      },
-      include: {
-        beneficiaryInfo: true // Include the updated beneficiary record in the response
-      }
-    });
+    // const updatedUser = await prisma.users.update({
+    //   where: {
+    //     id: user.id
+    //   },
+    //   data: {
+    //     isBeneficiary: true,
+    //     beneficiaryInfo: {
+    //       connect: {
+    //         beneficiaryId: beneficiary.beneficiaryId
+    //       }
+    //     }
+    //   },
+    //   include: {
+    //     beneficiaryInfo: true // Include the updated beneficiary record in the response
+    //   }
+    // });
 
-    res.status(200).json(updatedUser);
+    res.status(200).json(beneficiary);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create beneficiary' });
@@ -354,7 +356,14 @@ app.patch('/create-pvtOrg', async (req, res) => {
 
 
 app.post('/create-voucher', async function (req, res) {
-  const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById } = req.body;
+  const { 
+    voucherAmount, 
+    PhoneNumberSP, 
+    PhoneNumberB, 
+    PhoneNumberPvtOrg, 
+    voucherRedeemed
+  } = req.body;
+  console.log('req.body', req.body);
 
   try {
     const serviceProvider = await prisma.serviceProvider.findFirst({
@@ -365,6 +374,7 @@ app.post('/create-voucher', async function (req, res) {
 
       }
     });
+    console.log('serviceProvider', serviceProvider);
 
     if (!serviceProvider) {
       return res.status(404).json({ error: 'Service provider not found' });
@@ -375,9 +385,9 @@ app.post('/create-voucher', async function (req, res) {
         Users: {
           phoneNumber: PhoneNumberB
         }
-
       }
     });
+    console.log('beneficiary', beneficiary);
 
     if (!beneficiary) {
       return res.status(404).json({ error: 'Beneficiary not found' });
@@ -388,21 +398,18 @@ app.post('/create-voucher', async function (req, res) {
         Users: {
           phoneNumber: PhoneNumberPvtOrg
         }
-
       }
     });
+    console.log('pvtOrg', pvtOrg);
 
     if (!pvtOrg) {
       return res.status(404).json({ error: 'Private organization not found' });
     }
 
-    const voucher = await prisma.voucher.create({
+    const createdVoucher = await prisma.voucher.create({
       data: {
         voucherAmount: voucherAmount,
         voucherRedeemed,
-        voucherSPId,
-        voucherBeneficiaryId,
-        PvtOrgById,
         ServiceProviderUser: {
           connect: {
             serviceProviderId: serviceProvider.serviceProviderId
@@ -425,72 +432,20 @@ app.post('/create-voucher', async function (req, res) {
         PvtOrgBy: true
       }
     });
-    res.status(200).json(voucher);
+    console.log('createdVoucher', createdVoucher);
+    res.status(200).json({ createdVoucher });
+
+
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create voucher' });
   };
 
-  // Update the AvailableVoucher array in the beneficiary
-  try {
-    const updatedBeneficiary = await prisma.beneficiary.update({
-      where: {
-        beneficiaryId: voucherBeneficiaryId
-      },
-      data: {
-        AvailableVoucher: {
-          push: {
-            voucherId: voucher.voucherId
-          }
-        }
-      }
-    });
-    res.status(200).json(updatedBeneficiary);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to update beneficiary' });
-  }
 
-  try {
-    // Update the VoucherRequested array in the service provider
-    const updatedServiceProvider = await prisma.serviceProvider.update({
-      where: {
-        serviceProviderId: serviceProviderId
-      },
-      data: {
-        VoucherRequested: {
-          push: {
-            voucherId: voucher.voucherId
-          }
-        }
-      }
-    });
-
-    res.status(200).json(updatedServiceProvider);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to update service provider' });
-  }
-  try {
-    // Update the VouchersCreated field in the pvtOrg
-    const updatedPvtOrg = await prisma.pvtOrg.update({
-      where: {
-        privateOrgId: PvtOrgById
-      },
-      data: {
-        VouchersCreated: {
-          connect: {
-            voucherId: voucher.voucherId
-          }
-        }
-      }
-    });
-    res.status(200).json(updatedPvtOrg);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to update PvtOrg' });
-  }
 });
+
+
 
 app.patch('/create-voucher', async (req, res) => {
   try {
@@ -618,34 +573,8 @@ app.get('/get-pvtOrg-info/:phoneNumber', async (req, res) => {
   }
 });
 
-app.get('/get-user-info/:phoneNumber', async (req, res) => {
-  const { phoneNumber } = req.params;
-
-  try {
-    const user = await prisma.Users.findFirst({
-      where: {
-          phoneNumber: phoneNumber
-      },
-      select: {
-            firstName: true,
-            lastName: true,
-            bankName: true
-      }
-    });
-
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(404).json({ message: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-app.post('/login/:phoneNumber', async (req, res) => {
-  const { walletPin } = req.body;
-  const { phoneNumber } = req.params;
+app.post('/login', async (req, res) => {
+  const { phoneNumber, walletPin } = req.body;
 
   try {
     const user = await prisma.Users.findFirst({
@@ -665,6 +594,27 @@ app.post('/login/:phoneNumber', async (req, res) => {
     console.error('Error checking wallet PIN:', error);
     res.status(500).json({ error: 'Failed to check wallet PIN' });
   }
+});
+
+app.post('/check-phone', async function (req, res) {
+  const { phoneNumber } = req.body;
+
+  try {
+    const user = await prisma.users.findFirst({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    });
+
+    if (user) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to check phone number' });
+   }
 });
 
 app.get('/all-service-providers', async (req, res) => {

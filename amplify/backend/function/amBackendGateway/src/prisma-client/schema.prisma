@@ -1,7 +1,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "./prisma-client"
-  binaryTargets = ["native", "rhel-openssl-1.0.x", "darwin-arm64"]
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
@@ -34,7 +34,7 @@ model Users {
 
 model beneficiary {
   beneficiaryId    String    @id @default(uuid())
-  AvailableVoucher Voucher[]
+  AvailableVoucher Voucher[]   
   Users            Users     @relation(fields: [beneficiaryId], references: [id])
 }
 
