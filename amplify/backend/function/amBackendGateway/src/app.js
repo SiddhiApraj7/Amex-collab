@@ -579,9 +579,7 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
   try {
     const user = await prisma.Users.findFirst({
       where: {
-        Users: {
           phoneNumber: phoneNumber
-        }
       },
       select: {
             firstName: true,
