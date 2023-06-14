@@ -444,237 +444,6 @@ app.post('/create-voucher', async function (req, res) {
 
 
 });
-//   try {
-//     const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById } = req.body;
-
-//     const serviceProvider = await prisma.serviceProvider.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberSP
-//         }
-//       }
-//     });
-
-//     if (!serviceProvider) {
-//       return res.status(404).json({ error: 'Service provider not found' });
-//     }
-
-//     const beneficiary = await prisma.beneficiary.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberB
-//         }
-//       }
-//     });
-
-//     if (!beneficiary) {
-//       return res.status(404).json({ error: 'Beneficiary not found' });
-//     }
-
-//     const pvtOrg = await prisma.pvtOrg.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberPvtOrg
-//         }
-//       }
-//     });
-
-//     if (!pvtOrg) {
-//       return res.status(404).json({ error: 'Private organization not found' });
-//     }
-
-//     const Voucher = await prisma.voucher.create({
-//       data: {
-//         voucherAmount: voucherAmount,
-//         voucherRedeemed,
-//         voucherSPId,
-//         voucherBeneficiaryId,
-//         PvtOrgById,
-//         ServiceProviderUser: {
-//           connect: {
-//             serviceProviderId: serviceProvider.serviceProviderId
-//           }
-//         },
-//         BeneficiaryUser: {
-//           connect: {
-//             beneficiaryId: beneficiary.beneficiaryId
-//           }
-//         },
-//         PvtOrgBy: {
-//           connect: {
-//             privateOrgId: pvtOrg.privateOrgId
-//           }
-//         }
-//       },
-//       include: {
-//         BeneficiaryUser: true,
-//         ServiceProviderUser: true,
-//         PvtOrgBy: true
-//       }
-//     });
-
-//     // Update the AvailableVoucher array in the beneficiary
-//     const updatedBeneficiary = prisma.beneficiary.update({
-//       where: {
-//         beneficiaryId: voucherBeneficiaryId
-//       },
-//       data: {
-//         AvailableVoucher: {
-//           set: [...beneficiary.AvailableVoucher, Voucher]
-//         }
-//       }
-//     });
-
-//     // Update the VoucherRequested array in the service provider
-//     const updatedServiceProvider = prisma.serviceProvider.update({
-//       where: {
-//         serviceProviderId: voucherSPId
-//       },
-//       data: {
-//         VouchersRequested: {
-//           set: [...serviceProvider.VouchersRequested, Voucher]
-//         }
-//       }
-//     });
-
-//     // Update the VouchersCreated field in the pvtOrg
-//     const updatedPvtOrg = prisma.pvtOrg.update({
-//       where: {
-//         privateOrgId: PvtOrgById
-//       },
-//       data: {
-//         VouchersCreated: {
-//           set: [...pvtOrg.VouchersCreated, Voucher]
-//         }
-//       }
-//     });
-
-//     await Promise.all([updatedBeneficiary, updatedServiceProvider, updatedPvtOrg]);
-
-//     res.status(200).json(Voucher);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Failed to create voucher' });
-//   }
-// });
-
-
-
-// app.post('/create-voucher', async function (req, res) {
-//   try {
-//     const { voucherAmount, PhoneNumberSP, PhoneNumberB, PhoneNumberPvtOrg, voucherRedeemed, voucherSPId, voucherBeneficiaryId, PvtOrgById } = req.body;
-
-//     const serviceProvider = await prisma.serviceProvider.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberSP
-//         }
-//       }
-//     });
-
-//     if (!serviceProvider) {
-//       return res.status(404).json({ error: 'Service provider not found' });
-//     }
-
-//     const beneficiary = await prisma.beneficiary.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberB
-//         }
-//       }
-//     });
-
-//     if (!beneficiary) {
-//       return res.status(404).json({ error: 'Beneficiary not found' });
-//     }
-
-//     const pvtOrg = await prisma.pvtOrg.findFirst({
-//       where: {
-//         Users: {
-//           phoneNumber: PhoneNumberPvtOrg
-//         }
-//       }
-//     });
-
-//     if (!pvtOrg) {
-//       return res.status(404).json({ error: 'Private organization not found' });
-//     }
-
-//     const voucher = await prisma.voucher.create({
-//       data: {
-//         voucherAmount: voucherAmount,
-//         voucherRedeemed,
-//         voucherSPId,
-//         voucherBeneficiaryId,
-//         PvtOrgById,
-//         ServiceProviderUser: {
-//           connect: {
-//             serviceProviderId: serviceProvider.serviceProviderId
-//           }
-//         },
-//         BeneficiaryUser: {
-//           connect: {
-//             beneficiaryId: beneficiary.beneficiaryId
-//           }
-//         },
-//         PvtOrgBy: {
-//           connect: {
-//             privateOrgId: pvtOrg.privateOrgId
-//           }
-//         }
-//       }
-//     });
-
-//     // Update the AvailableVoucher array in the beneficiary
-//     const updatedBeneficiary = prisma.beneficiary.update({
-//       where: {
-//         beneficiaryId: voucherBeneficiaryId
-//       },
-//       data: {
-//         AvailableVoucher: {
-//           connect: {
-//             voucherId: voucher.voucherId
-//           }
-//         }
-//       }
-//     });
-
-//     // Update the VouchersRequested array in the service provider
-//     const updatedServiceProvider = prisma.serviceProvider.update({
-//       where: {
-//         serviceProviderId: voucherSPId
-//       },
-//       data: {
-//         vouchersRequested: {
-//           connect: {
-//             voucherId: voucher.voucherId
-//           }
-//         }
-//       }
-//     });
-
-//     // Update the VouchersCreated field in the pvtOrg
-//     const updatedPvtOrg = prisma.pvtOrg.update({
-//       where: {
-//         privateOrgId: PvtOrgById
-//       },
-//       data: {
-//         vouchersCreated: {
-//           connect: {
-//             voucherId: voucher.voucherId
-//           }
-//         }
-//       }
-//     });
-
-//     await Promise.all([updatedBeneficiary, updatedServiceProvider, updatedPvtOrg]);
-
-//     res.status(200).json(voucher);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Failed to create voucher' });
-//   }
-// });
 
 
 
@@ -845,6 +614,32 @@ app.post('/check-phone', async function (req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to check phone number' });
+   }
+});
+
+app.get('/all-service-providers', async (req, res) => {
+  try {
+    const serviceProviders = await prisma.serviceProvider.findMany({
+      select: {
+        
+        BusinessName: true,
+        BusinessTag: true,
+        PositionInBusiness: true,
+        serviceProviderId : true,
+        Users: {
+          select: {
+            phoneNumber: true,
+            firstName: true,
+            lastName: true,
+          }
+        }
+      }
+    });
+
+    res.status(200).json(serviceProviders);
+  } catch (error) {
+    console.error('Error retrieving service providers:', error);
+    res.status(500).json({ error: 'Failed to retrieve service providers' });
   }
 });
 

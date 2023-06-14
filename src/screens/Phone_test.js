@@ -5,7 +5,6 @@ import axios from 'axios';
 import { AppContext } from '../../AppContext';
 import { useContext } from 'react';
 import { useEffect } from 'react';
-import { set } from '../../amplify/backend/function/amBackendGateway/src/app';
 
 const Phone_test = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);

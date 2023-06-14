@@ -47,7 +47,7 @@ export default function App() {
     screenOptions={{
       headerShown: false
     }}>
-      {/* <Stack.Screen name="home" component={HomePage}></Stack.Screen>
+       {/*<Stack.Screen name="home" component={HomePage}></Stack.Screen>
 
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
       <Stack.Screen name="otp" component={Phone}></Stack.Screen>  */}
@@ -64,9 +64,9 @@ export default function App() {
       <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen>
       <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen>
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
-      <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
-      <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
-      <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
+       <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
+     {/* <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>*/}
+      {/*<Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen> */}
   </Stack.Navigator>
 </NavigationContainer>
 </AppProvider>
