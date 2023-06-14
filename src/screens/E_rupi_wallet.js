@@ -14,22 +14,40 @@ const E_rupi_wallet = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
-  const [vouchers, setVouchers] = useState([]);
-  // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
-
+  // const [vouchers, setVouchers] = useState([]);
+  const [voucherObjectList, setVoucherObjectList] = useState([]);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   useEffect(() => {
     getAvailableVouchers();
+  }, []);
+
+  useEffect(() => {
     getAllVouchers();
   }, []);
 
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.1.45:3000/available-vouchers');
-      console.log(response.data);
+      const response = await axios.post('http://192.168.29.164:3000/available-vouchers');
+      // console.log(response.data);
       const vouchersList = response.data.vouchers;
-      setVouchers(vouchersList);
+      console.log("voucher list :", vouchersList);
+
+      let voucherList = [];
+      vouchersList.forEach((voucher) => {
+        let vocherObject = {};
+        vocherObject = {
+          voucherId: voucher.voucherId,
+          voucherAmount: voucher.voucherAmount,
+          ServiceProviderUser: voucher.ServiceProviderUser.BusinessName,
+          PvtOrgBy: voucher.PvtOrgBy.CompanyName,
+          purpose: voucher.ServiceProviderUser.BusinessTag
+        };
+        voucherList.push(vocherObject);
+      });
+      setVoucherObjectList(voucherList);
+      console.log("voucher object list :", voucherObjectList);
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -39,8 +57,8 @@ const E_rupi_wallet = () => {
 
   async function getAvailableVouchers() {
     try {
-      const phoneNumber = "+9101";
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      // const phoneNumber = "+9101";
+      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -57,8 +75,8 @@ const E_rupi_wallet = () => {
       }, 3000); */ // Redirect to login screen after 3 seconds
     }
   }
-  
-    
+
+
   return (
 
     <SafeAreaView className="bg-white h-full">
@@ -91,21 +109,23 @@ const E_rupi_wallet = () => {
           </View>
           <ScrollView className="flex-row space-y-10 ">
 
-          {vouchers.map((voucher)=>(
-               <Voucher
-                pvtorg = {voucher.PvtOrgBy.CompanyName}
-                sp = {voucher.ServiceProviderUser}
-                amount = {voucher.voucherAmount}
-                purpose = {voucher.ServiceProviderUser.BusinessTag}
-                key = {voucher.voucherId}
-               />
-          ))}
-          
+            {voucherObjectList.map((voucher) => (
+
+              <Voucher
+                pvtorg={voucher.PvtOrgBy}
+                sp={voucher.ServiceProviderUser}
+                amount={voucher.voucherAmount}
+                purpose={voucher.purpose}
+                key={voucher.voucherId}
+                voucherId={voucher.voucherId}
+              />
+            ))}
+
           </ScrollView>
-        
-                    
-                    
-{/*                     <View className="mt-5 mb-3">
+
+
+
+          {/*                     <View className="mt-5 mb-3">
                       <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
                     </View>
                     <ScrollView className="flex-row space-y-10 ">
@@ -116,7 +136,7 @@ const E_rupi_wallet = () => {
             <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
           </View>
           <ScrollView className="flex-row space-y-10 ">
-            <Voucher />
+            {/* <Voucher /> */}
             {/* <Voucher /> */}
             {/* <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" /> */}
           </ScrollView>
@@ -124,14 +144,14 @@ const E_rupi_wallet = () => {
 
 
         </View>
-        <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+        <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
           <View className="flex-row gap-10 justify-evenly" >
-          <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
-          <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
-          <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
-          <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
+            <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
+            <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
+            <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
+            <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
           </View>
-      </View>
+        </View>
       </View>
 
 

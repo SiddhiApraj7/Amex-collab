@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native';
 import { useContext } from "react"; */
 
 
-const Voucher = (pvtorg, amount, key, sp, purpose) => {
+const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
   // const [vouchers, setVouchers] = useState([]);
 
   // useEffect(() => {
