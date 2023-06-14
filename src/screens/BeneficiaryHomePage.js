@@ -40,7 +40,7 @@ const BeneficiaryHomePage = () => {
   }, []);
 
   async function fetchBenificiaryInfo() {
-    // const phoneNumber = "+911234";
+    // const phoneNumber = "+9101";
     try {
       const response = await axios.get(`http://192.168.29.164:3000/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);

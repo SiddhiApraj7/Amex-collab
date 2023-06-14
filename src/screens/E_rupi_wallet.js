@@ -7,18 +7,58 @@ import Voucher from '../components/Voucher';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
+import { useEffect } from 'react';
 
 const E_rupi_wallet = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
+  // const [vouchers, setVouchers] = useState([]);
+  const [voucherObjectList, setVoucherObjectList] = useState([]);
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
-  async function fetchUserInfo(phoneNumber) {
-    //const phoneNumber = "+91321";
+  useEffect(() => {
+    getAvailableVouchers();
+  }, []);
+
+  useEffect(() => {
+    getAllVouchers();
+  }, []);
+
+
+  async function getAllVouchers() {
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.post('http://192.168.29.164:3000/available-vouchers');
+      // console.log(response.data);
+      const vouchersList = response.data.vouchers;
+      console.log("voucher list :", vouchersList);
+
+      let voucherList = [];
+      vouchersList.forEach((voucher) => {
+        let vocherObject = {};
+        vocherObject = {
+          voucherId: voucher.voucherId,
+          voucherAmount: voucher.voucherAmount,
+          ServiceProviderUser: voucher.ServiceProviderUser.BusinessName,
+          PvtOrgBy: voucher.PvtOrgBy.CompanyName,
+          purpose: voucher.ServiceProviderUser.BusinessTag
+        };
+        voucherList.push(vocherObject);
+      });
+      setVoucherObjectList(voucherList);
+      console.log("voucher object list :", voucherObjectList);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      // Handle error and navigation logic
+    }
+  }
+
+  async function getAvailableVouchers() {
+    try {
+      // const phoneNumber = "+9101";
+      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -36,8 +76,7 @@ const E_rupi_wallet = () => {
     }
   }
 
-  fetchUserInfo(phoneNumber);
-    
+
   return (
 
     <SafeAreaView className="bg-white h-full">
@@ -50,19 +89,6 @@ const E_rupi_wallet = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
-          <View className="flex-row gap-2  mx-auto rounded-lg p-2">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="p-1 font-medium text-lg">Sahil Kumar</Text>
-          </View>
-
-
-
-          <View className="mt-5 mb-3">
-            <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
-          </View>
-          <ScrollView className="flex-row space-y-10 ">
-            <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" />
-          </ScrollView>
           <View className="flex-row gap-2 ml-5 w-96 justify-between">
             <View className="flex-row gap-2">
               <Ionicons name="person-circle" size={36}></Ionicons>
@@ -75,45 +101,57 @@ const E_rupi_wallet = () => {
               <Text className="font-medium text-lg">{bankName}</Text>
             </View>
           </View>
-                    
-                    
-                    
-                    <View className="mt-5 mb-3">
+
+
+
+          <View className="mt-5 mb-3">
+            <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
+          </View>
+          <ScrollView className="flex-row space-y-10 ">
+
+            {voucherObjectList.map((voucher) => (
+
+              <Voucher
+                pvtorg={voucher.PvtOrgBy}
+                sp={voucher.ServiceProviderUser}
+                amount={voucher.voucherAmount}
+                purpose={voucher.purpose}
+                key={voucher.voucherId}
+                voucherId={voucher.voucherId}
+              />
+            ))}
+
+          </ScrollView>
+
+
+
+          {/*                     <View className="mt-5 mb-3">
                       <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
                     </View>
                     <ScrollView className="flex-row space-y-10 ">
                       <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy"/>
-                    </ScrollView>
+                    </ScrollView> */}
 
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
           </View>
           <ScrollView className="flex-row space-y-10 ">
-            <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" />
-            <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" />
-            <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" />
+            {/* <Voucher /> */}
+            {/* <Voucher /> */}
+            {/* <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" /> */}
           </ScrollView>
 
 
 
         </View>
-        <View className="bg-gray-300 rounded-lg p-1 my-auto pt-1" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+        <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
           <View className="flex-row gap-10 justify-evenly" >
-          <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
-          <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
-          <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
-          <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
-      </View>
-
-                </View>
-        <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
-          <View className="flex-row gap-10 justify-evenly" >
-          <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
-          <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
-          <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
-          <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
+            <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
+            <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
+            <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
+            <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
           </View>
-      </View>
+        </View>
       </View>
 
 

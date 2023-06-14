@@ -211,7 +211,6 @@ const config = {
 
 const fs = require('fs')
 
-
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   config.dirname = path.join(process.cwd(), "prisma/prisma-client")

@@ -10,52 +10,48 @@ const Phone_test = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
   const [error, setError] = useState('');
-  const[isalreadyUser,setIsalreadyUser]=useState(false);
+  // const[isalreadyUser,setIsalreadyUser]=useState(false);
 
 
-  const fetchUserInfo = async () => {
+  async function createUser(phoneNumber) {
     try {
       // Make API call to check user role
       const response = await axios.post('http://192.168.29.164:3000/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response.data);
-      setIsalreadyUser(response.data.exists);
+      // setIsalreadyUser(response.data.exists);
+      const isalreadyUser=response.data.exists;           
+      console.log(phoneNumber);
+      console.log(isalreadyUser);
+      if(isalreadyUser){
+        setError('User already exists, please login.');
+        setTimeout(() => {
+          setError('');
+          navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+        }, 3000); // Redirect to login screen after 3 seconds
+      }
+      else{
+        try {
+          const response = await axios.post('http://192.168.29.164:3000/create-user', {
+            phoneNumber: phoneNumber,
+          });
+    
+          console.log(response.data);
+          navigation.navigate('pinRegister');
+        } catch (error) {
+          console.log(error);
+          alert(error);
+       
+        }
+  
+      }
+
+
     } catch (error) {
       console.log('Error fetching user info:', error);
     }
-  };
 
-
-  useEffect(() => {
-    // Fetch user data and check role status
-    fetchUserInfo();
-  }, []);
-
-
-  async function createUser(phoneNumber) {
-    if(isalreadyUser){
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); // Redirect to login screen after 3 seconds
-    }
-    else{
-      try {
-        const response = await axios.post('http://192.168.29.164:3000/create-user', {
-          phoneNumber: phoneNumber,
-        });
-  
-        console.log(response.data);
-        navigation.navigate('pinRegister');
-      } catch (error) {
-        console.log(error);
-        alert(error);
-     
-      }
-
-    }
 
   }
 
