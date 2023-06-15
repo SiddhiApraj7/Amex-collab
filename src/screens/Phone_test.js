@@ -38,7 +38,7 @@ const Phone_test = () => {
           });
     
           console.log(response.data);
-          navigation.navigate('pinRegister');
+          navigation.navigate('userDetails');
         } catch (error) {
           console.log(error);
           alert(error);

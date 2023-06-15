@@ -9,6 +9,8 @@ import { useContext } from "react"; */
 import { useNavigation } from '@react-navigation/native';
 
 
+// voucher redemed prop 
+
 const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
   const navigation = useNavigation();
 

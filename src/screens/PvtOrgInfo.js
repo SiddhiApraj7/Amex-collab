@@ -37,14 +37,14 @@ const PvtOrgInfo = () => {
         positionInCompany: data.positionInCompany,
       });
       if (response.status === 200) {
-        console.log('serviceProvider created successfully');
+        console.log('pvtOrg account created successfully');
         console.log(response.data);
-        navigation.navigate('serviceProviderHomePage');
+        navigation.navigate('pvtOrgrHomePage');
       } else {
-        console.log('Failed to create serviceProvider');
+        console.log('Failed to create private org');
       }
     } catch (error) {
-      console.log('Error creating serviceProvider:', error);
+      console.log('Error creating pvtOrg account:', error);
     }
   };
 

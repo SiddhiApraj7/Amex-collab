@@ -33,7 +33,7 @@ const UserDetails = () => {
 
       });
       console.log(response.data);
-      navigation.navigate('pinRegister');
+      navigation.navigate('bankDetails');
     } catch (error) {
       console.log(error);
     }

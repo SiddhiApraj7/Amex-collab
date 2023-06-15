@@ -47,7 +47,7 @@ import {
 
          
          <View className="text-center p-2 mt-10 items-center">
-          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp")}}></Button> : <Text className="font-medium text-center mt-5 text-white">Press the fingerprint to initiate biometric authentication</Text>}
+          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp_test")}}></Button> : <Text className="font-medium text-center mt-5 text-white">Press the fingerprint to initiate biometric authentication</Text>}
           </View> 
           
 

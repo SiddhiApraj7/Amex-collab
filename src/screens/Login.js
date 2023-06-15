@@ -1,11 +1,11 @@
 import { View, Text , TextInput, Image, SafeAreaView, Button ,Pressable} from 'react-native'
 import React from 'react'
 import CustomInput from '../components/CustomInput';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-
+import { AppContext } from '../../AppContext';
 // post menthod 
 import axios from 'axios';
 // add phone number input box
@@ -15,6 +15,7 @@ const Login = () => {
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
   const [error, setError] = useState('');
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   const VerifyUser = async(data) => {
     try {
@@ -25,6 +26,7 @@ const Login = () => {
 
       console.log(response.data);
       if(response.data.isPinMatched === true){
+        setPhoneNumber(data.phoneNumber);
         navigation.navigate('selectRole');
       }
       else{

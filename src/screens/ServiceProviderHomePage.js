@@ -41,10 +41,9 @@ const ServiceProviderHomePage = () => {
   }, []);
 
   async function fetchSPInfo() {
-    const phoneNumber="+9106";
     
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
@@ -57,12 +56,6 @@ const ServiceProviderHomePage = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
-      /* alert(error);
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); */ // Redirect to login screen after 3 seconds
     }
   } 
 
@@ -151,6 +144,8 @@ const ServiceProviderHomePage = () => {
 
         <ScrollView>
 
+
+   {/* redemeed true vouchers  */}
          <View className="mb-40">
             <VoucherHistory name="Anushtha Prakash" date="22-05-23" cost="140" color="#F99D96" purpose="Scholarship"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>

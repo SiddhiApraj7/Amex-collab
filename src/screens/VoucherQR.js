@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 
+// voucher redemmed 
+
 const VoucherQR = ({ route }) => {
     const { voucherId } = route.params;
     const { phoneNumber, setPhoneNumber } = useContext(AppContext);

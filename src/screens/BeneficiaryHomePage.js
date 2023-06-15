@@ -36,13 +36,13 @@ const BeneficiaryHomePage = () => {
   );
   useEffect(() => {
     // Fetch user data and check role status
-    fetchBenificiaryInfo();
+    fetchBenificiaryInfo(phoneNumber);
   }, []);
 
-  async function fetchBenificiaryInfo() {
-    const phoneNumber = "+9101";
+  async function fetchBenificiaryInfo(phoneNumber) {
+    //const phoneNumber = "+9101";
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-beneficiary-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
       setFirstName(beneficiary.firstName);
@@ -167,7 +167,7 @@ const BeneficiaryHomePage = () => {
 
         </View>
       </View>
-      <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+      <View className="bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
