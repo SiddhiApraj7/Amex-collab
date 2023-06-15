@@ -43,7 +43,7 @@ const ServiceProviderHomePage = () => {
   async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
@@ -116,7 +116,7 @@ const ServiceProviderHomePage = () => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate("");
+              navigation.navigate("qr-code");
             }}>
              <View className="w-42 h-46 mx-0 py-7 pl-6 pr-5 text-center rounded-2xl mt-5 bg-blue-200">
               <View className="my-auto align-center">
