@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, Button , ScrollView, TextInput} from 'react-native'
+import { View, Text, SafeAreaView, Image, Button , ScrollView, TextInput, Alert} from 'react-native'
 import React from 'react'
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -20,14 +20,15 @@ const GenerateVoucher = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
- 
+  const [error,setError] = useState('');
  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+ const phoneNumber = "+9196";
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
  
   async function fetchUserInfo() {
-    const phoneNumber = "+9196";
+    
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -52,7 +53,7 @@ const GenerateVoucher = () => {
   async function fetchSPInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       // setFirstName(serviceProvider.Users.firstName);
@@ -91,7 +92,7 @@ const GenerateVoucher = () => {
 
      try {
       
-      const response = await axios.post("http://192.168.29.208:3000/create-voucher", {
+      const response = await axios.post("http://192.168.1.45:3000/create-voucher", {
       voucherAmount : parseInt(data.amount), 
       PhoneNumberSP : serviceProviderChoice, 
       PhoneNumberB : data.phoneNumberB, 
@@ -100,11 +101,18 @@ const GenerateVoucher = () => {
         
       });
       console.log(response.data);
+      Alert.alert("Voucher has been created!");
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
+      }, 2000); 
   
     } catch (error) {
       console.log(error);
     }
   };
+
+  
   return (
     <SafeAreaView className="bg-white h-full">
     <View className="items-center  bg-white">
