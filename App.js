@@ -59,10 +59,10 @@ export default function App() {
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
       <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
       <Stack.Screen name="beneficiaryHomePage" component={BeneficiaryHomePage}></Stack.Screen> */}
-      <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
+      {/* <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
       <Stack.Screen name="e_rupee_wallet" component={E_rupee_wallet}></Stack.Screen>
-      <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen>
-      <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen> */}
+      <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen> */}
+      <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen> 
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
        <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
      <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
