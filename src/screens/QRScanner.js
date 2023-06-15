@@ -11,7 +11,7 @@ const QRScanner = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(false);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState('')
+  const [id, setId] = useState(null);
   const [error, setError] = useState('');
 
   const [BfirstName, setBFirstName] = useState('');
@@ -37,7 +37,8 @@ const QRScanner = () => {
     setScanned(true);
     //setText(data);
     fetchVoucherInfo(data);
-    console.log(text);
+    setId(data);
+   console.log(id);
     console.log('Type: ' + type + '\nData: ' + data)
   };
 
@@ -55,11 +56,28 @@ const QRScanner = () => {
         <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
       </View>)
   }
-
+  const updateVoucher = async (id) => {
+  
+     try {
+      
+      const response = await axios.patch("http://192.168.29.208:3000/create-voucher", {
+        voucherId : id
+        
+      });
+      console.log(response.data);
+      Alert.alert("Voucher has been redeemed!");
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('serviceProviderHomePage'); // Replace 'Login' with the name of your login screen
+      }, 2000); 
+    } catch (error) {
+      console.log(error);
+    }
+  };
   async function fetchVoucherInfo(data) {
 
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-voucher-info/${data}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-voucher-info/${data}`);
       console.log(response.data);
       const voucher = response.data;
 
@@ -73,7 +91,7 @@ const QRScanner = () => {
     }
   }
 
-  async function ConfirmRedeem() {
+  async function ConfirmRedeem(data) {
 
     Alert.alert(
       'Sure you want to redeem the voucher?',
@@ -84,6 +102,7 @@ const QRScanner = () => {
           onPress: () => {
             // Call the function you want to execute here
             console.log('OK pressed, calling function...');
+            updateVoucher(data)
             // Your function code here
           }
         }
@@ -124,7 +143,7 @@ const QRScanner = () => {
                 <Button title={'Scan Again'} onPress={() => setScanned(false)} className="text-black" color="#81C3FD" />
               </View>
               <View>
-                <Button title={'Redeem'} onPress={() => { ConfirmRedeem() }} className="text-black" color="#8EA2FD" />
+                <Button title={'Redeem'} onPress={() => { ConfirmRedeem(id) }} className="text-black" color="#8EA2FD" />
               </View>
 
             </View>
