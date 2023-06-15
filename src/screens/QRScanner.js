@@ -35,8 +35,8 @@ const QRScanner = () => {
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(data);
-    fetchVoucherInfo(text);
+    //setText(data);
+    fetchVoucherInfo(data);
     console.log(text);
     console.log('Type: ' + type + '\nData: ' + data)
   };
@@ -56,17 +56,17 @@ const QRScanner = () => {
       </View>)
   }
 
-  async function fetchVoucherInfo(text) {
+  async function fetchVoucherInfo(data) {
 
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-voucher-info/${text}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-voucher-info/${data}`);
       console.log(response.data);
       const voucher = response.data;
 
       setCompanyName(voucher.PvtOrgBy.CompanyName);
       setAmount(voucher.voucherAmount);
-      setBFirstName(voucher.BeneficiaryUser.firstName);
-      setBLastName(voucher.BeneficiaryUser.lastName);
+      setBFirstName(voucher.BeneficiaryUser.Users.firstName);
+      setBLastName(voucher.BeneficiaryUser.Users.lastName);
     } catch (error) {
       console.error(error);
       console.log(error);
