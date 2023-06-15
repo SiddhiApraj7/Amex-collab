@@ -9,17 +9,17 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
 
-const E_rupi_wallet = () => {
+const RequestedVouchers = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
   // const [vouchers, setVouchers] = useState([]);
   const [voucherObjectList, setVoucherObjectList] = useState([]);
-  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   useEffect(() => {
-    getAvailableVouchers();
+    getRequestedVouchers();
   }, []);
 
   useEffect(() => {
@@ -28,11 +28,9 @@ const E_rupi_wallet = () => {
 
 
   async function getAllVouchers() {
-    phoneNumber 
     try {
-      const response = await axios.post('http://192.168.29.164:3000/available-vouchers',{
-        phoneNumber: phoneNumber
-      });
+      const response = await axios.post('http://192.168.1.45:3000/vouchers-requested',
+      {phoneNumber: "+9106"});
       // console.log(response.data);
       const vouchersList = response.data.vouchers;
       console.log("voucher list :", vouchersList);
@@ -50,7 +48,6 @@ const E_rupi_wallet = () => {
         voucherList.push(vocherObject);
       });
       setVoucherObjectList(voucherList);
-      console.log(voucherList);
       console.log("voucher object list :", voucherObjectList);
     } catch (error) {
       console.error(error);
@@ -58,11 +55,11 @@ const E_rupi_wallet = () => {
       // Handle error and navigation logic
     }
   }
-  const phoneNumber = "+9101";
-  async function getAvailableVouchers() {
+
+  async function getRequestedVouchers() {
     try {
-      
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const phoneNumber = "+9106";
+      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -109,9 +106,9 @@ const E_rupi_wallet = () => {
 
 
           <View className="mt-5 mb-3">
-            <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
+            <Text className="text-gray-500 font-light">REQUESTED VOUCHERS</Text>
           </View>
-          <ScrollView className=" h-[45%]">
+          <ScrollView className="h-[57%]">
 
             {voucherObjectList.map((voucher) => (
 
@@ -127,23 +124,6 @@ const E_rupi_wallet = () => {
 
           </ScrollView>
 
-
-
-          {/*                     <View className="mt-5 mb-3">
-                      <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
-                    </View>
-                    <ScrollView className="flex-row space-y-10 ">
-                      <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy"/>
-                    </ScrollView> */}
-
-          <View className="mt-5 mb-3">
-            <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
-          </View>
-          {/* <ScrollView className="flex-row space-y-10 "> */}
-            {/* <Voucher /> */}
-            {/* <Voucher /> */}
-            {/* <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" /> */}
-          {/* </ScrollView> */}
 
 
 
@@ -170,4 +150,4 @@ const E_rupi_wallet = () => {
 
 
 
-export default E_rupi_wallet;
+export default RequestedVouchers;

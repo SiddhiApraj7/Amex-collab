@@ -27,6 +27,7 @@ import PvtOrgHomePage from './src/screens/PvtOrgHomePage';
 import SelectServiceProvider from './src/screens/SelectServiceProvider';
 import ServiceProviderHomePage from './src/screens/ServiceProviderHomePage';
 import ServiceProviderInfo from './src/screens/ServiceProviderInfo';
+import RequestedVouchers from './src/screens/RequestedVouchers';
 import { AppProvider } from './AppContext';
 import Phone_test from './src/screens/Phone_test';
 
@@ -65,7 +66,7 @@ export default function App() {
       <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen> 
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
        <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
-     <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
+       <Stack.Screen name="requestedVouchers" component={RequestedVouchers}></Stack.Screen>
       <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
   </Stack.Navigator>
 </NavigationContainer>
