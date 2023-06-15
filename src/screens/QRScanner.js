@@ -1,20 +1,31 @@
-import { Image, View, Text, Button, SafeAreaView, StyleSheet} from "react-native";
+import { Image, View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {NavigationPreloadManager} from "@react-navigation/native"
-import {BarCodeScanner} from 'expo-barcode-scanner';
-import {useState, useEffect} from "react";
+import { NavigationPreloadManager } from "@react-navigation/native"
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import { Alert } from 'react-native';
+
+
 const QRScanner = () => {
-    const navigation = useNavigation();
-    const [hasPermission, setHasPermission] = useState(false);
-    const [scanned, setScanned] = useState(false);
-    const [text, setText] = useState('Not yet scanned')
+  const navigation = useNavigation();
+  const [hasPermission, setHasPermission] = useState(false);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState('')
+  const [error, setError] = useState('');
+
+  const [BfirstName, setBFirstName] = useState('');
+  const [BlastName, setBLastName] = useState('');
+
+  const [CompanyName, setCompanyName] = useState('');
+  const [amount, setAmount] = useState('');
 
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })()
-  }
+  };
 
   // Request Camera Permission
   useEffect(() => {
@@ -24,7 +35,9 @@ const QRScanner = () => {
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(data)
+    setText(data);
+    fetchVoucherInfo(text);
+    console.log(text);
     console.log('Type: ' + type + '\nData: ' + data)
   };
 
@@ -43,38 +56,84 @@ const QRScanner = () => {
       </View>)
   }
 
-    return (
-        <SafeAreaView className="bg-white h-full">
-            <View className="items-center mt-6 p-5 bg-white">
+  async function fetchVoucherInfo(text) {
 
-            
-            <Image
-            className="h-36 w-36"
-            
-            source = {require('../../assets/e-rupi.png')}></Image>
-            
-            <View className="">
-            <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={{ height: 450, width: 450 }} />
-            </View>
-            <Text style={styles.maintext}>{text}</Text>
+    try {
+      const response = await axios.get(`http://192.168.1.45:3000/get-voucher-info/${text}`);
+      console.log(response.data);
+      const voucher = response.data;
 
-            {scanned && 
-            <View className="flex-row gap-5">
-                <View>
-                <Button title={'Scan Again'} onPress={() => setScanned(false)} color='orange' />
-                </View>
-              <View>
-              <Button title={'Redeem'} onPress={() => setScanned(true)} color='lightblue' />
-              </View>
-              
-              </View>}
-            
+      setCompanyName(voucher.PvtOrgBy.CompanyName);
+      setAmount(voucher.voucherAmount);
+      setBFirstName(voucher.BeneficiaryUser.firstName);
+      setBLastName(voucher.BeneficiaryUser.lastName);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+    }
+  }
+
+  async function ConfirmRedeem() {
+
+    Alert.alert(
+      'Sure you want to redeem the voucher?',
+      'Press OK to continue',
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            // Call the function you want to execute here
+            console.log('OK pressed, calling function...');
+            // Your function code here
+          }
+        }
+      ]
+    );
+
+  }
+
+
+  return (
+    <SafeAreaView className="bg-white h-full">
+      <View className="items-center mt-6 p-5 bg-white">
+
+
+        <Image
+          className="h-36 w-36"
+
+          source={require('../../assets/e-rupi.png')}></Image>
+
+        <View className="">
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={{ height: 400, width: 450 }} />
         </View>
-        </SafeAreaView>
-        
-    )
+
+
+
+
+        {scanned &&
+          <View className="flex-col space-y-5">
+            <View className="flex-col bg-blue-200 h-26 p-2 mt-2 space-y-3 rounded-lg">
+              <Text className=" font-light text-sm"> Beneficiary Name : {BfirstName} {BlastName}</Text>
+              <Text className=" font-light text-sm"> Private Org: {CompanyName}</Text>
+              <Text className=" font-light text-sm"> Amount: {amount}</Text>
+            </View>
+            <View className="flex-row gap-5">
+              <View>
+                <Button title={'Scan Again'} onPress={() => setScanned(false)} className="text-black" color="#81C3FD" />
+              </View>
+              <View>
+                <Button title={'Redeem'} onPress={() => { ConfirmRedeem() }} className="text-black" color="#8EA2FD" />
+              </View>
+
+            </View>
+          </View>}
+
+      </View>
+    </SafeAreaView>
+
+  )
 }
 
 const styles = StyleSheet.create({
@@ -88,15 +147,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 20,
   },
-//   barcodebox: {
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     height: 300,
-//     width: 300,
-//     overflow: 'hidden',
-//     borderRadius: 30,
-//     backgroundColor: 'tomato'
-//   }
+  //   barcodebox: {
+  //     alignItems: 'center',
+  //     justifyContent: 'center',
+  //     height: 300,
+  //     width: 300,
+  //     overflow: 'hidden',
+  //     borderRadius: 30,
+  //     backgroundColor: 'tomato'
+  //   }
 });
 
 export default QRScanner;
