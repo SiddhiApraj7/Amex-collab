@@ -29,7 +29,9 @@ const E_rupi_wallet = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/available-vouchers');
+      const response = await axios.post('http://192.168.29.164:3000/available-vouchers',{
+        phoneNumber: phoneNumber
+      });
       // console.log(response.data);
       const vouchersList = response.data.vouchers;
       console.log("voucher list :", vouchersList);
