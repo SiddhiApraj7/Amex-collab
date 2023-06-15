@@ -16,7 +16,7 @@ const E_rupi_wallet = () => {
   const [bankName, setBankName] = useState('');
   // const [vouchers, setVouchers] = useState([]);
   const [voucherObjectList, setVoucherObjectList] = useState([]);
-  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   useEffect(() => {
     getAvailableVouchers();
@@ -28,6 +28,7 @@ const E_rupi_wallet = () => {
 
 
   async function getAllVouchers() {
+    phoneNumber 
     try {
       const response = await axios.post('http://192.168.29.164:3000/available-vouchers',{
         phoneNumber: phoneNumber
@@ -49,6 +50,7 @@ const E_rupi_wallet = () => {
         voucherList.push(vocherObject);
       });
       setVoucherObjectList(voucherList);
+      console.log(voucherList);
       console.log("voucher object list :", voucherObjectList);
     } catch (error) {
       console.error(error);
@@ -56,11 +58,11 @@ const E_rupi_wallet = () => {
       // Handle error and navigation logic
     }
   }
-
+  const phoneNumber = "+9101";
   async function getAvailableVouchers() {
     try {
-      // const phoneNumber = "+9101";
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -109,7 +111,7 @@ const E_rupi_wallet = () => {
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
           </View>
-          <ScrollView className="flex-row space-y-10 ">
+          <ScrollView className=" h-[45%]">
 
             {voucherObjectList.map((voucher) => (
 
@@ -137,11 +139,11 @@ const E_rupi_wallet = () => {
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
           </View>
-          <ScrollView className="flex-row space-y-10 ">
+          {/* <ScrollView className="flex-row space-y-10 "> */}
             {/* <Voucher /> */}
             {/* <Voucher /> */}
             {/* <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" /> */}
-          </ScrollView>
+          {/* </ScrollView> */}
 
 
 
