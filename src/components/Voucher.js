@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native';
 import { useContext } from "react"; */
 
 
-const Voucher = (pvtorg, amount, key, sp, purpose) => {
+const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
   // const [vouchers, setVouchers] = useState([]);
 
   // useEffect(() => {
@@ -20,8 +20,8 @@ const Voucher = (pvtorg, amount, key, sp, purpose) => {
   return (
     <View>
         <TouchableOpacity /* onPress={() => handleProviderClick(index, provider.Users.phoneNumber)} */>
-      <View className="bg-blue-200 w-full mx-auto p-2 rounded-lg my-3">
-        <View className="flex-row justify-center gap-20">
+      <View className="bg-blue-200 w-80 mx-auto p-2 rounded-lg my-3 ">
+        <View className="flex-row justify-evenly gap-20">
           <Ionicons name="qr-code-outline" size={50}></Ionicons>
           <View className="text-white text-xs">
             <Text>{pvtorg}</Text>
