@@ -6,22 +6,24 @@ import axios from 'axios';
 import { TouchableOpacity } from 'react-native';
 /* import { AppContext } from "../../AppContext";
 import { useContext } from "react"; */
+import { useNavigation } from '@react-navigation/native';
 
 
 const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
-  // const [vouchers, setVouchers] = useState([]);
+  const navigation = useNavigation();
 
-  // useEffect(() => {
-   
-  // }, []);
+
+  const handleVoucherClick = () => {
+    navigation.navigate('voucherQR', { voucherId });
+  };
 
 
 
   return (
-    <View>
-        <TouchableOpacity /* onPress={() => handleProviderClick(index, provider.Users.phoneNumber)} */>
-      <View className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3">
-        <View className="flex-row justify-evenly gap-20">
+    <View className="flex-row justify-evenly gap-20">
+        <TouchableOpacity  className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3 " onPress={handleVoucherClick}>
+      {/* <View className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3"> */}
+      
           <Ionicons name="qr-code-outline" size={50}></Ionicons>
           <View className="text-white text-xs">
             <Text>{pvtorg}</Text>
@@ -35,8 +37,8 @@ const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
             
           </View>
           
-        </View>
-      </View>
+     
+      {/* </View> */}
       </TouchableOpacity>
       </View>
     

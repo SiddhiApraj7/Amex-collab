@@ -30,6 +30,7 @@ import ServiceProviderInfo from './src/screens/ServiceProviderInfo';
 import RequestedVouchers from './src/screens/RequestedVouchers';
 import { AppProvider } from './AppContext';
 import Phone_test from './src/screens/Phone_test';
+import VoucherQR from './src/screens/VoucherQR';
 
 
 Amplify.configure(awsExports);
@@ -48,8 +49,7 @@ export default function App() {
     screenOptions={{
       headerShown: false
     }}>
-       {/*<Stack.Screen name="home" component={HomePage}></Stack.Screen>
-
+       {/* <Stack.Screen name="home" component={HomePage}></Stack.Screen>
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
       <Stack.Screen name="otp" component={Phone}></Stack.Screen>  */}
       {/* <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> 
@@ -57,17 +57,19 @@ export default function App() {
        <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen>
        <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
-      <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
+      <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen> */}
+      <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
       <Stack.Screen name="selectRole" component={SelectRole}></Stack.Screen> 
-      <Stack.Screen name="beneficiaryHomePage" component={BeneficiaryHomePage}></Stack.Screen> */}
-      {/* <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen>
+      <Stack.Screen name="beneficiaryHomePage" component={BeneficiaryHomePage}></Stack.Screen>
+
       <Stack.Screen name="e_rupee_wallet" component={E_rupee_wallet}></Stack.Screen>
-      <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen> */}
+      <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen>
       <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen> 
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
        <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
        <Stack.Screen name="requestedVouchers" component={RequestedVouchers}></Stack.Screen>
       <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
+      <Stack.Screen name="voucherQR" component={VoucherQR}></Stack.Screen>
   </Stack.Navigator>
 </NavigationContainer>
 </AppProvider>
