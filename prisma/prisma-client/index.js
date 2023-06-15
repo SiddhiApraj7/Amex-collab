@@ -174,7 +174,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\anush\\Desktop\\digirupi\\prisma\\prisma-client",
+      "value": "C:\\Users\\tanis\\amex\\Amex-collab\\prisma\\prisma-client",
       "fromEnvVar": null
     },
     "config": {

@@ -37,9 +37,9 @@ const PvtOrgHomePage = () => {
 
 
   async function fetchPvtOrgInfo() {
-    const phoneNumber = "+911234";
+    const phoneNumber = "+9196";
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);
@@ -88,7 +88,7 @@ const PvtOrgHomePage = () => {
             <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
             <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text>
             </View>
-            <View className="pt-1 mr-10">
+            <View className=" mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             <Text className="font-light text-center">BALANCE:1000e$</Text>
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
@@ -132,6 +132,7 @@ const PvtOrgHomePage = () => {
         <Text className="font-light text-center mt-4">PAST TRANSACTIONS</Text>
     </View>
 
+
     <ScrollView clasName="h-20">
 
  
@@ -154,7 +155,7 @@ const PvtOrgHomePage = () => {
     
 </View>
 
-{/* <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+ <View className=" bg-white rounded-lg pt-3 h-16" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
       <View className="flex-row gap-10 justify-evenly" >
       <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
       <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -162,7 +163,7 @@ const PvtOrgHomePage = () => {
       <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
       </View>
     
-  </View> */}
+  </View> 
 </SafeAreaView>
     )
 }
