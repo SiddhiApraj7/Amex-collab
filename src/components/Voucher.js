@@ -20,7 +20,7 @@ const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
   return (
     <View>
         <TouchableOpacity /* onPress={() => handleProviderClick(index, provider.Users.phoneNumber)} */>
-      <View className="bg-blue-200 w-80 mx-auto p-2 rounded-lg my-3 ">
+      <View className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3">
         <View className="flex-row justify-evenly gap-20">
           <Ionicons name="qr-code-outline" size={50}></Ionicons>
           <View className="text-white text-xs">
