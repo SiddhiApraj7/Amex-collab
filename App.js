@@ -66,7 +66,7 @@ export default function App() {
       <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen> 
       <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
        <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
-     <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
+       <Stack.Screen name="requestedVouchers" component={RequestedVouchers}></Stack.Screen>
       <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
   </Stack.Navigator>
 </NavigationContainer>
