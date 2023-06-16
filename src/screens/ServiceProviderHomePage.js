@@ -9,7 +9,7 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState} from "react";
 import axios from 'axios';
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 const ServiceProviderHomePage = () => {
   const navigation = useNavigation();
@@ -45,7 +45,7 @@ const ServiceProviderHomePage = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
@@ -180,7 +180,7 @@ const ServiceProviderHomePage = () => {
         
     </View>
 
-    <View className="bg-white rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+    {/* <View className="bg-white rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -188,7 +188,8 @@ const ServiceProviderHomePage = () => {
           <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
           </View>
         
-      </View>
+      </View> */}
+      <Footer disableDashboardButton={true}/>
     </SafeAreaView>
   )
           }

@@ -25,10 +25,8 @@ const Phone = () => {
     // create User schema using post method using axioms and async , await
     
     try {
-      console.log(phoneNumber);
       setIsLoading(true);
-      
-      const response = await axios.post('http://localhost:3000/create-user', {
+      const response = await axios.post('http://192.168.1.45:3000/create-user', {
         phoneNumber: phoneNumber,
       });
       console.log(response);

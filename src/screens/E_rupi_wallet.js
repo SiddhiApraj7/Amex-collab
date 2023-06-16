@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 const E_rupi_wallet = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
@@ -17,7 +17,6 @@ const E_rupi_wallet = () => {
   // const [vouchers, setVouchers] = useState([]);
   const [voucherObjectList, setVoucherObjectList] = useState([]);
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAvailableVouchers(phoneNumber);
@@ -31,7 +30,6 @@ const E_rupi_wallet = () => {
   async function getAllVouchers(phoneNumber) {
     //phoneNumber = "+9101";
     try {
-      
       const response = await axios.post('http://192.168.1.45:3000/available-vouchers',{
         phoneNumber: phoneNumber
       });
@@ -58,16 +56,14 @@ const E_rupi_wallet = () => {
       console.error(error);
       console.log(error);
       // Handle error and navigation logic
-    } finally {
-      setIsLoading(false);
     }
   }
   // const phoneNumber = "+9101";
   async function getAvailableVouchers(phoneNumber) {
     try {
       //phoneNumber= "+9101"
-      setIsLoading(true);
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -82,8 +78,6 @@ const E_rupi_wallet = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -100,13 +94,6 @@ const E_rupi_wallet = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
-      {isLoading ? (
-        <View className=" justify-center items-center z-40">
-        <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-        ) : (
-
-          
         <View>
         <View className="flex-row gap-2 ml-7 w-96 justify-between">
           <View className="flex-row gap-1">
@@ -123,18 +110,10 @@ const E_rupi_wallet = () => {
         </View>
         </View>
 
-        )}
 
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
           </View>
-
-          {isLoading ? (
-            <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-          ) : (
-
           <ScrollView className=" h-[45%]">
 
             {voucherObjectList.map((voucher) => (
@@ -151,38 +130,48 @@ const E_rupi_wallet = () => {
 
           </ScrollView>
 
-          )}
 
-          
+
+          {/*                     <View className="mt-5 mb-3">
+                      <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
+                    </View>
+                    <ScrollView className="flex-row space-y-10 ">
+                      <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy"/>
+                    </ScrollView> */}
 
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
           </View>
+          {/* <ScrollView className="flex-row space-y-10 "> */}
+            {/* <Voucher /> */}
+            {/* <Voucher /> */}
+            {/* <Voucher name="Ashish Daharwal" company="Infosys" value="400" purpose="Pharmacy" /> */}
+          {/* </ScrollView> */}
 
-        
+
 
         </View>
-
-        
-        
-        <View className=" bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+        {/* <View className=" bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
       <View className="flex-row gap-10 justify-evenly" >
       <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
       <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
       <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
       <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
       </View>
-    </View> 
+    
+  </View>  */}
+
+  <Footer />
+      </View>
 
 
 
 
-    </View>
 
     </SafeAreaView>
 
 
-  );
+  )
 }
 
 

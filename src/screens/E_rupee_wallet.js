@@ -7,7 +7,7 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 const E_rupee_wallet = () => {
 
@@ -22,7 +22,7 @@ const E_rupee_wallet = () => {
     //const phoneNumber = "+91321";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -125,7 +125,7 @@ const E_rupee_wallet = () => {
 
 
 
-      <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
+      {/* <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
           <View className="flex-row gap-10 justify-evenly" >
             <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
             <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -134,7 +134,8 @@ const E_rupee_wallet = () => {
           </View>
        
         
-      </View>
+      </View> */}
+      <Footer />
       </View>
   
 
