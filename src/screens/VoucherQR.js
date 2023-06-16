@@ -26,7 +26,7 @@ const VoucherQR = ({ route }) => {
 
     async function getVoucherInfo() {
         try {
-            const response = await axios.get(`http://192.168.29.164:3000/get-voucher/${voucherId}`);
+            const response = await axios.get(`http://192.168.1.45:3000/get-voucher/${voucherId}`);
             console.log(response.data);
             setVoucher(response.data);
             const beneficiaryname= ` ${response.data.BeneficiaryUser.Users.firstName} ${response.data.BeneficiaryUser.Users.lastName}`

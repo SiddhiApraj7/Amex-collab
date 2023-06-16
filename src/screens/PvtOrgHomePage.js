@@ -39,7 +39,7 @@ const PvtOrgHomePage = () => {
   async function fetchPvtOrgInfo() {
     //const phoneNumber = "+9196";
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);

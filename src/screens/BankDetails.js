@@ -36,7 +36,7 @@ const BankDetails = () => {
     console.log(data);
      try {
       
-      const response = await axios.patch("http://192.168.29.164:3000/create-user", {
+      const response = await axios.patch("http://192.168.1.45:3000/create-user", {
         phoneNumber: phoneNumber,
         bankAccountHolderName : data.accHolderName,
         accountNumber : parseInt(data.accountNumber),
@@ -97,7 +97,7 @@ const BankDetails = () => {
 
             <NumberInput
               placeholder="Account Holder Name"
-              secureTextEntry={true}
+              secureTextEntry={false}
               keyboardType="default"
               name="accHolderName"
               control={control}
