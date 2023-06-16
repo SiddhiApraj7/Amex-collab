@@ -1,4 +1,4 @@
-import { View, Text , TextInput, Image, SafeAreaView, Button ,Pressable} from 'react-native'
+import { View, Text , TextInput, Image, SafeAreaView, Button ,Pressable, ActivityIndicator} from 'react-native'
 import React from 'react'
 import CustomInput from '../components/CustomInput';
 import { useState, useContext } from 'react';
@@ -16,8 +16,10 @@ const Login = () => {
   const {control, handleSubmit} = useForm();
   const [error, setError] = useState('');
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const VerifyUser = async(data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post('http://192.168.1.45:3000/login', {
         phoneNumber: data.phoneNumber,
@@ -44,6 +46,8 @@ const Login = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -87,6 +91,12 @@ const Login = () => {
 
             <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Submit" onPress={handleSubmit(onSignInPress)}/></View>
 
+            {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+        
             </View>
             
         </View>

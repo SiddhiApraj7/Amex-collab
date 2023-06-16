@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react'
 import QRCode from 'react-native-qrcode-svg';
 import { AppContext } from "../../AppContext";
@@ -19,6 +19,7 @@ const VoucherQR = ({ route }) => {
     const [serviceProviderName, setserviceProviderName] = useState('');
     const [serviceProviderTag, setserviceProviderTag] = useState('');
     const [pvtOrgName, setPvtOrgName] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getVoucherInfo();
@@ -56,9 +57,18 @@ const VoucherQR = ({ route }) => {
             console.error(error);
             console.log(error);
             // Handle error and navigation logic
-        }
+        } finally {
+            setIsLoading(false);
+          }
     }
 
+    if (isLoading) {
+        return (
+          <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </SafeAreaView>
+        );
+      }
 
     return (
         <SafeAreaView className="bg-white h-full">

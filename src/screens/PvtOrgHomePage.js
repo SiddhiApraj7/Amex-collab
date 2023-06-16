@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -19,6 +19,7 @@ const PvtOrgHomePage = () => {
   const [bankName, setBankName] = useState('');
   const [CompanyName, setCompanyName] = useState('');
   const [positionInCompany, setPositionInCompany] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -38,6 +39,7 @@ const PvtOrgHomePage = () => {
 
   async function fetchPvtOrgInfo() {
     //const phoneNumber = "+9196";
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
@@ -51,6 +53,8 @@ const PvtOrgHomePage = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -80,6 +84,12 @@ const PvtOrgHomePage = () => {
         
         source = {require('../../assets/e-rupi.png')}></Image>
 
+    {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
           <View className="flex-row gap-2 ml-7 w-96 justify-between">
@@ -94,6 +104,9 @@ const PvtOrgHomePage = () => {
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
+        </View>
+
+        )}
 
         {/* <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
         <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View> */}
@@ -125,7 +138,7 @@ const PvtOrgHomePage = () => {
 
        </View>
         
-    </View>
+    
 
 
     <View>
