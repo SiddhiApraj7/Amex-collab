@@ -31,7 +31,7 @@ const GenerateVoucher = () => {
   //const phoneNumber = "+91321";
   setIsLoading(true);
   try {
-    const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+    const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
     console.log(response.data);
     const user = response.data;
     setisValidB(user.isBeneficiary);
@@ -52,7 +52,7 @@ const GenerateVoucher = () => {
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -123,7 +123,7 @@ const GenerateVoucher = () => {
     {
       try {
       
-        const response = await axios.post("http:/192.168.29.208:3000/create-voucher", {
+        const response = await axios.post("http:/192.168.29.164:3000/create-voucher", {
         voucherAmount : parseInt(data.amount), 
         PhoneNumberSP : serviceProviderChoice, 
         PhoneNumberB : data.phoneNumberB, 
