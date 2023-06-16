@@ -142,7 +142,7 @@ app.post('/create-beneficiary', async function (req, res) {
       }
     });
 
-    //Update the beneficiaryInfo field in the Users model
+    // Update the beneficiaryInfo field in the Users model
     const updatedUser = await prisma.users.update({
       where: {
         id: user.id
@@ -834,7 +834,16 @@ app.post('/vouchers-created', async (req, res) => {
         VouchersCreated: {
           include: {
             PvtOrgBy: true,
-            BeneficiaryUser : true,
+            BeneficiaryUser: {
+              select: {
+                Users: {
+                  select: {
+                    firstName: true,
+                    lastName: true
+                  }
+                }
+              }
+            },
             ServiceProviderUser: true,
           },
         },

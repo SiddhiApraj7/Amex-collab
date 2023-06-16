@@ -31,6 +31,8 @@ import RequestedVouchers from './src/screens/RequestedVouchers';
 import { AppProvider } from './AppContext';
 import Phone_test from './src/screens/Phone_test';
 import VoucherQR from './src/screens/VoucherQR';
+import VoucherGenerated from './src/screens/VoucherGenerated';
+
 import Profile from './src/screens/Profile';
 
 Amplify.configure(awsExports);
@@ -73,6 +75,7 @@ export default function App() {
           <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
           <Stack.Screen name="qrScanner" component={QRScanner}></Stack.Screen>
           <Stack.Screen name="voucherQR" component={VoucherQR}></Stack.Screen>
+          <Stack.Screen name="voucherGenerated" component={VoucherGenerated}></Stack.Screen>
           <Stack.Screen name="profile" component={Profile}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
