@@ -20,7 +20,7 @@ const E_rupee_wallet = () => {
   async function fetchUserInfo() {
     //const phoneNumber = "+91321";
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);

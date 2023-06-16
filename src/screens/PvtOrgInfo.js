@@ -31,7 +31,7 @@ const PvtOrgInfo = () => {
     console.log(data);
     // create User schema using post method using axios and async , await
      try {
-      const response = await axios.post("http://192.168.29.208:3000/create-pvtOrg", {
+      const response = await axios.post("http://192.168.1.45:3000/create-pvtOrg", {
         phoneNumber: phoneNumber,  
         CompanyName: data.CompanyName,
         positionInCompany: data.positionInCompany,

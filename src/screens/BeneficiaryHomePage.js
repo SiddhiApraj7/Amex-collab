@@ -42,7 +42,7 @@ const BeneficiaryHomePage = () => {
   async function fetchBenificiaryInfo(phoneNumber) {
     //const phoneNumber = "+9101";
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-beneficiary-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
       setFirstName(beneficiary.firstName);
@@ -86,7 +86,7 @@ const BeneficiaryHomePage = () => {
             </View>
             <View className=" mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
+            <Text className="font-light text-center">BALANCE:1000e$</Text>
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
