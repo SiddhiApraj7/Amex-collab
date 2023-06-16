@@ -142,23 +142,23 @@ app.post('/create-beneficiary', async function (req, res) {
       }
     });
 
-    // Update the beneficiaryInfo field in the Users model
-    // const updatedUser = await prisma.users.update({
-    //   where: {
-    //     id: user.id
-    //   },
-    //   data: {
-    //     isBeneficiary: true,
-    //     beneficiaryInfo: {
-    //       connect: {
-    //         beneficiaryId: beneficiary.beneficiaryId
-    //       }
-    //     }
-    //   },
-    //   include: {
-    //     beneficiaryInfo: true // Include the updated beneficiary record in the response
-    //   }
-    // });
+    //Update the beneficiaryInfo field in the Users model
+    const updatedUser = await prisma.users.update({
+      where: {
+        id: user.id
+      },
+      data: {
+        isBeneficiary: true,
+        beneficiaryInfo: {
+          connect: {
+            beneficiaryId: beneficiary.beneficiaryId
+          }
+        }
+      },
+      include: {
+        beneficiaryInfo: true // Include the updated beneficiary record in the response
+      }
+    });
 
     res.status(200).json(beneficiary);
   } catch (error) {
@@ -584,7 +584,14 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
       select: {
             firstName: true,
             lastName: true,
-            bankName: true
+            bankName: true,
+            isBeneficiary: true,
+            isServiceProvider : true,
+            isPvtOrg : true,
+            bankAccountHolderName : true,
+            accountNumber : true
+
+
           }
     });
 

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext , useState} from "react";
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 
 const BeneficiaryHomePage = () => {
@@ -162,7 +162,7 @@ const BeneficiaryHomePage = () => {
 
         </View>
       </View>
-      <View className="bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+      {/* <View className="bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -170,7 +170,9 @@ const BeneficiaryHomePage = () => {
           <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
       </View>
 
-      </View>
+      </View> */}
+
+      <Footer />
     </SafeAreaView>
   )
 }
