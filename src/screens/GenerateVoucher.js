@@ -27,7 +27,7 @@ const GenerateVoucher = () => {
  //const phoneNumber = "+9196";
 
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
- async function checkValidBeneficiary() {
+ async function checkValidBeneficiary(phoneNumber) {
   //const phoneNumber = "+91321";
   setIsLoading(true);
   try {
