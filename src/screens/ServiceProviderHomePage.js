@@ -85,19 +85,17 @@ const ServiceProviderHomePage = () => {
               <View className="flex-row gap-2">
                 <Ionicons name="person-circle" size={36}></Ionicons>
                 <View className="pb-2">
-                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-                <Text className="font-light text-sm mr-7">{BusinessName} - {PositionInBusiness}</Text>
+                <Text className="font-medium text-sm mr-7">{firstName} {lastName}</Text>
+                <Text className="font-light text-xs mr-7">{BusinessName} - {PositionInBusiness}</Text>
                 </View>
                 </View>
-                <View className="pt-1 mr-5">
-                <Text className="font-medium text-lg">{bankName}</Text>
-                <Text className="font-light text-sm mr-7">{BusinessTag}</Text>
+                <View className="pt-3 mr-5">
+                <Text className="font-medium text-md">{bankName}</Text>
+                <Text className="font-light text-xs mr-7">{BusinessTag}</Text>
                 </View>
             </View>
 
-            <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
-            <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View>
-
+            <View className="flex-row ml-10"><Text className="font-light text-sm text-center mt-3">BALANCE: </Text><Text className="font-bold text-lg  text-center mt-1.5">1000 e$</Text></View>
             <View className="items-center">
 
 
@@ -142,11 +140,11 @@ const ServiceProviderHomePage = () => {
             <Text className="font-light text-center mt-6">PAST TRANSACTIONS</Text>
         </View>
 
-        <ScrollView>
+        <ScrollView className="h-36">
 
 
    {/* redemeed true vouchers  */}
-         <View className="mb-40">
+         
             <VoucherHistory name="Anushtha Prakash" date="22-05-23" cost="140" color="#F99D96" purpose="Scholarship"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
@@ -155,7 +153,7 @@ const ServiceProviderHomePage = () => {
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
             <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-            </View>
+           
         </ScrollView>
         
             
@@ -166,7 +164,7 @@ const ServiceProviderHomePage = () => {
         
     </View>
 
-    <View className="bg-gray-300 rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+    <View className="bg-white rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>

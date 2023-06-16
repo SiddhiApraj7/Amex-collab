@@ -39,7 +39,7 @@ const PvtOrgInfo = () => {
       if (response.status === 200) {
         console.log('pvtOrg account created successfully');
         console.log(response.data);
-        navigation.navigate('pvtOrgrHomePage');
+        navigation.navigate('pvtOrgHomePage');
       } else {
         console.log('Failed to create private org');
       }

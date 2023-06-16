@@ -23,10 +23,10 @@ const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
 
   return (
     <View className="flex-row justify-evenly gap-20">
-        <TouchableOpacity  className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3 " onPress={handleVoucherClick}>
+        <TouchableOpacity  className="bg-blue-200 w-80 mx-auto p-2 rounded-lg my-10" onPress={handleVoucherClick}>
       {/* <View className="bg-blue-200 w-80 mx-auto  p-2 rounded-lg my-3"> */}
-      
-          <Ionicons name="qr-code-outline" size={50}></Ionicons>
+      <View className="flex-row justify-between">
+      <Ionicons name="qr-code-outline" size={50}></Ionicons>
           <View className="text-white text-xs">
             <Text>{pvtorg}</Text>
             <View className="flex-row gap-2">
@@ -38,6 +38,8 @@ const Voucher = ({pvtorg, amount, sp, purpose,voucherId}) => {
             <Text>{amount}e₹</Text>
             
           </View>
+      </View>
+          
           
      
       {/* </View> */}

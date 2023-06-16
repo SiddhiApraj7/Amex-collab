@@ -1,0 +1,1 @@
+style={[styles.providerContainer, selectedProviderIndex === index && styles.selectedProviderContainer]}

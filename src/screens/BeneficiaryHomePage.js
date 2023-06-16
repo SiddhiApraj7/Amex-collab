@@ -92,7 +92,7 @@ const BeneficiaryHomePage = () => {
         </View>
 
           <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
-          <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View>
+          <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e₹</Text></View>
 
           <View className="flex-row gap-6 ml-1">
             <TouchableOpacity onPress={() => {
@@ -120,15 +120,10 @@ const BeneficiaryHomePage = () => {
 
           </View>
 
-          <View className="flex-row">
-            <Image source={require("../../assets/amex.jpeg")} className="w-20 h-20 p-5 ml-6 mt-5"></Image>
-            <View className="my-auto ml-4">
-              <Ionicons name="add-circle-outline" size={26} ></Ionicons>
-            </View>
-          </View>
+         
 
           <View>
-            <Text className="font-light text-center mt-5">GOVERNMENT SCHEMES</Text>
+            <Text className="font-light text-center mt-10">GOVERNMENT SCHEMES</Text>
           </View>
 
           <ScrollView horizontal={true} className="mt-5">

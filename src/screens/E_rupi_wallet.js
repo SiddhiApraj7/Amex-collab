@@ -94,19 +94,21 @@ const E_rupi_wallet = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
+        <View>
         <View className="flex-row gap-2 ml-7 w-96 justify-between">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+          <View className="flex-row gap-1">
+          <Ionicons name="person-circle" size={36}></Ionicons>
+            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
+          </View>
+            
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            </View>
-            <View className=" mr-10">
+            <View className=" mt-3 mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
-
+        </View>
 
 
           <View className="mt-5 mb-3">
