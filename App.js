@@ -52,8 +52,8 @@ export default function App() {
           <Stack.Screen name="home" component={HomePage}></Stack.Screen>
 
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
-      {/* <Stack.Screen name="otp" component={Phone}></Stack.Screen> */} 
-          <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> 
+      <Stack.Screen name="otp" component={Phone}></Stack.Screen>
+          {/* <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen>  */}
       <Stack.Screen name="login" component={Login}></Stack.Screen>
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
        <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
