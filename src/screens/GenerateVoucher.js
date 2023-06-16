@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, Button , ScrollView, TextInput, Alert} from 'react-native'
+import { View, Text, SafeAreaView, Image, Button , ScrollView, TextInput, Alert, ActivityIndicator} from 'react-native'
 import React from 'react'
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -21,8 +21,10 @@ const GenerateVoucher = () => {
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
   const [error,setError] = useState('');
- //const { phoneNumber, setPhoneNumber } = useContext(AppContext);
- const phoneNumber = "+9196";
+ const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+ const [isLoading, setIsLoading] = useState(true);
+ //const phoneNumber = "+9196";
+
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
  
   async function fetchUserInfo() {
@@ -43,6 +45,8 @@ const GenerateVoucher = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -50,7 +54,7 @@ const GenerateVoucher = () => {
     fetchUserInfo();
   }, []);
 
-  async function fetchSPInfo(phoneNumber) {
+  async function fetchSPInfo() {
     
     try {
       const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
@@ -78,7 +82,7 @@ const GenerateVoucher = () => {
   
   useEffect(() => {
     if (serviceProviderChoice) {
-      fetchSPInfo(serviceProviderChoice);
+      fetchSPInfo();
     }
   }, [serviceProviderChoice]); 
 
@@ -88,6 +92,7 @@ const GenerateVoucher = () => {
     console.log(data.amount);
     console.log(data.phoneNumberB);
     console.log(serviceProviderChoice);
+    setIsLoading(true);
     
 
      try {
@@ -109,6 +114,8 @@ const GenerateVoucher = () => {
   
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,18 +129,34 @@ const GenerateVoucher = () => {
     className="h-36 w-52 "
     
     source = {require('../../assets/e-rupi.png')}></Image>
-   <View className="flex-row gap-2 ml-7 w-96 justify-between">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+
+
+   {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
+          
+        <View>
+        <View className="flex-row gap-2 ml-7 w-96 justify-between">
+          <View className="flex-row gap-1">
+          <Ionicons name="person-circle" size={36}></Ionicons>
+            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
+          </View>
+            
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            </View>
-            <View className=" mr-10">
+            <View className=" mt-3 mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
+        </View>
+
+        )}
+
+
     <View className="mt-5">
     <Text className="font-bold text-lg p-1 mb-2">Generate Voucher</Text>
     </View>
@@ -202,6 +225,11 @@ const GenerateVoucher = () => {
 
         <View className="mx-28 py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Make Request" onPress={handleSubmit(createVoucher)}/></View>
 
+        {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )} 
         
     </View>
     

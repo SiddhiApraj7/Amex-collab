@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Button, TextInput } from 'react-native';
+import { View, Text, SafeAreaView, Button, TextInput, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
@@ -10,11 +10,13 @@ const Phone_test = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   // const[isalreadyUser,setIsalreadyUser]=useState(false);
 
 
   async function createUser(phoneNumber) {
     try {
+      setIsLoading(true);
       // Make API call to check user role
       const response = await axios.post('http://192.168.29.208:3000/check-phone', {
         phoneNumber: phoneNumber,
@@ -50,7 +52,10 @@ const Phone_test = () => {
 
     } catch (error) {
       console.log('Error fetching user info:', error);
+    } finally {
+      setIsLoading(false);
     }
+  
 
 
   }
@@ -75,6 +80,10 @@ const Phone_test = () => {
             createUser(phoneNumber);
           }}
         ></Button>
+
+      <View className="items-center mt-12">
+      {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
+      </View>
       </View>
     </SafeAreaView>
   );

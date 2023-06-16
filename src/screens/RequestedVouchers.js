@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -17,6 +17,7 @@ const RequestedVouchers = () => {
   // const [vouchers, setVouchers] = useState([]);
   const [voucherObjectList, setVoucherObjectList] = useState([]);
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getRequestedVouchers(phoneNumber);
@@ -53,6 +54,8 @@ const RequestedVouchers = () => {
       console.error(error);
       console.log(error);
       // Handle error and navigation logic
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -74,6 +77,8 @@ const RequestedVouchers = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -90,24 +95,37 @@ const RequestedVouchers = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
+      {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
         <View className="flex-row gap-2 ml-7 w-96 justify-between">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+          <View className="flex-row gap-1">
+          <Ionicons name="person-circle" size={36}></Ionicons>
+            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
+          </View>
+            
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            </View>
-            <View className=" mr-10">
+            <View className=" mt-3 mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
 
-
+        )}
 
           <View className="mt-5 mb-3">
             <Text className="text-gray-500 font-light">REQUESTED VOUCHERS</Text>
           </View>
+
+          {isLoading ? (
+            <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          ) : (
           <ScrollView className="h-[57%]">
 
             {voucherObjectList.map((voucher) => (
@@ -123,8 +141,7 @@ const RequestedVouchers = () => {
             ))}
 
           </ScrollView>
-
-
+          )}
 
 
         </View>

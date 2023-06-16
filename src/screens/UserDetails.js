@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   ScrollView,
+  ActivityIndicator
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,9 +22,14 @@ const UserDetails = () => {
   const navigation = useNavigation();
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const {control, handleSubmit} = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+
+
   const updateUser = async (data) => {
     console.log(data);
     console.log(phoneNumber);
+    setIsLoading(true);
+
      try {
       const response = await axios.patch("http://192.168.29.208:3000/create-user", {
         phoneNumber: phoneNumber,
@@ -36,6 +42,8 @@ const UserDetails = () => {
       navigation.navigate('bankDetails');
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,7 +137,15 @@ const UserDetails = () => {
               title="Next"
             ></Button>
           </View>
+
+          {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+
         </View>
+
       </View>
     </SafeAreaView>
   );
