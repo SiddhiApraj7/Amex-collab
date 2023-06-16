@@ -55,14 +55,14 @@ const Profile = () => {
   useEffect(() => {
     fetchUserInfo();
   
-    if (is_PvtOrg === true) {
+    if (is_PvtOrg) {
       fetchPvtOrgInfo();
     }
   
-    if (is_serviceProvider === true) {
+    if (is_serviceProvider) {
       fetchSPInfo();
     }
-  }, []);
+  }, [is_PvtOrg, is_Beneficiary, is_serviceProvider]);
   
 
   async function fetchSPInfo() {
@@ -153,9 +153,9 @@ const Profile = () => {
     <Text className="text-right text-gray-700 font-semibold text-lg">Private Organisation</Text>
     
     <View className="flex-row justify-evenly" >
-    <Text className="text-right font-medium text-xs text-stone-600"> {CompanyName}</Text>
+    <Text className="text-right font-medium text-sm text-stone-600"> {CompanyName}</Text>
     <Text>|</Text>
-    <Text className="text-right font-md text-xs text-stone-600"> {positionInCompany}</Text>
+    <Text className="text-right font-md text-sm text-stone-600"> {positionInCompany}</Text>
     </View>
    
     
@@ -176,10 +176,10 @@ const Profile = () => {
                 </View>
                 
             </View>
-    <View className="mr-5 my-auto">
+    <View className=" mr-5 my-auto">
     
         <Text className="text-right text-gray-700 font-semibold text-xl">Service Provider</Text>
-        <View className="flex-row justify-evenly" >
+        <View className="flex-row justify-between" >
         <Text className="text-right font-medium text-sm text-stone-600">{BusinessName}</Text>
         <Text>|</Text>
         <Text className="text-right font-medium text-sm text-stone-600">{PositionInBusiness}</Text>
@@ -209,14 +209,15 @@ const Profile = () => {
                 <View className="mr-5 my-auto">
                 <View className="" >
                     <Text className="text-right text-gray-700 font-semibold text-xl">Bank Details</Text>
-                    <View className="flex-row">
-                    <Text className="text-right font-medium text-sm text-stone-600"> {bankName}  | </Text>
+                    <View className="flex-row justify-between">
+                    <Text className="text-right font-medium text-sm text-stone-600"> {bankName}</Text>
+                    <Text>|</Text>
                     <Text className="text-right font-medium text-sm text-stone-600"> {bankAccountHolderName}</Text>
                     </View>
                     
                     </View>
                     
-                    <Text className="text-right font-md text-sm text-stone-600">{accountNumber}</Text>
+                    <Text className="text-right font-md text-sm text-stone-600">Account Number : {accountNumber}</Text>
                    
                     
                    

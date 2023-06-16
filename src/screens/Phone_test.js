@@ -16,7 +16,7 @@ const Phone_test = () => {
   async function createUser(phoneNumber) {
     try {
       // Make API call to check user role
-      const response = await axios.post('http://192.168.1.45:3000/check-phone', {
+      const response = await axios.post('http://192.168.29.208:3000/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response.data);
@@ -33,7 +33,7 @@ const Phone_test = () => {
       }
       else{
         try {
-          const response = await axios.post('http://192.168.1.45:3000/create-user', {
+          const response = await axios.post('http://192.168.29.208:3000/create-user', {
             phoneNumber: phoneNumber,
           });
     

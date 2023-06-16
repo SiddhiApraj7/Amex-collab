@@ -43,7 +43,7 @@ const ServiceProviderHomePage = () => {
   async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
@@ -173,7 +173,7 @@ const ServiceProviderHomePage = () => {
           </View>
         
       </View> */}
-      <Footer />
+      <Footer disableDashboardButton={true}/>
     </SafeAreaView>
   )
           }
