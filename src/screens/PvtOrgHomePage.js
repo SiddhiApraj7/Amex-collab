@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import axios from 'axios';
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 const PvtOrgHomePage = () => {
   const navigation = useNavigation();
@@ -21,6 +21,7 @@ const PvtOrgHomePage = () => {
   const [positionInCompany, setPositionInCompany] = useState('');
   const [voucherList, setVoucherList] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -73,6 +74,7 @@ const PvtOrgHomePage = () => {
 
   async function fetchPvtOrgInfo() {
     //const phoneNumber = "+9196";
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
@@ -86,6 +88,8 @@ const PvtOrgHomePage = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -118,6 +122,12 @@ const PvtOrgHomePage = () => {
         
         source = {require('../../assets/e-rupi.png')}></Image>
 
+    {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
           <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg">
@@ -131,6 +141,9 @@ const PvtOrgHomePage = () => {
             <Text className="font-light text-center">BALANCE:1000e$</Text>
             </View>
         </View>
+        </View>
+
+        )}
 
         <View className="items-center">
 
@@ -170,7 +183,7 @@ const PvtOrgHomePage = () => {
 
        </View>
         
-    </View>
+    
 
 
     <View className=" mb-3 border-b-2 border-gray-300 p-1">
@@ -205,7 +218,7 @@ const PvtOrgHomePage = () => {
     
 </View>
 
- <View className=" border-t-2 border-gray-300 p-1 rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+ {/* <View className=" bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
       <View className="flex-row gap-10 justify-evenly" >
       <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
       <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -213,7 +226,9 @@ const PvtOrgHomePage = () => {
       <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
       </View>
     
-  </View> 
+  </View>  */}
+
+  <Footer disableDashboardButton={true}/>
 </SafeAreaView>
     )
 }

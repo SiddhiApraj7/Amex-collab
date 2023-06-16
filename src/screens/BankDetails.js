@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, SafeAreaView, Button } from 'react-native'
+import { View, Text, TextInput, Image, SafeAreaView, Button, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,13 +7,15 @@ import { useForm, Controller } from "react-hook-form";
 import { useState, useRef } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import { AppContext } from '../../AppContext';
-
 import axios from 'axios';
 import { useContext } from "react";
+
+
 const BankDetails = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const banks = [
     { label: 'Axis Bank', value: '1' },
@@ -29,11 +31,15 @@ const BankDetails = () => {
     { label: 'Union Bank of India', value: '11' },
   ];
   const [value, setValue] = useState(null);
+
+
   const updateUser = async (data) => {
     
     console.log(phoneNumber);
     console.log(value);
     console.log(data);
+    setIsLoading(true);
+
      try {
       
       const response = await axios.patch("http://192.168.29.164:3000/create-user", {
@@ -47,6 +53,8 @@ const BankDetails = () => {
       navigation.navigate('pinRegister');
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -108,6 +116,13 @@ const BankDetails = () => {
           <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl">
             <Button color="#82E0AA" onPress={handleSubmit(updateUser)} title="Next"></Button>
           </View>
+
+          {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+
         </View>
 
       </View>

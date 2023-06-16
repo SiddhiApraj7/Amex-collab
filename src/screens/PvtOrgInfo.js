@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   ScrollView,
+  ActivityIndicator
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -23,6 +24,7 @@ const PvtOrgInfo = () => {
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
   //[CompanyName, setCompanyName] = useState("");
   //[positionInCompany, setPositionInCompany] = useState("");
 
@@ -30,6 +32,7 @@ const PvtOrgInfo = () => {
   const updatePvtOrg = async (data) => {
     console.log(data);
     // create User schema using post method using axios and async , await
+    setIsLoading(true);
      try {
       const response = await axios.post("http://192.168.29.164:3000/create-pvtOrg", {
         phoneNumber: phoneNumber,  
@@ -45,6 +48,8 @@ const PvtOrgInfo = () => {
       }
     } catch (error) {
       console.log('Error creating pvtOrg account:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,6 +122,13 @@ const PvtOrgInfo = () => {
               title="Next"
             ></Button>
           </View>
+
+          {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+
         </View>
       </View>
     </SafeAreaView>

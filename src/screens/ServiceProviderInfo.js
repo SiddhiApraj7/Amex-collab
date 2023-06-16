@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -27,6 +28,7 @@ const ServiceProviderInfo = () => {
   //[BusinessTag, setBusinessTag] = useState('');
   const [value, setValue] = useState(null);
   const { control, handleSubmit } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const businessTagData = [
     { label: 'HOSPITALITY', value: '1' },
@@ -41,6 +43,7 @@ const ServiceProviderInfo = () => {
   const updateServiceProvider = async (data) => {
     console.log(data);
     // create User schema using post method using axios and async , await
+    setIsLoading(true);
      try {
       const response = await axios.post("http://192.168.29.164:3000/create-serviceProvider", {
         phoneNumber: phoneNumber,  
@@ -57,6 +60,8 @@ const ServiceProviderInfo = () => {
       }
     } catch (error) {
       console.log('Error creating ServiceProvider:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -147,6 +152,13 @@ const ServiceProviderInfo = () => {
               title="Next"
             ></Button>
           </View>
+
+          {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+
         </View>
       </View>
     </SafeAreaView>

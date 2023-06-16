@@ -1,4 +1,4 @@
-import { Image, View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
+import { Image, View, Text, Button, SafeAreaView, StyleSheet, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPreloadManager } from "@react-navigation/native"
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -19,6 +19,7 @@ const QRScanner = () => {
 
   const [CompanyName, setCompanyName] = useState('');
   const [amount, setAmount] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -58,6 +59,7 @@ const QRScanner = () => {
   }
   const updateVoucher = async (id) => {
   
+    setIsLoading(true);
      try {
       
       const response = await axios.patch("http://192.168.29.164:3000/create-voucher", {
@@ -72,10 +74,13 @@ const QRScanner = () => {
       }, 2000); 
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
-  async function fetchVoucherInfo(data) {
 
+  async function fetchVoucherInfo(data) {
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.29.164:3000/get-voucher-info/${data}`);
       console.log(response.data);
@@ -88,6 +93,8 @@ const QRScanner = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -128,10 +135,10 @@ const QRScanner = () => {
             style={{ height: 400, width: 450 }} />
         </View>
 
-
-
-
-        {scanned &&
+        {isLoading ? (
+          // Render loader when loading is true
+          <ActivityIndicator size="large" color="#0000ff" className="mt-7" />
+        ) : scanned ? (
           <View className="flex-col space-y-5">
             <View className="flex-col bg-blue-200 h-26 p-2 mt-2 space-y-3 rounded-lg">
               <Text className=" font-light text-sm"> Beneficiary Name : {BfirstName} {BlastName}</Text>
@@ -147,7 +154,8 @@ const QRScanner = () => {
               </View>
 
             </View>
-          </View>}
+          </View>
+        ) : null}
 
       </View>
     </SafeAreaView>

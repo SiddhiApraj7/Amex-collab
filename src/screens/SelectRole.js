@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TextInput, Button } from 'react-native'
+import { View, Text, SafeAreaView, Image, TextInput, Button, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
@@ -15,6 +15,8 @@ const SelectRole = () => {
   const [is_Beneficiary, setIsBeneficiary] = useState(false);
   const [is_ServiceProvider, setIsServiceProvider] = useState(false);
   const [is_PvtOrg, setIsPvtOrg] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchUserRole = async () => {
     try {
       // Make API call to check user role
@@ -33,6 +35,8 @@ const SelectRole = () => {
 
     } catch (error) {
       console.log('Error fetching user role:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +79,7 @@ const SelectRole = () => {
 
 
  const onBeneficiaryPress = async () => {
+  setIsLoading(true);
     if (is_Beneficiary) {
       navigation.navigate('beneficiaryHomePage');
     } else {
@@ -84,6 +89,7 @@ const SelectRole = () => {
   };
 
 const onServiceProviderPress = async () => {
+  setIsLoading(true);
     if (is_ServiceProvider) {
       navigation.navigate('serviceProviderHomePage');
     } else {
@@ -92,6 +98,7 @@ const onServiceProviderPress = async () => {
   };
 
  const onPvtOrgPress = async () => {
+  setIsLoading(true);
     if (is_PvtOrg) {
       navigation.navigate('pvtOrgHomePage');
     } else {
@@ -144,6 +151,11 @@ const onServiceProviderPress = async () => {
               />
             </View>
 
+            {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
 
           </View>
 

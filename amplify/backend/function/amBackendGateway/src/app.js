@@ -584,7 +584,14 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
       select: {
             firstName: true,
             lastName: true,
-            bankName: true
+            bankName: true,
+            isBeneficiary: true,
+            isServiceProvider : true,
+            isPvtOrg : true,
+            bankAccountHolderName : true,
+            accountNumber : true
+
+
           }
     });
 

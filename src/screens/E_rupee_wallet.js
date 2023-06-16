@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, Button , ScrollView, TouchableOpacity} from 'react-native'
+import { View, Text, SafeAreaView, Image, Button , ScrollView, TouchableOpacity, ActivityIndicator} from 'react-native'
 import React from 'react'
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 const E_rupee_wallet = () => {
 
@@ -16,9 +16,11 @@ const E_rupee_wallet = () => {
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function fetchUserInfo() {
     //const phoneNumber = "+91321";
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
@@ -35,6 +37,8 @@ const E_rupee_wallet = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -53,6 +57,12 @@ const E_rupee_wallet = () => {
              className="h-36 w-52 mt-4"
              source = {require('../../assets/e-rupi.png')}></Image>
 
+       {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
           <View >
           <View className="flex-row gap-2 ml-7 w-96 justify-between">
           <View className="flex-row gap-1">
@@ -68,10 +78,13 @@ const E_rupee_wallet = () => {
             </View>
         </View>
 
+        
+
              <View><Text className="font-light text-center mt-2 text-sm">BALANCE:</Text></View>
             <View><Text className="font-bold text-lg text-center mt-1 mb-5">1000 e$</Text></View> 
 
           </View>
+        )}
 
           <View className="flex-row gap-4 items-center">
               <View className="font-light bg-blue-200 rounded-lg w-24 h-15 pl-6 py-4 mr-5 align-center">
@@ -112,7 +125,7 @@ const E_rupee_wallet = () => {
 
 
 
-      <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
+      {/* <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
           <View className="flex-row gap-10 justify-evenly" >
             <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
             <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -121,7 +134,8 @@ const E_rupee_wallet = () => {
           </View>
        
         
-      </View>
+      </View> */}
+      <Footer />
       </View>
   
 

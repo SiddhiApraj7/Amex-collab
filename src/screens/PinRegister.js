@@ -1,4 +1,4 @@
-import { View, Text , TextInput, Image, SafeAreaView, Button} from 'react-native'
+import { View, Text , TextInput, Image, SafeAreaView, Button, ActivityIndicator} from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import NumberInput from '../components/NumberInput';
@@ -17,8 +17,10 @@ const PinRegister = () => {
   //const [verificationError, setVerificationError] = useState('');
   const [error, setError] = useState('');
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function updateUser(phoneNumber, pin) {
+    setIsLoading(true);
     
     try {
       console.log(pin);
@@ -35,6 +37,8 @@ const PinRegister = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   } 
 
@@ -104,7 +108,11 @@ const PinRegister = () => {
 
             <View className="mx-28 p-4 mt-9 mb-10 rounded-2xl"><Button onPress={handleSubmit(onPinPress)} className="text-black text-center" color = "#82E0AA" title="Submit"></Button></View>
 
-
+            {isLoading && (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
             
             </View>
             

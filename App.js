@@ -31,8 +31,12 @@ import RequestedVouchers from './src/screens/RequestedVouchers';
 import { AppProvider } from './AppContext';
 import Phone_test from './src/screens/Phone_test';
 import VoucherQR from './src/screens/VoucherQR';
+<<<<<<< HEAD
 import VoucherGenerated from './src/screens/VoucherGenerated';
 
+=======
+import Profile from './src/screens/Profile';
+>>>>>>> 265307b2420be560013a8a4bd1013442cb2583fe
 
 Amplify.configure(awsExports);
 
@@ -53,8 +57,8 @@ export default function App() {
           <Stack.Screen name="home" component={HomePage}></Stack.Screen>
 
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
-      {/* <Stack.Screen name="otp" component={Phone}></Stack.Screen> */} 
-          <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> 
+      <Stack.Screen name="otp" component={Phone}></Stack.Screen>
+          {/* <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen>  */}
       <Stack.Screen name="login" component={Login}></Stack.Screen>
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
        <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
@@ -74,7 +78,11 @@ export default function App() {
           <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
           <Stack.Screen name="qrScanner" component={QRScanner}></Stack.Screen>
           <Stack.Screen name="voucherQR" component={VoucherQR}></Stack.Screen>
+<<<<<<< HEAD
           <Stack.Screen name="voucherGenerated" component={VoucherGenerated}></Stack.Screen>
+=======
+          <Stack.Screen name="profile" component={Profile}></Stack.Screen>
+>>>>>>> 265307b2420be560013a8a4bd1013442cb2583fe
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

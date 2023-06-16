@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button,ScrollView , StyleSheet,TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button,ScrollView , StyleSheet,TouchableOpacity, ActivityIndicator} from 'react-native';
 import React from 'react';
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation ,useFocusEffect } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState} from "react";
 import axios from 'axios';
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 
 const ServiceProviderHomePage = () => {
   const navigation = useNavigation();
@@ -20,6 +20,7 @@ const ServiceProviderHomePage = () => {
   const [BusinessName, setBusinessName] = useState('');
   const [PositionInBusiness, setPositionInBusiness] = useState('');
   const [BusinessTag, setBusinessTag] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -41,6 +42,7 @@ const ServiceProviderHomePage = () => {
   }, []);
 
   async function fetchSPInfo() {
+    setIsLoading(true);
     
     try {
       const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
@@ -56,6 +58,8 @@ const ServiceProviderHomePage = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   } 
 
@@ -79,7 +83,14 @@ const ServiceProviderHomePage = () => {
             className="h-36 w-52 mt-4"
             
             source = {require('../../assets/e-rupi.png')}></Image>
-    
+
+      {isLoading ? (
+        <View className=" justify-center items-center z-40">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+          
+          
         <View >
             <View className="flex-row gap-2 ml-5 w-96 justify-between">
               <View className="flex-row gap-2">
@@ -95,7 +106,13 @@ const ServiceProviderHomePage = () => {
                 </View>
             </View>
 
+            
+
             <View className="flex-row ml-10"><Text className="font-light text-sm text-center mt-3">BALANCE: </Text><Text className="font-bold text-lg  text-center mt-1.5">1000 e$</Text></View>
+
+            </View>
+            )}
+
             <View className="items-center">
 
 
@@ -133,7 +150,6 @@ const ServiceProviderHomePage = () => {
 
            </View>
             
-        </View>
 
 
         <View>
@@ -164,7 +180,7 @@ const ServiceProviderHomePage = () => {
         
     </View>
 
-    <View className="bg-white rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+    {/* <View className="bg-white rounded-lg pt-1 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
           <View className="flex-row gap-10 justify-evenly" >
           <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
           <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
@@ -172,7 +188,8 @@ const ServiceProviderHomePage = () => {
           <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
           </View>
         
-      </View>
+      </View> */}
+      <Footer disableDashboardButton={true}/>
     </SafeAreaView>
   )
           }
