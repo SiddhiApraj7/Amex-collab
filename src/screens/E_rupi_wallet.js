@@ -30,7 +30,7 @@ const E_rupi_wallet = () => {
   async function getAllVouchers(phoneNumber) {
     //phoneNumber = "+9101";
     try {
-      const response = await axios.post('http://192.168.29.164:3000/available-vouchers',{
+      const response = await axios.post('http://192.168.29.208:3000/available-vouchers',{
         phoneNumber: phoneNumber
       });
       // console.log(response.data);
@@ -63,7 +63,7 @@ const E_rupi_wallet = () => {
     try {
       //phoneNumber= "+9101"
       
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -94,19 +94,21 @@ const E_rupi_wallet = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
-          <View className="flex-row gap-2 ml-5 w-96 justify-between">
-            <View className="flex-row gap-2">
-              <Ionicons name="person-circle" size={36}></Ionicons>
-              <View className="pb-2">
-                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-                {/* <Text className="font-light text-sm mr-7">Infosys - HR Head</Text> */}
-              </View>
-            </View>
-            <View className="pt-1 mr-5">
-              <Text className="font-medium text-lg">{bankName}</Text>
-            </View>
+        <View>
+        <View className="flex-row gap-2 ml-7 w-96 justify-between">
+          <View className="flex-row gap-1">
+          <Ionicons name="person-circle" size={36}></Ionicons>
+            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
           </View>
-
+            
+            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
+            <View className=" mt-3 mr-10">
+            <Text className="font-medium text-lg">{bankName}</Text>
+            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
+            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
+            </View>
+        </View>
+        </View>
 
 
           <View className="mt-5 mb-3">
@@ -149,14 +151,15 @@ const E_rupi_wallet = () => {
 
 
         </View>
-        <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
-          <View className="flex-row gap-10 justify-evenly" >
-            <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
-            <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
-            <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
-            <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
-          </View>
-        </View>
+        <View className=" bg-white rounded-lg pt-2 h-14" style={{position: 'absolute', left:0, right:0, bottom:0, flex:1}}>
+      <View className="flex-row gap-10 justify-evenly" >
+      <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
+      <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
+      <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
+      <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
+      </View>
+    
+  </View> 
       </View>
 
 

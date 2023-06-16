@@ -31,7 +31,7 @@ const PvtOrgInfo = () => {
     console.log(data);
     // create User schema using post method using axios and async , await
      try {
-      const response = await axios.post("http://192.168.29.164:3000/create-pvtOrg", {
+      const response = await axios.post("http://192.168.29.208:3000/create-pvtOrg", {
         phoneNumber: phoneNumber,  
         CompanyName: data.CompanyName,
         positionInCompany: data.positionInCompany,
@@ -39,7 +39,7 @@ const PvtOrgInfo = () => {
       if (response.status === 200) {
         console.log('pvtOrg account created successfully');
         console.log(response.data);
-        navigation.navigate('pvtOrgrHomePage');
+        navigation.navigate('pvtOrgHomePage');
       } else {
         console.log('Failed to create private org');
       }

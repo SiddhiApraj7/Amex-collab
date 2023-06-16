@@ -60,7 +60,7 @@ const QRScanner = () => {
   
      try {
       
-      const response = await axios.patch("http://192.168.29.164:3000/create-voucher", {
+      const response = await axios.patch("http://192.168.29.208:3000/create-voucher", {
         voucherId : id
         
       });
@@ -77,7 +77,7 @@ const QRScanner = () => {
   async function fetchVoucherInfo(data) {
 
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-voucher-info/${data}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-voucher-info/${data}`);
       console.log(response.data);
       const voucher = response.data;
 

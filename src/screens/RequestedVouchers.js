@@ -29,7 +29,7 @@ const RequestedVouchers = () => {
 
   async function getAllVouchers(phoneNumber) {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-requested',
+      const response = await axios.post('http://192.168.29.208:3000/vouchers-requested',
       {phoneNumber});
       // console.log(response.data);
       const vouchersList = response.data.vouchers;
@@ -59,7 +59,7 @@ const RequestedVouchers = () => {
   async function getRequestedVouchers(phoneNumber) {
     try {
       //const phoneNumber = "+9106";
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -90,18 +90,18 @@ const RequestedVouchers = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
-          <View className="flex-row gap-2 ml-5 w-96 justify-between">
-            <View className="flex-row gap-2">
-              <Ionicons name="person-circle" size={36}></Ionicons>
-              <View className="pb-2">
-                <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-                {/* <Text className="font-light text-sm mr-7">Infosys - HR Head</Text> */}
-              </View>
+        <View className="flex-row gap-2 ml-7 w-96 justify-between">
+            <Ionicons name="person-circle" size={36}></Ionicons>
+            <View className="pb-2">
+            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             </View>
-            <View className="pt-1 mr-5">
-              <Text className="font-medium text-lg">{bankName}</Text>
+            <View className=" mr-10">
+            <Text className="font-medium text-lg">{bankName}</Text>
+            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
+            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
-          </View>
+        </View>
 
 
 
