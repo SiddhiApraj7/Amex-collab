@@ -9,7 +9,7 @@ The Digital Wallet App is a secure and user-friendly application that allows use
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Contributers](#contributers)
 
 ## Overview
 
@@ -17,7 +17,7 @@ The Digital Wallet App is built using React Native for the frontend and Node.js 
 
 ## Features
 
-- User Authentication: Users can authenticate themselves using OTP, biometric authentication, or a wallet PIN for secure access to the app.
+- User Authentication: Users can authenticate themselves using OTP, biometric authentication, recaptcha and a wallet PIN for secure access to the app during Registration.
 - E-RUPI Integration: The app integrates with the e-RUPI payment gateway, enabling users to transact seamlessly with other payment systems.
 - Encryption: All sensitive information, including personal data and transaction details, is encrypted to ensure privacy and security.
 - Access Control: The app implements robust access control mechanisms, enabling different user roles such as beneficiaries, service providers, and private organizations, with the ability to have multiple roles simultaneously.
@@ -25,7 +25,7 @@ The Digital Wallet App is built using React Native for the frontend and Node.js 
 - Dynamic Mode: Users can switch between different modes of app usage, such as consumer, private business, or service provider, based on their specific needs.
 - In-App Alerts: The app provides timely updates and alerts for voucher usage, voucher requests, and payment receipts.
 - Database Integration: Private organizations can create databases of affected beneficiaries, and service providers can maintain a list of services offered.
-- Communication with NPCI and Banks: The app facilitates communication with NPCI (National Payments Corporation of India) and banks for authentication, voucher verification, and payment processing.
+- QR Scanner and Generator: App provides facility to create a QR with necessary information about Voucher as well as facility to scan voucher to redeem it.
 
 ## System Requirements
 
