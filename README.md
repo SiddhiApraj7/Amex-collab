@@ -9,9 +9,7 @@ The Digital Wallet App is a secure and user-friendly application that allows use
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [API Documentation](#api-documentation)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
