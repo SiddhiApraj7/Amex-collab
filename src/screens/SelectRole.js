@@ -43,7 +43,7 @@ const SelectRole = () => {
   useEffect(() => {
     // Fetch user data and check role status
     fetchUserRole();
-  }, []);
+  }, [phoneNumber]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -88,6 +88,7 @@ const SelectRole = () => {
      await createBeneficiary();
       navigation.navigate('beneficiaryHomePage');
     } 
+    setIsLoading(false);
   };
 
 const onServiceProviderPress = async () => {
@@ -97,6 +98,7 @@ const onServiceProviderPress = async () => {
     } else {
       navigation.navigate('serviceProviderInfo');
     }
+    setIsLoading(false);
   };
 
  const onPvtOrgPress = async () => {
@@ -106,6 +108,7 @@ const onServiceProviderPress = async () => {
     } else {
       navigation.navigate('pvtOrgInfo');
     }
+    setIsLoading(false);
   };
 
 
