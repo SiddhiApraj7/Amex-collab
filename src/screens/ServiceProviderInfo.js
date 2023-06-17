@@ -45,7 +45,7 @@ const ServiceProviderInfo = () => {
     // create User schema using post method using axios and async , await
     setIsLoading(true);
      try {
-      const response = await axios.post("http://192.168.1.45:3000/create-serviceProvider", {
+      const response = await axios.post("http://192.168.29.164:3000/create-serviceProvider", {
         phoneNumber: phoneNumber,  
         BusinessName: data.BusinessName,
         PositionInBusiness: data.PositionInBusiness,
