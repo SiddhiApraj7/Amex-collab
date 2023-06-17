@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image, Button, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -18,6 +18,8 @@ const E_rupi_wallet = () => {
   const [availablevoucherList, setAvaialbelVoucherList] = useState([]);
   const [redeemedvoucherList, setRedeemedVoucherList] = useState([])
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(true);
+
 
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const E_rupi_wallet = () => {
   async function getAllVouchers(phoneNumber) {
     //phoneNumber = "+9101";
     try {
-      const response = await axios.post('http://192.168.29.164:3000/available-vouchers', {
+      const response = await axios.post('http://192.168.1.45:3000/available-vouchers', {
         phoneNumber: phoneNumber
       });
       // console.log(response.data);
@@ -81,6 +83,8 @@ const E_rupi_wallet = () => {
       console.error(error);
       console.log(error);
       // Handle error and navigation logic
+    } finally {
+      setIsLoading(false);
     }
   }
   // const phoneNumber = "+9101";
@@ -103,13 +107,20 @@ const E_rupi_wallet = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
-    }
+    } 
   }
 
 
   return (
 
     <SafeAreaView className="bg-white h-full">
+
+      {isLoading ? (
+        <View className=" justify-center items-center mt-72">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
       <View className="flex-col h-full justify-between">
         <View className="items-center  bg-white">
 
@@ -118,6 +129,8 @@ const E_rupi_wallet = () => {
             className="h-36 w-96 mt-5"
 
             source={require('../../assets/e-rupi.png')}></Image>
+
+      
 
           <View>
             <View className="flex-row gap-2 ml-7 w-96 justify-between">
@@ -135,6 +148,7 @@ const E_rupi_wallet = () => {
             </View>
           </View>
 
+          
 
           <View className="mt-1 mb-3">
             <Text className="text-gray-500 font-bold tracking-widest">ALL VOUCHERS</Text>
@@ -143,6 +157,8 @@ const E_rupi_wallet = () => {
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
               <Text className="text-gray-500  font-light">AVAILABLE VOUCHERS</Text>
             </View>
+
+
             {availablevoucherList.length === 0 || (availablevoucherList.length === 1 && Object.keys(availablevoucherList[0]).length === 0) ? (
               <Text className="text-gray-400  font-extralight p-3">No available vouchers</Text>
             ) : (
@@ -160,14 +176,13 @@ const E_rupi_wallet = () => {
             )}
 
 
-
-
-
-
             <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1">
               <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
             </View>
             {/* <ScrollView className="flex-row space-y-10 "> */}
+
+            
+
             {redeemedvoucherList.length === 0 || (redeemedvoucherList.length === 1 && Object.keys(redeemedvoucherList[0]).length === 0) ? (
               <Text className="text-gray-400  font-extralight p-3">No redeemed vouchers</Text>
             ) : (
@@ -185,6 +200,8 @@ const E_rupi_wallet = () => {
                 )
               )))
             }
+
+
           </ScrollView>
 
           {/* </ScrollView> */}
@@ -201,11 +218,10 @@ const E_rupi_wallet = () => {
       </View>
     
   </View>  */}
-
   <Footer />
       </View>
 
-
+      )}
 
 
 

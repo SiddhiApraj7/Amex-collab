@@ -40,7 +40,7 @@ const PvtOrgHomePage = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-created',
+      const response = await axios.post('http://192.168.1.45:3000/vouchers-created',
         { phoneNumber });
       // console.log("hdcuhasdcjkskdc",response.data);
       const vouchersList = response.data.vouchers;

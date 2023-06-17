@@ -15,7 +15,6 @@ const Phone = () => {
 
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
-  // const [ phoneNumber, setPhoneNumber ] = useState('');
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState('');
   const recaptchaVerifier = useRef(null);
