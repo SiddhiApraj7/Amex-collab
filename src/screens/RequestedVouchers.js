@@ -148,13 +148,14 @@ const RequestedVouchers = () => {
           </View>
         ) : (
           <ScrollView className="h-3/5 ">
-            <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
+            <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
             </View>
             {activevoucherList.length === 0 || (activevoucherList.length === 1 && Object.keys(activevoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400 mx-auto font-extralight p-3">No active vouchers</Text>
+              <Text className="text-gray-400 mx-auto font-extralight p-3 items-center">No active vouchers</Text>
             ) : (
               activevoucherList.map((voucher, i) => (
+                (voucher.voucherRedeemed == false && voucher.voucherId != null && voucher.voucherAmount != null) && (
                 <Voucher
                   pvtorg={voucher.PvtOrgBy}
                   sp={voucher.ServiceProviderUser}
@@ -163,17 +164,17 @@ const RequestedVouchers = () => {
                   key={i}
                   voucherId={voucher.voucherId}
                   voucherRedeemed={voucher.voucherRedeemed}
-                />
+                />)
               ))
             )}
-            <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500 mx-auto font-light">SCANNED VOUCHERS</Text>
+            <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1 items-center">
+              <Text className="text-gray-500 mx-auto font-light ">SCANNED VOUCHERS</Text>
             </View>
             {redeemedvoucherList.length === 0 || (redeemedvoucherList.length === 1 && Object.keys(redeemedvoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400 mx-auto font-extralight p-3">No scanned vouchers</Text>
+              <Text className="text-gray-400 mx-auto font-extralight p-3 items-center">No scanned vouchers</Text>
             ) : (
               redeemedvoucherList.map((voucher, i) => (
-                voucher.voucherId !== null && (
+                (voucher.voucherRedeemed == true && voucher.voucherId != null && voucher.voucherAmount != null) && (
                   <Voucher
                     pvtorg={voucher.PvtOrgBy}
                     sp={voucher.ServiceProviderUser}

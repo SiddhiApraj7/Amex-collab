@@ -22,7 +22,6 @@ const GenerateVoucher = () => {
  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
  const [isLoading, setIsLoading] = useState(true);
  const [isValidB, setisValidB] = useState(false);
- //const phoneNumber = "+9196";
 
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
  async function checkValidBeneficiary(phoneNumber) {
@@ -53,12 +52,6 @@ const GenerateVoucher = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
-      /* alert(error);
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); */ // Redirect to login screen after 3 seconds
     } finally {
       setIsLoading(false);
     }
@@ -76,23 +69,12 @@ const GenerateVoucher = () => {
       const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
-      // setFirstName(serviceProvider.Users.firstName);
-      // setLastName(serviceProvider.Users.lastName);
-      // setBankName(serviceProvider.Users.bankName);
-      // setBusinessName(serviceProvider.BusinessName);
-      // setPositionInBusiness(serviceProvider.PositionInBusiness);
       setBusinessTag(serviceProvider.BusinessTag);
       setBusinessName(serviceProvider.BusinessName);
       
     } catch (error) {
       console.error(error);
       console.log(error);
-      /* alert(error);
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); */ // Redirect to login screen after 3 seconds
     }
   } 
   
@@ -101,51 +83,6 @@ const GenerateVoucher = () => {
       fetchSPInfo(serviceProviderChoice);
     }
   }, [serviceProviderChoice]); 
-
-
-  // const createVoucher = async (data) => {
-  //   console.log(phoneNumber);
-  //   console.log(data.amount);
-  //   console.log(data.phoneNumberB);
-  //   console.log(serviceProviderChoice);
-  //   setIsLoading(true);
-    
-  //   await checkValidBeneficiary(data.phoneNumberB);
-
-  //   if(isValidB === true)
-  //   {
-  //     try {
-      
-  //     const response = await axios.post("http:/192.168.29.208:3000/create-voucher", {
-  //     voucherAmount : parseInt(data.amount), 
-  //     PhoneNumberSP : serviceProviderChoice, 
-  //     PhoneNumberB : data.phoneNumberB, 
-  //     PhoneNumberPvtOrg : phoneNumber, 
-  //     voucherRedeemed : false
-        
-  //     });
-  //     console.log(response.data);
-  //     Alert.alert("Voucher has been created!");
-  //     setTimeout(() => {
-  //       setError('');
-  //       navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
-  //     }, 2000); 
-  
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
-  //   else{
-  //     Alert.alert("Beneficiary doesn't exist");
-  //       setTimeout(() => {
-  //         setError('');
-  //         navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
-  //       }, 3000); 
-  //   }
-     
-  // };
 
   const createVoucher = async (data) => {
     console.log(phoneNumber);
@@ -207,17 +144,14 @@ const GenerateVoucher = () => {
 
           
         <View>
-        <View className="flex-row gap-2 ml-7 w-96 justify-between">
+        <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 border-b-2 border-neutral-200">
           <View className="flex-row gap-1">
           <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
+            <Text className="font-normal text-lg ">{firstName} {lastName}</Text>
           </View>
-            
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             <View className=" mt-3 mr-10">
-            <Text className="font-medium text-lg">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
+            <Text className="font-extralight text-lg">{bankName}</Text>
+
             </View>
         </View>
         </View>
@@ -225,16 +159,13 @@ const GenerateVoucher = () => {
         )}
 
 
-    <View className="mt-5">
+    <View className="mt-2">
     <Text className="font-bold text-lg p-1 mb-2">Generate Voucher</Text>
     </View>
 
     <View className="bg-blue-300 h-4/5 w-full rounded-lg">
         <View className="px-5 py-3 flex-col gap-1">
             <Text className="font-bold text-sm">Phone Number of Beneficiary</Text>
-            {/* <NumberInput className="bg-gray-100 w-full h-10 rounded-lg p-2" placeholder="Enter phone Number">
-              
-            </NumberInput> */}
             <Number_input_ud
               placeholder="ex. +917766"
               secureTextEntry={true}
