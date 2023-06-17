@@ -45,7 +45,7 @@ const BeneficiaryHomePage = () => {
     //const phoneNumber = "+9101";
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://192.168.29.208:3000/get-beneficiary-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
       setFirstName(beneficiary.firstName);

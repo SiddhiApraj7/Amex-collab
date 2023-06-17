@@ -21,7 +21,7 @@ const Login = () => {
   const VerifyUser = async(data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://192.168.29.208:3000/login', {
+      const response = await axios.post('http://192.168.1.45:3000/login', {
         phoneNumber: data.phoneNumber,
         walletPin : parseInt(data.pin),
       });
