@@ -130,7 +130,7 @@ const PvtOrgHomePage = () => {
 
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
-          <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg">
+          <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto">
             <Ionicons name="person-circle" size={36}></Ionicons>
             <View className="pb-2">
             <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>

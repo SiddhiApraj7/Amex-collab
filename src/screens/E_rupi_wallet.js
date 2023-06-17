@@ -155,7 +155,7 @@ const E_rupi_wallet = () => {
           </View>
           <ScrollView className="h-3/5 ">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500  font-light">AVAILABLE VOUCHERS</Text>
+              <Text className="text-gray-500 font-light">AVAILABLE VOUCHERS</Text>
             </View>
 
 
