@@ -46,7 +46,7 @@ const ServiceProviderHomePage = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);

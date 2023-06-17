@@ -31,7 +31,7 @@ const SelectServiceProvider_comp = () => {
 
   async function getAllServiceProviders() {
     try {
-      const response = await axios.get('http://192.168.29.164:3000/all-service-providers');
+      const response = await axios.get('http://192.168.29.208:3000/all-service-providers');
       console.log(response.data);
       const serviceProvidersList = response.data;
       setServiceProviders(serviceProvidersList);
@@ -52,10 +52,10 @@ const SelectServiceProvider_comp = () => {
         
             <View className="bg-blue-200 h-24 w-full rounded-md flex-row ">
               <View>
-              <Image className="h-14 w-20 mt-4 ml-3" source={require('../../assets/sp.png')} />
+              <Image className="h-14 w-20 mt-4 ml-2" source={require('../../assets/sp.png')} />
               </View>
             <View className="flex ">
-            <View className="flex-row mx-auto space-x-10">
+            <View className="flex-row mx-auto space-x-8">
                 <Text className="font-light text-md p-1 ml-6 mt-5">{provider.BusinessName}</Text>
                 <Text className="font-light text-md p-1 mt-5">{provider.Users.phoneNumber}</Text>
               </View>

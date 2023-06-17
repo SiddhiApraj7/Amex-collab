@@ -8,7 +8,7 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
-
+import Footer from '../components/Footer';
 const VoucherGenerated = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');
@@ -30,7 +30,7 @@ const VoucherGenerated = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.1.45:3000/vouchers-created',
+      const response = await axios.post('http://192.168.29.208:3000/vouchers-created',
       {phoneNumber});
       console.log(response.data);
       const vouchersList = response.data.vouchers;
@@ -78,7 +78,7 @@ const VoucherGenerated = () => {
 
   async function getRequestedVouchers() {
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -123,10 +123,10 @@ const VoucherGenerated = () => {
           </View>
           <ScrollView className="h-3/5 ">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500  font-light">ACTIVE VOUCHERS</Text>
+              <Text className="text-gray-500 text-center font-light">ACTIVE VOUCHERS</Text>
             </View>
             {activevoucherList.length === 0 || (activevoucherList.length === 1 && Object.keys(activevoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400  font-extralight p-3">No active vouchers</Text>
+              <Text className="text-gray-400 text-center font-extralight p-3">No active vouchers</Text>
             ) : (
               activevoucherList.map((voucher, i) => (
                 <Voucher
@@ -147,11 +147,11 @@ const VoucherGenerated = () => {
 
 
             <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
+              <Text className="text-gray-500 text-center font-light">REDEEMED VOUCHERS</Text>
             </View>
             {/* <ScrollView className="flex-row space-y-10 "> */}
             {redeemedvoucherList.length === 0 || (redeemedvoucherList.length === 1 && Object.keys(redeemedvoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400  font-extralight p-3">No redeemed vouchers</Text>
+              <Text className="text-gray-400 text-center font-extralight p-3">No redeemed vouchers</Text>
             ) : (
               redeemedvoucherList.map((voucher, i) => (
                 voucher.voucherId !== null && (
