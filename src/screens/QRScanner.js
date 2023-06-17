@@ -20,7 +20,7 @@ const QRScanner = () => {
   const [CompanyName, setCompanyName] = useState('');
   const [amount, setAmount] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isredeemed, setIsredeemed] = useState(false);
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -58,31 +58,44 @@ const QRScanner = () => {
       </View>)
   }
   const updateVoucher = async (id) => {
-  
+  if(isredeemed === false)
+  {
     setIsLoading(true);
-     try {
-      
-      const response = await axios.patch("http://192.168.29.164:3000/create-voucher", {
-        voucherId : id
-        
-      });
-      console.log(response.data);
-      Alert.alert("Voucher has been redeemed!");
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('serviceProviderHomePage'); // Replace 'Login' with the name of your login screen
-      }, 2000); 
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    try {
+     
+     const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-voucher", {
+       voucherId : id
+       
+     });
+     console.log(response.data);
+     Alert.alert("Voucher has been redeemed!");
+     setTimeout(() => {
+       setError('');
+       navigation.navigate('serviceProviderHomePage'); // Replace 'Login' with the name of your login screen
+     }, 2000); 
+   } catch (error) {
+     console.log(error);
+   } finally {
+     setIsLoading(false);
+   }
+  }
+  else
+  {
+    
+    Alert.alert("Voucher has already been redeemed 😔");
+     setTimeout(() => {
+       setError('');
+       navigation.navigate('serviceProviderHomePage'); // Replace 'Login' with the name of your login screen
+     }, 2000); 
+    
+  }
+    
   };
 
   async function fetchVoucherInfo(data) {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-voucher-info/${data}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-voucher-info/${data}`);
       console.log(response.data);
       const voucher = response.data;
 
@@ -90,6 +103,7 @@ const QRScanner = () => {
       setAmount(voucher.voucherAmount);
       setBFirstName(voucher.BeneficiaryUser.Users.firstName);
       setBLastName(voucher.BeneficiaryUser.Users.lastName);
+      setIsredeemed(voucher.voucherRedeemed);
     } catch (error) {
       console.error(error);
       console.log(error);

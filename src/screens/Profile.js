@@ -32,7 +32,7 @@ const Profile = () => {
     //const phoneNumber = "+91321";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -73,7 +73,7 @@ const Profile = () => {
   async function fetchSPInfo() {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       
@@ -93,7 +93,7 @@ const Profile = () => {
     //const phoneNumber = "+9196";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);
@@ -127,7 +127,7 @@ const Profile = () => {
              className="h-36 w-52 mt-4"
              source = {require('../../assets/e-rupi.png')}></Image>
 
-        <View className="bg-indigo-200 h-44 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
+        <View className="bg-indigo-200 h-40 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
           
                 <View className="rounded-full  h-16 w-16 mt-12  mx-5 z-50 shadow-lg items-center  ">
                     <View className="my-auto mx-auto">
@@ -225,11 +225,11 @@ const Profile = () => {
                         </View>
                 <View className="mr-5 my-auto">
                 <View className="" >
-                    <Text className="text-right text-gray-700 font-semibold text-xl">Bank Details</Text>
-                    <View className="flex-row justify-between">
-                    <Text className="text-right font-medium text-sm text-stone-600"> {bankName}</Text>
-                    <Text>|</Text>
-                    <Text className="text-right font-medium text-sm text-stone-600"> {bankAccountHolderName}</Text>
+                    <Text className="text-right text-gray-700 font-semibold text-xl break-normal">Bank Details</Text>
+                    <View className="flex-col items-right justify-between">
+                    <Text className="text-right font-medium text-sm text-stone-600 break-normal"> {bankName}</Text>
+                    
+                    <Text className="text-right font-medium text-sm text-stone-600 "> {bankAccountHolderName}</Text>
                     </View>
                     
                     </View>

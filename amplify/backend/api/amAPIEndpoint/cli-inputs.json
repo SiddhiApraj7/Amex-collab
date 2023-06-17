@@ -14,6 +14,125 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/create-beneficiary": {
+      "name": "/create-beneficiary",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/delete-all-data": {
+      "name": "/delete-all-data",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/create-pvtOrg": {
+      "name": "/create-pvtOrg",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/create-serviceProvider": {
+      "name": "/create-serviceProvider",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/create-voucher": {
+      "name": "/create-voucher",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/login": {
+      "name": "/login",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/all-service-providers": {
+      "name": "/all-service-providers",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/available-vouchers": {
+      "name": "/available-vouchers",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/vouchers-created": {
+      "name": "/vouchers-created",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/vouchers-requested": {
+      "name": "/vouchers-requested",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-voucher/{voucherId}": {
+      "name": "/get-voucher/{voucherId}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-voucher-info/{voucherId}": {
+      "name": "/get-voucher-info/{voucherId}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-user-info/{phoneNumber}": {
+      "name": "/get-user-info/{phoneNumber}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-pvtOrg-info/{phoneNumber}": {
+      "name": "/get-pvtOrg-info/{phoneNumber}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-serviceProvider-info/{phoneNumber}": {
+      "name": "/get-serviceProvider-info/{phoneNumber}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/get-beneficiary-info/{phoneNumber}": {
+      "name": "/get-beneficiary-info/{phoneNumber}",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/check-phone": {
+      "name": "/check-phone",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

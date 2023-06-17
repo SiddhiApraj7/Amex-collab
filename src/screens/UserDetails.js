@@ -31,7 +31,7 @@ const UserDetails = () => {
     setIsLoading(true);
 
      try {
-      const response = await axios.patch("http://192.168.29.164:3000/create-user", {
+      const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user", {
         phoneNumber: phoneNumber,
         firstName: data.firstName,
         lastName: data.lastName,

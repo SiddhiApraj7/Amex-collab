@@ -22,11 +22,12 @@ const Phone = () => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const createUser = async (phoneNumber) => {
+  const createUser = async () => {
     // create User schema using post method using axioms and async , await
+    setIsLoading(true);
     
     try {
-      const response = await axios.post('http://192.168.29.164:3000/check-phone', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response);
@@ -41,7 +42,7 @@ const Phone = () => {
       }
       else{
         try {
-          const response = await axios.post('http://192.168.29.164:3000/create-user', {
+          const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
             phoneNumber: phoneNumber,
           });
     
@@ -67,6 +68,7 @@ const Phone = () => {
   }
 
   const sendVerification = () => {
+    console.log(phoneNumber);
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
     phoneProvider
       .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
@@ -118,7 +120,7 @@ const Phone = () => {
             />
 
           </View>
-          <View className="mx-28 p-4 mb-5  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" onPress={sendVerification} title="Send Verification"/></View>
+          <View className="mx-auto p-4 mb-5  mt-3 rounded-3xl w-3/5"><Button className="text-black text-center " color="#82E0AA" onPress={sendVerification} title="Send Verification"/></View>
 
 
             <Text className="text-center mt-2  mb-1 font-semibold text-lg"> Enter your OTP: </Text>

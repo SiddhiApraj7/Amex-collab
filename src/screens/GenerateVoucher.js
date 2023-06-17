@@ -27,7 +27,7 @@ const GenerateVoucher = () => {
  async function checkValidBeneficiary(phoneNumber) {
   setIsLoading(true);
   try {
-    const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+    const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
     console.log(response.data);
     const user = response.data;
     return user.isBeneficiary;
@@ -43,7 +43,7 @@ const GenerateVoucher = () => {
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -66,7 +66,7 @@ const GenerateVoucher = () => {
   async function fetchSPInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setBusinessTag(serviceProvider.BusinessTag);
@@ -95,7 +95,7 @@ const GenerateVoucher = () => {
   
     if (isValidBeneficiary) {
       try {
-        const response = await axios.post("http:/192.168.29.164:3000/create-voucher", {
+        const response = await axios.post("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-voucher", {
           voucherAmount: parseInt(data.amount),
           PhoneNumberSP: serviceProviderChoice,
           PhoneNumberB: data.phoneNumberB,

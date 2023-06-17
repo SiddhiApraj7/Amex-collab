@@ -685,6 +685,7 @@ app.get('/get-voucher-info/:voucherId', async (req, res) => {
       },
       select: {
             voucherAmount: true,
+            voucherRedeemed : true,
             PvtOrgBy: {
               select: {
                 CompanyName: true
@@ -713,44 +714,6 @@ app.get('/get-voucher-info/:voucherId', async (req, res) => {
       }
     });
 
-
-app.get('/get-voucher-info/:voucherId', async (req, res) => {
-  const { voucherId } = req.params;
-
-  try {
-    const voucher = await prisma.Voucher.findFirst({
-      where: {
-         voucherId: voucherId
-      },
-      select: {
-            voucherAmount: true,
-            PvtOrgBy: {
-              select: {
-                CompanyName: true
-              }
-            },
-            BeneficiaryUser: {
-              select: {
-                Users: {
-                  select: {
-                    firstName: true,
-                    lastName: true
-                  }
-                }
-              }
-            }
-          }
-        });
-
-        if (voucher && voucher.BeneficiaryUser && voucher.PvtOrgBy) {
-          res.status(200).json(voucher);
-        } else {
-          res.status(404).json({ message: 'Voucher not found' });
-        }
-      } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-      }
-    });
 app.get('/get-voucher/:voucherId', async (req, res) => {
   const { voucherId } = req.params;
 

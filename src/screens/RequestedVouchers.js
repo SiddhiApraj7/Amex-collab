@@ -31,7 +31,7 @@ const RequestedVouchers = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-requested',
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/vouchers-requested',
         { phoneNumber });
       console.log("hdcuhasdcjkskdc", response.data);
       const vouchersList = response.data.vouchers;
@@ -82,7 +82,7 @@ const RequestedVouchers = () => {
   async function getRequestedVouchers() {
     try {
       //const phoneNumber = "+9106";
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -147,7 +147,7 @@ const RequestedVouchers = () => {
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
         ) : (
-          <ScrollView className="h-3/5 ">
+          <ScrollView className="h-3/5  mb-14">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
             </View>

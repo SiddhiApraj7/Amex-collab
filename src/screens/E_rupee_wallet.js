@@ -22,7 +22,7 @@ const E_rupee_wallet = () => {
     //const phoneNumber = "+91321";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -89,7 +89,7 @@ const E_rupee_wallet = () => {
 
 
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
-              <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
+              <Text className="text-gray-500 mx-auto font-light">TRANSACTION HISTORY</Text>
             </View>
 
 

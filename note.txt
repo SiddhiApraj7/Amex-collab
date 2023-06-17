@@ -8,4 +8,3 @@ profile name : am_amplify
 endpoint : https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev
 environment : dev
 
-https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev

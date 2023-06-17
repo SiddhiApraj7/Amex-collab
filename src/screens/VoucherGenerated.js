@@ -30,7 +30,7 @@ const VoucherGenerated = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.1.45:3000/vouchers-created',
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/vouchers-created',
       {phoneNumber});
       console.log(response.data);
       const vouchersList = response.data.vouchers;
@@ -78,7 +78,7 @@ const VoucherGenerated = () => {
 
   async function getRequestedVouchers() {
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -121,7 +121,7 @@ const VoucherGenerated = () => {
         <View className="mt-1 mb-3 items-center">
             <Text className="text-gray-500 font-bold tracking-widest">ALL GENERATED VOUCHERS</Text>
           </View>
-          <ScrollView className="h-3/5 ">
+          <ScrollView className="h-3/5 mb-14">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500  font-light">ACTIVE VOUCHERS</Text>
             </View>

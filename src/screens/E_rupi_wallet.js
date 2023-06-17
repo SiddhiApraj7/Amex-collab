@@ -34,7 +34,7 @@ const E_rupi_wallet = () => {
   async function getAllVouchers(phoneNumber) {
     //phoneNumber = "+9101";
     try {
-      const response = await axios.post('http://192.168.1.45:3000/available-vouchers', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/available-vouchers', {
         phoneNumber: phoneNumber
       });
       // console.log(response.data);
@@ -92,7 +92,7 @@ const E_rupi_wallet = () => {
     try {
       //phoneNumber= "+9101"
       
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -153,7 +153,7 @@ const E_rupi_wallet = () => {
           <View className="mt-1 mb-3">
             <Text className="text-gray-500 font-bold tracking-widest">ALL VOUCHERS</Text>
           </View>
-          <ScrollView className="h-3/5 ">
+          <ScrollView className="h-3/5 mb-14">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500  font-light ">AVAILABLE VOUCHERS</Text>
             </View>

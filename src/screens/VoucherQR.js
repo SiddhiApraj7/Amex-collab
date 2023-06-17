@@ -27,7 +27,7 @@ const VoucherQR = ({ route }) => {
 
     async function getVoucherInfo() {
         try {
-            const response = await axios.get(`http://192.168.29.164:3000/get-voucher/${voucherId}`);
+            const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-voucher/${voucherId}`);
             console.log(response.data);
             setVoucher(response.data);
             const beneficiaryname= ` ${response.data.BeneficiaryUser.Users.firstName} ${response.data.BeneficiaryUser.Users.lastName}`

@@ -21,7 +21,7 @@ const Login = () => {
   const VerifyUser = async(data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://192.168.29.164:3000/login', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/login', {
         phoneNumber: data.phoneNumber,
         walletPin : parseInt(data.pin),
       });

@@ -20,7 +20,7 @@ const SelectRole = () => {
   const fetchUserRole = async () => {
     try {
       // Make API call to check user role
-      const response = await axios.post('http://192.168.29.164:3000/get-role', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-role', {
         phoneNumber: phoneNumber
       });
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
@@ -63,7 +63,7 @@ const SelectRole = () => {
   const createBeneficiary = async () => {
     await fetchUserRole();
     try {
-      const response = await axios.post('http://192.168.29.164:3000/create-beneficiary', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-beneficiary', {
         phoneNumber: phoneNumber
       });
        

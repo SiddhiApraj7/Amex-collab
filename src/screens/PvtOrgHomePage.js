@@ -40,7 +40,7 @@ const PvtOrgHomePage = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-created',
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/vouchers-created',
         { phoneNumber });
       // console.log("hdcuhasdcjkskdc",response.data);
       const vouchersList = response.data.vouchers;
@@ -76,7 +76,7 @@ const PvtOrgHomePage = () => {
     //const phoneNumber = "+9196";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);

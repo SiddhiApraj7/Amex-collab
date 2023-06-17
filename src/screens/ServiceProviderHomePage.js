@@ -46,7 +46,7 @@ const ServiceProviderHomePage = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setFirstName(serviceProvider.Users.firstName);
@@ -68,7 +68,7 @@ const ServiceProviderHomePage = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-requested',
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/vouchers-requested',
         { phoneNumber });
       // console.log("hdcuhasdcjkskdc",response.data);
       const vouchersList = response.data.vouchers;

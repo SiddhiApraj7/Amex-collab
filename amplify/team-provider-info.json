@@ -15,8 +15,11 @@
       "function": {
         "amBackendGateway": {
           "deploymentBucketName": "amplify-digirupi-dev-132457-deployment",
-          "s3Key": "amplify-builds/amBackendGateway-4b5034466d4a46334e43-build.zip"
+          "s3Key": "amplify-builds/amBackendGateway-306c30397a363776622b-build.zip"
         }
+      },
+      "api": {
+        "amAPIEndpoint": {}
       }
     }
   }
