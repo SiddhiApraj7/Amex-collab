@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, Button , ScrollView, TouchableOpacity} from 'react-native'
+import { View, Text, SafeAreaView, Image, Button , ScrollView, TouchableOpacity, ActivityIndicator} from 'react-native'
 import React from 'react'
 import {Ionicons} from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -26,8 +26,11 @@ const Profile = () => {
   const [is_serviceProvider, set_is_serviceProvider] = useState(false);
   const [bankAccountHolderName, setBankAccHolderName] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
   async function fetchUserInfo() {
     //const phoneNumber = "+91321";
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
@@ -49,6 +52,8 @@ const Profile = () => {
         setError('');
         navigation.navigate('login'); // Replace 'Login' with the name of your login screen
       }, 3000); */ // Redirect to login screen after 3 seconds
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -66,7 +71,7 @@ const Profile = () => {
   
 
   async function fetchSPInfo() {
-    
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
@@ -79,11 +84,14 @@ const Profile = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   } 
 
   async function fetchPvtOrgInfo() {
     //const phoneNumber = "+9196";
+    setIsLoading(true);
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
@@ -97,10 +105,19 @@ const Profile = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
 <SafeAreaView className="bg-white h-full">
+
+{isLoading ? (
+        <View className=" justify-center items-center mt-72">
+        <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        ) : (
+
 
   <View className="flex-col justify-between h-full">
 
@@ -246,7 +263,7 @@ const Profile = () => {
       <Footer />
       </View>
   
-
+        )}
         
     </SafeAreaView>
   )

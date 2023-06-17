@@ -122,7 +122,7 @@ const RequestedVouchers = () => {
           </View>
         ) : (
 
-          <View className="flex-row gap-2 ml-7 w-96 justify-between">
+          <View className="flex-row gap-2 ml-3 w-96 justify-between">
             <View className="flex-row gap-1">
               <Ionicons name="person-circle" size={36}></Ionicons>
               <Text className="font-medium text-lg">{firstName} {lastName}</Text>
@@ -139,7 +139,7 @@ const RequestedVouchers = () => {
         )}
 
         <View className="mt-1 mb-3">
-          <Text className="text-gray-500 font-bold tracking-widest">ALL REQUESTED VOUCHERS</Text>
+          <Text className="text-gray-500 font-bold tracking-widest mx-auto">ALL REQUESTED VOUCHERS</Text>
         </View>
 
         {isLoading ? (
@@ -149,10 +149,10 @@ const RequestedVouchers = () => {
         ) : (
           <ScrollView className="h-3/5 ">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500  font-light">ACTIVE VOUCHERS</Text>
+              <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
             </View>
             {activevoucherList.length === 0 || (activevoucherList.length === 1 && Object.keys(activevoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400  font-extralight p-3">No active vouchers</Text>
+              <Text className="text-gray-400 mx-auto font-extralight p-3">No active vouchers</Text>
             ) : (
               activevoucherList.map((voucher, i) => (
                 <Voucher
@@ -167,10 +167,10 @@ const RequestedVouchers = () => {
               ))
             )}
             <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1">
-              <Text className="text-gray-500 font-light">SCANNED VOUCHERS</Text>
+              <Text className="text-gray-500 mx-auto font-light">SCANNED VOUCHERS</Text>
             </View>
             {redeemedvoucherList.length === 0 || (redeemedvoucherList.length === 1 && Object.keys(redeemedvoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400  font-extralight p-3">No scanned vouchers</Text>
+              <Text className="text-gray-400 mx-auto font-extralight p-3">No scanned vouchers</Text>
             ) : (
               redeemedvoucherList.map((voucher, i) => (
                 voucher.voucherId !== null && (
