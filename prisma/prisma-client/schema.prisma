@@ -19,7 +19,7 @@ model Users {
   walletPin               Int?
   bankName                String?
   bankAccountHolderName   String?
-  accountNumber           Int?             @unique
+  accountNumber           String?          
   isBeneficiary           Boolean          @default(false)
   isPvtOrg                Boolean?         @default(false)
   isServiceProvider       Boolean?         @default(false)

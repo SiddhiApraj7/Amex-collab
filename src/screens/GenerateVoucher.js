@@ -9,8 +9,6 @@ import Number_input_ud from "../components/Number_input_ud.js"
 import { useForm, Controller } from "react-hook-form";
 
 
-
-
 const GenerateVoucher = () => {
 
   const [BusinessTag, setBusinessTag] = useState('');

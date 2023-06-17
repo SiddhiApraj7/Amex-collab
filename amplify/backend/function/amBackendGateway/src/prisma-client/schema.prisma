@@ -1,6 +1,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "./prisma-client"
+  // output        = "."
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
@@ -18,7 +19,7 @@ model Users {
   walletPin               Int?
   bankName                String?
   bankAccountHolderName   String?
-  accountNumber           Int?             @unique
+  accountNumber           String?          
   isBeneficiary           Boolean          @default(false)
   isPvtOrg                Boolean?         @default(false)
   isServiceProvider       Boolean?         @default(false)

@@ -25,7 +25,7 @@ export type Users = {
   walletPin: number | null
   bankName: string | null
   bankAccountHolderName: string | null
-  accountNumber: number | null
+  accountNumber: string | null
   isBeneficiary: boolean
   isPvtOrg: boolean | null
   isServiceProvider: boolean | null
@@ -1056,12 +1056,10 @@ export namespace Prisma {
 
   export type UsersAvgAggregateOutputType = {
     walletPin: number | null
-    accountNumber: number | null
   }
 
   export type UsersSumAggregateOutputType = {
     walletPin: number | null
-    accountNumber: number | null
   }
 
   export type UsersMinAggregateOutputType = {
@@ -1073,7 +1071,7 @@ export namespace Prisma {
     walletPin: number | null
     bankName: string | null
     bankAccountHolderName: string | null
-    accountNumber: number | null
+    accountNumber: string | null
     isBeneficiary: boolean | null
     isPvtOrg: boolean | null
     isServiceProvider: boolean | null
@@ -1093,7 +1091,7 @@ export namespace Prisma {
     walletPin: number | null
     bankName: string | null
     bankAccountHolderName: string | null
-    accountNumber: number | null
+    accountNumber: string | null
     isBeneficiary: boolean | null
     isPvtOrg: boolean | null
     isServiceProvider: boolean | null
@@ -1128,12 +1126,10 @@ export namespace Prisma {
 
   export type UsersAvgAggregateInputType = {
     walletPin?: true
-    accountNumber?: true
   }
 
   export type UsersSumAggregateInputType = {
     walletPin?: true
-    accountNumber?: true
   }
 
   export type UsersMinAggregateInputType = {
@@ -1293,7 +1289,7 @@ export namespace Prisma {
     walletPin: number | null
     bankName: string | null
     bankAccountHolderName: string | null
-    accountNumber: number | null
+    accountNumber: string | null
     isBeneficiary: boolean
     isPvtOrg: boolean | null
     isServiceProvider: boolean | null
@@ -6059,7 +6055,7 @@ export namespace Prisma {
     walletPin?: IntNullableFilter | number | null
     bankName?: StringNullableFilter | string | null
     bankAccountHolderName?: StringNullableFilter | string | null
-    accountNumber?: IntNullableFilter | number | null
+    accountNumber?: StringNullableFilter | string | null
     isBeneficiary?: BoolFilter | boolean
     isPvtOrg?: BoolNullableFilter | boolean | null
     isServiceProvider?: BoolNullableFilter | boolean | null
@@ -6100,7 +6096,6 @@ export namespace Prisma {
     id?: string
     phoneNumber?: string
     recoveryEmail?: string
-    accountNumber?: number
   }
 
   export type UsersOrderByWithAggregationInput = {
@@ -6140,7 +6135,7 @@ export namespace Prisma {
     walletPin?: IntNullableWithAggregatesFilter | number | null
     bankName?: StringNullableWithAggregatesFilter | string | null
     bankAccountHolderName?: StringNullableWithAggregatesFilter | string | null
-    accountNumber?: IntNullableWithAggregatesFilter | number | null
+    accountNumber?: StringNullableWithAggregatesFilter | string | null
     isBeneficiary?: BoolWithAggregatesFilter | boolean
     isPvtOrg?: BoolNullableWithAggregatesFilter | boolean | null
     isServiceProvider?: BoolNullableWithAggregatesFilter | boolean | null
@@ -6344,7 +6339,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -6367,7 +6362,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -6390,7 +6385,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6413,7 +6408,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6436,7 +6431,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -6456,7 +6451,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6476,7 +6471,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6796,7 +6791,6 @@ export namespace Prisma {
 
   export type UsersAvgOrderByAggregateInput = {
     walletPin?: SortOrder
-    accountNumber?: SortOrder
   }
 
   export type UsersMaxOrderByAggregateInput = {
@@ -6841,7 +6835,6 @@ export namespace Prisma {
 
   export type UsersSumOrderByAggregateInput = {
     walletPin?: SortOrder
-    accountNumber?: SortOrder
   }
 
   export type StringWithAggregatesFilter = {
@@ -7851,7 +7844,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -7873,7 +7866,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -7935,7 +7928,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7957,7 +7950,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8107,7 +8100,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -8129,7 +8122,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -8177,7 +8170,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8199,7 +8192,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8251,7 +8244,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -8273,7 +8266,7 @@ export namespace Prisma {
     walletPin?: number | null
     bankName?: string | null
     bankAccountHolderName?: string | null
-    accountNumber?: number | null
+    accountNumber?: string | null
     isBeneficiary?: boolean
     isPvtOrg?: boolean | null
     isServiceProvider?: boolean | null
@@ -8321,7 +8314,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8343,7 +8336,7 @@ export namespace Prisma {
     walletPin?: NullableIntFieldUpdateOperationsInput | number | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
-    accountNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
     isBeneficiary?: BoolFieldUpdateOperationsInput | boolean
     isPvtOrg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isServiceProvider?: NullableBoolFieldUpdateOperationsInput | boolean | null
