@@ -143,6 +143,7 @@ const GenerateVoucher = () => {
     } finally {
       setIsLoading(false);
     }
+  }
     else{
       Alert.alert("Beneficiary doesn't exist");
         setTimeout(() => {
