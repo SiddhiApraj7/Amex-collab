@@ -95,7 +95,7 @@ const GenerateVoucher = () => {
   
     if (isValidBeneficiary) {
       try {
-        const response = await axios.post("http:/192.168.29.208:3000/create-voucher", {
+        const response = await axios.post("http:/192.168.1.45:3000/create-voucher", {
           voucherAmount: parseInt(data.amount),
           PhoneNumberSP: serviceProviderChoice,
           PhoneNumberB: data.phoneNumberB,
@@ -144,13 +144,13 @@ const GenerateVoucher = () => {
 
           
         <View>
-        <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 border-b-2 border-neutral-200">
+        <View className="flex-row gap-2 ml-7 w-96 mx-auto justify-between bg-neutral-100 p-2 border-b-2 border-neutral-200">
           <View className="flex-row gap-1">
           <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="font-normal text-lg ">{firstName} {lastName}</Text>
+            <Text className="font-normal text-lg pt-1 ">{firstName} {lastName}</Text>
           </View>
             <View className=" mt-3 mr-10">
-            <Text className="font-extralight text-lg">{bankName}</Text>
+            <Text className="font-light text-lg pt-2">{bankName}</Text>
 
             </View>
         </View>

@@ -121,7 +121,7 @@ const QRScanner = () => {
 
   return (
     <SafeAreaView className="bg-white h-full">
-      <View className="items-center mt-6 p-5 bg-white">
+      <View className="items-center mt-2 p-5 bg-white">
 
 
         <Image
