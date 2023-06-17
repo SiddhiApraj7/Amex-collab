@@ -50,7 +50,7 @@ const GenerateVoucher = () => {
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -79,7 +79,7 @@ const GenerateVoucher = () => {
   async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       // setFirstName(serviceProvider.Users.firstName);
@@ -121,7 +121,7 @@ const GenerateVoucher = () => {
     {
       try {
       
-      const response = await axios.post("http:/192.168.1.45:3000/create-voucher", {
+      const response = await axios.post("http:/192.168.29.164:3000/create-voucher", {
       voucherAmount : parseInt(data.amount), 
       PhoneNumberSP : serviceProviderChoice, 
       PhoneNumberB : data.phoneNumberB, 

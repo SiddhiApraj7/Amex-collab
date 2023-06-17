@@ -13,19 +13,20 @@ import { AppContext } from '../../AppContext';
 
 const Phone = () => {
 
-  // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
-  const [ phoneNumber, setPhoneNumber ] = useState('');
+  // const [ phoneNumber, setPhoneNumber ] = useState('');
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState('');
   const recaptchaVerifier = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
 
+
   const createUser = async (phoneNumber) => {
     // create User schema using post method using axioms and async , await
     
     try {
-      const response = await axios.post('http://192.168.29.164:3000/create-user', {
+      const response = await axios.post('http://192.168.29.164:3000/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response);
@@ -33,15 +34,14 @@ const Phone = () => {
       console.log(phoneNumber);
       console.log(isalreadyUser);
       if(isalreadyUser){
-        setError('User already exists, please login.');
+        Alert.alert("User already exists, please login.");
         setTimeout(() => {
-          setError('');
           navigation.navigate('login'); // Replace 'Login' with the name of your login screen
         }, 3000); // Redirect to login screen after 3 seconds
       }
       else{
         try {
-          const response = await axios.post('http://192.168.1.45:3000/create-user', {
+          const response = await axios.post('http://192.168.29.164:3000/create-user', {
             phoneNumber: phoneNumber,
           });
     
@@ -80,10 +80,10 @@ const Phone = () => {
     firebase.auth().signInWithCredential(credential)
       .then(() => {
         setCode('');
-        createUser(phoneNumber);
+         createUser(phoneNumber);
         // setPhoneNumber('');
-        console.warn('Verified');
-        navigation.navigate("userDetails");
+        // console.warn('Verified');
+        // navigation.navigate("userDetails");
       })
       .catch((error) => {
         // setPhoneNumber('');
@@ -132,6 +132,7 @@ const Phone = () => {
               />
 
             </View>
+            {/* {error ? <Text style={styles.warningText}>{error}</Text> : null} */}
 
             <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" onPress={confirmCode} title="Check OTP"/></View>
 
@@ -153,6 +154,13 @@ const Phone = () => {
 
   )
 }
+// const styles = {
+//   warningText: {
+//     fontSize: 16,
+//     color: 'red',
+//     marginBottom: 10,
+//   },
+// };
 
 
 export default Phone;
