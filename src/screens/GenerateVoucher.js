@@ -26,31 +26,25 @@ const GenerateVoucher = () => {
 
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
  async function checkValidBeneficiary(phoneNumber) {
-  //const phoneNumber = "+91321";
   setIsLoading(true);
   try {
-    const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+    const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
     console.log(response.data);
     const user = response.data;
-    setisValidB(user.isBeneficiary);
+    return user.isBeneficiary;
   } catch (error) {
     console.error(error);
-    console.log(error);
-    /* alert(error);
-    setError('User already exists, please login.');
-    setTimeout(() => {
-      setError('');
-      navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-    }, 3000); */ // Redirect to login screen after 3 seconds
+    return false; // Return false if an error occurs
   } finally {
     setIsLoading(false);
   }
 }
 
+
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -76,10 +70,10 @@ const GenerateVoucher = () => {
     fetchUserInfo(phoneNumber);
   }, []);
 
-  async function fetchSPInfo() {
+  async function fetchSPInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       // setFirstName(serviceProvider.Users.firstName);
@@ -104,10 +98,54 @@ const GenerateVoucher = () => {
   
   useEffect(() => {
     if (serviceProviderChoice) {
-      fetchSPInfo();
+      fetchSPInfo(serviceProviderChoice);
     }
   }, [serviceProviderChoice]); 
 
+
+  // const createVoucher = async (data) => {
+  //   console.log(phoneNumber);
+  //   console.log(data.amount);
+  //   console.log(data.phoneNumberB);
+  //   console.log(serviceProviderChoice);
+  //   setIsLoading(true);
+    
+  //   await checkValidBeneficiary(data.phoneNumberB);
+
+  //   if(isValidB === true)
+  //   {
+  //     try {
+      
+  //     const response = await axios.post("http:/192.168.29.208:3000/create-voucher", {
+  //     voucherAmount : parseInt(data.amount), 
+  //     PhoneNumberSP : serviceProviderChoice, 
+  //     PhoneNumberB : data.phoneNumberB, 
+  //     PhoneNumberPvtOrg : phoneNumber, 
+  //     voucherRedeemed : false
+        
+  //     });
+  //     console.log(response.data);
+  //     Alert.alert("Voucher has been created!");
+  //     setTimeout(() => {
+  //       setError('');
+  //       navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
+  //     }, 2000); 
+  
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
+  //   else{
+  //     Alert.alert("Beneficiary doesn't exist");
+  //       setTimeout(() => {
+  //         setError('');
+  //         navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
+  //       }, 3000); 
+  //   }
+     
+  // };
 
   const createVoucher = async (data) => {
     console.log(phoneNumber);
@@ -115,42 +153,39 @@ const GenerateVoucher = () => {
     console.log(data.phoneNumberB);
     console.log(serviceProviderChoice);
     setIsLoading(true);
-    
-    checkValidBeneficiary(data.phoneNumberB);
-    if(isValidB === true)
-    {
-      try {
-      
-      const response = await axios.post("http:/192.168.1.45:3000/create-voucher", {
-      voucherAmount : parseInt(data.amount), 
-      PhoneNumberSP : serviceProviderChoice, 
-      PhoneNumberB : data.phoneNumberB, 
-      PhoneNumberPvtOrg : phoneNumber, 
-      voucherRedeemed : false
-        
-      });
-      console.log(response.data);
-      Alert.alert("Voucher has been created!");
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
-      }, 2000); 
   
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-    else{
-      Alert.alert("Beneficiary doesn't exist");
+    const isValidBeneficiary = await checkValidBeneficiary(data.phoneNumberB);
+  
+    if (isValidBeneficiary) {
+      try {
+        const response = await axios.post("http:/192.168.29.208:3000/create-voucher", {
+          voucherAmount: parseInt(data.amount),
+          PhoneNumberSP: serviceProviderChoice,
+          PhoneNumberB: data.phoneNumberB,
+          PhoneNumberPvtOrg: phoneNumber,
+          voucherRedeemed: false
+        });
+        console.log(response.data);
+        Alert.alert("Voucher has been created!");
         setTimeout(() => {
           setError('');
-          navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
-        }, 3000); 
+          navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      Alert.alert("Beneficiary doesn't exist");
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
+      }, 3000);
+      setIsLoading(false); // Set isLoading to false in the else block as well
     }
-     
   };
+  
 
   
   return (

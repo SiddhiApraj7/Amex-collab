@@ -13,9 +13,9 @@ import { AppContext } from '../../AppContext';
 
 const Phone = () => {
 
-  // const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
-  const [ phoneNumber, setPhoneNumber ] = useState('');
+  
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState('');
   const recaptchaVerifier = useRef(null);
@@ -25,7 +25,7 @@ const Phone = () => {
     // create User schema using post method using axioms and async , await
     
     try {
-      const response = await axios.post('http://192.168.29.164:3000/create-user', {
+      const response = await axios.post('http://192.168.29.208:3000/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response);
@@ -41,7 +41,7 @@ const Phone = () => {
       }
       else{
         try {
-          const response = await axios.post('http://192.168.1.45:3000/create-user', {
+          const response = await axios.post('http://192.168.29.208:3000/create-user', {
             phoneNumber: phoneNumber,
           });
     

@@ -40,7 +40,7 @@ const PvtOrgHomePage = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-created',
+      const response = await axios.post('http://192.168.29.208:3000/vouchers-created',
         { phoneNumber });
       // console.log("hdcuhasdcjkskdc",response.data);
       const vouchersList = response.data.vouchers;
@@ -76,7 +76,7 @@ const PvtOrgHomePage = () => {
     //const phoneNumber = "+9196";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);
@@ -130,7 +130,7 @@ const PvtOrgHomePage = () => {
 
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
-          <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg">
+          <View className="flex-row gap-2 mx-auto w-96 justify-between bg-neutral-100 p-2 rounded-lg">
             <Ionicons name="person-circle" size={36}></Ionicons>
             <View className="pb-2">
             <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>

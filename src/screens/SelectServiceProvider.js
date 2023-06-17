@@ -23,7 +23,7 @@ const SelectServiceProvider = () => {
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
