@@ -25,7 +25,7 @@ const GenerateVoucher = () => {
  //const phoneNumber = "+9196";
 
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
- async function checkValidBeneficiary() {
+ async function checkValidBeneficiary(phoneNumber) {
   //const phoneNumber = "+91321";
   setIsLoading(true);
   try {
@@ -50,7 +50,7 @@ const GenerateVoucher = () => {
   async function fetchUserInfo(phoneNumber) {
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
       setFirstName(pvtOrg.Users.firstName);
@@ -79,7 +79,7 @@ const GenerateVoucher = () => {
   async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${serviceProviderChoice}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       // setFirstName(serviceProvider.Users.firstName);
@@ -121,27 +121,27 @@ const GenerateVoucher = () => {
     {
       try {
       
-        const response = await axios.post("http:/192.168.29.164:3000/create-voucher", {
-        voucherAmount : parseInt(data.amount), 
-        PhoneNumberSP : serviceProviderChoice, 
-        PhoneNumberB : data.phoneNumberB, 
-        PhoneNumberPvtOrg : phoneNumber, 
-        voucherRedeemed : false
-          
-        });
-        console.log(response.data);
-        Alert.alert("Voucher has been created!");
-        setTimeout(() => {
-          setError('');
-          navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
-        }, 2000); 
-    
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
+      const response = await axios.post("http:/192.168.1.45:3000/create-voucher", {
+      voucherAmount : parseInt(data.amount), 
+      PhoneNumberSP : serviceProviderChoice, 
+      PhoneNumberB : data.phoneNumberB, 
+      PhoneNumberPvtOrg : phoneNumber, 
+      voucherRedeemed : false
+        
+      });
+      console.log(response.data);
+      Alert.alert("Voucher has been created!");
+      setTimeout(() => {
+        setError('');
+        navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
+      }, 2000); 
+  
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
+  }
     else{
       Alert.alert("Beneficiary doesn't exist");
         setTimeout(() => {

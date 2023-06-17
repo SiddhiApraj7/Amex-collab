@@ -87,8 +87,8 @@ const E_rupi_wallet = () => {
   async function getAvailableVouchers(phoneNumber) {
     try {
       //phoneNumber= "+9101"
-
-      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+      
+      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);

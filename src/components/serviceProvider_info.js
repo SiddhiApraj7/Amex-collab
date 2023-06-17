@@ -31,7 +31,7 @@ const SelectServiceProvider_comp = () => {
 
   async function getAllServiceProviders() {
     try {
-      const response = await axios.get('http://192.168.29.164:3000/all-service-providers');
+      const response = await axios.get('http://192.168.1.45:3000/all-service-providers');
       console.log(response.data);
       const serviceProvidersList = response.data;
       setServiceProviders(serviceProvidersList);

@@ -20,7 +20,7 @@ const SelectRole = () => {
   const fetchUserRole = async () => {
     try {
       // Make API call to check user role
-      const response = await axios.post('http://192.168.29.164:3000/get-role', {
+      const response = await axios.post('http://192.168.1.45:3000/get-role', {
         phoneNumber: phoneNumber
       });
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
@@ -62,7 +62,7 @@ const SelectRole = () => {
 
   const createBeneficiary = async () => {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/create-beneficiary', {
+      const response = await axios.post('http://192.168.1.45:3000/create-beneficiary', {
         phoneNumber: phoneNumber
       });
        
@@ -74,6 +74,8 @@ const SelectRole = () => {
       }
     } catch (error) {
       console.log('Error creating beneficiary:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,7 +87,7 @@ const SelectRole = () => {
     } else {
      await createBeneficiary();
       navigation.navigate('beneficiaryHomePage');
-    }
+    } 
   };
 
 const onServiceProviderPress = async () => {
