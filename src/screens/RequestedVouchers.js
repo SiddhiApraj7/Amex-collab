@@ -31,7 +31,7 @@ const RequestedVouchers = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.164:3000/vouchers-requested',
+      const response = await axios.post('http://192.168.1:3000/vouchers-requested',
         { phoneNumber });
       console.log("hdcuhasdcjkskdc", response.data);
       const vouchersList = response.data.vouchers;
