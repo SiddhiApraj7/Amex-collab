@@ -57,7 +57,7 @@ const BeneficiaryHomePage = () => {
     //const phoneNumber = "+9101";
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://192.168.29.164:3000/get-beneficiary-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.208:3000/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
       setFirstName(beneficiary.firstName);
@@ -106,17 +106,15 @@ const BeneficiaryHomePage = () => {
 
         <View >
          <View>
-        <View className="flex-row gap-2 ml-7 w-96 justify-between">
-          <View className="flex-row gap-1">
-          <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
-          </View>
-            
+         <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto">
+            <Ionicons name="person-circle" size={36}></Ionicons>
+            <View className="pb-2">
+            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            <View className=" mt-3 mr-10">
+            </View>
+            <View className=" mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
         </View>

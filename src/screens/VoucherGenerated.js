@@ -9,7 +9,6 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
-
 const VoucherGenerated = () => {
   const navigation = useNavigation();
   const [firstName, setFirstName] = useState('');

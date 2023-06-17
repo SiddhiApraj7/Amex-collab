@@ -42,7 +42,7 @@ const BankDetails = () => {
 
      try {
       
-      const response = await axios.patch("http://192.168.29.164:3000/create-user", {
+      const response = await axios.patch("http://192.168.29.208:3000/create-user", {
         phoneNumber: phoneNumber,
         bankAccountHolderName : data.accHolderName,
         accountNumber : data.accountNumber,
