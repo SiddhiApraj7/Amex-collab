@@ -23,7 +23,7 @@ The Digital Wallet App is built using React Native for the frontend and Node.js 
 - Access Control: The app implements robust access control mechanisms, enabling different user roles such as beneficiaries, service providers, and private organizations, with the ability to have multiple roles simultaneously.
 - Wallet Functionality: Users can add funds to their digital wallets, check account balances, transfer e-rupee, redeem vouchers, and view available government and private sponsorships or e-rupi vouchers.
 - Dynamic Mode: Users can switch between different modes of app usage, such as consumer, private business, or service provider, based on their specific needs.
-- Notifications: The app provides timely updates and notifications for voucher usage, voucher requests, and payment receipts.
+- In-App Alerts: The app provides timely updates and alerts for voucher usage, voucher requests, and payment receipts.
 - Database Integration: Private organizations can create databases of affected beneficiaries, and service providers can maintain a list of services offered.
 - Communication with NPCI and Banks: The app facilitates communication with NPCI (National Payments Corporation of India) and banks for authentication, voucher verification, and payment processing.
 
