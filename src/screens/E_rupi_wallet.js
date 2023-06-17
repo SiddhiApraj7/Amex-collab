@@ -34,7 +34,7 @@ const E_rupi_wallet = () => {
   async function getAllVouchers(phoneNumber) {
     //phoneNumber = "+9101";
     try {
-      const response = await axios.post('http://192.168.1.45:3000/available-vouchers', {
+      const response = await axios.post('http://192.168.29.164:3000/available-vouchers', {
         phoneNumber: phoneNumber
       });
       // console.log(response.data);
@@ -154,7 +154,7 @@ const E_rupi_wallet = () => {
             <Text className="text-gray-500 font-bold tracking-widest">ALL VOUCHERS</Text>
           </View>
           <ScrollView className="h-3/5 ">
-            <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1">
+            <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500  font-light">AVAILABLE VOUCHERS</Text>
             </View>
 
@@ -163,6 +163,7 @@ const E_rupi_wallet = () => {
               <Text className="text-gray-400  font-extralight p-3">No available vouchers</Text>
             ) : (
               availablevoucherList.map((voucher, i) => (
+                (voucher.voucherRedeemed == false && voucher.voucherId != null && voucher.voucherAmount != null) && (
                 <Voucher
                   pvtorg={voucher.PvtOrgBy}
                   sp={voucher.ServiceProviderUser}
@@ -172,11 +173,12 @@ const E_rupi_wallet = () => {
                   voucherId={voucher.voucherId}
                   voucherRedeemed={voucher.voucherRedeemed}
                 />
+                )
               ))
             )}
 
 
-            <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1">
+            <View className="mt-3 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500 font-light">REDEEMED VOUCHERS</Text>
             </View>
             {/* <ScrollView className="flex-row space-y-10 "> */}
@@ -184,10 +186,10 @@ const E_rupi_wallet = () => {
             
 
             {redeemedvoucherList.length === 0 || (redeemedvoucherList.length === 1 && Object.keys(redeemedvoucherList[0]).length === 0) ? (
-              <Text className="text-gray-400  font-extralight p-3">No redeemed vouchers</Text>
+              <Text className="text-gray-400  font-extralight p-3 items-center">No redeemed vouchers</Text>
             ) : (
               redeemedvoucherList.map((voucher, i) => (
-                voucher.voucherId !== null && (
+                (voucher.voucherRedeemed == true && voucher.voucherId != null && voucher.voucherAmount != null) && (
                   <Voucher
                     pvtorg={voucher.PvtOrgBy}
                     sp={voucher.ServiceProviderUser}
