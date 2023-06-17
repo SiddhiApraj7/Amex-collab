@@ -76,7 +76,7 @@ const PvtOrgHomePage = () => {
     //const phoneNumber = "+9196";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-pvtOrg-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
       setFirstName(pvtorg.Users.firstName);
@@ -186,7 +186,7 @@ const PvtOrgHomePage = () => {
     
 
 
-    <View className=" mb-3 border-b-2 border-gray-300 p-1">
+    <View className=" mb-3 border-b-2 border-neutral-200 p-1">
         <Text className="text-gray-500 font-bold tracking-widest text-center mt-6">PAST TRANSACTIONS</Text>
     </View>
 
@@ -203,7 +203,7 @@ const PvtOrgHomePage = () => {
                   purpose={voucher.purpose}
                   key={i}
                   date={voucher.date}
-                  moneyType={voucher.moneyType}
+                  moneyType={!(voucher.moneyType)}
                 />)
               ))
             )}

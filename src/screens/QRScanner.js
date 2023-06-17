@@ -62,7 +62,7 @@ const QRScanner = () => {
     setIsLoading(true);
      try {
       
-      const response = await axios.patch("http://192.168.29.208:3000/create-voucher", {
+      const response = await axios.patch("http://192.168.29.164:3000/create-voucher", {
         voucherId : id
         
       });
@@ -82,7 +82,7 @@ const QRScanner = () => {
   async function fetchVoucherInfo(data) {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-voucher-info/${data}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-voucher-info/${data}`);
       console.log(response.data);
       const voucher = response.data;
 
@@ -121,7 +121,7 @@ const QRScanner = () => {
 
   return (
     <SafeAreaView className="bg-white h-full">
-      <View className="items-center mt-6 p-5 bg-white">
+      <View className="items-center mt-2 p-1 bg-white">
 
 
         <Image

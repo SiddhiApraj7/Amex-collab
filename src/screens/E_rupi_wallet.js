@@ -92,7 +92,7 @@ const E_rupi_wallet = () => {
     try {
       //phoneNumber= "+9101"
       
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -155,7 +155,7 @@ const E_rupi_wallet = () => {
           </View>
           <ScrollView className="h-3/5 ">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
-              <Text className="text-gray-500  font-light">AVAILABLE VOUCHERS</Text>
+              <Text className="text-gray-500  font-light ">AVAILABLE VOUCHERS</Text>
             </View>
 
 

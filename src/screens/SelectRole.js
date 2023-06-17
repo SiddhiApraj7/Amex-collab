@@ -20,7 +20,7 @@ const SelectRole = () => {
   const fetchUserRole = async () => {
     try {
       // Make API call to check user role
-      const response = await axios.post('http://192.168.29.208:3000/get-role', {
+      const response = await axios.post('http://192.168.29.164:3000/get-role', {
         phoneNumber: phoneNumber
       });
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
@@ -43,7 +43,7 @@ const SelectRole = () => {
   useEffect(() => {
     // Fetch user data and check role status
     fetchUserRole();
-  }, [phoneNumber]);
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -61,8 +61,9 @@ const SelectRole = () => {
   );
 
   const createBeneficiary = async () => {
+    await fetchUserRole();
     try {
-      const response = await axios.post('http://192.168.29.208:3000/create-beneficiary', {
+      const response = await axios.post('http://192.168.29.164:3000/create-beneficiary', {
         phoneNumber: phoneNumber
       });
        
@@ -82,6 +83,7 @@ const SelectRole = () => {
 
  const onBeneficiaryPress = async () => {
   setIsLoading(true);
+  await fetchUserRole();
     if (is_Beneficiary) {
       navigation.navigate('beneficiaryHomePage');
     } else {
@@ -93,6 +95,7 @@ const SelectRole = () => {
 
 const onServiceProviderPress = async () => {
   setIsLoading(true);
+  await fetchUserRole();
     if (is_ServiceProvider) {
       navigation.navigate('serviceProviderHomePage');
     } else {
@@ -103,6 +106,7 @@ const onServiceProviderPress = async () => {
 
  const onPvtOrgPress = async () => {
   setIsLoading(true);
+  await fetchUserRole();
     if (is_PvtOrg) {
       navigation.navigate('pvtOrgHomePage');
     } else {

@@ -876,7 +876,16 @@ app.post('/vouchers-requested', async (req, res) => {
         VouchersRequested: {
           include: {
             PvtOrgBy: true,
-            BeneficiaryUser : true,
+            BeneficiaryUser : {
+              select: {
+                Users: {
+                  select: {
+                    firstName: true,
+                    lastName: true
+                  }
+                }
+              }
+            },
             ServiceProviderUser: true,
           },
         },

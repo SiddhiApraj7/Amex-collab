@@ -1,10 +1,13 @@
 import { Image, View, Text, Button, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {NavigationPreloadManager} from "@react-navigation/native"
+import { AppContext } from "../../AppContext";
+import { useContext } from "react";
 
 
 const HomePage = () => {
     const navigation = useNavigation();
+    const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
     return (
         <SafeAreaView className="bg-white h-full">
@@ -19,9 +22,11 @@ const HomePage = () => {
             <Text className="font-bold text-xl p-3 mb-5">Welcome to E-Rupi Wallet</Text>
             <View className="flex-row gap-10">
                 <View><Button onPress={() => {
+                    setPhoneNumber("");
                     navigation.navigate("login");
                 }}className="text-black" title = "Login" color = "#82E0AA"></Button></View>
                 <View><Button onPress={() => {
+                    setPhoneNumber("");
                     navigation.navigate("fingerprint");
                 }}className="text-black" color = "#82E0AA" title="Register"></Button></View>
             
