@@ -10,7 +10,7 @@ import { CognitoUserPool } from 'amazon-cognito-identity-js';
 // voucher redemmed 
 
 const VoucherQR = ({ route }) => {
-    const { voucherId } = route.params;
+    const { voucherId,voucherRedeemed } = route.params;
     const { phoneNumber, setPhoneNumber } = useContext(AppContext);
     const [voucher, setVoucher] = useState({});
     const [createdDate, setCreatedDate] = useState('');
@@ -81,16 +81,16 @@ const VoucherQR = ({ route }) => {
                     <View className="bg-blue-200 h-3/4 w-11/12  rounded-md">
                     <View className=" items-center">
                         <Text className="font-semibold font mt-2">Unique Voucher ID :</Text>
-                        <Text> {voucherId}</Text>
+                        {(voucherRedeemed==false)&&(<Text> {voucherId}</Text>)}
                         <View className="mt-5">
-                            <QRCode
+                            {(voucherRedeemed==false)&&(<QRCode
                                 value={voucherId}
                                 color={'#606060'}
                                 backgroundColor={'transparent'}
                                 logo={require('../../assets/npci.jpg')}
                                 logoSize={20}
                                 size={200}
-                            />
+                            />)}
                         </View>
                         </View>
                         <View className="ml-8 mr-8">
@@ -102,6 +102,7 @@ const VoucherQR = ({ route }) => {
                         <View className="flex-row justify-between"><Text className="font-semibold mt-2">Voucher Amount:</Text><Text className=" font mt-2">{voucher.voucherAmount}</Text></View>
                         <View className="flex-row justify-between"><Text className="font-semibold mt-2">Date of creation:</Text><Text className=" font mt-2">{createdDate}</Text></View>
                         <View className="flex-row justify-between"><Text className="font-semibold mt-2">Time of creation:</Text><Text className=" font mt-2">{createdTime}</Text></View>
+                       {(voucherRedeemed==true)&& (<View className="flex-row justify-center tracking-widest"><Text className="font-semibold mt-2 text-red-500">VOUCHER REDEEMED</Text></View>)}
                         </View>
                     </View>
                 </View>

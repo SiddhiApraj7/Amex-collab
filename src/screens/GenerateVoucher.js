@@ -23,11 +23,33 @@ const GenerateVoucher = () => {
   const [error,setError] = useState('');
  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
  const [isLoading, setIsLoading] = useState(true);
+ const [isValidB, setisValidB] = useState(false);
  //const phoneNumber = "+9196";
 
  const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
- 
-  async function fetchUserInfo() {
+ async function checkValidBeneficiary(phoneNumber) {
+  //const phoneNumber = "+91321";
+  setIsLoading(true);
+  try {
+    const response = await axios.get(`http://192.168.29.164:3000/get-user-info/${phoneNumber}`);
+    console.log(response.data);
+    const user = response.data;
+    setisValidB(user.isBeneficiary);
+  } catch (error) {
+    console.error(error);
+    console.log(error);
+    /* alert(error);
+    setError('User already exists, please login.');
+    setTimeout(() => {
+      setError('');
+      navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+    }, 3000); */ // Redirect to login screen after 3 seconds
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+  async function fetchUserInfo(phoneNumber) {
     
     try {
       const response = await axios.get(`http://192.168.1.45:3000/get-pvtOrg-info/${phoneNumber}`);
@@ -50,8 +72,10 @@ const GenerateVoucher = () => {
     }
   }
 
+ 
+
   useEffect(() => {
-    fetchUserInfo();
+    fetchUserInfo(phoneNumber);
   }, []);
 
   async function fetchSPInfo() {
@@ -94,8 +118,10 @@ const GenerateVoucher = () => {
     console.log(serviceProviderChoice);
     setIsLoading(true);
     
-
-     try {
+    checkValidBeneficiary(data.phoneNumberB);
+    if(isValidB === true)
+    {
+      try {
       
       const response = await axios.post("http:/192.168.1.45:3000/create-voucher", {
       voucherAmount : parseInt(data.amount), 
@@ -117,6 +143,14 @@ const GenerateVoucher = () => {
     } finally {
       setIsLoading(false);
     }
+    else{
+      Alert.alert("Beneficiary doesn't exist");
+        setTimeout(() => {
+          setError('');
+          navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
+        }, 3000); 
+    }
+     
   };
 
   

@@ -133,7 +133,7 @@ const ServiceProviderInfo = () => {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder="Select item"
+                placeholder="Select Tag"
                 searchPlaceholder="Search..."
                 onChange={item => {
                   setValue(item.label);

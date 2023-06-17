@@ -19,6 +19,8 @@ const PvtOrgHomePage = () => {
   const [bankName, setBankName] = useState('');
   const [CompanyName, setCompanyName] = useState('');
   const [positionInCompany, setPositionInCompany] = useState('');
+  const [voucherList, setVoucherList] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
 
   useFocusEffect(
@@ -35,6 +37,39 @@ const PvtOrgHomePage = () => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
+
+  async function getAllVouchers() {
+    try {
+      const response = await axios.post('http://192.168.29.164:3000/vouchers-created',
+        { phoneNumber });
+      // console.log("hdcuhasdcjkskdc",response.data);
+      const vouchersList = response.data.vouchers;
+      // console.log("voucher list :", vouchersList);
+
+      let voucherList = [];
+      vouchersList.forEach((voucher) => {
+        if(voucher.voucherRedeemed==true){
+        let vocherObject = {};
+          vocherObject = {
+            beneficiaryName : voucher.BeneficiaryUser.Users.firstName + " " + voucher.BeneficiaryUser.Users.lastName,
+            cost: voucher.voucherAmount,
+            pvtOrgName: voucher.PvtOrgBy.CompanyName,
+            date: voucher.voucherRedeemedDate,
+            moneyType: voucher.voucherRedeemed
+      }
+      voucherList.push(vocherObject);
+    }
+        
+      });
+      setVoucherList(voucherList);
+      console.log("voucher list :", voucherList);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      // Handle error and navigation logic
+    }
+  }
+
 
 
   async function fetchPvtOrgInfo() {
@@ -62,6 +97,9 @@ const PvtOrgHomePage = () => {
   useEffect(() => {
     fetchPvtOrgInfo(phoneNumber);
   }, []);
+  useEffect(() => {
+    getAllVouchers();
+  }, []);
 
 
 
@@ -80,7 +118,7 @@ const PvtOrgHomePage = () => {
 
     
         <Image
-        className="h-36 w-52 "
+        className="h-36 w-52"
         
         source = {require('../../assets/e-rupi.png')}></Image>
 
@@ -92,7 +130,7 @@ const PvtOrgHomePage = () => {
 
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
-          <View className="flex-row gap-2 ml-7 w-96 justify-between">
+          <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg">
             <Ionicons name="person-circle" size={36}></Ionicons>
             <View className="pb-2">
             <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
@@ -101,16 +139,11 @@ const PvtOrgHomePage = () => {
             <View className=" mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
             <Text className="font-light text-center">BALANCE:1000e$</Text>
-            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
         </View>
 
         )}
-
-        {/* <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
-        <View><Text className="font-bold text-xl text-center mt-3 mb-3">1000 e$</Text></View> */}
-        {/* </View> */}
 
         <View className="items-center">
 
@@ -125,6 +158,7 @@ const PvtOrgHomePage = () => {
 
 
          <TouchableOpacity onPress={() => {
+          // setserviceProviderChoice(null);
           navigation.navigate("generateVoucher");
         }}>
          <View className="w-38 h-46 mx-0 py-5 pl-5 pr-5 text-center rounded-2xl mt-5  bg-blue-200">
@@ -135,28 +169,44 @@ const PvtOrgHomePage = () => {
           </View>
           </View>
         </TouchableOpacity>    
+        <TouchableOpacity onPress={() => {
+              navigation.navigate("voucherGenerated");
+            }}>
+             <View className="w-42 h-46 mx-0 py-5 pl-6 pr-5 text-center rounded-2xl mt-5 bg-blue-200">
+              <View className="my-auto align-center">
+              <Ionicons name="file-tray-full-outline" size={42} ></Ionicons>
+              <Text className=" text-xs">Voucher</Text>
+              <Text className="text-xs">Generated</Text>
+              </View>
+              </View>
+            </TouchableOpacity>  
 
        </View>
         
     
 
 
-    <View>
-        <Text className="font-light text-center mt-4">PAST TRANSACTIONS</Text>
+    <View className=" mb-3 border-b-2 border-gray-300 p-1">
+        <Text className="text-gray-500 font-bold tracking-widest text-center mt-6">PAST TRANSACTIONS</Text>
     </View>
 
 
     <ScrollView clasName="h-20">
-
- 
-        <VoucherHistory name="Anushtha Prakash" date="22-05-23" cost="140" color="#F99D96" purpose="Scholarship"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-        <VoucherHistory name="BHOPAL CATERERS" date="22-05-23" cost="140" color="#F99D96" purpose="Grocery"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
-        <VoucherHistory name="Tanisha Daharwal" date="17-03-23" cost="200" color="#A1F7BA" purpose="Pharmaceutical"/>
+    {voucherList.length === 0 || (voucherList.length === 1 && Object.keys(voucherList[0]).length === 0) ? (
+              <Text className="text-gray-400  font-extralight p-3 text-center">No Transactions</Text>
+            ) : (
+              voucherList.map((voucher, i) => (
+                (voucher.moneyType==true)&&(<VoucherHistory
+                  beneficiaryName={voucher.beneficiaryName}
+                  pvtOrgName={voucher.pvtOrgName}
+                  cost={voucher.cost}
+                  purpose={voucher.purpose}
+                  key={i}
+                  date={voucher.date}
+                  moneyType={voucher.moneyType}
+                />)
+              ))
+            )}
 
     </ScrollView>
     
@@ -185,5 +235,5 @@ const PvtOrgHomePage = () => {
 
 
 
-    export default PvtOrgHomePage;
+export default PvtOrgHomePage;
 

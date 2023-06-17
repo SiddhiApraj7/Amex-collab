@@ -68,7 +68,7 @@ const Profile = () => {
   async function fetchSPInfo() {
     
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-serviceProvider-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.29.164:3000/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       
@@ -118,7 +118,7 @@ const Profile = () => {
                     </View>
                     
                 </View>
-                <View className="mr-5 mt-1">
+                <View className="mr-5 mt-1 my-auto">
                     <View className="" >
                     <Text className="text-right text-gray-700 font-semibold text-xl">{firstName} {lastName}</Text>
                     <Text className="text-right font-medium text-sm text-stone-600">{phoneNumber}</Text>

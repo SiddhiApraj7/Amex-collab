@@ -91,7 +91,7 @@ const BankDetails = () => {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder="Select item"
+                placeholder="Select Bank"
                 searchPlaceholder="Search..."
                 onChange={item => {
                   
