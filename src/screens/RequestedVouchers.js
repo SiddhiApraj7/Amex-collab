@@ -31,7 +31,7 @@ const RequestedVouchers = () => {
 
   async function getAllVouchers() {
     try {
-      const response = await axios.post('http://192.168.29.208:3000/vouchers-requested',
+      const response = await axios.post('http://192.168.1.45:3000/vouchers-requested',
         { phoneNumber });
       console.log("hdcuhasdcjkskdc", response.data);
       const vouchersList = response.data.vouchers;
@@ -82,7 +82,7 @@ const RequestedVouchers = () => {
   async function getRequestedVouchers() {
     try {
       //const phoneNumber = "+9106";
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);

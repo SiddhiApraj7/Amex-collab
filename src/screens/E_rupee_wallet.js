@@ -22,7 +22,7 @@ const E_rupee_wallet = () => {
     //const phoneNumber = "+91321";
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://192.168.29.208:3000/get-user-info/${phoneNumber}`);
+      const response = await axios.get(`http://192.168.1.45:3000/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
       setFirstName(user.firstName);
@@ -31,12 +31,6 @@ const E_rupee_wallet = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
-      /* alert(error);
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); */ // Redirect to login screen after 3 seconds
     } finally {
       setIsLoading(false);
     }
@@ -69,12 +63,8 @@ const E_rupee_wallet = () => {
           <Ionicons name="person-circle" size={36}></Ionicons>
             <Text className="font-medium text-lg">{firstName} {lastName}</Text>
           </View>
-            
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             <View className=" mt-3 mr-10">
             <Text className="font-medium text-lg">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
         </View>
 
@@ -97,7 +87,11 @@ const E_rupee_wallet = () => {
               </View>
           </View>
 
-          <View><Text className="font-light text-center mt-10">HISTORY</Text></View>
+
+            <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
+              <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
+            </View>
+
 
           <ScrollView className="">
 
@@ -121,20 +115,6 @@ const E_rupee_wallet = () => {
       </View>
 
           
-
-
-
-
-      {/* <View className="bg-white rounded-lg pt-2 h-14" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, flex: 1 }}>
-          <View className="flex-row gap-10 justify-evenly" >
-            <View className="text-center items-center"><Ionicons name="home-outline" size={20}></Ionicons><Text className="text-xs">Dashboard</Text></View>
-            <View className="text-center items-center"><Ionicons name="build-outline" size={20}></Ionicons><Text className="text-xs">Select Role</Text></View>
-            <View className="text-center items-center"><Ionicons name="wallet-outline" size={20}></Ionicons><Text className="text-xs">Wallets</Text></View>
-            <View className="text-center items-center"><Ionicons name="person-outline" size={20}></Ionicons><Text className="text-xs">Profile</Text></View>
-          </View>
-       
-        
-      </View> */}
       <Footer />
       </View>
   
