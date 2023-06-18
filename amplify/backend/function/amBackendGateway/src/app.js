@@ -700,6 +700,15 @@ app.get('/get-voucher-info/:voucherId', async (req, res) => {
                   }
                 }
               }
+            },
+            ServiceProviderUser : {
+              select : {
+                Users : {
+                  select : {
+                    phoneNumber : true,
+                  }
+                }
+              }
             }
           }
         });
