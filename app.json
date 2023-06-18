@@ -4,7 +4,7 @@
     "slug": "digirupi",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/npci.jpg",
+    "icon": "./assets/logo-color.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

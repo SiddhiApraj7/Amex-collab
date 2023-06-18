@@ -87,7 +87,7 @@ const VoucherQR = ({ route }) => {
                                 value={voucherId}
                                 color={'#606060'}
                                 backgroundColor={'transparent'}
-                                logo={require('../../assets/npci.jpg')}
+                                logo={require('../../assets/npci.png')}
                                 logoSize={20}
                                 size={200}
                             />)}

@@ -11,13 +11,13 @@ const HomePage = () => {
 
     return (
         <SafeAreaView className="bg-white h-full">
-            <View className="items-center mt-48 p-5 bg-white">
+            <View className="items-center mt-20 p-5 bg-white">
 
             
             <Image
-            className="h-16 w-3/4 mt-10 mb-4"
+            className="h-72 w-72 mt-10 mb-4"
             
-            source = {require('../../assets/e-rupi.png')}></Image>
+            source = {require('../../assets/logo-no-background.png')}></Image>
             
             <Text className="font-medium tracking-widest text-xl p-3">Welcome to E-Rupi Wallet</Text>
             <View className="border-b-2 border-neutral-100">
