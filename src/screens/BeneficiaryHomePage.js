@@ -85,7 +85,7 @@ const BeneficiaryHomePage = () => {
   )
   const textrupee = (
 
-    <Text className="text-xs" >E-RUPEE</Text>
+    <Text className="text-xs font-" >E-RUPEE</Text>
   )
 
 
@@ -94,9 +94,10 @@ const BeneficiaryHomePage = () => {
     <SafeAreaView className="bg-white h-full">
       
       <View className="items-center bg-white">
-        <Image
-          className="h-36 w-52 mt-4"
-          source={require('../../assets/e-rupi.png')}></Image>
+      <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
 
       {isLoading ? (
         <View className=" justify-center items-center z-40">
@@ -106,14 +107,14 @@ const BeneficiaryHomePage = () => {
 
         <View >
          <View>
-         <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto">
+         <View className="flex-row gap-2 ml-9 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto border-b-2 border-neutral-200">
             <Ionicons name="person-circle" size={36}></Ionicons>
             <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
+            <Text className="font-medium text-lg mr-7 mt-1">{firstName} {lastName}</Text>
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             </View>
             <View className=" mr-10">
-            <Text className="font-medium text-lg">{bankName}</Text>
+            <Text className="font-medium text-lg mt-1">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
             </View>
         </View>
@@ -141,7 +142,7 @@ const BeneficiaryHomePage = () => {
                   <View className="my-auto ml-4">
                     <Ionicons name="documents-outline" size={56} ></Ionicons>
                   </View>
-                  <Text className="text-xs">Digital Safe</Text>
+                  <Text className="text-xs ">DIGITAL SAFE</Text>
                 </TouchableOpacity>
               </View>
             </View>

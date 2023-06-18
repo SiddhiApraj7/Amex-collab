@@ -15,12 +15,15 @@ const HomePage = () => {
 
             
             <Image
-            className="h-36 w-36 mt-5"
+            className="h-16 w-3/4 mt-10 mb-4"
             
             source = {require('../../assets/e-rupi.png')}></Image>
             
-            <Text className="font-bold text-xl p-3 mb-5">Welcome to E-Rupi Wallet</Text>
-            <View className="flex-row gap-10">
+            <Text className="font-medium tracking-widest text-xl p-3">Welcome to E-Rupi Wallet</Text>
+            <View className="border-b-2 border-neutral-100">
+            <Text className=" font-extralight tracking-widest text-xs">IN COLLABORATION WITH AMEX</Text>
+            </View>
+            <View className="flex-row gap-10 mt-2">
                 <View><Button onPress={() => {
                     setPhoneNumber("");
                     navigation.navigate("login");

@@ -54,9 +54,9 @@ useEffect(() => {
 
     
     <Image
-    className="h-36 w-96 mt-5"
-    
-    source = {require('../../assets/e-rupi.png')}></Image>
+          className="h-14 w-1/2 mt-10 mb-9"
+
+          source={require('../../assets/e-rupi.png')}></Image>
 
 
     {isLoading ? (
@@ -65,7 +65,7 @@ useEffect(() => {
         </View>
         ) : (
 
-        <View className="flex-row gap-2 ml-7 w-96 justify-between">
+        <View className="flex-row gap-2 ml-7 w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100">
           <View className="flex-row gap-1">
           <Ionicons name="person-circle" size={36}></Ionicons>
             <Text className="font-medium text-lg">{firstName} {lastName}</Text>
@@ -73,7 +73,7 @@ useEffect(() => {
             
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             <View className=" mt-3 mr-10">
-            <Text className="font-medium text-lg">{bankName}</Text>
+            <Text className="font-medium text-lg mt-1">{bankName}</Text>
             {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
             {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
@@ -81,9 +81,9 @@ useEffect(() => {
 
         )}
           
-    <View className="mt-5">
-    <Text className="font-bold text-xl p-1 mb-1">Select Service Provider</Text>
-    </View>
+        <View className="mt-4 mb-3">
+          <Text className="text-gray-500 font-bold tracking-widest mx-auto">SEARCH SERVICE PROVIDER</Text>
+        </View>
 
     
 

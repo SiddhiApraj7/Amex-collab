@@ -117,10 +117,10 @@ const PvtOrgHomePage = () => {
     <View className="items-center bg-white">
 
     
-        <Image
-        className="h-36 w-52"
-        
-        source = {require('../../assets/e-rupi.png')}></Image>
+    <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
 
     {isLoading ? (
         <View className=" justify-center items-center z-40">
@@ -130,7 +130,7 @@ const PvtOrgHomePage = () => {
 
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
-          <View className="flex-row gap-2 ml-7 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto">
+          <View className="flex-row gap-2 ml-7 w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100 p-2 rounded-lg mx-auto">
             <Ionicons name="person-circle" size={36}></Ionicons>
             <View className="pb-2">
             <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>

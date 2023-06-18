@@ -8,3 +8,6 @@ profile name : am_amplify
 endpoint : https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev
 environment : dev
 
+
+npm install --global eas-cli && \
+eas init --id ecceb5fa-65c6-45e5-b1f7-808344c4ffed

@@ -2,10 +2,10 @@ import { Image, View, Text, Button, SafeAreaView, StyleSheet, ActivityIndicator 
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPreloadManager } from "@react-navigation/native"
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { Alert } from 'react-native';
-
+import { AppContext } from "../../AppContext";
 
 const QRScanner = () => {
   const navigation = useNavigation();
@@ -13,6 +13,7 @@ const QRScanner = () => {
   const [scanned, setScanned] = useState(false);
   const [id, setId] = useState(null);
   const [error, setError] = useState('');
+  const {phoneNumber, setphoneNumber} = useContext(AppContext);
 
   const [BfirstName, setBFirstName] = useState('');
   const [BlastName, setBLastName] = useState('');
@@ -21,6 +22,7 @@ const QRScanner = () => {
   const [amount, setAmount] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isredeemed, setIsredeemed] = useState(false);
+  const [allowScan, setallowScan] = useState(false);
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -37,7 +39,7 @@ const QRScanner = () => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     //setText(data);
-    fetchVoucherInfo(data);
+     fetchVoucherInfo(data);
     setId(data);
    console.log(id);
     console.log('Type: ' + type + '\nData: ' + data)
@@ -58,7 +60,7 @@ const QRScanner = () => {
       </View>)
   }
   const updateVoucher = async (id) => {
-  if(isredeemed === false)
+  if(isredeemed === false && allowScan === true)
   {
     setIsLoading(true);
     try {
@@ -79,7 +81,7 @@ const QRScanner = () => {
      setIsLoading(false);
    }
   }
-  else
+  else if (isredeemed === true)
   {
     
     Alert.alert("Voucher has already been redeemed 😔");
@@ -89,9 +91,18 @@ const QRScanner = () => {
      }, 2000); 
     
   }
+  else
+  {
+    Alert.alert("You don't have permission to scan the voucher!");
+    setTimeout(() => {
+      setError('');
+      navigation.navigate('serviceProviderHomePage'); // Replace 'Login' with the name of your login screen
+    }, 2000); 
+  }
     
   };
 
+  
   async function fetchVoucherInfo(data) {
     setIsLoading(true);
     try {
@@ -104,6 +115,7 @@ const QRScanner = () => {
       setBFirstName(voucher.BeneficiaryUser.Users.firstName);
       setBLastName(voucher.BeneficiaryUser.Users.lastName);
       setIsredeemed(voucher.voucherRedeemed);
+      setallowScan(voucher. ServiceProviderUser.Users.phoneNumber === phoneNumber);
     } catch (error) {
       console.error(error);
       console.log(error);

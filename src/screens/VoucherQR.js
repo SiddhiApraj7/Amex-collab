@@ -74,10 +74,10 @@ const VoucherQR = ({ route }) => {
         <SafeAreaView className="bg-white h-full">
             <View className="flex-col h-full justify-between">
                 <View className="items-center  bg-white">
-                    <Image
-                        className="h-36 w-96 mt-5"
-
-                        source={require('../../assets/e-rupi.png')}></Image>
+                <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
                     <View className="bg-blue-200 h-3/4 w-11/12  rounded-md">
                     <View className=" items-center">
                         <Text className="font-semibold font mt-2">Unique Voucher ID :</Text>

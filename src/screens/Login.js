@@ -63,7 +63,7 @@ const Login = () => {
 
             
             <Image
-            className="h-36 w-96 mt-5"
+            className="h-14 w-1/2 mt-10"
             
             source = {require('../../assets/e-rupi.png')}></Image>
             
