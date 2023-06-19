@@ -192,7 +192,7 @@ const ServiceProviderHomePage = () => {
     </View>
 
 
-    <ScrollView clasName="h-20">
+    <ScrollView className="h-20 mb-14">
     {voucherList.length === 0 || (voucherList.length === 1 && Object.keys(voucherList[0]).length === 0) ? (
               <Text className="text-gray-400  font-extralight p-3 text-center">No Transactions</Text>
             ) : (
