@@ -15,7 +15,7 @@ const HomePage = () => {
 
             
             <Image
-            className="h-72 w-72 mt-10 mb-4"
+            className="h-44 w-40 mt-20 mb-4"
             
             source = {require('../../assets/logo-no-background.png')}></Image>
             
