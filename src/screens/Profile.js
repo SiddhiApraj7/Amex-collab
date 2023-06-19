@@ -123,11 +123,12 @@ const Profile = () => {
 
       <View className=" items-center ">
    
-          <Image
-             className="h-36 w-52 mt-4"
-             source = {require('../../assets/e-rupi.png')}></Image>
+      <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
 
-        <View className="bg-indigo-200 h-40 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
+        <View className="bg-blue-200 h-40 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
           
                 <View className="rounded-full  h-16 w-16 mt-12  mx-5 z-50 shadow-lg items-center  ">
                     <View className="my-auto mx-auto">
@@ -157,7 +158,7 @@ const Profile = () => {
         </View>
 {is_PvtOrg === true && 
 
-<View className="bg-indigo-200 mt-5  h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
+<View className="bg-blue-200 mt-5  h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
           
 <View className="rounded-md text-gray-500 h-16 w-16 my-auto mx-5 z-50 shadow-lg items-center  ">
             <View className="my-auto mx-auto text-gray-500">
@@ -171,7 +172,7 @@ const Profile = () => {
     
     <View className="flex-row justify-evenly" >
     <Text className="text-right font-medium text-sm text-stone-600"> {CompanyName}</Text>
-    <Text>|</Text>
+    <Text>  |  </Text>
     <Text className="text-right font-md text-sm text-stone-600"> {positionInCompany}</Text>
     </View>
    
@@ -185,7 +186,7 @@ const Profile = () => {
         
     {is_serviceProvider === true &&
     
-    <View className="bg-indigo-200 mt-5 h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
+    <View className="bg-blue-200 mt-5 h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
           
     <View className="rounded-md  h-16 tex-gray-400 w-16 my-auto mx-5 z-50 shadow-lg items-center  ">
                 <View className="my-auto mx-auto">
@@ -215,7 +216,7 @@ const Profile = () => {
     }
         
 
-        <View className="bg-indigo-200 mt-5  h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
+        <View className="bg-blue-200 mt-5  h-30 p-1 w-11/12 rounded-lg shadow-xl flex-row justify-between shadow-black  z-30">
           
                 <View className="rounded-md text-gray-500 h-16 w-16 my-auto mx-5 z-50 shadow-lg items-center  ">
                             <View className="my-auto mx-auto text-gray-500">
@@ -244,7 +245,7 @@ const Profile = () => {
         </View>
 
         <TouchableOpacity className="h-24"onPress={() => {navigation.navigate("home")}}>
-            <View className="bg-gray-500 p-2 rounded-lg mt-5 "><Text className="text-white">Logout</Text></View>
+            <View className="bg-gray-500 pt-2 pb-2 pr-4 pl-4 rounded-lg mt-5 "><Text className="text-white">Logout</Text></View>
         </TouchableOpacity>
         
 

@@ -50,10 +50,10 @@ const UserDetails = () => {
   return (
     <SafeAreaView className="bg-white h-full">
       <View className="items-center  bg-white">
-        <Image
-          className="h-36 w-96 mt-5"
-          source={require("../../assets/e-rupi.png")}
-        ></Image>
+      <Image
+          className="h-14 w-1/2 mt-10 mb-9"
+
+          source={require('../../assets/e-rupi.png')}></Image>
 
         <Text className="font-bold text-xl p-3 mb-5">User Details</Text>
 

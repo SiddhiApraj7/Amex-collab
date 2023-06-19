@@ -55,8 +55,8 @@ const SelectServiceProvider_comp = () => {
               <Image className="h-14 w-20 mt-4 ml-2" source={require('../../assets/sp.png')} />
               </View>
             <View className="flex ">
-            <View className="flex-row mx-auto space-x-8">
-                <Text className="font-light text-md p-1 ml-6 mt-5">{provider.BusinessName}</Text>
+            <View className="flex-row mx-auto space-x-5">
+                <Text className="font-medium text-md p-1 ml-6 mt-5 ">{provider.BusinessName}</Text>
                 <Text className="font-light text-md p-1 mt-5">{provider.Users.phoneNumber}</Text>
               </View>
               <View className="ml-6">

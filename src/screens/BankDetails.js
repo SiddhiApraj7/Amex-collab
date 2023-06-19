@@ -63,8 +63,8 @@ const BankDetails = () => {
       <View className="items-center  bg-white">
 
 
-        <Image
-          className="h-36 w-96 mt-5"
+      <Image
+          className="h-14 w-1/2 mt-10 mb-9"
 
           source={require('../../assets/e-rupi.png')}></Image>
 

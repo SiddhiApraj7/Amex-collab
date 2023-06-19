@@ -110,10 +110,10 @@ const RequestedVouchers = () => {
         <View className="items-center  bg-white">
 
 
-          <Image
-            className="h-36 w-96 mt-5"
-
-            source={require('../../assets/e-rupi.png')}></Image>
+        <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
         </View>
 
         {isLoading ? (
@@ -122,7 +122,7 @@ const RequestedVouchers = () => {
           </View>
         ) : (
 
-          <View className="flex-row gap-2 ml-3 w-96 justify-between">
+          <View className="flex-row gap-2  w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100">
             <View className="flex-row gap-1">
               <Ionicons name="person-circle" size={36}></Ionicons>
               <Text className="font-medium text-lg">{firstName} {lastName}</Text>
@@ -130,7 +130,7 @@ const RequestedVouchers = () => {
 
             {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
             <View className=" mt-3 mr-10">
-              <Text className="font-medium text-lg">{bankName}</Text>
+              <Text className="font-medium text-lg mt-1">{bankName}</Text>
               {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
               {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
             </View>
@@ -138,16 +138,16 @@ const RequestedVouchers = () => {
 
         )}
 
-        <View className="mt-1 mb-3">
+        <View className="mt-4 mb-3">
           <Text className="text-gray-500 font-bold tracking-widest mx-auto">ALL REQUESTED VOUCHERS</Text>
         </View>
 
         {isLoading ? (
-          <View className=" justify-center items-center z-40">
+          <View className=" justify-center items-center mt-6">
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
         ) : (
-          <ScrollView className="h-3/5  mb-14">
+          <ScrollView className="h-4/6  mb-14">
             <View className="mt-2 mb-3 border-b-2 border-gray-300 p-1 items-center">
               <Text className="text-gray-500 mx-auto font-light">ACTIVE VOUCHERS</Text>
             </View>

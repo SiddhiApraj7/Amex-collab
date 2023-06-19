@@ -1,6 +1,6 @@
-import { View, Text, SafeAreaView, Image, Button , ScrollView, TextInput, Alert, ActivityIndicator} from 'react-native'
+import { View, Text, SafeAreaView, Image, Button, ScrollView, TextInput, Alert, ActivityIndicator } from 'react-native'
 import React from 'react'
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
@@ -18,30 +18,30 @@ const GenerateVoucher = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
-  const [error,setError] = useState('');
- const { phoneNumber, setPhoneNumber } = useContext(AppContext);
- const [isLoading, setIsLoading] = useState(true);
- const [isValidB, setisValidB] = useState(false);
+  const [error, setError] = useState('');
+  const { phoneNumber, setPhoneNumber } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isValidB, setisValidB] = useState(false);
 
- const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
- async function checkValidBeneficiary(phoneNumber) {
-  setIsLoading(true);
-  try {
-    const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
-    console.log(response.data);
-    const user = response.data;
-    return user.isBeneficiary;
-  } catch (error) {
-    console.error(error);
-    return false; // Return false if an error occurs
-  } finally {
-    setIsLoading(false);
+  const { serviceProviderChoice, setserviceProviderChoice } = useContext(AppContext);
+  async function checkValidBeneficiary(phoneNumber) {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
+      console.log(response.data);
+      const user = response.data;
+      return user.isBeneficiary;
+    } catch (error) {
+      console.error(error);
+      return false; // Return false if an error occurs
+    } finally {
+      setIsLoading(false);
+    }
   }
-}
 
 
   async function fetchUserInfo(phoneNumber) {
-    
+
     try {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
@@ -57,32 +57,32 @@ const GenerateVoucher = () => {
     }
   }
 
- 
+
 
   useEffect(() => {
     fetchUserInfo(phoneNumber);
   }, []);
 
   async function fetchSPInfo(phoneNumber) {
-    
+
     try {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
       setBusinessTag(serviceProvider.BusinessTag);
       setBusinessName(serviceProvider.BusinessName);
-      
+
     } catch (error) {
       console.error(error);
       console.log(error);
     }
-  } 
-  
+  }
+
   useEffect(() => {
     if (serviceProviderChoice) {
       fetchSPInfo(serviceProviderChoice);
     }
-  }, [serviceProviderChoice]); 
+  }, [serviceProviderChoice]);
 
   const createVoucher = async (data) => {
     console.log(phoneNumber);
@@ -90,9 +90,9 @@ const GenerateVoucher = () => {
     console.log(data.phoneNumberB);
     console.log(serviceProviderChoice);
     setIsLoading(true);
-  
+
     const isValidBeneficiary = await checkValidBeneficiary(data.phoneNumberB);
-  
+
     if (isValidBeneficiary) {
       try {
         const response = await axios.post("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-voucher", {
@@ -122,50 +122,50 @@ const GenerateVoucher = () => {
       setIsLoading(false); // Set isLoading to false in the else block as well
     }
   };
-  
 
-  
+
+
   return (
     <SafeAreaView className="bg-white h-full">
-    <View className="items-center  bg-white">
-
-    
-    <Image
-    className="h-36 w-52 "
-    
-    source = {require('../../assets/e-rupi.png')}></Image>
+      <View className="items-center  bg-white">
 
 
-   {isLoading ? (
-        <View className=" justify-center items-center z-40">
-        <ActivityIndicator size="large" color="#0000ff" />
-        </View>
+        <Image
+          className="h-14 w-1/2 mt-10 mb-9"
+
+          source={require('../../assets/e-rupi.png')}></Image>
+
+
+        {isLoading ? (
+          <View className=" justify-center items-center z-40">
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
         ) : (
 
-          
-        <View>
-        <View className="flex-row gap-2 ml-7 w-96 mx-auto justify-between bg-neutral-100 p-2 border-b-2 border-neutral-200">
-          <View className="flex-row gap-1">
-          <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="font-normal text-lg pt-1 ">{firstName} {lastName}</Text>
-          </View>
-            <View className=" mt-3 mr-10">
-            <Text className="font-light text-lg pt-2">{bankName}</Text>
 
+          <View>
+            <View className="flex-row gap-2 ml-7 w-96 mx-auto justify-between bg-neutral-100 p-2 border-b-2 border-neutral-200">
+              <View className="flex-row gap-1">
+                <Ionicons name="person-circle" size={36}></Ionicons>
+                <Text className="font-normal text-lg pt-1 ">{firstName} {lastName}</Text>
+              </View>
+              <View className=" mt-3 mr-10">
+                <Text className="font-light text-lg pt-2">{bankName}</Text>
+
+              </View>
             </View>
-        </View>
-        </View>
+          </View>
 
         )}
 
 
-    <View className="mt-2">
-    <Text className="font-bold text-lg p-1 mb-2">Generate Voucher</Text>
-    </View>
+        <View className="mt-2 mb-3 items-center">
+          <Text className="text-gray-600 font-bold tracking-widest">GENERATE VOUCHER</Text>
+        </View>
 
-    <View className="bg-blue-300 h-4/5 w-full rounded-lg">
-        <View className="px-5 py-3 flex-col gap-1">
-            <Text className="font-bold text-sm">Phone Number of Beneficiary</Text>
+        <View className="bg-blue-300 w-11/12 rounded-lg ">
+          <View className="px-5 py-2 flex-col">
+            <Text className="font-semibold text-sm">Phone number of Beneficiary</Text>
             <Number_input_ud
               placeholder="ex. +917766"
               secureTextEntry={true}
@@ -173,10 +173,10 @@ const GenerateVoucher = () => {
               name="phoneNumberB"
               control={control}
             />
-        </View>
+          </View>
 
-        <View className="px-5 py-1 flex-col gap-1">
-            <Text className="font-bold text-sm">Validity</Text>
+          <View className="px-5 py-1 flex-col gap-1">
+            <Text className="font-semibold text-sm">Validity</Text>
             <Number_input_ud
               placeholder="ex. 23-10-23"
               secureTextEntry={true}
@@ -184,10 +184,10 @@ const GenerateVoucher = () => {
               name="validity"
               control={control}
             />
-        </View>
+          </View>
 
-        <View className="px-5 py-1 flex-col gap-2">
-            <Text className="font-bold text-sm">Amount in e₹</Text>
+          <View className="px-5 py-1 flex-col gap-2">
+            <Text className="font-semibold text-sm">Amount in e₹</Text>
             <Number_input_ud
               placeholder="ex. 100"
               secureTextEntry={true}
@@ -195,48 +195,48 @@ const GenerateVoucher = () => {
               name="amount"
               control={control}
             />
-        </View>
-
-        <View className="mx-28 py-2  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Search Service Provider" onPress={() => {
-              navigation.navigate("selectServiceProvider");
-            }}/></View>
-        <View className="p-3">
-        <Text className="font-bold mb-2 text-sm">Service Provider Name</Text>
-          <View className="p-2 bg-gray-100 rounded-lg w-full h-10">
-          
-          <Text className="font-semibold mx-auto ">{serviceProviderChoice ? BusinessName: 'Selected Service Provider'}</Text>
-          
-          </View></View>
-
-        <View className="text-center items-center">
-        
-        </View>
-        
-        <View>
-       
-            <View className="flex-row gap-5 items-center mx-auto"> 
-                <Text className="text-lg mx-auto"> Select Tag</Text>
-
-                <View className="bg-gray-100 h-8 w-1/3 rounded-lg" ><Text className="font-semibold mx-auto my-auto">{serviceProviderChoice ? BusinessTag : 'No Tag Selected'}</Text></View>
-            </View>
-            
-        </View>
-
-        <View className="mx-28 py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color = "#82E0AA" title="Make Request" onPress={handleSubmit(createVoucher)}/></View>
-
-        {isLoading && (
-          <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
           </View>
-        )} 
-        
-    </View>
-    
 
-  
-    
-</View>
-</SafeAreaView>
+          <View className="mx-auto py-2 w-2/3  mt-1 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" title="Search Service Provider" onPress={() => {
+            navigation.navigate("selectServiceProvider");
+          }} /></View>
+          <View className="p-3">
+            <Text className="font-semibold mb-2 text-sm">Service Provider Name</Text>
+            <View className="p-2 bg-gray-100 rounded-lg w-full h-10">
+
+              <Text className="font-light text-neutral-400 mx-auto ">{serviceProviderChoice ? BusinessName : 'Selected Service Provider'}</Text>
+
+            </View></View>
+
+          <View className="text-center items-center">
+
+          </View>
+
+          <View>
+
+            <View className="flex-row gap-5 items-center mx-auto">
+              <Text className="text-md mx-auto font-semibold"> Selected Tag</Text>
+
+              <View className="bg-gray-100 h-8 w-1/3 rounded-lg" ><Text className="font-light mx-auto my-auto  text-neutral-400">{serviceProviderChoice ? BusinessTag : 'No Tag Selected'}</Text></View>
+            </View>
+
+          </View>
+
+          <View className="mx-auto py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" title="Make Request" onPress={handleSubmit(createVoucher)} /></View>
+
+          {isLoading && (
+            <View className=" justify-center items-center z-40">
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
+
+        </View>
+
+
+
+
+      </View>
+    </SafeAreaView>
   )
 }
 
