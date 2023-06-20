@@ -11,7 +11,7 @@ const Walletcard = ({children}) => {
               <View className="my-auto align-center">
               <Ionicons name="wallet-outline" size={56} ></Ionicons>
               </View>
-            {children}
+              <Text className="text-xs">{children}</Text>
             </View>
     </View>
     

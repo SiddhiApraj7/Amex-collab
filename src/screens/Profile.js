@@ -9,6 +9,8 @@ import { useContext, useState } from "react";
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
 import CryptoJS from "react-native-crypto-js";
+
+
 const Profile = () => {
 
   const navigation = useNavigation();
@@ -35,17 +37,35 @@ const Profile = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
-      setFirstName(user.firstName);
+      /* setFirstName(user.firstName);
       setLastName(user.lastName);
-      setBankName(user.bankName);
+      setBankName(user.bankName); */
+      let fn  = CryptoJS.AES.decrypt(user.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(user.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(user.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
+
       set_is_Benefiary(user.isBeneficiary);
       set_is_PvtOrg(user.isPvtOrg);
       set_is_serviceProvider(user.isServiceProvider);
-      setBankAccHolderName(user.bankAccountHolderName);
+      /* setBankAccHolderName(user.bankAccountHolderName); */
+
+      let ahn  = CryptoJS.AES.decrypt(user.bankAccountHolderName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankAccHolderName(ahn.toString(CryptoJS.enc.Utf8));
+      console.log(bankAccountHolderName);
+
       let decryptaccNumber  = CryptoJS.AES.decrypt(user.accountNumber, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
-let originalaccNumber = decryptaccNumber.toString(CryptoJS.enc.Utf8);
-console.log(originalaccNumber);
+      let originalaccNumber = decryptaccNumber.toString(CryptoJS.enc.Utf8);
+      console.log(originalaccNumber);
       setAccountNumber(originalaccNumber);
+
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -81,7 +101,12 @@ console.log(originalaccNumber);
       const serviceProvider = response.data;
       
       setBusinessName(serviceProvider.BusinessName);
-      setPositionInBusiness(serviceProvider.PositionInBusiness);
+      
+
+      let pb  = CryptoJS.AES.decrypt(serviceProvider.PositionInBusiness, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setPositionInBusiness(pb.toString(CryptoJS.enc.Utf8));
+      console.log(PositionInBusiness);
+
       setBusinessTag(serviceProvider.BusinessTag);
       
     } catch (error) {
@@ -99,11 +124,29 @@ console.log(originalaccNumber);
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
-      setFirstName(pvtorg.Users.firstName);
+      /* setFirstName(pvtorg.Users.firstName);
       setLastName(pvtorg.Users.lastName);
       setBankName(pvtorg.Users.bankName);
       setCompanyName(pvtorg.CompanyName);
-      setPositionInCompany(pvtorg.positionInCompany);
+      setPositionInCompany(pvtorg.positionInCompany); */
+      let fn  = CryptoJS.AES.decrypt(pvtorg.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(pvtorg.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(pvtorg.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
+
+      setCompanyName(pvtorg.CompanyName);
+      
+
+      let pb  = CryptoJS.AES.decrypt(pvtorg.positionInCompany, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setPositionInCompany(pb.toString(CryptoJS.enc.Utf8));
+      console.log(positionInCompany);
 
     } catch (error) {
       console.error(error);

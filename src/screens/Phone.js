@@ -43,7 +43,7 @@ const Phone = () => {
       }
       else{
         try {
-          const response = await axios.post('http://192.168.1.45:3000/create-user', {
+          const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
             phoneNumber: phoneNumber,
           });
     

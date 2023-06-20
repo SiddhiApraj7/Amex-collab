@@ -6,7 +6,6 @@ import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { AppContext } from '../../AppContext';
-import CryptoJS from "react-native-crypto-js";
 // post menthod 
 import axios from 'axios';
 // add phone number input box
@@ -19,29 +18,25 @@ const Login = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSignInPress = async (data) => {
+  const VerifyUser = async(data) => {
     setIsLoading(true);
-    
     try {
-      const response = await axios.post('http://192.168.1.45:3000/login', {
+      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/login', {
         phoneNumber: data.phoneNumber,
-        pin : data.pin
+        walletPin : data.pin,
       });
-  
+
       console.log(response.data);
-      // Assuming the response contains the hashed PIN and salt from the server
-  
-      const valid = response.data;
-  
-      if (valid) {
+      if(response.data.isPinMatched === true){
         setPhoneNumber(data.phoneNumber);
         navigation.navigate('selectRole');
-      } else {
+      }
+      else{
         alert('Incorrect Pin. Please try again.');
         setError('Incorrect Pin. Please try again.');
         setTimeout(() => {
           setError('');
-        }, 4000);
+        }, 4000); // Redirect to login screen after 3 seconds
       }
     } catch (error) {
       console.log(error);
@@ -49,12 +44,18 @@ const Login = () => {
       setError('Error during verification. Please try again.');
       setTimeout(() => {
         setError('');
-        navigation.navigate('login');
-      }, 3000);
+        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
+      }, 3000); // Redirect to login screen after 3 seconds
     } finally {
       setIsLoading(false);
     }
-  };
+  }
+
+  const onSignInPress = async(data) => {
+    console.log(data);
+    await VerifyUser(data);
+
+  }
   
   return (
     <SafeAreaView className="bg-white h-full">

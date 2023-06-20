@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import CryptoJS from 'react-native-crypto-js';
 
 // voucher redemmed 
 
@@ -20,6 +21,8 @@ const VoucherQR = ({ route }) => {
     const [serviceProviderTag, setserviceProviderTag] = useState('');
     const [pvtOrgName, setPvtOrgName] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
     useEffect(() => {
         getVoucherInfo();
@@ -30,15 +33,31 @@ const VoucherQR = ({ route }) => {
             const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-voucher/${voucherId}`);
             console.log(response.data);
             setVoucher(response.data);
-            const beneficiaryname= ` ${response.data.BeneficiaryUser.Users.firstName} ${response.data.BeneficiaryUser.Users.lastName}`
-            setBeneficiaryName(beneficiaryname);
+
+            const fnPromise = CryptoJS.AES.decrypt(response.data.BeneficiaryUser.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        const lnPromise = CryptoJS.AES.decrypt(response.data.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+
+        const firstName = await fnPromise;
+        const lastName = await lnPromise;
+
+        const decryptedFirstName = firstName.toString(CryptoJS.enc.Utf8);
+        const decryptedLastName = lastName.toString(CryptoJS.enc.Utf8);
+
+        /* setFirstName(decryptedFirstName);
+        setLastName(decryptedLastName); */
+
+        const bName = `${decryptedFirstName} ${decryptedLastName}`;
+        setBeneficiaryName(bName);
+        console.log(beneficiaryName);
+
+
             const serviceProviderName = response.data.ServiceProviderUser.BusinessName;
             setserviceProviderName(serviceProviderName);
             const serviceProviderTag = response.data.ServiceProviderUser.BusinessTag;
             setserviceProviderTag(serviceProviderTag);
             const pvtOrgName = response.data.PvtOrgBy.CompanyName;
             setPvtOrgName(pvtOrgName);
-            console.log(beneficiaryname);
+            //console.log(beneficiaryname);
             const timestamp = response.data.voucherCreatedAt;
             const date = new Date(timestamp);
 

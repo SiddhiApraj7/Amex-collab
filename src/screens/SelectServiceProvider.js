@@ -7,6 +7,8 @@ import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState, useEffect } from "react";
 import GenerateVoucher from './GenerateVoucher';
+import CryptoJS from 'react-native-crypto-js';
+import Header from '../components/Header';
 
 const SelectServiceProvider = () => {
 
@@ -25,10 +27,18 @@ const SelectServiceProvider = () => {
     try {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
-      const pvtOrg = response.data;
-      setFirstName(pvtOrg.Users.firstName);
-      setLastName(pvtOrg.Users.lastName);
-      setBankName(pvtOrg.Users.bankName);
+      const pvtorg = response.data;
+      let fn  = CryptoJS.AES.decrypt(pvtorg.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(pvtorg.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(pvtorg.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -65,19 +75,7 @@ useEffect(() => {
         </View>
         ) : (
 
-        <View className="flex-row gap-2 ml-7 w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100">
-          <View className="flex-row gap-1">
-          <Ionicons name="person-circle" size={36}></Ionicons>
-            <Text className="font-medium text-lg">{firstName} {lastName}</Text>
-          </View>
-            
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            <View className=" mt-3 mr-10">
-            <Text className="font-medium text-lg mt-1">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            {/* <Text className="font-light text-sm mr-7">{BusinessTag}</Text> */}
-            </View>
-        </View>
+          <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1"/>
 
         )}
           

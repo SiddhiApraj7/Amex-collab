@@ -62,6 +62,7 @@ const SelectRole = () => {
 
   const createBeneficiary = async () => {
     await fetchUserRole();
+    console.log(phoneNumber);
     try {
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-beneficiary', {
         phoneNumber: phoneNumber

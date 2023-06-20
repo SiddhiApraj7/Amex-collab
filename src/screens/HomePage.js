@@ -34,6 +34,9 @@ const HomePage = () => {
                 }}className="text-black" color = "#82E0AA" title="Register"></Button></View>
             
             </View>
+
+            <Text className="mt-36 font-extralight tracking-widest text-xs">IIT ROPAR'S FINGALS</Text>
+            <Text className="mt-1 font-extralight tracking-widest text-xs">ANUSHTHA     TANISHA     SIDDHI </Text>
             
         </View>
         </SafeAreaView>

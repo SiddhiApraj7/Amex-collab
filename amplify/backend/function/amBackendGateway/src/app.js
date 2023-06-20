@@ -8,7 +8,7 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const express = require('express')
-const argon2 = require('argon2');
+
 const bodyParser = require('body-parser')
 
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
@@ -88,38 +88,6 @@ app.patch('/create-user', async (req, res) => {
   }
 });
 
-// post request to see if a user is a beneficiary
-// app.post('/is-beneficiary', async function (req, res) {
-//   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
-app.patch('/registerPin', async (req, res) => {
-  const { phoneNumber, pin } = req.body;
-  try {
-    
-
-    // Generate a random salt
-    const salt = await argon2.generateSalt();
-
-    // Hash the PIN with the generated salt using Argon2
-    const hashedPin = await argon2.hash(pin, salt);
-
-    // Store the hashed PIN and salt securely
-    // Replace this code with your actual storage mechanism
-    const updatedUser = await prisma.users.update({
-      where: { phoneNumber },
-      data: {
-        walletPin : hashedPin,
-        salt : salt
-      },
-
-    });
-
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
 app.post('/get-role', async function (req, res) {
   const { phoneNumber } = req.body;
@@ -638,31 +606,25 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { pin, phoneNumber} = req.body;
-  try {
-    
-    const user = await prisma.users.findFirst({
-      where: {
-        phoneNumber
-      },
-      select: {
-       walletPin : true,
-       salt : true
+  const { phoneNumber, walletPin } = req.body;
 
+  try {
+    const user = await prisma.Users.findFirst({
+      where: {
+        phoneNumber: phoneNumber
       }
     });
 
-    // Verify the PIN by comparing the hashed PIN with the provided PIN using Argon2
-    const isPinValid = await argon2.verify(user.walletPin, pin + user.salt);
-
-    if (isPinValid) {
-      res.status(200).json(true);
-    } else {
-      res.status(401).json(false);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+
+    const isPinMatched = user.walletPin === walletPin;
+
+    res.status(200).json({ isPinMatched });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error checking wallet PIN:', error);
+    res.status(500).json({ error: 'Failed to check wallet PIN' });
   }
 });
 
