@@ -1,4 +1,11 @@
-# Digital Wallet App
+<p align="center">
+    <img src="assets/e-rupi.png" alt="Logo" width="580" height="200">
+
+  <h1 align="center">DigiRupi App</h1>
+    <br />
+    
+  </p>
+</p>
 
 
 Introducing our user-friendly Digital Wallet App, providing a secure and convenient platform for seamless transactions. Track your transaction history, manage wallet balance, and easily transfer funds. Create and redeem e-Rupi vouchers with QR code scanning and integration with UPI apps. Safely store important documents and credit/debit card information. Our app prioritizes security with encryption and biometric authentication. Connect with banks and NPCI effortlessly. Join us and experience the future of digital payments with our comprehensive solution.
@@ -65,25 +72,25 @@ To run the Digital Wallet App, ensure that your development environment meets th
 
 Here are some screenshots of our DigiRupi App:
 
-1. **Home Screen**
+   <p align="center">
+  <img src="./assets/1.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
-   ![Home Screen](assets/1.jpeg)
+   <p align="center">
+  <img src="./assets/2.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
-3. **Transaction History**
+   <p align="center">
+  <img src="./assets/3.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
-   ![Transaction History](./assets/2.jpeg)
+   <p align="center">
+  <img src="./assets/4.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
-4. **Wallet Balance**
-
-   ![Wallet Balance](./assets/3.jpeg)
-
-5. **Voucher Redemption**
-
-   ![Voucher Redemption](./assets/4.jpeg)
-
-6. **QR Code Scanner**
-
-   ![QR Code Scanner](./assets/5.jpeg)
+   <p align="center">
+  <img src="./assets/5.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
 <h2 id="contributers">Contributors</h2>
 
