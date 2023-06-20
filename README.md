@@ -1,6 +1,7 @@
 # Digital Wallet App
 
-The Digital Wallet App is a secure and user-friendly application that allows users to store, send, and receive digital currencies or digital assets. It integrates with the e-RUPI payment system, enabling seamless transactions and ensuring high reliability, confidentiality, and platform availability.
+
+Introducing our user-friendly Digital Wallet App, providing a secure and convenient platform for seamless transactions. Track your transaction history, manage wallet balance, and easily transfer funds. Create and redeem e-Rupi vouchers with QR code scanning and integration with UPI apps. Safely store important documents and credit/debit card information. Our app prioritizes security with encryption and biometric authentication. Connect with banks and NPCI effortlessly. Join us and experience the future of digital payments with our comprehensive solution.
 
 ## Table of Contents
 
@@ -13,7 +14,7 @@ The Digital Wallet App is a secure and user-friendly application that allows use
 
 ## Overview
 
-The Digital Wallet App is built using React Native for the frontend and Node.js for the backend. It leverages Prisma as the ORM (Object-Relational Mapping) tool to interact with the database and handle data persistence. The app provides a simple and intuitive user interface, allowing users to perform various actions such as adding funds to their digital wallets, initiating transactions, and viewing transaction history.
+The Digital Wallet App is a React Native application with an AWS Amplify backend. It utilizes Prisma as the ORM tool for seamless interaction with a PostgreSQL database. The app offers a user-friendly interface for managing digital wallets, enabling users to add funds, initiate transactions, and view transaction history.
 
 ## Features
 
@@ -26,21 +27,41 @@ The Digital Wallet App is built using React Native for the frontend and Node.js 
 - In-App Alerts: The app provides timely updates and alerts for voucher usage, voucher requests, and payment receipts.
 - Database Integration: Private organizations can create databases of affected beneficiaries, and service providers can maintain a list of services offered.
 - QR Scanner and Generator: App provides facility to create a QR with necessary information about Voucher as well as facility to scan voucher to redeem it.
+- Voucher Transactions : The app allows service providers to create and distribute vouchers that can be securely redeemed within the app, while also enabling companies and 
+  organizations to create personalized vouchers for individuals, with a scanning feature for fast redemption.
 
 ## System Requirements
 
 To run the Digital Wallet App, ensure that your development environment meets the following requirements:
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-- React Native CLI (v0.64 or higher)
-- Android SDK (for Android development) or Xcode (for iOS development) or VSCode
-- Prisma CLI (v3 or higher)
-- PostgreSQL database (v12 or higher)
+- `Node.js` (v14 or higher)
+- `Expo CLI`
+- `Prisma CLI` (v3 or higher)
+- `AWS Amplify CLI`
 
 ## Installation
 
-## Usage
+- Make sure you have Git and Node.js installed on your computer.
+- Clone the repository by running the following command:
+  <pre><code>
+    git clone <repository-url>
+  </code></pre>
+- Install Expo CLI globally by running the following command:
+  <pre><code>
+   npm install -g expo-cli
+  </code></pre>
+- Install the app dependencies by running the following command:
+   <pre><code>
+    npm install
+  </code></pre>
+- Start the Expo development server:
+  <pre><code>
+   expo start
+  </code></pre>
+- Download and install the Expo app on your mobile device from the App Store or Google Play.
+- Scan the QR code displayed in the terminal using the Expo app.
+- The app will compile and launch on your mobile device, allowing you to test and develop locally.
+
 
 ## Contributers
 * Anushtha Prakash
