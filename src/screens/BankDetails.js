@@ -9,6 +9,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { AppContext } from '../../AppContext';
 import axios from 'axios';
 import { useContext } from "react";
+import CryptoJS from "react-native-crypto-js";
 
 
 const BankDetails = () => {
@@ -38,15 +39,25 @@ const BankDetails = () => {
     console.log(phoneNumber);
     console.log(value);
     console.log(data);
+
     setIsLoading(true);
+
+    let cipherAccountNumber = CryptoJS.AES.encrypt(data.accountNumber,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherAccountNumber);
+
+    let cipherAccountHolderName = CryptoJS.AES.encrypt(data.accHolderName,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherAccountHolderName);
+
+    let cipherBankName = CryptoJS.AES.encrypt(value,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherBankName);
 
      try {
       
       const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user", {
         phoneNumber: phoneNumber,
-        bankAccountHolderName : data.accHolderName,
-        accountNumber : data.accountNumber,
-        bankName : value,
+        bankAccountHolderName : cipherAccountHolderName,
+        accountNumber : cipherAccountNumber,
+        bankName : cipherBankName,
         
       });
       console.log(response.data);

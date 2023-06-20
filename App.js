@@ -34,6 +34,7 @@ import VoucherQR from './src/screens/VoucherQR';
 import VoucherGenerated from './src/screens/VoucherGenerated';
 
 import Profile from './src/screens/Profile';
+import testing from './src/screens/testing';
 
 Amplify.configure(awsExports);
 
@@ -51,6 +52,7 @@ export default function App() {
           screenOptions={{
             headerShown: false
           }}>
+           {/*  <Stack.Screen name="testing" component={testing}></Stack.Screen> */}
           <Stack.Screen name="home" component={HomePage}></Stack.Screen>
 
       <Stack.Screen name="fingerprint" component = {Fingerprint}></Stack.Screen>
@@ -58,7 +60,7 @@ export default function App() {
       {/* <Stack.Screen name="otp_test" component={Phone_test}></Stack.Screen> */}
       <Stack.Screen name="login" component={Login}></Stack.Screen>
        {/* <Stack.Screen name="confirmationCode" component={ConfirmationCode}></Stack.Screen> */}
-       <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
+        <Stack.Screen name="userDetails" component = {UserDetails}></Stack.Screen>
       <Stack.Screen name="bankDetails" component = {BankDetails}></Stack.Screen>
       <Stack.Screen name="pinRegister" component = {PinRegister}></Stack.Screen>
       {/* <Stack.Screen name="e_rupi_wallet" component={E_rupi_wallet}></Stack.Screen> */}
@@ -69,14 +71,14 @@ export default function App() {
       <Stack.Screen name="pvtOrgInfo" component={PvtOrgInfo}></Stack.Screen>
           <Stack.Screen name="pvtOrgHomePage" component={PvtOrgHomePage}></Stack.Screen>
           <Stack.Screen name="generateVoucher" component={GenerateVoucher}></Stack.Screen>
-          <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen>
+          <Stack.Screen name="selectServiceProvider" component={SelectServiceProvider}></Stack.Screen> 
           <Stack.Screen name="serviceProviderHomePage" component={ServiceProviderHomePage}></Stack.Screen>
           <Stack.Screen name="requestedVouchers" component={RequestedVouchers}></Stack.Screen>
           <Stack.Screen name="serviceProviderInfo" component={ServiceProviderInfo}></Stack.Screen>
           <Stack.Screen name="qrScanner" component={QRScanner}></Stack.Screen>
           <Stack.Screen name="voucherQR" component={VoucherQR}></Stack.Screen>
           <Stack.Screen name="voucherGenerated" component={VoucherGenerated}></Stack.Screen>
-          <Stack.Screen name="profile" component={Profile}></Stack.Screen>
+          <Stack.Screen name="profile" component={Profile}></Stack.Screen> 
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

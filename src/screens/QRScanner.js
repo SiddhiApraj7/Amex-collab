@@ -150,10 +150,10 @@ const QRScanner = () => {
       <View className="items-center mt-2 p-1 bg-white">
 
 
-        <Image
-          className="h-36 w-36"
-
-          source={require('../../assets/e-rupi.png')}></Image>
+      <Image
+            className="h-14 w-1/2 mt-10 mb-9"
+            
+            source = {require('../../assets/e-rupi.png')}></Image>
 
         <View className="">
           <BarCodeScanner
