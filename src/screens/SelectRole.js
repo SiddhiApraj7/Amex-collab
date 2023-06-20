@@ -19,16 +19,11 @@ const SelectRole = () => {
 
   const fetchUserRole = async () => {
     try {
-      // Make API call to check user role
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-role', {
         phoneNumber: phoneNumber
       });
-      // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to check user role
       const data = response.data;
       console.log(data);
-
-
-      // Update the state based on user role
       setIsBeneficiary(data.isBeneficiary);
       setIsServiceProvider(data.isServiceProvider);
       setIsPvtOrg(data.isPvtOrg);
@@ -41,21 +36,15 @@ const SelectRole = () => {
   };
 
   useEffect(() => {
-    // Fetch user data and check role status
     fetchUserRole();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        // Prevent going back by returning true
         return true;
       };
-
-      // Add event listener for the back button press
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
-      // Remove event listener when the component is unfocused or unmounted
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [])
   );
@@ -67,7 +56,7 @@ const SelectRole = () => {
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-beneficiary', {
         phoneNumber: phoneNumber
       });
-       
+
       if (response.status === 200) {
         console.log('Beneficiary created successfully');
         console.log(response.data);
@@ -82,21 +71,21 @@ const SelectRole = () => {
   };
 
 
- const onBeneficiaryPress = async () => {
-  setIsLoading(true);
-  await fetchUserRole();
+  const onBeneficiaryPress = async () => {
+    setIsLoading(true);
+    await fetchUserRole();
     if (is_Beneficiary) {
       navigation.navigate('beneficiaryHomePage');
     } else {
-     await createBeneficiary();
+      await createBeneficiary();
       navigation.navigate('beneficiaryHomePage');
-    } 
+    }
     setIsLoading(false);
   };
 
-const onServiceProviderPress = async () => {
-  setIsLoading(true);
-  await fetchUserRole();
+  const onServiceProviderPress = async () => {
+    setIsLoading(true);
+    await fetchUserRole();
     if (is_ServiceProvider) {
       navigation.navigate('serviceProviderHomePage');
     } else {
@@ -105,9 +94,9 @@ const onServiceProviderPress = async () => {
     setIsLoading(false);
   };
 
- const onPvtOrgPress = async () => {
-  setIsLoading(true);
-  await fetchUserRole();
+  const onPvtOrgPress = async () => {
+    setIsLoading(true);
+    await fetchUserRole();
     if (is_PvtOrg) {
       navigation.navigate('pvtOrgHomePage');
     } else {
@@ -123,54 +112,54 @@ const onServiceProviderPress = async () => {
       <View className="items-center  bg-white">
 
 
-      <Image
-            className="h-14 w-1/2 mt-10"
-            
-            source = {require('../../assets/e-rupi.png')}></Image>
+        <Image
+          className="h-14 w-1/2 mt-10"
+
+          source={require('../../assets/e-rupi.png')}></Image>
 
 
-         
 
-          <Text className="font-bold text-xl p-3 mb-5">Select Role</Text>
 
-          <View className="h-full w-full bg-blue-300 rounded-t-3xl">
+        <Text className="font-bold text-xl p-3 mb-5">Select Role</Text>
 
-            <View className="mx-10 p-4 mt-16 mb-5 rounded-2xl">
-              <Button
-                color="#236DE7"
-                className="p-4"
-                title="Beneficiary"
-                onPress={onBeneficiaryPress}
-              />
-            </View>
+        <View className="h-full w-full bg-blue-300 rounded-t-3xl">
 
-            <View className="mx-10 p-4 mt-9 mb-5 rounded-2xl">
-              <Button
-                color="#236DE7"
-                className="p-4"
-                title="Service Provider"
-                onPress={onServiceProviderPress}
-              />
-            </View>
-
-            <View className="mx-10 p-4 mt-9 mb-10 rounded-2xl">
-              <Button
-                color="#236DE7"
-                className="p-4"
-                title="Private Organization"
-                onPress={onPvtOrgPress}
-              />
-            </View>
-
-            {isLoading && (
-          <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
+          <View className="mx-10 p-4 mt-16 mb-5 rounded-2xl">
+            <Button
+              color="#236DE7"
+              className="p-4"
+              title="Beneficiary"
+              onPress={onBeneficiaryPress}
+            />
           </View>
-        )}
 
+          <View className="mx-10 p-4 mt-9 mb-5 rounded-2xl">
+            <Button
+              color="#236DE7"
+              className="p-4"
+              title="Service Provider"
+              onPress={onServiceProviderPress}
+            />
           </View>
+
+          <View className="mx-10 p-4 mt-9 mb-10 rounded-2xl">
+            <Button
+              color="#236DE7"
+              className="p-4"
+              title="Private Organization"
+              onPress={onPvtOrgPress}
+            />
+          </View>
+
+          {isLoading && (
+            <View className=" justify-center items-center z-40">
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
 
         </View>
+
+      </View>
     </SafeAreaView>
   )
 }

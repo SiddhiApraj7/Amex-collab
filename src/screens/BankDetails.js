@@ -1,10 +1,9 @@
-import { View, Text, TextInput, Image, SafeAreaView, Button, ActivityIndicator } from 'react-native'
+import { View, Text, Image, SafeAreaView, Button, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
 import NumberInput from '../components/NumberInput';
-import { useForm, Controller } from "react-hook-form";
-import { useState, useRef } from 'react';
+import { useForm } from "react-hook-form";
+import { useState} from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import { AppContext } from '../../AppContext';
 import axios from 'axios';
@@ -35,30 +34,30 @@ const BankDetails = () => {
 
 
   const updateUser = async (data) => {
-    
+
     console.log(phoneNumber);
     console.log(value);
     console.log(data);
 
     setIsLoading(true);
 
-    let cipherAccountNumber = CryptoJS.AES.encrypt(data.accountNumber,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    let cipherAccountNumber = CryptoJS.AES.encrypt(data.accountNumber, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
     console.log(cipherAccountNumber);
 
-    let cipherAccountHolderName = CryptoJS.AES.encrypt(data.accHolderName,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    let cipherAccountHolderName = CryptoJS.AES.encrypt(data.accHolderName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
     console.log(cipherAccountHolderName);
 
-    let cipherBankName = CryptoJS.AES.encrypt(value,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    let cipherBankName = CryptoJS.AES.encrypt(value, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
     console.log(cipherBankName);
 
-     try {
-      
+    try {
+
       const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user", {
         phoneNumber: phoneNumber,
-        bankAccountHolderName : cipherAccountHolderName,
-        accountNumber : cipherAccountNumber,
-        bankName : cipherBankName,
-        
+        bankAccountHolderName: cipherAccountHolderName,
+        accountNumber: cipherAccountNumber,
+        bankName: cipherBankName,
+
       });
       console.log(response.data);
       navigation.navigate('pinRegister');
@@ -74,7 +73,7 @@ const BankDetails = () => {
       <View className="items-center  bg-white">
 
 
-      <Image
+        <Image
           className="h-14 w-1/2 mt-10 mb-9"
 
           source={require('../../assets/e-rupi.png')}></Image>
@@ -105,7 +104,7 @@ const BankDetails = () => {
                 placeholder="Select Bank"
                 searchPlaceholder="Search..."
                 onChange={item => {
-                  
+
                   setValue(item.label);
 
                 }}
@@ -129,10 +128,10 @@ const BankDetails = () => {
           </View>
 
           {isLoading && (
-          <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
+            <View className=" justify-center items-center z-40">
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
 
         </View>
 

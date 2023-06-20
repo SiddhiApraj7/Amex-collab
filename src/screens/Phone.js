@@ -1,21 +1,19 @@
-import { View, Text, SafeAreaView, Button, TextInput, Image, ScrollView, StyleSheet, Alert, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, Button, TextInput, Image, Alert, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useState, useRef, useContext } from 'react';
 import { useNavigation } from "@react-navigation/native";
-import CustomInput from '../components/CustomInput';
 import { FirebaseRecaptchaVerifierModal, FirebaseAuthApplicationVerifier } from 'expo-firebase-recaptcha';
 import { firebaseConfig } from '../../config';
 import firebase from 'firebase/compat/app';
-import NumberInput from '../components/NumberInput';
 import axios from 'axios';
 import { AppContext } from '../../AppContext';
 
 const Phone = () => {
-  
+
 
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
-  
+
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState('');
   const recaptchaVerifier = useRef(null);
@@ -23,38 +21,38 @@ const Phone = () => {
 
 
   const createUser = async () => {
-    // create User schema using post method using axioms and async , await
+
     setIsLoading(true);
-      
-  
+
+
     try {
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response);
-      const isalreadyUser=response.data.exists;           
+      const isalreadyUser = response.data.exists;
       console.log(phoneNumber);
       console.log(isalreadyUser);
-      if(isalreadyUser){
+      if (isalreadyUser) {
         Alert.alert("User already exists, please login.");
         setTimeout(() => {
-          navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-        }, 3000); // Redirect to login screen after 3 seconds
+          navigation.navigate('login');
+        }, 3000);
       }
-      else{
+      else {
         try {
           const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
             phoneNumber: phoneNumber,
           });
-    
+
           console.log(response.data);
           navigation.navigate('userDetails');
         } catch (error) {
           console.log(error);
           alert(error);
-       
+
         }
-  
+
       }
 
 
@@ -63,7 +61,7 @@ const Phone = () => {
     } finally {
       setIsLoading(false);
     }
-  
+
 
 
   }
@@ -83,25 +81,21 @@ const Phone = () => {
     firebase.auth().signInWithCredential(credential)
       .then(() => {
         setCode('');
-         createUser(phoneNumber);
-        // setPhoneNumber('');
-        // console.warn('Verified');
-        // navigation.navigate("userDetails");
+        createUser(phoneNumber);
       })
       .catch((error) => {
-        // setPhoneNumber('');
         alert(error);
         navigation.navigate("otp");
       })
   }
-  
+
 
   return (
     <SafeAreaView className="bg-white h-screen">
       <View className="items-center  bg-white">
 
 
-      <Image
+        <Image
           className="h-14 w-1/2 mt-10 mb-9"
 
           source={require('../../assets/e-rupi.png')}></Image>
@@ -121,34 +115,31 @@ const Phone = () => {
             />
 
           </View>
-          <View className="mx-auto p-4 mb-5  mt-3 rounded-3xl w-3/5"><Button className="text-black text-center " color="#82E0AA" onPress={sendVerification} title="Send Verification"/></View>
+          <View className="mx-auto p-4 mb-5  mt-3 rounded-3xl w-3/5"><Button className="text-black text-center " color="#82E0AA" onPress={sendVerification} title="Send Verification" /></View>
 
 
-            <Text className="text-center mt-2  mb-1 font-semibold text-lg"> Enter your OTP: </Text>
-            <View className="bg-white flex-row ml-12 mr-12 mt-3 mb-3 p-2 rounded-lg">
+          <Text className="text-center mt-2  mb-1 font-semibold text-lg"> Enter your OTP: </Text>
+          <View className="bg-white flex-row ml-12 mr-12 mt-3 mb-3 p-2 rounded-lg">
 
-              <TextInput
-                value={code}
-                onChangeText={setCode}
-                placeholder="OTP"
-                keyboardType="phone-pad"
-              />
+            <TextInput
+              value={code}
+              onChangeText={setCode}
+              placeholder="OTP"
+              keyboardType="phone-pad"
+            />
 
+          </View>
+
+          <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" onPress={confirmCode} title="Check OTP" /></View>
+
+          {isLoading && (
+            <View className=" justify-center items-center z-40">
+              <ActivityIndicator size="large" color="#0000ff" />
             </View>
-            {/* {error ? <Text style={styles.warningText}>{error}</Text> : null} */}
+          )}
 
-            <View className="mx-28 p-4 mb-10  mt-3 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" onPress={confirmCode} title="Check OTP"/></View>
-
-            {isLoading && (
-          <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
-
-          </View>
         </View>
-    
-      {/* <Button onPress={() => createUser(phoneNumber)} title="Next"/> */}
+      </View>
 
 
 
@@ -157,13 +148,6 @@ const Phone = () => {
 
   )
 }
-// const styles = {
-//   warningText: {
-//     fontSize: 16,
-//     color: 'red',
-//     marginBottom: 10,
-//   },
-// };
 
 
 export default Phone;

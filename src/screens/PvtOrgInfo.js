@@ -1,25 +1,14 @@
-import {
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  Button,
-  Image,
-  ScrollView,
-  ActivityIndicator
-} from "react-native";
+import { View, Text, TextInput, SafeAreaView, Button, Image, ActivityIndicator } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import Number_input_ud from "../components/Number_input_ud"
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext } from "react";
 import CryptoJS from 'react-native-crypto-js';
-import Header from '../components/Header';
-
 
 
 const PvtOrgInfo = () => {
@@ -27,21 +16,18 @@ const PvtOrgInfo = () => {
   const { control, handleSubmit } = useForm();
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
-  //[CompanyName, setCompanyName] = useState("");
-  //[positionInCompany, setPositionInCompany] = useState("");
 
 
   const updatePvtOrg = async (data) => {
     console.log(data);
-    // create User schema using post method using axios and async , await
     setIsLoading(true);
 
-    let cipherPositionInCompany = CryptoJS.AES.encrypt(data.positionInCompany,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    let cipherPositionInCompany = CryptoJS.AES.encrypt(data.positionInCompany, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
     console.log(cipherPositionInCompany);
 
-     try {
+    try {
       const response = await axios.post("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-pvtOrg", {
-        phoneNumber: phoneNumber,  
+        phoneNumber: phoneNumber,
         CompanyName: data.CompanyName,
         positionInCompany: cipherPositionInCompany,
       });
@@ -62,7 +48,7 @@ const PvtOrgInfo = () => {
   return (
     <SafeAreaView className="bg-white h-full">
       <View className="items-center  bg-white">
-      <Image
+        <Image
           className="h-14 w-1/2 mt-10 mb-9"
 
           source={require('../../assets/e-rupi.png')}></Image>
@@ -130,10 +116,10 @@ const PvtOrgInfo = () => {
           </View>
 
           {isLoading && (
-          <View className=" justify-center items-center z-40">
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
+            <View className=" justify-center items-center z-40">
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
 
         </View>
       </View>

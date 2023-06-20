@@ -589,7 +589,8 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
             isServiceProvider : true,
             isPvtOrg : true,
             bankAccountHolderName : true,
-            accountNumber : true
+            accountNumber : true,
+            walletPin : true
 
 
           }

@@ -5,13 +5,12 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import CryptoJS from 'react-native-crypto-js';
 
 // voucher redemmed 
 
 const VoucherQR = ({ route }) => {
-    const { voucherId,voucherRedeemed } = route.params;
+    const { voucherId, voucherRedeemed } = route.params;
     const { phoneNumber, setPhoneNumber } = useContext(AppContext);
     const [voucher, setVoucher] = useState({});
     const [createdDate, setCreatedDate] = useState('');
@@ -21,8 +20,6 @@ const VoucherQR = ({ route }) => {
     const [serviceProviderTag, setserviceProviderTag] = useState('');
     const [pvtOrgName, setPvtOrgName] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
 
     useEffect(() => {
         getVoucherInfo();
@@ -35,20 +32,18 @@ const VoucherQR = ({ route }) => {
             setVoucher(response.data);
 
             const fnPromise = CryptoJS.AES.decrypt(response.data.BeneficiaryUser.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
-        const lnPromise = CryptoJS.AES.decrypt(response.data.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+            const lnPromise = CryptoJS.AES.decrypt(response.data.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
 
-        const firstName = await fnPromise;
-        const lastName = await lnPromise;
+            const firstName = await fnPromise;
+            const lastName = await lnPromise;
 
-        const decryptedFirstName = firstName.toString(CryptoJS.enc.Utf8);
-        const decryptedLastName = lastName.toString(CryptoJS.enc.Utf8);
+            const decryptedFirstName = firstName.toString(CryptoJS.enc.Utf8);
+            const decryptedLastName = lastName.toString(CryptoJS.enc.Utf8);
 
-        /* setFirstName(decryptedFirstName);
-        setLastName(decryptedLastName); */
 
-        const bName = `${decryptedFirstName} ${decryptedLastName}`;
-        setBeneficiaryName(bName);
-        console.log(beneficiaryName);
+            const bName = `${decryptedFirstName} ${decryptedLastName}`;
+            setBeneficiaryName(bName);
+            console.log(beneficiaryName);
 
 
             const serviceProviderName = response.data.ServiceProviderUser.BusinessName;
@@ -78,50 +73,50 @@ const VoucherQR = ({ route }) => {
             // Handle error and navigation logic
         } finally {
             setIsLoading(false);
-          }
+        }
     }
 
     if (isLoading) {
         return (
-          <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </SafeAreaView>
+            <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </SafeAreaView>
         );
-      }
+    }
 
     return (
         <SafeAreaView className="bg-white h-full">
             <View className="flex-col h-full justify-between">
                 <View className="items-center  bg-white">
-                <Image
-            className="h-14 w-1/2 mt-10 mb-9"
-            
-            source = {require('../../assets/e-rupi.png')}></Image>
+                    <Image
+                        className="h-14 w-1/2 mt-10 mb-9"
+
+                        source={require('../../assets/e-rupi.png')}></Image>
                     <View className="bg-blue-200 h-3/4 w-11/12  rounded-md">
-                    <View className=" items-center">
-                        <Text className="font-semibold font mt-2">Unique Voucher ID :</Text>
-                        {(voucherRedeemed==false)&&(<Text> {voucherId}</Text>)}
-                        <View className="mt-5">
-                            {(voucherRedeemed==false)&&(<QRCode
-                                value={voucherId}
-                                color={'#606060'}
-                                backgroundColor={'transparent'}
-                                logo={require('../../assets/npci.jpg')}
-                                logoSize={20}
-                                size={200}
-                            />)}
-                        </View>
+                        <View className=" items-center">
+                            <Text className="font-semibold font mt-2">Unique Voucher ID :</Text>
+                            {(voucherRedeemed == false) && (<Text> {voucherId}</Text>)}
+                            <View className="mt-5">
+                                {(voucherRedeemed == false) && (<QRCode
+                                    value={voucherId}
+                                    color={'#606060'}
+                                    backgroundColor={'transparent'}
+                                    logo={require('../../assets/npci.jpg')}
+                                    logoSize={20}
+                                    size={200}
+                                />)}
+                            </View>
                         </View>
                         <View className="ml-8 mr-8">
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Voucher Amount:</Text><Text className=" font mt-2">{voucher.voucherAmount}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Beneficiary Name:</Text><Text className=" font mt-2">{beneficiaryName}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Service Provider:</Text><Text className=" font mt-2">{serviceProviderName}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Service Provider BusinessTag:</Text><Text className=" font mt-2">{serviceProviderTag}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Created By:</Text><Text className=" font mt-2">{pvtOrgName}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Voucher Amount:</Text><Text className=" font mt-2">{voucher.voucherAmount}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Date of creation:</Text><Text className=" font mt-2">{createdDate}</Text></View>
-                        <View className="flex-row justify-between"><Text className="font-semibold mt-2">Time of creation:</Text><Text className=" font mt-2">{createdTime}</Text></View>
-                       {(voucherRedeemed==true)&& (<View className="flex-row justify-center tracking-widest"><Text className="font-semibold mt-2 text-red-500">VOUCHER REDEEMED</Text></View>)}
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Voucher Amount:</Text><Text className=" font mt-2">{voucher.voucherAmount}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Beneficiary Name:</Text><Text className=" font mt-2">{beneficiaryName}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Service Provider:</Text><Text className=" font mt-2">{serviceProviderName}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Service Provider BusinessTag:</Text><Text className=" font mt-2">{serviceProviderTag}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Created By:</Text><Text className=" font mt-2">{pvtOrgName}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Voucher Amount:</Text><Text className=" font mt-2">{voucher.voucherAmount}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Date of creation:</Text><Text className=" font mt-2">{createdDate}</Text></View>
+                            <View className="flex-row justify-between"><Text className="font-semibold mt-2">Time of creation:</Text><Text className=" font mt-2">{createdTime}</Text></View>
+                            {(voucherRedeemed == true) && (<View className="flex-row justify-center tracking-widest"><Text className="font-semibold mt-2 text-red-500">VOUCHER REDEEMED</Text></View>)}
                         </View>
                     </View>
                 </View>

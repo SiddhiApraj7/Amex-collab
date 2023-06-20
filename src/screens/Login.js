@@ -1,14 +1,12 @@
 import { View, Text , TextInput, Image, SafeAreaView, Button ,Pressable, ActivityIndicator} from 'react-native'
 import React from 'react'
-import CustomInput from '../components/CustomInput';
 import { useState, useContext } from 'react';
 import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { AppContext } from '../../AppContext';
-// post menthod 
+import CryptoJS from "react-native-crypto-js";
 import axios from 'axios';
-// add phone number input box
 
 const Login = () => {
   // const [pin,setPin] = useState('');
@@ -19,15 +17,17 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const VerifyUser = async(data) => {
+
     setIsLoading(true);
     try {
-      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/login', {
-        phoneNumber: data.phoneNumber,
-        walletPin : data.pin,
-      });
-
+      const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${data.phoneNumber}`);
+      const user = response.data;
       console.log(response.data);
-      if(response.data.isPinMatched === true){
+
+      let decryptedPin = CryptoJS.AES.decrypt(user.walletPin, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let newPin = decryptedPin.toString(CryptoJS.enc.Utf8);
+     
+      if(data.pin === newPin){
         setPhoneNumber(data.phoneNumber);
         navigation.navigate('selectRole');
       }
@@ -36,7 +36,7 @@ const Login = () => {
         setError('Incorrect Pin. Please try again.');
         setTimeout(() => {
           setError('');
-        }, 4000); // Redirect to login screen after 3 seconds
+        }, 4000); 
       }
     } catch (error) {
       console.log(error);
@@ -44,8 +44,8 @@ const Login = () => {
       setError('Error during verification. Please try again.');
       setTimeout(() => {
         setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); // Redirect to login screen after 3 seconds
+        navigation.navigate('login'); 
+      }, 3000); 
     } finally {
       setIsLoading(false);
     }
@@ -104,12 +104,5 @@ const Login = () => {
     
   )
 }
-const styles = {
-  warningText: {
-    fontSize: 16,
-    color: 'red',
-    marginBottom: 10,
-  },
-};
 
 export default Login;

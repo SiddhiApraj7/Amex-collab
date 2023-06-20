@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  Button,
-  Image,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
+import {View,Text,TextInput,SafeAreaView,Button, Image,ScrollView, ActivityIndicator} from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -24,9 +15,6 @@ import CryptoJS from "react-native-crypto-js";
 const ServiceProviderInfo = () => {
   const navigation = useNavigation();
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
-  //[BusinessName, setBusinessName] = useState("");
-  //[PositionInBusiness, setPositionInBusiness] = useState("");
-  //[BusinessTag, setBusinessTag] = useState('');
   const [value, setValue] = useState(null);
   const { control, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
@@ -43,14 +31,8 @@ const ServiceProviderInfo = () => {
 
   const updateServiceProvider = async (data) => {
     console.log(data);
-    // create User schema using post method using axios and async , await
     setIsLoading(true);
-
     console.log(phoneNumber);
-    
-
-    /* let cipherBusinessTag = CryptoJS.AES.encrypt(value,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
-    console.log(cipherBusinessTag); */
 
     let cipherPositionInBusiness = CryptoJS.AES.encrypt(data.PositionInBusiness,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
     console.log(cipherPositionInBusiness);
@@ -148,7 +130,6 @@ const ServiceProviderInfo = () => {
                 searchPlaceholder="Search..."
                 onChange={item => {
                   setValue(item.label);
-                  //setBusinessTag(item.label);
                 }}
 
               />

@@ -1,4 +1,4 @@
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import { View, Text} from 'react-native';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,11 +11,9 @@ const Header = ({ firstName, lastName, bankName, companyName, positionInCompany,
           <Ionicons name="person-circle" size={36}></Ionicons>
           <View className="pb-2">
             <Text className="font-medium text-lg mr-7 mt-1">{firstName} {lastName}</Text>
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
           </View>
           <View className=" mr-10">
             <Text className="font-medium text-lg mt-1">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
           </View>
         </View>
       )}

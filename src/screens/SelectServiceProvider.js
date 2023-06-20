@@ -19,8 +19,6 @@ const SelectServiceProvider = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const {serviceProviderChoice, setserviceProviderChoice} = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(true);
-  //console.log("aa");
-  //console.log(serviceProviderChoice);
 
   async function fetchUserInfo(phoneNumber) {
     
@@ -42,12 +40,6 @@ const SelectServiceProvider = () => {
     } catch (error) {
       console.error(error);
       console.log(error);
-      /* alert(error);
-      setError('User already exists, please login.');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); */ // Redirect to login screen after 3 seconds
     } finally {
       setIsLoading(false);
     }
@@ -105,12 +97,6 @@ useEffect(() => {
     <View>
       
     </View>
-    
-
-    
-    
-
-  
     
 </View>
 </SafeAreaView>

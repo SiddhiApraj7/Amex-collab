@@ -4,49 +4,46 @@ import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import { AppContext } from '../../AppContext';
 import { useContext } from 'react';
-import { useEffect } from 'react';
+
 
 const Phone_test = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  // const[isalreadyUser,setIsalreadyUser]=useState(false);
 
 
   async function createUser(phoneNumber) {
     try {
       setIsLoading(true);
-      // Make API call to check user role
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/check-phone', {
         phoneNumber: phoneNumber,
       });
       console.log(response.data);
-      // setIsalreadyUser(response.data.exists);
-      const isalreadyUser=response.data.exists;           
+      const isalreadyUser = response.data.exists;
       console.log(phoneNumber);
       console.log(isalreadyUser);
-      if(isalreadyUser){
+      if (isalreadyUser) {
         setError('User already exists, please login.');
         setTimeout(() => {
           setError('');
-          navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-        }, 3000); // Redirect to login screen after 3 seconds
+          navigation.navigate('login');
+        }, 3000);
       }
-      else{
+      else {
         try {
           const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
             phoneNumber: phoneNumber,
           });
-    
+
           console.log(response.data);
           navigation.navigate('userDetails');
         } catch (error) {
           console.log(error);
           alert(error);
-       
+
         }
-  
+
       }
 
 
@@ -55,7 +52,7 @@ const Phone_test = () => {
     } finally {
       setIsLoading(false);
     }
-  
+
 
 
   }
@@ -81,9 +78,9 @@ const Phone_test = () => {
           }}
         ></Button>
 
-      <View className="items-center mt-12">
-      {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
-      </View>
+        <View className="items-center mt-12">
+          {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
+        </View>
       </View>
     </SafeAreaView>
   );

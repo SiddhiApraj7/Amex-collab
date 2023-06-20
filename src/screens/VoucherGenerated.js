@@ -37,7 +37,6 @@ const VoucherGenerated = () => {
         { phoneNumber });
       console.log(response.data);
       const vouchersList = response.data.vouchers;
-      //   console.log("voucher list :", vouchersList);
 
       let activevoucherList = [];
       vouchersList.forEach((voucher) => {
@@ -71,11 +70,9 @@ const VoucherGenerated = () => {
         redeemedvoucherList.push(vocherObject);
       });
       setRedeemedVoucherList(redeemedvoucherList);
-      // console.log("voucher object list :", voucherObjectList);
     } catch (error) {
       console.error(error);
       console.log(error);
-      // Handle error and navigation logic
     }
   }
 
@@ -84,15 +81,15 @@ const VoucherGenerated = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-user-info/${phoneNumber}`);
       console.log(response.data);
       const user = response.data;
-      let fn  = CryptoJS.AES.decrypt(user.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let fn = CryptoJS.AES.decrypt(user.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setFirstName(fn.toString(CryptoJS.enc.Utf8));
       console.log(firstName);
 
-      let ln  = CryptoJS.AES.decrypt(user.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let ln = CryptoJS.AES.decrypt(user.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setLastName(ln.toString(CryptoJS.enc.Utf8));
       console.log(lastName);
 
-      let bn  = CryptoJS.AES.decrypt(user.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let bn = CryptoJS.AES.decrypt(user.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setBankName(bn.toString(CryptoJS.enc.Utf8));
       console.log(bankName);
     } catch (error) {
@@ -114,7 +111,7 @@ const VoucherGenerated = () => {
 
             source={require('../../assets/e-rupi.png')}></Image>
 
-              <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1"/>
+          <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1" />
 
 
 

@@ -1,12 +1,11 @@
-import { View, Text, SafeAreaView, Image, Button, ScrollView, TextInput, Alert, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, Image, Button, Alert, ActivityIndicator } from 'react-native'
 import React from 'react'
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext, useState, useEffect } from "react";
 import Number_input_ud from "../components/Number_input_ud.js"
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CryptoJS from 'react-native-crypto-js';
 import Header from '../components/Header';
 
@@ -23,9 +22,9 @@ const GenerateVoucher = () => {
   const [error, setError] = useState('');
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [isValidB, setisValidB] = useState(false);
-
   const { serviceProviderChoice, setserviceProviderChoice } = useContext(AppContext);
+
+
   async function checkValidBeneficiary(phoneNumber) {
     setIsLoading(true);
     try {
@@ -35,7 +34,7 @@ const GenerateVoucher = () => {
       return user.isBeneficiary;
     } catch (error) {
       console.error(error);
-      return false; // Return false if an error occurs
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -48,19 +47,16 @@ const GenerateVoucher = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtOrg = response.data;
-      /* setFirstName(pvtOrg.Users.firstName);
-      setLastName(pvtOrg.Users.lastName);
-      setBankName(pvtOrg.Users.bankName); */
 
-      let fn  = CryptoJS.AES.decrypt(pvtOrg.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let fn = CryptoJS.AES.decrypt(pvtOrg.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setFirstName(fn.toString(CryptoJS.enc.Utf8));
       console.log(firstName);
 
-      let ln  = CryptoJS.AES.decrypt(pvtOrg.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let ln = CryptoJS.AES.decrypt(pvtOrg.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setLastName(ln.toString(CryptoJS.enc.Utf8));
       console.log(lastName);
 
-      let bn  = CryptoJS.AES.decrypt(pvtOrg.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let bn = CryptoJS.AES.decrypt(pvtOrg.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
       setBankName(bn.toString(CryptoJS.enc.Utf8));
       console.log(bankName);
 
@@ -71,8 +67,6 @@ const GenerateVoucher = () => {
       setIsLoading(false);
     }
   }
-
-
 
   useEffect(() => {
     fetchUserInfo(phoneNumber);
@@ -121,7 +115,7 @@ const GenerateVoucher = () => {
         Alert.alert("Voucher has been created!");
         setTimeout(() => {
           setError('');
-          navigation.navigate('pvtOrgHomePage'); // Replace 'Login' with the name of your login screen
+          navigation.navigate('pvtOrgHomePage');
         }, 2000);
       } catch (error) {
         console.log(error);
@@ -132,9 +126,9 @@ const GenerateVoucher = () => {
       Alert.alert("Beneficiary doesn't exist");
       setTimeout(() => {
         setError('');
-        navigation.navigate('generateVoucher'); // Replace 'Login' with the name of your login screen
+        navigation.navigate('generateVoucher');
       }, 3000);
-      setIsLoading(false); // Set isLoading to false in the else block as well
+      setIsLoading(false);
     }
   };
 
@@ -144,10 +138,8 @@ const GenerateVoucher = () => {
     <SafeAreaView className="bg-white h-full">
       <View className="items-center  bg-white">
 
-
         <Image
           className="h-14 w-1/2 mt-10 mb-9"
-
           source={require('../../assets/e-rupi.png')}></Image>
 
 
@@ -157,9 +149,8 @@ const GenerateVoucher = () => {
           </View>
         ) : (
 
-
           <View>
-            <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1"/>
+            <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1" />
           </View>
 
         )}
@@ -209,23 +200,18 @@ const GenerateVoucher = () => {
           <View className="p-3">
             <Text className="font-semibold mb-2 text-sm">Service Provider Name</Text>
             <View className="p-2 bg-gray-100 rounded-lg w-full h-10">
-
               <Text className="font-light text-neutral-400 mx-auto ">{serviceProviderChoice ? BusinessName : 'Selected Service Provider'}</Text>
-
             </View></View>
 
           <View className="text-center items-center">
-
           </View>
 
           <View>
-
             <View className="flex-row gap-5 items-center mx-auto">
               <Text className="text-md mx-auto font-semibold"> Selected Tag</Text>
 
               <View className="bg-gray-100 h-8 w-1/3 rounded-lg" ><Text className="font-light mx-auto my-auto  text-neutral-400">{serviceProviderChoice ? BusinessTag : 'No Tag Selected'}</Text></View>
             </View>
-
           </View>
 
           <View className="mx-auto py-4  mb-1  mt-1 rounded-3xl"><Button className="text-black text-center" color="#82E0AA" title="Make Request" onPress={handleSubmit(createVoucher)} /></View>
