@@ -17,7 +17,7 @@ model Users {
   recoveryEmail           String?          @unique
   lastName                String?
   walletPin               String?
-  salt                    String?
+  salt                   String?
   bankName                String?
   bankAccountHolderName   String?
   accountNumber           String?          

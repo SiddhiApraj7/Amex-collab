@@ -127,6 +127,7 @@ exports.Prisma.UsersScalarFieldEnum = {
   recoveryEmail: 'recoveryEmail',
   lastName: 'lastName',
   walletPin: 'walletPin',
+  salt: 'salt',
   bankName: 'bankName',
   bankAccountHolderName: 'bankAccountHolderName',
   accountNumber: 'accountNumber',

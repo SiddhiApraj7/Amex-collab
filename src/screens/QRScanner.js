@@ -6,6 +6,10 @@ import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { AppContext } from "../../AppContext";
+import { FirebaseRecaptchaVerifierModal, FirebaseAuthApplicationVerifier } from 'expo-firebase-recaptcha';
+import { firebaseConfig } from '../../config';
+import firebase from 'firebase/compat/app';
+
 
 const QRScanner = () => {
   const navigation = useNavigation();
@@ -17,6 +21,8 @@ const QRScanner = () => {
 
   const [BfirstName, setBFirstName] = useState('');
   const [BlastName, setBLastName] = useState('');
+  const [verificationId, setVerificationId] = useState(null);
+  const [code, setCode] = useState('');
 
   const [CompanyName, setCompanyName] = useState('');
   const [amount, setAmount] = useState('');
@@ -34,6 +40,14 @@ const QRScanner = () => {
   useEffect(() => {
     askForCameraPermission();
   }, []);
+
+  const sendVerification = () => {
+    console.log(phoneNumber);
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    phoneProvider
+      .verifyPhoneNumber(phoneNumber)
+      .then(setVerificationId);
+  };
 
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
