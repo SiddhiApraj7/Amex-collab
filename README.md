@@ -62,6 +62,29 @@ To run the Digital Wallet App, ensure that your development environment meets th
 - Scan the QR code displayed in the terminal using the Expo app.
 - The app will compile and launch on your mobile device, allowing you to test and develop locally.
 
+## App Screenshots
+
+Here are some screenshots of our DigiRupi App:
+
+1. **Home Screen**
+
+   ![Home Screen](./assets/1.jpeg)
+
+2. **Transaction History**
+
+   ![Transaction History](/path/to/transaction-history.png)
+
+3. **Wallet Balance**
+
+   ![Wallet Balance](/path/to/wallet-balance.png)
+
+4. **Voucher Redemption**
+
+   ![Voucher Redemption](/path/to/voucher-redemption.png)
+
+5. **QR Code Scanner**
+
+   ![QR Code Scanner](/path/to/qr-code-scanner.png)
 
 ## Contributers
 * Anushtha Prakash
