@@ -6,6 +6,7 @@ import NumberInput from '../components/NumberInput';
 import {useForm,Controller} from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { AppContext } from '../../AppContext';
+import CryptoJS from "react-native-crypto-js";
 // post menthod 
 import axios from 'axios';
 // add phone number input box
@@ -18,25 +19,29 @@ const Login = () => {
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
-  const VerifyUser = async(data) => {
+  const onSignInPress = async (data) => {
     setIsLoading(true);
+    
     try {
-      const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/login', {
+      const response = await axios.post('http://192.168.1.45:3000/login', {
         phoneNumber: data.phoneNumber,
-        walletPin : parseInt(data.pin),
+        pin : data.pin
       });
-
+  
       console.log(response.data);
-      if(response.data.isPinMatched === true){
+      // Assuming the response contains the hashed PIN and salt from the server
+  
+      const valid = response.data;
+  
+      if (valid) {
         setPhoneNumber(data.phoneNumber);
         navigation.navigate('selectRole');
-      }
-      else{
+      } else {
         alert('Incorrect Pin. Please try again.');
         setError('Incorrect Pin. Please try again.');
         setTimeout(() => {
           setError('');
-        }, 4000); // Redirect to login screen after 3 seconds
+        }, 4000);
       }
     } catch (error) {
       console.log(error);
@@ -44,18 +49,12 @@ const Login = () => {
       setError('Error during verification. Please try again.');
       setTimeout(() => {
         setError('');
-        navigation.navigate('login'); // Replace 'Login' with the name of your login screen
-      }, 3000); // Redirect to login screen after 3 seconds
+        navigation.navigate('login');
+      }, 3000);
     } finally {
       setIsLoading(false);
     }
-  }
-
-  const onSignInPress = async(data) => {
-    console.log(data);
-    await VerifyUser(data);
-
-  }
+  };
   
   return (
     <SafeAreaView className="bg-white h-full">

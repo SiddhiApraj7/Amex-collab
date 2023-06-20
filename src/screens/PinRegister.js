@@ -24,9 +24,9 @@ const PinRegister = () => {
     
     try {
       console.log(pin);
-      const response = await axios.patch('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
+      const response = await axios.patch('http://192.168.1.45:3000/registerPin', {
         phoneNumber: phoneNumber,
-        walletPin : parseInt(pin),
+        pin : pin,
       });
       console.log(response.data);
     } catch (error) {

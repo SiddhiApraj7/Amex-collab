@@ -8,7 +8,9 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const express = require('express')
+const argon2 = require('argon2');
 const bodyParser = require('body-parser')
+
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 
 const { PrismaClient } = require('./prisma-client')
@@ -29,13 +31,14 @@ app.use(function (req, res, next) {
 
 //creat get method for items
 app.post('/create-user', async function (req, res) {
-  const { phoneNumber, firstName, recoveryEmail, lastName, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
+  const { phoneNumber, firstName, recoveryEmail, lastName, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
   const result = await prisma.users.create({
     data: {
       phoneNumber,
       firstName,
       lastName,
       walletPin,
+      salt,
       bankName,
       bankAccountHolderName,
       accountNumber,
@@ -62,13 +65,13 @@ app.post('/create-user', async function (req, res) {
 
 app.patch('/create-user', async (req, res) => {
   const { phoneNumber } = req.body;
-  const { firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
+  const { firstName, lastName, recoveryEmail, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
 
   try {
     const updatedUser = await prisma.users.update({
       where: { phoneNumber },
       data: {
-        firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo,
+        firstName, lastName, recoveryEmail, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo,
         beneficiaryInfo
       },
       include: {
@@ -88,6 +91,35 @@ app.patch('/create-user', async (req, res) => {
 // post request to see if a user is a beneficiary
 // app.post('/is-beneficiary', async function (req, res) {
 //   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
+app.patch('/registerPin', async (req, res) => {
+  const { phoneNumber, pin } = req.body;
+  try {
+    
+
+    // Generate a random salt
+    const salt = await argon2.generateSalt();
+
+    // Hash the PIN with the generated salt using Argon2
+    const hashedPin = await argon2.hash(pin, salt);
+
+    // Store the hashed PIN and salt securely
+    // Replace this code with your actual storage mechanism
+    const updatedUser = await prisma.users.update({
+      where: { phoneNumber },
+      data: {
+        walletPin : hashedPin,
+        salt : salt
+      },
+
+    });
+
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.post('/get-role', async function (req, res) {
   const { phoneNumber } = req.body;
@@ -606,25 +638,31 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { phoneNumber, walletPin } = req.body;
-
+  const { pin, phoneNumber} = req.body;
   try {
-    const user = await prisma.Users.findFirst({
+    
+    const user = await prisma.users.findFirst({
       where: {
-        phoneNumber: phoneNumber
+        phoneNumber
+      },
+      select: {
+       walletPin : true,
+       salt : true
+
       }
     });
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    // Verify the PIN by comparing the hashed PIN with the provided PIN using Argon2
+    const isPinValid = await argon2.verify(user.walletPin, pin + user.salt);
+
+    if (isPinValid) {
+      res.status(200).json(true);
+    } else {
+      res.status(401).json(false);
     }
-
-    const isPinMatched = user.walletPin === walletPin;
-
-    res.status(200).json({ isPinMatched });
   } catch (error) {
-    console.error('Error checking wallet PIN:', error);
-    res.status(500).json({ error: 'Failed to check wallet PIN' });
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

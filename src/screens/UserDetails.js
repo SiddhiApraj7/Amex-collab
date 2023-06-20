@@ -17,6 +17,7 @@ import { useForm, Controller } from "react-hook-form";
 import { AppContext } from "../../AppContext";
 import { useContext } from "react";
 import axios from "axios";
+import CryptoJS from "react-native-crypto-js";
 
 const UserDetails = () => {
   const navigation = useNavigation();
@@ -30,12 +31,21 @@ const UserDetails = () => {
     console.log(phoneNumber);
     setIsLoading(true);
 
+    let cipherFirstName = CryptoJS.AES.encrypt(data.firstName,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherFirstName);
+
+    let cipherLastName = CryptoJS.AES.encrypt(data.lastName,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherLastName);
+
+    let cipherEmail = CryptoJS.AES.encrypt(data.recoveryEmail,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherEmail);
+
      try {
-      const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user", {
+      const response = await axios.patch("http://192.168.1.45:3000/create-user", {
         phoneNumber: phoneNumber,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        recoveryEmail: data.recoveryEmail
+        firstName: cipherFirstName,
+        lastName: cipherLastName,
+        recoveryEmail: cipherEmail
 
       });
       console.log(response.data);

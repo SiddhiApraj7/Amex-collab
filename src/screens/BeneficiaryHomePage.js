@@ -9,6 +9,7 @@ import { AppContext } from "../../AppContext";
 import { useContext , useState} from "react";
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import { Linking } from 'react-native';
 
 const redirectToDigiLocker = () => {
@@ -25,9 +26,9 @@ const redirectToDigiLocker = () => {
 
 const BeneficiaryHomePage = () => {
   const navigation = useNavigation();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [bankName, setBankName] = useState('');
+  const [cipherFirstName, setCFirstName] = useState('');
+  const [cipherLastName, setCLastName] = useState('');
+  const [cipherBankName, setCBankName] = useState('');
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -60,9 +61,22 @@ const BeneficiaryHomePage = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
-      setFirstName(beneficiary.firstName);
-      setLastName(beneficiary.lastName);
-      setBankName(beneficiary.bankName);
+      setCFirstName(beneficiary.firstName);
+      setCLastName(beneficiary.lastName);
+      setCBankName(beneficiary.bankName);
+
+      let fn  = CryptoJS.AES.decrypt(cipherFirstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let firstName = fn.toString(CryptoJS.enc.Utf8);
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(cipherLastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let lastName = ln.toString(CryptoJS.enc.Utf8);
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(cipherBankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      let bankName = bn.toString(CryptoJS.enc.Utf8);
+      console.log(bankName);
+
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -107,17 +121,7 @@ const BeneficiaryHomePage = () => {
 
         <View >
          <View>
-         <View className="flex-row gap-2 ml-9 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto border-b-2 border-neutral-200">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7 mt-1">{firstName} {lastName}</Text>
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            </View>
-            <View className=" mr-10">
-            <Text className="font-medium text-lg mt-1">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            </View>
-        </View>
+            <Header firstName={firstName} lastName={lastName} bankName={bankName} />
         </View>
 
           <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>

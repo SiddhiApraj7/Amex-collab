@@ -53,7 +53,7 @@ const BankDetails = () => {
 
      try {
       
-      const response = await axios.patch("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user", {
+      const response = await axios.patch("http://192.168.1.45:3000/create-user", {
         phoneNumber: phoneNumber,
         bankAccountHolderName : cipherAccountHolderName,
         accountNumber : cipherAccountNumber,
