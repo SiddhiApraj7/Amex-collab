@@ -9,7 +9,6 @@ Introducing our user-friendly Digital Wallet App, providing a secure and conveni
 - [Features](#features)
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributers](#contributers)
 
 ## Overview
@@ -69,24 +68,32 @@ Here are some screenshots of our DigiRupi App:
 1. **Home Screen**
 
    ![Home Screen](./assets/1.jpeg)
+   <p align="center">
+  <img src="./assets/1.jpeg" alt="Logo" width="1080" height="500">
+</p>
 
-2. **Transaction History**
+3. **Transaction History**
 
-   ![Transaction History](/path/to/transaction-history.png)
+   ![Transaction History](./assets/2.jpeg)
 
-3. **Wallet Balance**
+4. **Wallet Balance**
 
-   ![Wallet Balance](/path/to/wallet-balance.png)
+   ![Wallet Balance](./assets/3.jpeg)
 
-4. **Voucher Redemption**
+5. **Voucher Redemption**
 
-   ![Voucher Redemption](/path/to/voucher-redemption.png)
+   ![Voucher Redemption](./assets/4.jpeg)
 
-5. **QR Code Scanner**
+6. **QR Code Scanner**
 
-   ![QR Code Scanner](/path/to/qr-code-scanner.png)
+   ![QR Code Scanner](./assets/5.jpeg)
 
-## Contributers
-* Anushtha Prakash
-* Tanisha Daharwal
-* Siddhi Apraj
+<h2 id="contributers">Contributors</h2>
+
+<div align="center">
+  <strong>
+    <a href="https://github.com/anushthaPrakash">Anushtha Prakash</a> &emsp;
+    <a href="https://github.com/tanishadaharwal">Tanisha Daharwal</a> &emsp;
+    <a href="https://github.com/SiddhiApraj7">Siddhi Apraj</a> &emsp;
+  </strong>
+</div>
