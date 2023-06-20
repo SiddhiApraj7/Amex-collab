@@ -10,8 +10,8 @@ import NumberInput from '../components/NumberInput';
 import axios from 'axios';
 import { AppContext } from '../../AppContext';
 
-
 const Phone = () => {
+  
 
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
   const navigation = useNavigation();
@@ -25,7 +25,8 @@ const Phone = () => {
   const createUser = async () => {
     // create User schema using post method using axioms and async , await
     setIsLoading(true);
-    
+      
+  
     try {
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/check-phone', {
         phoneNumber: phoneNumber,

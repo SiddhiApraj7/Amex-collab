@@ -40,14 +40,14 @@ import {
         <Text className="font-bold text-xl p-3 mb-5">Login</Text>
 
         <View className = "h-full w-full bg-blue-300 rounded-t-3xl">
-          <Text className="text-center mt-20  mb-1 font-semibold text-lg"> Biometric Authentication </Text>
+          <Text className="text-center mt-20  mb-10 font-semibold text-lg"> Biometric Authentication </Text>
           <View className="bg-white text-center mx-auto rounded-full p-2 mt-4">
           <Ionicons onPress={() => {biometricsAuth()}} name="finger-print-outline" size={70}></Ionicons>
           </View>
 
          
          <View className="text-center p-2 mt-10 items-center">
-          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp")}}></Button> : <Text className="font-medium text-center mt-5 text-white">Press the fingerprint to initiate biometric authentication</Text>}
+          {isAuthenticated ? <Button title="Next" color="#82E0AA" onPress={() => {navigation.navigate("otp")}}></Button> : <View><Text className="font-normal text-md text-center mt-5 text-black">Press the fingerprint to</Text><Text className="font-normal text-md text-center mt-2 text-black">initiate biometric authentication</Text></View>}
           </View> 
           
 

@@ -8,7 +8,7 @@ import { AppContext } from "../../AppContext";
 import { useContext, useState } from "react";
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
-
+import CryptoJS from "react-native-crypto-js";
 const Profile = () => {
 
   const navigation = useNavigation();
@@ -42,7 +42,10 @@ const Profile = () => {
       set_is_PvtOrg(user.isPvtOrg);
       set_is_serviceProvider(user.isServiceProvider);
       setBankAccHolderName(user.bankAccountHolderName);
-      setAccountNumber(user.accountNumber);
+      let decryptaccNumber  = CryptoJS.AES.decrypt(user.accountNumber, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+let originalaccNumber = decryptaccNumber.toString(CryptoJS.enc.Utf8);
+console.log(originalaccNumber);
+      setAccountNumber(originalaccNumber);
     } catch (error) {
       console.error(error);
       console.log(error);
