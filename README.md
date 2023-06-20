@@ -24,18 +24,18 @@ The Digital Wallet App is a React Native application with an AWS Amplify backend
 
 ## Features
 
-- User Authentication: Users can authenticate themselves using OTP, biometric authentication, recaptcha and a wallet PIN for secure access to the app during Registration.
-- E-RUPI Integration: The app integrates with the e-RUPI payment gateway, enabling users to transact seamlessly with other payment systems.
-- Encryption: All sensitive information, including personal data and transaction details, is encrypted to ensure privacy and security.
-- Access Control: The app implements robust access control mechanisms, enabling different user roles such as beneficiaries, service providers, and private organizations, with the ability to have multiple roles simultaneously.
-- Wallet Functionality: Users can add funds to their digital wallets, check account balances, transfer e-rupee, redeem vouchers, and view available government and private sponsorships or e-rupi vouchers.
-- Dynamic Mode: Users can switch between different modes of app usage, such as consumer, private business, or service provider, based on their specific needs.
-- In-App Alerts: The app provides timely updates and alerts for voucher usage, voucher requests, and payment receipts.
-- Database Integration: Private organizations can create databases of affected beneficiaries, and service providers can maintain a list of services offered.
-- QR Scanner and Generator: App provides facility to create a QR with necessary information about Voucher as well as facility to scan voucher to redeem it.
-- Voucher Transactions : The app allows service providers to create and distribute vouchers that can be securely redeemed within the app, while also enabling companies and 
-  organizations to create personalized vouchers for individuals, with a scanning feature for fast redemption.
-- Encryption: The application provides robust client-side encryption to safeguard all sensitive user data with enhanced security measures.
+- **User Authentication**: Users can authenticate themselves using OTP, biometric authentication, recaptcha, and a wallet PIN for secure access to the app during Registration.
+- **E-RUPI Integration**: The app integrates with the e-RUPI payment gateway, enabling users to transact seamlessly with other payment systems.
+- **Encryption**: All sensitive information, including personal data and transaction details, is encrypted to ensure privacy and security.
+- **Access Control**: The app implements robust access control mechanisms, enabling different user roles such as beneficiaries, service providers, and private organizations, with the ability to have multiple roles simultaneously.
+- **Wallet Functionality**: Users can add funds to their digital wallets, check account balances, transfer e-rupee, redeem vouchers, and view available government and private sponsorships or e-rupi vouchers.
+- **Dynamic Mode**: Users can switch between different modes of app usage, such as consumer, private business, or service provider, based on their specific needs.
+- **In-App Alerts**: The app provides timely updates and alerts for voucher usage, voucher requests, and payment receipts.
+- **Database Integration**: Private organizations can create databases of affected beneficiaries, and service providers can maintain a list of services offered.
+- **QR Scanner and Generator**: App provides a facility to create a QR with necessary information about the voucher as well as a facility to scan the voucher to redeem it.
+- **Voucher Transactions**: The app allows service providers to create and distribute vouchers that can be securely redeemed within the app, while also enabling companies and organizations to create personalized vouchers for individuals, with a scanning feature for fast redemption.
+- **Client-Side Encryption**: The application provides robust client-side encryption to safeguard all sensitive user data with enhanced security measures.
+
 
 ## System Requirements
 
