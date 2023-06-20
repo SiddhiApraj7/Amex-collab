@@ -23,6 +23,7 @@ export type Users = {
   recoveryEmail: string | null
   lastName: string | null
   walletPin: string | null
+  salt: string | null
   bankName: string | null
   bankAccountHolderName: string | null
   accountNumber: string | null
@@ -1059,6 +1060,7 @@ export namespace Prisma {
     recoveryEmail: string | null
     lastName: string | null
     walletPin: string | null
+    salt: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1079,6 +1081,7 @@ export namespace Prisma {
     recoveryEmail: string | null
     lastName: string | null
     walletPin: string | null
+    salt: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1099,6 +1102,7 @@ export namespace Prisma {
     recoveryEmail: number
     lastName: number
     walletPin: number
+    salt: number
     bankName: number
     bankAccountHolderName: number
     accountNumber: number
@@ -1121,6 +1125,7 @@ export namespace Prisma {
     recoveryEmail?: true
     lastName?: true
     walletPin?: true
+    salt?: true
     bankName?: true
     bankAccountHolderName?: true
     accountNumber?: true
@@ -1141,6 +1146,7 @@ export namespace Prisma {
     recoveryEmail?: true
     lastName?: true
     walletPin?: true
+    salt?: true
     bankName?: true
     bankAccountHolderName?: true
     accountNumber?: true
@@ -1161,6 +1167,7 @@ export namespace Prisma {
     recoveryEmail?: true
     lastName?: true
     walletPin?: true
+    salt?: true
     bankName?: true
     bankAccountHolderName?: true
     accountNumber?: true
@@ -1255,6 +1262,7 @@ export namespace Prisma {
     recoveryEmail: string | null
     lastName: string | null
     walletPin: string | null
+    salt: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1292,6 +1300,7 @@ export namespace Prisma {
     recoveryEmail?: boolean
     lastName?: boolean
     walletPin?: boolean
+    salt?: boolean
     bankName?: boolean
     bankAccountHolderName?: boolean
     accountNumber?: boolean
@@ -5974,6 +5983,7 @@ export namespace Prisma {
     recoveryEmail: 'recoveryEmail',
     lastName: 'lastName',
     walletPin: 'walletPin',
+    salt: 'salt',
     bankName: 'bankName',
     bankAccountHolderName: 'bankAccountHolderName',
     accountNumber: 'accountNumber',
@@ -6019,6 +6029,7 @@ export namespace Prisma {
     recoveryEmail?: StringNullableFilter | string | null
     lastName?: StringNullableFilter | string | null
     walletPin?: StringNullableFilter | string | null
+    salt?: StringNullableFilter | string | null
     bankName?: StringNullableFilter | string | null
     bankAccountHolderName?: StringNullableFilter | string | null
     accountNumber?: StringNullableFilter | string | null
@@ -6042,6 +6053,7 @@ export namespace Prisma {
     recoveryEmail?: SortOrder
     lastName?: SortOrder
     walletPin?: SortOrder
+    salt?: SortOrder
     bankName?: SortOrder
     bankAccountHolderName?: SortOrder
     accountNumber?: SortOrder
@@ -6071,6 +6083,7 @@ export namespace Prisma {
     recoveryEmail?: SortOrder
     lastName?: SortOrder
     walletPin?: SortOrder
+    salt?: SortOrder
     bankName?: SortOrder
     bankAccountHolderName?: SortOrder
     accountNumber?: SortOrder
@@ -6097,6 +6110,7 @@ export namespace Prisma {
     recoveryEmail?: StringNullableWithAggregatesFilter | string | null
     lastName?: StringNullableWithAggregatesFilter | string | null
     walletPin?: StringNullableWithAggregatesFilter | string | null
+    salt?: StringNullableWithAggregatesFilter | string | null
     bankName?: StringNullableWithAggregatesFilter | string | null
     bankAccountHolderName?: StringNullableWithAggregatesFilter | string | null
     accountNumber?: StringNullableWithAggregatesFilter | string | null
@@ -6301,6 +6315,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6324,6 +6339,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6347,6 +6363,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6370,6 +6387,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6393,6 +6411,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6413,6 +6432,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6433,6 +6453,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6729,6 +6750,7 @@ export namespace Prisma {
     recoveryEmail?: SortOrder
     lastName?: SortOrder
     walletPin?: SortOrder
+    salt?: SortOrder
     bankName?: SortOrder
     bankAccountHolderName?: SortOrder
     accountNumber?: SortOrder
@@ -6749,6 +6771,7 @@ export namespace Prisma {
     recoveryEmail?: SortOrder
     lastName?: SortOrder
     walletPin?: SortOrder
+    salt?: SortOrder
     bankName?: SortOrder
     bankAccountHolderName?: SortOrder
     accountNumber?: SortOrder
@@ -6769,6 +6792,7 @@ export namespace Prisma {
     recoveryEmail?: SortOrder
     lastName?: SortOrder
     walletPin?: SortOrder
+    salt?: SortOrder
     bankName?: SortOrder
     bankAccountHolderName?: SortOrder
     accountNumber?: SortOrder
@@ -7736,6 +7760,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -7758,6 +7783,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -7820,6 +7846,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7842,6 +7869,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7992,6 +8020,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8014,6 +8043,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8062,6 +8092,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8084,6 +8115,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8136,6 +8168,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8158,6 +8191,7 @@ export namespace Prisma {
     recoveryEmail?: string | null
     lastName?: string | null
     walletPin?: string | null
+    salt?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8206,6 +8240,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8228,6 +8263,7 @@ export namespace Prisma {
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
