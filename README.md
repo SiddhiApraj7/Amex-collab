@@ -35,6 +35,7 @@ The Digital Wallet App is a React Native application with an AWS Amplify backend
 - QR Scanner and Generator: App provides facility to create a QR with necessary information about Voucher as well as facility to scan voucher to redeem it.
 - Voucher Transactions : The app allows service providers to create and distribute vouchers that can be securely redeemed within the app, while also enabling companies and 
   organizations to create personalized vouchers for individuals, with a scanning feature for fast redemption.
+- Encryption: The application provides robust client-side encryption to safeguard all sensitive user data with enhanced security measures.
 
 ## System Requirements
 
@@ -73,23 +74,14 @@ To run the Digital Wallet App, ensure that your development environment meets th
 Here are some screenshots of our DigiRupi App:
 
    <p align="center">
-  <img src="./assets/1.jpeg" alt="Logo" width="1080" height="500">
+  <img src="./assets/5.jpeg" alt="Logo" width="200" height="500">
+  <img src="./assets/2.jpeg" alt="Logo" width="200" height="500">
+  <img src="./assets/3.jpeg" alt="Logo" width="200" height="500">
 </p>
 
-   <p align="center">
-  <img src="./assets/2.jpeg" alt="Logo" width="1080" height="500">
-</p>
-
-   <p align="center">
-  <img src="./assets/3.jpeg" alt="Logo" width="1080" height="500">
-</p>
-
-   <p align="center">
-  <img src="./assets/4.jpeg" alt="Logo" width="1080" height="500">
-</p>
-
-   <p align="center">
-  <img src="./assets/5.jpeg" alt="Logo" width="1080" height="500">
+<p align="center">
+  <img src="./assets/1.jpeg" alt="Logo" width="200" height="500">
+  <img src="./assets/4.jpeg" alt="Logo" width="200" height="500">
 </p>
 
 <h2 id="contributers">Contributors</h2>
