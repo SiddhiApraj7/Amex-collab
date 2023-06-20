@@ -67,10 +67,7 @@ Here are some screenshots of our DigiRupi App:
 
 1. **Home Screen**
 
-   ![Home Screen](./assets/1.jpeg)
-   <p align="center">
-  <img src="./assets/1.jpeg" alt="Logo" width="1080" height="500">
-</p>
+   ![Home Screen](assets/1.jpeg)
 
 3. **Transaction History**
 
