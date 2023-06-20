@@ -258,10 +258,10 @@ const Profile = () => {
               </View>
             </View>
 
-            <TouchableOpacity className="h-24" onPress={() => { navigation.navigate("home") }}>
-              <View className="bg-gray-500 pt-2 pb-2 pr-4 pl-4 rounded-lg mt-5 "><Text className="text-white">Logout</Text></View>
-            </TouchableOpacity>
-
+        <TouchableOpacity className="h-24" onPress={() => {navigation.navigate("home")}}>
+            <View className="bg-gray-500 pt-2 pb-2 pr-4 pl-4 rounded-lg mt-5 "><Text className="text-white">Logout</Text></View>
+        </TouchableOpacity>
+        
 
 
           </View>

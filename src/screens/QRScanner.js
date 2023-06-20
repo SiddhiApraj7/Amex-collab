@@ -1,7 +1,7 @@
 import { Image, View, Text, Button, SafeAreaView, StyleSheet, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext , useRef} from "react";
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { AppContext } from "../../AppContext";
@@ -38,9 +38,10 @@ const QRScanner = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    //setText(data);
     fetchVoucherInfo(data);
     setId(data);
-    console.log(id);
+    console.log(data);
     console.log('Type: ' + type + '\nData: ' + data)
   };
 
