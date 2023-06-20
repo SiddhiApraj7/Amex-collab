@@ -23,7 +23,7 @@ const Login = () => {
     try {
       const response = await axios.post('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/login', {
         phoneNumber: data.phoneNumber,
-        walletPin : parseInt(data.pin),
+        walletPin : data.pin,
       });
 
       console.log(response.data);

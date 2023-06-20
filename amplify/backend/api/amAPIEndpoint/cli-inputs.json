@@ -133,6 +133,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/register-pin": {
+      "name": "/register-pin",
+      "lambdaFunction": "amBackendGateway",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

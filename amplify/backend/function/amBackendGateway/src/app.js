@@ -1,4 +1,3 @@
-
 /*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -8,7 +7,9 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const express = require('express')
+
 const bodyParser = require('body-parser')
+
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 
 const { PrismaClient } = require('./prisma-client')
@@ -29,13 +30,14 @@ app.use(function (req, res, next) {
 
 //creat get method for items
 app.post('/create-user', async function (req, res) {
-  const { phoneNumber, firstName, recoveryEmail, lastName, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
+  const { phoneNumber, firstName, recoveryEmail, lastName, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
   const result = await prisma.users.create({
     data: {
       phoneNumber,
       firstName,
       lastName,
       walletPin,
+      salt,
       bankName,
       bankAccountHolderName,
       accountNumber,
@@ -62,13 +64,13 @@ app.post('/create-user', async function (req, res) {
 
 app.patch('/create-user', async (req, res) => {
   const { phoneNumber } = req.body;
-  const { firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
+  const { firstName, lastName, recoveryEmail, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo } = req.body;
 
   try {
     const updatedUser = await prisma.users.update({
       where: { phoneNumber },
       data: {
-        firstName, lastName, recoveryEmail, walletPin, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo,
+        firstName, lastName, recoveryEmail, walletPin, salt, bankName, bankAccountHolderName, accountNumber, isBeneficiary, isPvtOrg, isServiceProvider, walletIdBeneficiary, walletIdPvtOrg, walletIdServiceProvider, beneficiaryInfo, pvtOrgInfo, serviceProviderInfo,
         beneficiaryInfo
       },
       include: {
@@ -85,9 +87,6 @@ app.patch('/create-user', async (req, res) => {
   }
 });
 
-// post request to see if a user is a beneficiary
-// app.post('/is-beneficiary', async function (req, res) {
-//   const phoneNumber = req.body.phoneNumber; // Extract phone number from the request body
 
 app.post('/get-role', async function (req, res) {
   const { phoneNumber } = req.body;
@@ -589,7 +588,8 @@ app.get('/get-user-info/:phoneNumber', async (req, res) => {
             isServiceProvider : true,
             isPvtOrg : true,
             bankAccountHolderName : true,
-            accountNumber : true
+            accountNumber : true,
+            walletPin : true
 
 
           }
