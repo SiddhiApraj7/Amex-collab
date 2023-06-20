@@ -9,17 +9,9 @@ import { AppContext } from "../../AppContext";
 import { useContext , useState} from "react";
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import { Linking } from 'react-native';
-
-const redirectToDigiLocker = () => {
-  const digiLockerURL = 'https://www.digilocker.gov.in/';
-  
-  Linking.openURL(digiLockerURL)
-    .catch((error) => {
-      console.error('Failed to open URL:', error);
-    });
-};
-
+import CryptoJS from 'react-native-crypto-js';
 
 
 
@@ -28,6 +20,7 @@ const BeneficiaryHomePage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bankName, setBankName] = useState('');
+
   const { phoneNumber, setPhoneNumber } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -53,16 +46,40 @@ const BeneficiaryHomePage = () => {
     fetchBenificiaryInfo(phoneNumber);
   }, []);
 
+
+  const redirectToDigiLocker = () => {
+    const digiLockerURL = 'https://www.digilocker.gov.in/';
+    
+    Linking.openURL(digiLockerURL)
+      .catch((error) => {
+        console.error('Failed to open URL:', error);
+      });
+  };
+
   async function fetchBenificiaryInfo(phoneNumber) {
     //const phoneNumber = "+9101";
+    console.log(phoneNumber);
     try {
       setIsLoading(true);
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-beneficiary-info/${phoneNumber}`);
       // console.log(response.data);
       const beneficiary = response.data;
-      setFirstName(beneficiary.firstName);
-      setLastName(beneficiary.lastName);
-      setBankName(beneficiary.bankName);
+      /* setCFirstName(beneficiary.firstName);
+      setCLastName(beneficiary.lastName);
+      setCBankName(beneficiary.bankName); */
+
+      let fn  = CryptoJS.AES.decrypt(beneficiary.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(beneficiary.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(beneficiary.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
+
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -79,14 +96,14 @@ const BeneficiaryHomePage = () => {
 
   // fetchBenificiaryInfo();
 
-  const textrupi = (
+  // const textrupi = (
 
-    <Text className="text-xs"> E-RUPI</Text>
-  )
-  const textrupee = (
+  //   <Text className="text-xs"> E-RUPI</Text>
+  // )
+  // const textrupee = (
 
-    <Text className="text-xs font-" >E-RUPEE</Text>
-  )
+  //   <Text className="text-xs font-" >E-RUPEE</Text>
+  // )
 
 
   return (
@@ -107,17 +124,7 @@ const BeneficiaryHomePage = () => {
 
         <View >
          <View>
-         <View className="flex-row gap-2 ml-9 w-96 justify-between bg-neutral-100 p-2 rounded-lg mx-auto border-b-2 border-neutral-200">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7 mt-1">{firstName} {lastName}</Text>
-            {/* <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text> */}
-            </View>
-            <View className=" mr-10">
-            <Text className="font-medium text-lg mt-1">{bankName}</Text>
-            {/* <Text className="font-light text-center">BALANCE:1000e$</Text> */}
-            </View>
-        </View>
+            <Header firstName={firstName} lastName={lastName} bankName={bankName} type="1"/>
         </View>
 
           <View><Text className="font-light text-center mt-5">TOTAL BALANCE</Text></View>
@@ -127,13 +134,13 @@ const BeneficiaryHomePage = () => {
             <TouchableOpacity onPress={() => {
               navigation.navigate("e_rupi_wallet");
             }}>
-              <Walletcard children={textrupi} />
+              <Walletcard children="E-RUPI" />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
               navigation.navigate("e_rupee_wallet");
             }}>
-              <Walletcard children={textrupee} />
+              <Walletcard children="E-RUPEE" />
             </TouchableOpacity>
 
             <View>

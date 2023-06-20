@@ -17,6 +17,8 @@ import { useForm, Controller } from "react-hook-form";
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext } from "react";
+import CryptoJS from 'react-native-crypto-js';
+import Header from '../components/Header';
 
 
 
@@ -33,11 +35,15 @@ const PvtOrgInfo = () => {
     console.log(data);
     // create User schema using post method using axios and async , await
     setIsLoading(true);
+
+    let cipherPositionInCompany = CryptoJS.AES.encrypt(data.positionInCompany,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherPositionInCompany);
+
      try {
       const response = await axios.post("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-pvtOrg", {
         phoneNumber: phoneNumber,  
         CompanyName: data.CompanyName,
-        positionInCompany: data.positionInCompany,
+        positionInCompany: cipherPositionInCompany,
       });
       if (response.status === 200) {
         console.log('pvtOrg account created successfully');

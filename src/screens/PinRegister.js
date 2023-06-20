@@ -21,12 +21,13 @@ const PinRegister = () => {
 
   async function updateUser(phoneNumber, pin) {
     setIsLoading(true);
-    
+    let cipherPin = CryptoJS.AES.encrypt(pin,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherpin);
     try {
       console.log(pin);
       const response = await axios.patch('https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-user', {
         phoneNumber: phoneNumber,
-        walletPin : parseInt(pin),
+        walletPin : cipherPin,
       });
       console.log(response.data);
     } catch (error) {

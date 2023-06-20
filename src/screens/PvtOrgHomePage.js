@@ -10,6 +10,8 @@ import { useContext, useState } from "react";
 import axios from 'axios';
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
+import CryptoJS from 'react-native-crypto-js';
+import Header from '../components/Header';
 
 const PvtOrgHomePage = () => {
   const navigation = useNavigation();
@@ -50,8 +52,15 @@ const PvtOrgHomePage = () => {
       vouchersList.forEach((voucher) => {
         if(voucher.voucherRedeemed==true){
         let vocherObject = {};
+        let fn  = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        setFirstName(fn.toString(CryptoJS.enc.Utf8));
+        console.log(firstName);
+
+        let ln  = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        setLastName(ln.toString(CryptoJS.enc.Utf8));
+        console.log(lastName);
           vocherObject = {
-            beneficiaryName : voucher.BeneficiaryUser.Users.firstName + " " + voucher.BeneficiaryUser.Users.lastName,
+            beneficiaryName : firstName + " " + lastName,
             cost: voucher.voucherAmount,
             pvtOrgName: voucher.PvtOrgBy.CompanyName,
             date: voucher.voucherRedeemedDate,
@@ -79,11 +88,30 @@ const PvtOrgHomePage = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-pvtOrg-info/${phoneNumber}`);
       console.log(response.data);
       const pvtorg = response.data;
-      setFirstName(pvtorg.Users.firstName);
+      /* setFirstName(pvtorg.Users.firstName);
       setLastName(pvtorg.Users.lastName);
       setBankName(pvtorg.Users.bankName);
       setCompanyName(pvtorg.CompanyName);
-      setPositionInCompany(pvtorg.positionInCompany);
+      setPositionInCompany(pvtorg.positionInCompany); */
+
+      let fn  = CryptoJS.AES.decrypt(pvtorg.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(pvtorg.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(pvtorg.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
+
+      setCompanyName(pvtorg.CompanyName);
+      
+
+      let pb  = CryptoJS.AES.decrypt(pvtorg.positionInCompany, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setPositionInCompany(pb.toString(CryptoJS.enc.Utf8));
+      console.log(positionInCompany);
 
     } catch (error) {
       console.error(error);
@@ -130,17 +158,7 @@ const PvtOrgHomePage = () => {
 
     <View >
         {/* <View className="flex-row gap-2 ml-5 w-96 justify-between"> */}
-          <View className="flex-row gap-2 ml-7 w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100 p-2 rounded-lg mx-auto">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-            <Text className="font-light text-sm mr-7">{CompanyName} - {positionInCompany}</Text>
-            </View>
-            <View className=" mr-10">
-            <Text className="font-medium text-lg">{bankName}</Text>
-            <Text className="font-light text-center">BALANCE:1000e$</Text>
-            </View>
-        </View>
+          <Header firstName={firstName} lastName={lastName} bankName={bankName} companyName={CompanyName} positionInCompany={positionInCompany} type="3" />
         </View>
 
         )}
@@ -153,7 +171,7 @@ const PvtOrgHomePage = () => {
         <TouchableOpacity onPress={() => {
           navigation.navigate("e_rupee_wallet");
         }}>
-        <Walletcard children={textrupee}/>
+        <Walletcard children="E-RUPEE"/>
         </TouchableOpacity>
 
 

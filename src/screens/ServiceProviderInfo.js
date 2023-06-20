@@ -18,6 +18,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import axios from 'axios';
 import { AppContext } from "../../AppContext";
 import { useContext } from "react";
+import CryptoJS from "react-native-crypto-js";
 
 
 const ServiceProviderInfo = () => {
@@ -44,11 +45,21 @@ const ServiceProviderInfo = () => {
     console.log(data);
     // create User schema using post method using axios and async , await
     setIsLoading(true);
+
+    console.log(phoneNumber);
+    
+
+    /* let cipherBusinessTag = CryptoJS.AES.encrypt(value,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherBusinessTag); */
+
+    let cipherPositionInBusiness = CryptoJS.AES.encrypt(data.PositionInBusiness,"xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu").toString();
+    console.log(cipherPositionInBusiness);
+
      try {
       const response = await axios.post("https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/create-serviceProvider", {
         phoneNumber: phoneNumber,  
         BusinessName: data.BusinessName,
-        PositionInBusiness: data.PositionInBusiness,
+        PositionInBusiness: cipherPositionInBusiness,
         BusinessTag: value,
       });
       if (response.status === 200) {

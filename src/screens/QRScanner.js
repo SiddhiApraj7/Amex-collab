@@ -23,7 +23,9 @@ const QRScanner = () => {
   const [amount, setAmount] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isredeemed, setIsredeemed] = useState(false);
+  const [beneficiaryName, setBeneficiaryName] = useState('');
   const [allowScan, setallowScan] = useState(false);
+
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -114,10 +116,27 @@ const QRScanner = () => {
 
       setCompanyName(voucher.PvtOrgBy.CompanyName);
       setAmount(voucher.voucherAmount);
-      setBFirstName(voucher.BeneficiaryUser.Users.firstName);
-      setBLastName(voucher.BeneficiaryUser.Users.lastName);
+      /* setBFirstName(voucher.BeneficiaryUser.Users.firstName);
+      setBLastName(voucher.BeneficiaryUser.Users.lastName); */
       setIsredeemed(voucher.voucherRedeemed);
-      setallowScan(voucher.ServiceProviderUser.Users.phoneNumber === phoneNumber);
+      setallowScan(voucher. ServiceProviderUser.Users.phoneNumber === phoneNumber);
+
+      const fnPromise = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        const lnPromise = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+
+        const firstName = await fnPromise;
+        const lastName = await lnPromise;
+
+        const decryptedFirstName = firstName.toString(CryptoJS.enc.Utf8);
+        const decryptedLastName = lastName.toString(CryptoJS.enc.Utf8);
+
+        /* setFirstName(decryptedFirstName);
+        setLastName(decryptedLastName); */
+
+        const bName = `${decryptedFirstName} ${decryptedLastName}`;
+        setBeneficiaryName(bName);
+        console.log(beneficiaryName);
+
     } catch (error) {
       console.error(error);
       console.log(error);
@@ -170,7 +189,7 @@ const QRScanner = () => {
         ) : scanned ? (
           <View className="flex-col space-y-5">
             <View className="flex-col bg-blue-200 h-26 p-2 mt-2 space-y-3 rounded-lg">
-              <Text className=" font-light text-sm"> Beneficiary Name : {BfirstName} {BlastName}</Text>
+              <Text className=" font-light text-sm"> Beneficiary Name : {beneficiaryName}</Text>
               <Text className=" font-light text-sm"> Private Org: {CompanyName}</Text>
               <Text className=" font-light text-sm"> Amount: {amount}</Text>
             </View>

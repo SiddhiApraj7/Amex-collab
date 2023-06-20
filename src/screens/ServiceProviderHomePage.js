@@ -10,6 +10,8 @@ import { useContext, useState} from "react";
 import axios from 'axios';
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
+import CryptoJS from 'react-native-crypto-js';
+import Header from '../components/Header';
 
 const ServiceProviderHomePage = () => {
   const navigation = useNavigation();
@@ -49,11 +51,34 @@ const ServiceProviderHomePage = () => {
       const response = await axios.get(`https://bydj1o70lf.execute-api.us-east-1.amazonaws.com/dev/get-serviceProvider-info/${phoneNumber}`);
       console.log(response.data);
       const serviceProvider = response.data;
-      setFirstName(serviceProvider.Users.firstName);
+      /* setFirstName(serviceProvider.Users.firstName);
       setLastName(serviceProvider.Users.lastName);
       setBankName(serviceProvider.Users.bankName);
       setBusinessName(serviceProvider.BusinessName);
       setPositionInBusiness(serviceProvider.PositionInBusiness);
+      setBusinessTag(serviceProvider.BusinessTag); */
+
+      let fn  = CryptoJS.AES.decrypt(serviceProvider.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setFirstName(fn.toString(CryptoJS.enc.Utf8));
+      console.log(firstName);
+
+      let ln  = CryptoJS.AES.decrypt(serviceProvider.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setLastName(ln.toString(CryptoJS.enc.Utf8));
+      console.log(lastName);
+
+      let bn  = CryptoJS.AES.decrypt(serviceProvider.Users.bankName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBankName(bn.toString(CryptoJS.enc.Utf8));
+      console.log(bankName);
+
+      setBusinessName(serviceProvider.BusinessName);
+
+      let pb  = CryptoJS.AES.decrypt(serviceProvider.PositionInBusiness, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setPositionInBusiness(pb.toString(CryptoJS.enc.Utf8));
+      console.log(PositionInBusiness);
+
+      /* let bt  = CryptoJS.AES.decrypt(serviceProvider.BusinessTag, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+      setBusinessTag(bn.toString(CryptoJS.enc.Utf8));
+      console.log(BusinessTag); */
       setBusinessTag(serviceProvider.BusinessTag);
       
     } catch (error) {
@@ -78,8 +103,15 @@ const ServiceProviderHomePage = () => {
       vouchersList.forEach((voucher) => {
         if(voucher.voucherRedeemed==true){
         let vocherObject = {};
+        let fn  = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.firstName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        setFirstName(fn.toString(CryptoJS.enc.Utf8));
+        console.log(firstName);
+
+        let ln  = CryptoJS.AES.decrypt(voucher.BeneficiaryUser.Users.lastName, "xx6appn3TCL0LRx9zmRrqHgWmn8noXAVPMQXbjFssLDQ0+vS28QMNUp0rzT+5eTu");
+        setLastName(ln.toString(CryptoJS.enc.Utf8));
+        console.log(lastName);
           vocherObject = {
-            beneficiaryName : voucher.BeneficiaryUser.Users.firstName + " " + voucher.BeneficiaryUser.Users.lastName,
+            beneficiaryName : firstName + " " + lastName,
             cost: voucher.voucherAmount,
             pvtOrgName: voucher.PvtOrgBy.CompanyName,
             date: voucher.voucherRedeemedDate,
@@ -129,17 +161,8 @@ const ServiceProviderHomePage = () => {
           
           
         <View >
-           <View className="flex-row gap-2 ml-7 w-96 justify-between border-b-2 border-neutral-200 bg-neutral-100 p-1 rounded-lg mx-auto">
-            <Ionicons name="person-circle" size={36}></Ionicons>
-            <View className="pb-2">
-            <Text className="font-medium text-lg mr-7">{firstName} {lastName}</Text>
-            <Text className="font-light text-sm mr-7">{BusinessName} - {PositionInBusiness}</Text>
-            </View>
-            <View className=" mr-10">
-            <Text className="font-medium text-lg">{bankName}</Text>
-            <Text className="font-light text-center">{BusinessTag}</Text>
-            </View>
-        </View>
+          
+          <Header firstName={firstName} lastName={lastName} bankName={bankName} type="2" businessName={BusinessName} BusinessTag={BusinessTag} positionInBusiness={PositionInBusiness}/>
 
             
 
@@ -156,7 +179,7 @@ const ServiceProviderHomePage = () => {
             <TouchableOpacity onPress={() => {
               navigation.navigate("e_rupee_wallet");
             }}>
-            <Walletcard children={textrupee}/>
+            <Walletcard children="E-RUPEE"/>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
