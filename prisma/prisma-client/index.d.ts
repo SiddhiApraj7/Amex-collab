@@ -22,7 +22,7 @@ export type Users = {
   firstName: string | null
   recoveryEmail: string | null
   lastName: string | null
-  walletPin: number | null
+  walletPin: string | null
   bankName: string | null
   bankAccountHolderName: string | null
   accountNumber: string | null
@@ -1048,18 +1048,8 @@ export namespace Prisma {
 
   export type AggregateUsers = {
     _count: UsersCountAggregateOutputType | null
-    _avg: UsersAvgAggregateOutputType | null
-    _sum: UsersSumAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
-  }
-
-  export type UsersAvgAggregateOutputType = {
-    walletPin: number | null
-  }
-
-  export type UsersSumAggregateOutputType = {
-    walletPin: number | null
   }
 
   export type UsersMinAggregateOutputType = {
@@ -1068,7 +1058,7 @@ export namespace Prisma {
     firstName: string | null
     recoveryEmail: string | null
     lastName: string | null
-    walletPin: number | null
+    walletPin: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1088,7 +1078,7 @@ export namespace Prisma {
     firstName: string | null
     recoveryEmail: string | null
     lastName: string | null
-    walletPin: number | null
+    walletPin: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1123,14 +1113,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type UsersAvgAggregateInputType = {
-    walletPin?: true
-  }
-
-  export type UsersSumAggregateInputType = {
-    walletPin?: true
-  }
 
   export type UsersMinAggregateInputType = {
     id?: true
@@ -1231,18 +1213,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: UsersAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UsersSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: UsersMinAggregateInputType
@@ -1273,8 +1243,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UsersCountAggregateInputType | true
-    _avg?: UsersAvgAggregateInputType
-    _sum?: UsersSumAggregateInputType
     _min?: UsersMinAggregateInputType
     _max?: UsersMaxAggregateInputType
   }
@@ -1286,7 +1254,7 @@ export namespace Prisma {
     firstName: string | null
     recoveryEmail: string | null
     lastName: string | null
-    walletPin: number | null
+    walletPin: string | null
     bankName: string | null
     bankAccountHolderName: string | null
     accountNumber: string | null
@@ -1299,8 +1267,6 @@ export namespace Prisma {
     createdAt: Date
     role: Role | null
     _count: UsersCountAggregateOutputType | null
-    _avg: UsersAvgAggregateOutputType | null
-    _sum: UsersSumAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
   }
@@ -6052,7 +6018,7 @@ export namespace Prisma {
     firstName?: StringNullableFilter | string | null
     recoveryEmail?: StringNullableFilter | string | null
     lastName?: StringNullableFilter | string | null
-    walletPin?: IntNullableFilter | number | null
+    walletPin?: StringNullableFilter | string | null
     bankName?: StringNullableFilter | string | null
     bankAccountHolderName?: StringNullableFilter | string | null
     accountNumber?: StringNullableFilter | string | null
@@ -6117,10 +6083,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     role?: SortOrder
     _count?: UsersCountOrderByAggregateInput
-    _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
     _min?: UsersMinOrderByAggregateInput
-    _sum?: UsersSumOrderByAggregateInput
   }
 
   export type UsersScalarWhereWithAggregatesInput = {
@@ -6132,7 +6096,7 @@ export namespace Prisma {
     firstName?: StringNullableWithAggregatesFilter | string | null
     recoveryEmail?: StringNullableWithAggregatesFilter | string | null
     lastName?: StringNullableWithAggregatesFilter | string | null
-    walletPin?: IntNullableWithAggregatesFilter | number | null
+    walletPin?: StringNullableWithAggregatesFilter | string | null
     bankName?: StringNullableWithAggregatesFilter | string | null
     bankAccountHolderName?: StringNullableWithAggregatesFilter | string | null
     accountNumber?: StringNullableWithAggregatesFilter | string | null
@@ -6336,7 +6300,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6359,7 +6323,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6382,7 +6346,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6405,7 +6369,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6428,7 +6392,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -6448,7 +6412,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6468,7 +6432,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6715,17 +6679,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
-  export type IntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
-  }
-
   export type BoolFilter = {
     equals?: boolean
     not?: NestedBoolFilter | boolean
@@ -6789,10 +6742,6 @@ export namespace Prisma {
     role?: SortOrder
   }
 
-  export type UsersAvgOrderByAggregateInput = {
-    walletPin?: SortOrder
-  }
-
   export type UsersMaxOrderByAggregateInput = {
     id?: SortOrder
     phoneNumber?: SortOrder
@@ -6833,10 +6782,6 @@ export namespace Prisma {
     role?: SortOrder
   }
 
-  export type UsersSumOrderByAggregateInput = {
-    walletPin?: SortOrder
-  }
-
   export type StringWithAggregatesFilter = {
     equals?: string
     in?: Enumerable<string> | string
@@ -6871,22 +6816,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
     _max?: NestedStringNullableFilter
-  }
-
-  export type IntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
   }
 
   export type BoolWithAggregatesFilter = {
@@ -7147,14 +7076,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -7487,17 +7408,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
-  export type NestedIntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
-  }
-
   export type NestedBoolFilter = {
     equals?: boolean
     not?: NestedBoolFilter | boolean
@@ -7571,7 +7481,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter
   }
 
-  export type NestedIntNullableWithAggregatesFilter = {
+  export type NestedIntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | number | null
     notIn?: Enumerable<number> | number | null
@@ -7579,23 +7489,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
-  }
-
-  export type NestedFloatNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableFilter | number | null
+    not?: NestedIntNullableFilter | number | null
   }
 
   export type NestedBoolWithAggregatesFilter = {
@@ -7841,7 +7735,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -7863,7 +7757,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -7925,7 +7819,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7947,7 +7841,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8097,7 +7991,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8119,7 +8013,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8167,7 +8061,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8189,7 +8083,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8241,7 +8135,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8263,7 +8157,7 @@ export namespace Prisma {
     firstName?: string | null
     recoveryEmail?: string | null
     lastName?: string | null
-    walletPin?: number | null
+    walletPin?: string | null
     bankName?: string | null
     bankAccountHolderName?: string | null
     accountNumber?: string | null
@@ -8311,7 +8205,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8333,7 +8227,7 @@ export namespace Prisma {
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    walletPin?: NullableIntFieldUpdateOperationsInput | number | null
+    walletPin?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     bankAccountHolderName?: NullableStringFieldUpdateOperationsInput | string | null
     accountNumber?: NullableStringFieldUpdateOperationsInput | string | null
